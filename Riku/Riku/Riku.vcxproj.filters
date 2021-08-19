@@ -13,10 +13,69 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GameLogic">
+      <UniqueIdentifier>{1671bd3a-7b0d-40e1-b263-23b2dc954d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\Tile">
+      <UniqueIdentifier>{1c0c2264-6ca4-4d2b-92f2-386ad77f124f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\Tile\TileCost">
+      <UniqueIdentifier>{d253964c-7880-4f06-a7d7-958a4e40be8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Riku.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Biome.cpp">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="Area.cpp">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>GameLogic\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicResources.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameLogic.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>GameLogic\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Biome.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="Area.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="ICostModifier.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicResources.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
