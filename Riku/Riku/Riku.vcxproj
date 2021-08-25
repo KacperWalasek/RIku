@@ -157,6 +157,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="LogicResources.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Riku.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="ICostModifier.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="LogicResources.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>

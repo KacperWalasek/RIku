@@ -22,6 +22,9 @@
     <Filter Include="GameLogic\Tile\TileCost">
       <UniqueIdentifier>{d253964c-7880-4f06-a7d7-958a4e40be8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLogic\Player">
+      <UniqueIdentifier>{390e02d8-ae2c-4777-af55-227d622a614b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Riku.cpp">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="LogicResources.cpp">
       <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameLogic\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameLogic\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
