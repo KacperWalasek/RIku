@@ -21,9 +21,9 @@ GameLogic::GameLogic()
 	int woodIndex = 0;
 	std::cout << "Player test" << std::endl <<
 		"\t Begining wood count - " << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
-	gameState.players[0].acceptResource(woodIndex, 10);
+	gameState.players[0].acceptResources(woodIndex, 10);
 	std::cout << "\t After adding 10 - " << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
-	gameState.players[0].acceptResource(woodIndex, 10);
+	gameState.players[0].acceptResources(woodIndex, 10);
 	gameState.players[0].useResources(woodIndex, 15);
 	std::cout << "\t After adding 10 more and using 15 - " << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
 	std::cout << "\t Try to use 10:"<< std::endl <<

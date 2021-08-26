@@ -6,7 +6,7 @@ class Player
 	std::vector<int> resources;
 public:
 	Player(int numberOfResources);
-	void acceptResource(int type, int quantity);
+	void acceptResources(int type, int quantity);
 	bool useResources(int type, int quantity);
 	int getResourceQuantity(int type) const;
 };

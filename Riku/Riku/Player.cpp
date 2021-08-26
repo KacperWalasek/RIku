@@ -6,16 +6,16 @@ Player::Player(int numberOfResources)
 	resources = std::vector<int>(numberOfResources, 0);
 }
 
-void Player::acceptResource(int type, int quantity)
+void Player::acceptResources(int type, int quantity)
 {
-	if (type < 0 || type >= resources.size())
+	if (type < 0 || type >= resources.size() || quantity <= 0)
 		return;
 	resources[type] += quantity;
 }
 
 bool Player::useResources(int type, int quantity)
 {
-	if (type < 0 || type >= resources.size() || resources[type] < quantity)
+	if (type < 0 || type >= resources.size() || quantity <= 0 || resources[type] < quantity)
 		return false;
 	resources[type] -= quantity;
 	return true;
@@ -23,7 +23,7 @@ bool Player::useResources(int type, int quantity)
 
 int Player::getResourceQuantity(int type) const
 {
-	if (type < 0 || type >= resources.size())
+	if (type < 0 || type >= resources.size() )
 		return -1;
 	return resources[type];
 }
