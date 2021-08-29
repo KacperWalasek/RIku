@@ -10,6 +10,7 @@ struct LogicResources
 	std::vector<Biome> biomes;
 	std::vector<Area> areas;
 	std::vector<Ground> grounds;
+	std::vector<Resource> playerResources;
 
 	//TODO inicjalizacja z pliku
 	void initialize();
