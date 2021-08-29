@@ -10,6 +10,6 @@ class Ground :
     double mult = 0;
 public:
     Ground(std::string name, double mult);
-    virtual double modifyCost(double cost) const override;
+    virtual double getModifiedCost(double cost) const override;
 };
 

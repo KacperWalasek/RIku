@@ -5,7 +5,7 @@ Ground::Ground(std::string name, double mult)
 	: Resource(name), mult(mult) 
 {}
 
-double Ground::modifyCost(double cost) const
+double Ground::getModifiedCost(double cost) const
 {
 	return cost * mult;
 }
