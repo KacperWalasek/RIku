@@ -1,0 +1,508 @@
+#ifdef _WIN32
+#define APIENTRY __stdcall
+#endif
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <cmath>
+#include <iostream>
+#include <filesystem>
+#include "Shader.h"
+#include "stb_image.h"
+#include "Texture.h"
+#include <glm/glm.hpp>
+#include <glm/gtx/rotate_vector.hpp>
+#include "Camera.h"
+#include "Model.h"
+#include "Object.h"
+#include <cstdlib>
+#include <ctime>
+//#include <cegui-0.8.7/CEGUI/CEGUI.h>
+//#include <cegui-0.8.7/CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#include <cmath>
+
+//https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
+float spotLightAngle=0.0f;
+
+Camera camera=glm::vec3(0.0f, 0.0f, 0.0f);
+Transform movingCameraTransform{glm::vec3(20.0f, 50.0f, 20.0f),glm::vec3(glm::radians(60.0f),glm::radians(180.0f),0.0f)};
+
+bool firstMouse=true;
+constexpr uint16_t NR_POINT_LIGHTS=9;
+constexpr uint16_t NR_SPOT_LIGHTS=1;
+
+// lighting
+//glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+constexpr int SRC_WIDTH=1024;
+constexpr int SRC_HEIGHT=768;
+constexpr float DAY_LENGTH=30.0f;
+float lastX = SRC_WIDTH/2.0f, lastY = SRC_HEIGHT/2.0f;
+//std::unique_ptr<CEGUI::OpenGL3Renderer> myRenderer;
+
+std::vector<Model> tileTypeModels;
+std::vector<Model> unitTypeModels;
+
+struct TileType
+{
+	int level;
+	int type; //0 - grass, 1 - water
+};
+struct Unit
+{
+	int type; //0 - Sara, 1 - assassin
+	int x;
+	int y;
+	explicit Unit(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
+};
+
+namespace gk4
+{
+	float aspect;
+	float deltaTime = 0.0f;	// Time between current frame and last frame
+	const glm::vec3 Zero=glm::vec3(0.0f);
+	const glm::vec3 One=glm::vec3(1.0f);
+	float fogDensity=0.01f; //to-change
+	float dayPhase=0.6f;
+	int focusedUnit=0;
+	std::vector<std::vector<TileType> > tiles;
+	std::vector<Unit> units;
+	std::vector<Object> gridObjects;
+	bool isGridOn=false;
+	unsigned int lightCubeVAO;
+	std::vector<glm::vec3> pointLightPositions;
+}
+
+//1 directional light, 16 point lights and spotlights
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+	gk4::aspect=width/height;
+}
+//function for processing input
+void processInput(GLFWwindow *window)
+{
+	//used for keys which are pressed continuously
+	float rotSpeed = M_PI*gk4::deltaTime;
+	float moveSpeed = 3.0f*gk4::deltaTime;
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,-moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
+	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
+		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+		movingCameraTransform.position+=glm::rotateY(glm::vec3(-moveSpeed,0.0,0.0),0.0f*glm::radians(movingCameraTransform.rotation.y));
+	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+		movingCameraTransform.position+=glm::rotateY(glm::vec3(moveSpeed,0.0,0.0),0.0f*glm::radians(movingCameraTransform.rotation.y));
+	if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS)
+		movingCameraTransform.rotation.y-=moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
+		movingCameraTransform.rotation.y+=moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+		movingCameraTransform.rotation.y+=rotSpeed;
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+		movingCameraTransform.rotation.y-=rotSpeed;
+	camera.Front=glm::rotateY(glm::rotateX(glm::vec3(0.0f,0.0f,1.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
+	camera.Up=glm::rotateY(glm::rotateX(glm::vec3(0.0f,1.0f,0.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
+	camera.Position=movingCameraTransform.position;
+}
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	//key - key code (can be GLFW_KEY_UNKNOWN)
+	//scancode - unique for each key
+	//action - GLFW_PRESS, GLFW_REPEAT, GLFW_RELEASE
+	//mods - GLFW_MOD_SHIFT, GLFW_MOD_CONTROL, GLFW_MOD_ALT, GLFW_MOD_SUPER, GLFW_MOD_CAPS_LOCK, GLFW_MOD_NUM_LOCK
+	if(action==GLFW_RELEASE)
+		;
+	if(action==GLFW_PRESS)
+	{
+		switch(key)
+		{
+			case GLFW_KEY_ESCAPE:
+				glfwSetWindowShouldClose(window, true);
+				break;
+			case GLFW_KEY_W:
+					gk4::units[gk4::focusedUnit].y=std::max(0,gk4::units[gk4::focusedUnit].y-1);
+				break;
+			case GLFW_KEY_S:
+					gk4::units[gk4::focusedUnit].y=std::min((int)gk4::tiles[0].size()-1,gk4::units[gk4::focusedUnit].y+1);
+				break;
+			case GLFW_KEY_A:
+					gk4::units[gk4::focusedUnit].x=std::max(0,gk4::units[gk4::focusedUnit].x-1);
+				break;
+			case GLFW_KEY_D:
+					gk4::units[gk4::focusedUnit].x=std::min((int)gk4::tiles.size()-1,gk4::units[gk4::focusedUnit].x+1);
+				break;
+			case GLFW_KEY_G:
+					gk4::isGridOn=!gk4::isGridOn;
+				break;
+			case GLFW_KEY_1:
+				gk4::focusedUnit=0;
+				break;
+			case GLFW_KEY_2:
+				gk4::focusedUnit=1;
+				break;
+			case GLFW_KEY_3:
+				gk4::focusedUnit=2;
+				break;
+			case GLFW_KEY_4:
+				gk4::focusedUnit=3;
+				break;
+			case GLFW_KEY_5:
+				gk4::focusedUnit=4;
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	//TODO
+
+}
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	movingCameraTransform.position.y-=yoffset*0.5f;
+	if(movingCameraTransform.position.y<3.0f)
+		movingCameraTransform.position.y=3.0f;
+}
+GLFWwindow* initWindow();
+
+void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFrame)
+{
+	//calculating
+	gk4::dayPhase+=gk4::deltaTime/DAY_LENGTH;
+
+	float dayPart=0.5f*(1.0f+std::sin(M_PI*2.0f*gk4::dayPhase));
+	if(gk4::fogDensity>=0.05f)
+		glClearColor(dayPart*0.7f, dayPart*0.7f, dayPart*0.7f, 1.0f);
+	else
+	{
+		float fog_per=gk4::fogDensity/0.05f;
+		glClearColor(dayPart*(0.2f+0.5f*fog_per), dayPart*0.7f, dayPart*(1.0f-0.3f*fog_per), 1.0f);
+	}
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	//
+	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), gk4::aspect, 0.1f, 100.0f);
+	glm::mat4 view = camera.GetViewMatrix();
+	//shader initialization
+	lightingShader.use();
+	lightingShader.setMat4("projection", projection);
+	lightingShader.setMat4("view", view);
+	lightingShader.setVec3("viewPos", camera.Position);
+	lightingShader.setFloat("material.shininess", 32.0f);
+	//default value
+	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
+	//fog parameters
+	lightingShader.setFloat("fog_density", gk4::fogDensity);
+	lightingShader.setVec4("fog_color", 0.7f*dayPart, 0.7f*dayPart, 0.7f*dayPart, 1.0f);
+
+	//Setting lights
+	// directional light
+	lightingShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
+	lightingShader.setVec3("dirLight.ambient", 0.03f+0.3f*dayPart, 0.03f+0.3f*dayPart, 0.03f+0.3f*dayPart);
+	lightingShader.setVec3("dirLight.diffuse", 0.7f*dayPart, 0.7f*dayPart, 0.7f*dayPart);
+	lightingShader.setVec3("dirLight.specular", 0.9f*dayPart, 0.9f*dayPart, 0.9f*dayPart);
+	// point lights
+	for(int i=0;i<NR_POINT_LIGHTS;i++) {
+		lightingShader.setVec3("pointLights["+std::to_string(i)+"].position", gk4::pointLightPositions[i]);
+		lightingShader.setVec3("pointLights["+std::to_string(i)+"].ambient", 0.0f, 0.0f, 0.0f);
+		lightingShader.setVec3("pointLights["+std::to_string(i)+"].diffuse", 0.8f*(1.0f-dayPart), 0.8f*(1.0f-dayPart), 0.8f*(1.0f-dayPart));
+		lightingShader.setVec3("pointLights["+std::to_string(i)+"].specular", 1.0f*(1.0f-dayPart), 1.0f*(1.0f-dayPart), 1.0f*(1.0f-dayPart));
+		lightingShader.setFloat("pointLights["+std::to_string(i)+"].constant", 1.0);
+		lightingShader.setFloat("pointLights["+std::to_string(i)+"].linear", 0.09);
+		lightingShader.setFloat("pointLights["+std::to_string(i)+"].quadratic", 0.032);
+	}
+	// spotLight
+	float tmp_angle2=glm::radians(spotLightAngle);
+	for(int i=0;i<NR_SPOT_LIGHTS;i++) {
+		lightingShader.setVec3("spotLights["+std::to_string(i)+"].position", glm::vec3({0.0f,1.7f,0.0f}));
+		lightingShader.setVec3("spotLights["+std::to_string(i)+"].direction", glm::vec3(std::sin(tmp_angle2),0.0f,std::cos(tmp_angle2)));
+		lightingShader.setVec3("spotLights["+std::to_string(i)+"].ambient", 0.0f, 0.0f, 0.0f);
+		lightingShader.setVec3("spotLights["+std::to_string(i)+"].diffuse", 1.0f, 1.0f, 1.0f);
+		lightingShader.setVec3("spotLights["+std::to_string(i)+"].specular", 1.0f, 1.0f, 1.0f);
+		lightingShader.setFloat("spotLights["+std::to_string(i)+"].constant", 1.0f);
+		lightingShader.setFloat("spotLights["+std::to_string(i)+"].linear", 0.09);
+		lightingShader.setFloat("spotLights["+std::to_string(i)+"].quadratic", 0.032);
+		lightingShader.setFloat("spotLights["+std::to_string(i)+"].cutOff", glm::cos(glm::radians(12.5f)));
+		lightingShader.setFloat("spotLights["+std::to_string(i)+"].outerCutOff", glm::cos(glm::radians(15.0f)));
+	}
+	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
+	// render the loaded models
+	//draw tiles
+	for(int i=0;i<gk4::tiles.size();i++)
+	{
+		for(int j=0;j<gk4::tiles[i].size();j++)
+		{
+			Object object;
+			if(gk4::tiles[i][j].type<0 || gk4::tiles[i][j].type>tileTypeModels.size())
+				object = Object(tileTypeModels[0],glm::vec3((float)i,0.0f,(float)j));
+			else
+				object = Object(tileTypeModels[gk4::tiles[i][j].type],glm::vec3(i,gk4::tiles[i][j].level*0.5f,j));
+			object.Draw(lightingShader);
+		}
+	}
+	//draw units
+	int ind=0;
+	for(auto unit: gk4::units)
+	{
+		float height=0.5f*gk4::tiles[unit.x][unit.y].level;
+		//last two parameters needed by that models
+		Object object;
+		if(ind!=gk4::focusedUnit)
+			lightingShader.setVec4("color_mod", 0.7f,0.7f,0.7f, 1.0f);
+		if(unit.type==0)
+			object={unitTypeModels[unit.type],glm::vec3(unit.x,height,unit.y),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f)};
+		else
+			object={unitTypeModels[unit.type],glm::vec3(unit.x,height,unit.y),glm::vec3(-90.0f,0.0f,0.0f),glm::vec3(0.1f,0.1f,0.1f)};
+		object.Draw(lightingShader);
+		if(ind!=gk4::focusedUnit)
+			lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
+		ind++;
+	}
+	if(gk4::isGridOn)
+		for (const auto & gridObject : gk4::gridObjects)
+		{
+			gridObject.Draw(lightingShader);
+		}
+	// render the loaded models
+	//return to default value
+	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
+	//return to default value
+	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
+
+	// also draw the lamp object(s)
+	lightCubeShader.use();
+	lightCubeShader.setMat4("projection", projection);
+	lightCubeShader.setMat4("view", view);
+
+	lightCubeShader.setFloat("fog_density", gk4::fogDensity);
+	lightCubeShader.setVec4("fog_color", 0.5f, 0.5f, 0.5f, 1.0f);
+	lightCubeShader.setVec3("camera_position", camera.Position);
+
+	//set night value
+	lightCubeShader.setVec4("color", 1.0f,1.0f,1.0f,1.0f);
+	// we now draw as many light bulbs as we have point lights.
+	glBindVertexArray(gk4::lightCubeVAO);
+	for (unsigned int i = 0; i < NR_POINT_LIGHTS; i++)
+	{
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, gk4::pointLightPositions[i]);
+		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
+		lightCubeShader.setMat4("model", model);
+		glm::mat4 inv_model = glm::mat4(1.0f);
+		inv_model = glm::inverse(model);
+		inv_model = glm::transpose(inv_model);
+		//glm::mat4 inv-model = glm::;
+		lightCubeShader.setMat4("ti_model", inv_model);
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+}
+
+int my_main() {
+	srand(time(0));
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#if defined(__APPLE__) || defined (__MACH__)
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+	GLFWwindow* window=initWindow();
+	//init shaders
+	Shader lightingShader("../shaders/phong-vertex.shader","../shaders/phong-fragment.shader");
+
+	Shader lightCubeShader("../shaders/light-vertex.shader","../shaders/light-fragment.shader");
+
+	//load used models
+	tileTypeModels.emplace_back("models/floor/water.obj",1,1);
+	tileTypeModels.emplace_back("models/floor/grass.obj",1,1);
+	tileTypeModels.emplace_back("models/floor/sand.obj",1,1);
+	Model grid_model("models/floor/grid.obj",1,1);
+	unitTypeModels.emplace_back("models/sara/model/sara.blend",1,-1);
+	unitTypeModels.emplace_back("models/Assassin/Assassin.blend",1,-1);
+	//vertices info (light cube)
+	float vertices[] = {
+			// positions          // normals           // texture coords
+			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+			0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
+			0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+			0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+			-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+
+			-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
+			0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,
+			0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
+			0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
+			-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,
+			-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
+
+			-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+			-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+			-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+			-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+
+			0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+			0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+			0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+			0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+			0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+			0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+
+			-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+			0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
+			0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+			0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+			-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+
+			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+			0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+			0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+			0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+			-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
+	};
+	// create objects
+	gk4::units.emplace_back(0,10,10);
+	gk4::units.emplace_back(1,15,15);
+	gk4::units.emplace_back(1,19,19);
+	gk4::units.emplace_back(1,15,17);
+	gk4::units.emplace_back(1,20,14);
+	//object
+	for(int i=0;i<40;i++) {
+		std::vector<TileType> tmpTiles;
+		for (int j = 0; j < 40; j++) {
+			tmpTiles.emplace_back();
+			tmpTiles.back().level=rand()%3;
+			if(tmpTiles.back().level==0)
+				tmpTiles.back().type=rand()%3;
+			else
+				tmpTiles.back().type=1+rand()%2;
+			//gk4::gridObjects.push_back({grid_model, glm::vec3(i, 0.01f, j)});
+		}
+		gk4::tiles.push_back(tmpTiles);
+	}
+
+	// positions of the point lights
+	gk4::pointLightPositions = {
+			glm::vec3( 0.0f,  5.0f,  0.0f),
+			glm::vec3( 0.0f,  5.0f,  20.0f),
+			glm::vec3( 0.0f,  5.0f,  40.0f),
+			glm::vec3( 20.0f,  5.0f,  0.0f),
+			glm::vec3( 20.0f,  5.0f,  20.0f),
+			glm::vec3( 20.0f,  5.0f,  40.0f),
+			glm::vec3( 40.0f,  5.0f,  0.0f),
+			glm::vec3( 40.0f,  5.0f,  20.0f),
+			glm::vec3( 40.0f,  5.0f,  40.0f),
+	};
+
+	//vertex attributes
+	// first, configure the cube's VAO (and VBO)
+	unsigned int VBO/*, cubeVAO*/;
+	//glGenVertexArrays(1, &cubeVAO);
+	glGenBuffers(1, &VBO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	//glBindVertexArray(cubeVAO);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	//texture attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	// second, configure the light's VAO (VBO stays the same; the vertices are the same for the light object which is also a 3D cube)
+	glGenVertexArrays(1, &gk4::lightCubeVAO);
+	glBindVertexArray(gk4::lightCubeVAO);
+
+	// we only need to bind to the VBO (to link it with glVertexAttribPointer), no need to fill it; the VBO's data already contains all we need (it's already bound, but we do it again for educational purposes)
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// shader configuration
+	// --------------------
+	lightingShader.use();
+	lightingShader.setInt("material.diffuse", 0);
+	lightingShader.setInt("material.specular", 1);
+
+	float lastFrame = 0.0f; // Time of last frame
+	//main loop
+	while(!glfwWindowShouldClose(window))
+	{
+		//calculating deltaTime
+		auto currentFrame = (float)glfwGetTime();
+		gk4::deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+		//input
+		processInput(window);
+		// render
+		// ------
+		//day/night
+		drawScene(lightingShader,lightCubeShader,currentFrame);
+		//check and call events and swap the buffers
+		glfwSwapBuffers(window);
+
+		glfwPollEvents();
+	}
+	//glDeleteVertexArrays(1, &cubeVAO);
+	glDeleteVertexArrays(1, &gk4::lightCubeVAO);
+	glDeleteBuffers(1, &VBO);
+	//end of program
+	glfwTerminate();
+	//CEGUI::System::destroy();
+	//CEGUI::OpenGL3Renderer::destroy(static_cast<CEGUI::OpenGL3Renderer&>(*d_renderer));
+	return 0;
+}
+
+GLFWwindow* initWindow()
+{
+	gk4::aspect=(float)SRC_WIDTH/(float)SRC_HEIGHT;
+	GLFWwindow* window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "LearnOpenGL", nullptr, nullptr);
+	if (window == nullptr)
+	{
+		std::cerr << "Failed to create GLFW window\n";
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+	glfwMakeContextCurrent(window);
+	//glViewport(0, 0, 800, 600);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	//glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetKeyCallback(window, key_callback);
+	//GLEW: check errors
+	GLenum err = glewInit();
+	//myRenderer=std::make_unique(CEGUI::OpenGL3Renderer::create());
+	//CEGUI::System::create( *myRenderer );
+	if (GLEW_OK != err)
+	{
+		/* Problem: glewInit failed, something is seriously wrong. */
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+	stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+	std::cout << std::filesystem::current_path().string() << "\n";
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//system("pwd");
+	return window;
+}
