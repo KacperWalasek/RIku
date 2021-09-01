@@ -43,21 +43,18 @@ float lastX = SRC_WIDTH/2.0f, lastY = SRC_HEIGHT/2.0f;
 std::vector<Model> tileTypeModels;
 std::vector<Model> unitTypeModels;
 
-struct TileType
-{
+struct TileType{
 	int level;
 	int type; //0 - grass, 1 - water
 };
-struct Unit
-{
+struct Unit{
 	int type; //0 - Sara, 1 - assassin
 	int x;
 	int y;
 	explicit Unit(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
 };
 
-namespace front
-{
+namespace front{
 	float aspect;
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	constexpr glm::vec3 Zero=glm::vec3(0.0f);
@@ -72,49 +69,52 @@ namespace front
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
 	GLFWwindow* initWindow();
+	glm::vec2 getRelativeCursorPosition(GLFWwindow* window){
+		double x,y;
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		glfwGetCursorPos(window,&x, &x);
+		x/=width;
+		y/=height;
+		return glm::vec2(x,y);
+	}
 }
 
 //1 directional light, 16 point lights and spotlights
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
+void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 	glViewport(0, 0, width, height);
 	front::aspect=width/height;
 }
 //function for processing input
-void processInput(GLFWwindow *window)
-{
+void processInput(GLFWwindow *window){
 	//used for keys which are pressed continuously
 	float rotSpeed = M_PI*front::deltaTime;
 	float moveSpeed = 1.5f*std::sqrt(movingCameraTransform.position.y)*front::deltaTime;
 	float scrollSpeed = 10.0f*front::deltaTime;
 	float dx=0.0f,dy=0.0f;
-
-	int width, height;
-	glfwGetWindowSize(window, &width, &height);
-	double xpos, ypos;
-	glfwGetCursorPos(window,&xpos, &ypos);
-	xpos/=width;
-	ypos/=height;
+	auto clickPos=front::getRelativeCursorPosition(window);
 	//camera move
-	if(xpos<0.05f)
+	if(clickPos.x<0.05f)
 	{
 		dx=1.0f;
 		dy=1.0f-2.0f*ypos;
+		dy=1.0f-2.0f*clickPos.y;
 	}
-	else if(xpos>0.95f)
+	else if(clickPos.x>0.95f)
 	{
 		dx=-1.0f;
 		dy=1.0f-2.0f*ypos;
+		dy=1.0f-2.0f*clickPos.y;
 	}
-	else if(ypos<0.05f)
+	else if(clickPos.y<0.05f)
 	{
 		dy=1.0f;
-		dx=1.0f-2.0f*xpos;
+		dx=1.0f-2.0f*clickPos.x;
 	}
-	else if(ypos>0.95f)
+	else if(clickPos.y>0.95f)
 	{
 		dy=-1.0f;
-		dx=1.0f-2.0f*xpos;
+		dx=1.0f-2.0f*clickPos.x;
 	}
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
 		dy++;
@@ -146,18 +146,15 @@ void processInput(GLFWwindow *window)
 	camera.Up=front::rotate({0.f,1.f,0.f},{movingCameraTransform.rotation.x,movingCameraTransform.rotation.y,0});
 	camera.Position=movingCameraTransform.position;
 }
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
 	//key - key code (can be GLFW_KEY_UNKNOWN)
 	//scancode - unique for each key
 	//action - GLFW_PRESS, GLFW_REPEAT, GLFW_RELEASE
 	//mods - GLFW_MOD_SHIFT, GLFW_MOD_CONTROL, GLFW_MOD_ALT, GLFW_MOD_SUPER, GLFW_MOD_CAPS_LOCK, GLFW_MOD_NUM_LOCK
 	if(action==GLFW_RELEASE)
 		;
-	if(action==GLFW_PRESS)
-	{
-		switch(key)
-		{
+	if(action==GLFW_PRESS){
+		switch(key){
 			case GLFW_KEY_ESCAPE:
 				glfwSetWindowShouldClose(window, true);
 				break;
@@ -197,38 +194,34 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
+void mouse_callback(GLFWwindow* window, double xpos, double ypos){
 	int width, height;
 	glfwGetWindowSize(window, &width, &height);
 
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-{
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+	auto clickPos=front::getRelativeCursorPosition(window);
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
 		
 	}
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
 	if((movingCameraTransform.position.y>MIN_SCROLL_HEIGHT || yoffset<0.0f) && (movingCameraTransform.position.y<MAX_SCROLL_HEIGHT || yoffset>0.0f) )
 		movingCameraTransform.position-=glm::rotateX(glm::vec3(0.f,yoffset*.5f,0.f),(float)M_PI_4-movingCameraTransform.rotation.x*.25f);
 	else
 		movingCameraTransform.position.y=std::min(40.0f,std::max(3.0f,movingCameraTransform.position.y));
 }
 
-void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFrame)
-{
+void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFrame){
 	//calculating
 	front::dayPhase+=front::deltaTime/DAY_LENGTH;
 
 	float dayPart=0.5f*(1.0f+std::sin(M_PI*2.0f*front::dayPhase));
 	if(front::fogDensity>=0.05f)
 		glClearColor(dayPart*0.7f, dayPart*0.7f, dayPart*0.7f, 1.0f);
-	else
-	{
+	else{
 		float fog_per=front::fogDensity/0.05f;
 		glClearColor(dayPart*(0.2f+0.5f*fog_per), dayPart*0.7f, dayPart*(1.0f-0.3f*fog_per), 1.0f);
 	}
@@ -256,7 +249,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightingShader.setVec3("dirLight.diffuse", 0.7f*dayPart, 0.7f*dayPart, 0.7f*dayPart);
 	lightingShader.setVec3("dirLight.specular", 0.9f*dayPart, 0.9f*dayPart, 0.9f*dayPart);
 	// point lights
-	for(int i=0;i<NR_POINT_LIGHTS;i++) {
+	for(int i=0;i<NR_POINT_LIGHTS;i++){
 		lightingShader.setVec3("pointLights["+std::to_string(i)+"].position", front::pointLightPositions[i]);
 		lightingShader.setVec3("pointLights["+std::to_string(i)+"].ambient", 0.0f, 0.0f, 0.0f);
 		lightingShader.setVec3("pointLights["+std::to_string(i)+"].diffuse", 0.8f*(1.0f-dayPart), 0.8f*(1.0f-dayPart), 0.8f*(1.0f-dayPart));
@@ -267,7 +260,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	}
 	// spotLight
 	float tmp_angle2=glm::radians(spotLightAngle);
-	for(int i=0;i<NR_SPOT_LIGHTS;i++) {
+	for(int i=0;i<NR_SPOT_LIGHTS;i++){
 		lightingShader.setVec3("spotLights["+std::to_string(i)+"].position", glm::vec3({0.0f,1.7f,0.0f}));
 		lightingShader.setVec3("spotLights["+std::to_string(i)+"].direction", glm::vec3(std::sin(tmp_angle2),0.0f,std::cos(tmp_angle2)));
 		lightingShader.setVec3("spotLights["+std::to_string(i)+"].ambient", 0.0f, 0.0f, 0.0f);
@@ -282,10 +275,8 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	// render the loaded models
 	//draw tiles
-	for(int i=0;i<front::tiles.size();i++)
-	{
-		for(int j=0;j<front::tiles[i].size();j++)
-		{
+	for(int i=0;i<front::tiles.size();i++){
+		for(int j=0;j<front::tiles[i].size();j++){
 			front::Object object;
 			if(front::tiles[i][j].type<0 || front::tiles[i][j].type>tileTypeModels.size())
 				object = front::Object(tileTypeModels[0],glm::vec3((float)i,0.0f,(float)j));
@@ -296,8 +287,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	}
 	//draw units
 	int ind=0;
-	for(auto unit: front::units)
-	{
+	for(auto unit: front::units){
 		float height=0.5f*front::tiles[unit.x][unit.y].level;
 		//last two parameters needed by that models
 		front::Object object;
@@ -312,11 +302,11 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 			lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 		ind++;
 	}
-	if(front::isGridOn)
-		for (const auto & gridObject : front::gridObjects)
-		{
+	if(front::isGridOn){
+		for (const auto & gridObject : front::gridObjects){
 			gridObject.Draw(lightingShader);
 		}
+	}
 	// render the loaded models
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
@@ -336,8 +326,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightCubeShader.setVec4("color", 1.0f,1.0f,1.0f,1.0f);
 	// we now draw as many light bulbs as we have point lights.
 	glBindVertexArray(front::lightCubeVAO);
-	for (unsigned int i = 0; i < NR_POINT_LIGHTS; i++)
-	{
+	for (unsigned int i = 0; i < NR_POINT_LIGHTS; i++){
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, front::pointLightPositions[i]);
 		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
@@ -352,7 +341,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	}
 }
 
-int my_main() {
+int my_main(){
 	srand(time(0));
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -426,9 +415,9 @@ int my_main() {
 	front::units.emplace_back(1,15,17);
 	front::units.emplace_back(1,20,14);
 	//object
-	for(int i=0;i<40;i++) {
+	for(int i=0;i<40;i++){
 		std::vector<TileType> tmpTiles;
-		for (int j = 0; j < 40; j++) {
+		for (int j = 0; j < 40; j++){
 			tmpTiles.emplace_back();
 			tmpTiles.back().level=rand()%3;
 			if(tmpTiles.back().level==0)
@@ -492,8 +481,7 @@ int my_main() {
 
 	float lastFrame = 0.0f; // Time of last frame
 	//main loop
-	while(!glfwWindowShouldClose(window))
-	{
+	while(!glfwWindowShouldClose(window)){
 		//calculating deltaTime
 		auto currentFrame = (float)glfwGetTime();
 		front::deltaTime = currentFrame - lastFrame;
@@ -519,12 +507,10 @@ int my_main() {
 	return 0;
 }
 
-GLFWwindow* front::initWindow()
-{
+GLFWwindow* front::initWindow(){
 	front::aspect=(float)SRC_WIDTH/(float)SRC_HEIGHT;
 	GLFWwindow* window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "LearnOpenGL", nullptr, nullptr);
-	if (window == nullptr)
-	{
+	if (window == nullptr){
 		std::cerr << "Failed to create GLFW window\n";
 		glfwTerminate();
 		exit(EXIT_FAILURE);
@@ -540,8 +526,7 @@ GLFWwindow* front::initWindow()
 	GLenum err = glewInit();
 	//myRenderer=std::make_unique(CEGUI::OpenGL3Renderer::create());
 	//CEGUI::System::create( *myRenderer );
-	if (GLEW_OK != err)
-	{
+	if (GLEW_OK != err){
 		/* Problem: glewInit failed, something is seriously wrong. */
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		glfwTerminate();
