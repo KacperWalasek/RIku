@@ -72,16 +72,6 @@ namespace front
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
 	GLFWwindow* initWindow();
-	glm::vec2 getRelativeCursorPosition(GLFWwindow* window)
-	{
-		double x,y;
-		int width, height;
-		glfwGetWindowSize(window, &width, &height);
-		glfwGetCursorPos(window,&x, &x);
-		x/=width;
-		y/=height;
-		return glm::vec2(x,y);
-	}
 }
 
 //1 directional light, 16 point lights and spotlights
@@ -98,27 +88,33 @@ void processInput(GLFWwindow *window)
 	float moveSpeed = 1.5f*std::sqrt(movingCameraTransform.position.y)*front::deltaTime;
 	float scrollSpeed = 10.0f*front::deltaTime;
 	float dx=0.0f,dy=0.0f;
-	auto clickPos=front::getRelativeCursorPosition(window);
+
+	int width, height;
+	glfwGetWindowSize(window, &width, &height);
+	double xpos, ypos;
+	glfwGetCursorPos(window,&xpos, &ypos);
+	xpos/=width;
+	ypos/=height;
 	//camera move
-	if(clickPos.x<0.05f)
+	if(xpos<0.05f)
 	{
 		dx=1.0f;
-		dy=1.0f-2.0f*clickPos.y;
+		dy=1.0f-2.0f*ypos;
 	}
-	else if(clickPos.x>0.95f)
+	else if(xpos>0.95f)
 	{
 		dx=-1.0f;
-		dy=1.0f-2.0f*clickPos.y;
+		dy=1.0f-2.0f*ypos;
 	}
-	else if(clickPos.y<0.05f)
+	else if(ypos<0.05f)
 	{
 		dy=1.0f;
-		dx=1.0f-2.0f*clickPos.x;
+		dx=1.0f-2.0f*xpos;
 	}
-	else if(clickPos.y>0.95f)
+	else if(ypos>0.95f)
 	{
 		dy=-1.0f;
-		dx=1.0f-2.0f*clickPos.x;
+		dx=1.0f-2.0f*xpos;
 	}
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
 		dy++;
@@ -210,9 +206,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	auto clickPos=front::getRelativeCursorPosition(window);
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+		
 	}
 }
 

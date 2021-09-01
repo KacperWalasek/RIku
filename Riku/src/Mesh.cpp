@@ -3,9 +3,6 @@
 //
 
 #include "Mesh.h"
-#include "Texture.h"
-#include "Shader.h"
-#include <glm/glm.hpp>
 
 Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures)
 {

@@ -5,6 +5,7 @@
 #ifndef GK_4_OBJECT_H
 #define GK_4_OBJECT_H
 #include <glm/glm.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 
 class Model;
 class Shader;
