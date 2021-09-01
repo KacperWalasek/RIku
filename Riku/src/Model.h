@@ -5,10 +5,13 @@
 #ifndef GK_4_MODEL_H
 #define GK_4_MODEL_H
 
-#include "Mesh.h"
-#include "assimp/Importer.hpp"
-#include "assimp/scene.h"
-#include "assimp/postprocess.h"
+class Mesh;
+class Texture;
+class Shader;
+class aiNode;
+class aiScene;
+class aiMaterial;
+enum aiTextureType;
 
 class Model {
 public:

@@ -7,8 +7,8 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "Texture.h"
-#include "Shader.h"
+class Texture;
+class Shader;
 
 struct Vertex {
 	// position
