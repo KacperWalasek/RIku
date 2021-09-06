@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "Model.h"
 #include "Object.h"
+#include "Config.h"
 #include <cstdlib>
 #include <ctime>
 //#include <cegui-0.8.7/CEGUI/CEGUI.h>
@@ -24,7 +25,7 @@
 float spotLightAngle=0.0f;
 
 Camera camera=glm::vec3(0.0f, 0.0f, 0.0f);
-Transform movingCameraTransform{glm::vec3(20.0f, 50.0f, 20.0f),glm::vec3(glm::radians(60.0f),glm::radians(180.0f),0.0f)};
+Transform movingCameraTransform;
 
 bool firstMouse=true;
 constexpr uint16_t NR_POINT_LIGHTS=9;
@@ -35,8 +36,6 @@ constexpr uint16_t NR_SPOT_LIGHTS=1;
 constexpr int SRC_WIDTH=1024;
 constexpr int SRC_HEIGHT=768;
 constexpr float DAY_LENGTH=30.0f;
-float lastX = SRC_WIDTH/2.0f, lastY = SRC_HEIGHT/2.0f;
-//std::unique_ptr<CEGUI::OpenGL3Renderer> myRenderer;
 
 std::vector<Model> tileTypeModels;
 std::vector<Model> unitTypeModels;
@@ -54,7 +53,7 @@ struct Unit
 	explicit Unit(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
 };
 
-namespace gk4
+namespace front
 {
 	float aspect;
 	float deltaTime = 0.0f;	// Time between current frame and last frame
@@ -69,20 +68,53 @@ namespace gk4
 	bool isGridOn=false;
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
+	Config config;
+	GLFWwindow* initWindow();
+	std::optional<glm::vec2> getRelativeCursorPosition(GLFWwindow* window){
+		double x,y;
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		glfwGetCursorPos(window,&x, &y);
+		x/=width;
+		y/=height;
+		if(x>=0 && x<=1 && y>=0 && y<=1)
+			return glm::vec2(x,y);
+		return {};
+	}
 }
 
 //1 directional light, 16 point lights and spotlights
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
-	gk4::aspect=width/height;
+	front::aspect=width/height;
 }
 //function for processing input
 void processInput(GLFWwindow *window)
 {
 	//used for keys which are pressed continuously
-	float rotSpeed = M_PI*gk4::deltaTime;
-	float moveSpeed = 3.0f*gk4::deltaTime;
+	float rotSpeed = M_PI*front::deltaTime;
+	float moveSpeed = 1.5f*std::sqrt(movingCameraTransform.position.y)*front::deltaTime;
+	float scrollSpeed = 10.0f*front::deltaTime;
+	float dx=0.0f,dy=0.0f;
+	auto optCursorPos=front::getRelativeCursorPosition(window);
+	//camera move
+	if(optCursorPos.has_value()) {
+		auto cursorPos = optCursorPos.value();
+		if (cursorPos.x < 0.1f) {
+			dx = 1.0f;
+			dy = 1.0f - 2.0f * cursorPos.y;
+		} else if (cursorPos.x > 0.9f) {
+			dx = -1.0f;
+			dy = 1.0f - 2.0f * cursorPos.y;
+		} else if (cursorPos.y < 0.1f) {
+			dy = 1.0f;
+			dx = 1.0f - 2.0f * cursorPos.x;
+		} else if (cursorPos.y > 0.9f) {
+			dy = -1.0f;
+			dx = 1.0f - 2.0f * cursorPos.x;
+		}
+	}
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
 		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,-moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
@@ -95,6 +127,18 @@ void processInput(GLFWwindow *window)
 		movingCameraTransform.rotation.y-=moveSpeed;
 	if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
 		movingCameraTransform.rotation.y+=moveSpeed;
+	//process zoom
+	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
+		if(movingCameraTransform.position.y>front::config.minZoomHeight)
+			movingCameraTransform.position+=glm::rotateX(glm::vec3(0.f,-scrollSpeed,0.f),(float)M_PI_4-movingCameraTransform.rotation.x*.25f);
+	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
+		if(movingCameraTransform.position.y<front::config.maxZoomHeight)
+			movingCameraTransform.position+=glm::rotateX(glm::vec3(0.f,scrollSpeed,0.f),(float)M_PI_4-movingCameraTransform.rotation.x*.25f);
+	if(movingCameraTransform.position.y<front::config.minZoomHeight)
+		movingCameraTransform.position.y=front::config.minZoomHeight;
+	if(movingCameraTransform.position.y>front::config.maxZoomHeight)
+		movingCameraTransform.position.y=front::config.maxZoomHeight;
+	//rotation
 	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 		movingCameraTransform.rotation.y+=rotSpeed;
 	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
@@ -119,34 +163,34 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 				glfwSetWindowShouldClose(window, true);
 				break;
 			case GLFW_KEY_W:
-					gk4::units[gk4::focusedUnit].y=std::max(0,gk4::units[gk4::focusedUnit].y-1);
+					front::units[front::focusedUnit].y=std::max(0,front::units[front::focusedUnit].y-1);
 				break;
 			case GLFW_KEY_S:
-					gk4::units[gk4::focusedUnit].y=std::min((int)gk4::tiles[0].size()-1,gk4::units[gk4::focusedUnit].y+1);
+					front::units[front::focusedUnit].y=std::min((int)front::tiles[0].size()-1,front::units[front::focusedUnit].y+1);
 				break;
 			case GLFW_KEY_A:
-					gk4::units[gk4::focusedUnit].x=std::max(0,gk4::units[gk4::focusedUnit].x-1);
+					front::units[front::focusedUnit].x=std::max(0,front::units[front::focusedUnit].x-1);
 				break;
 			case GLFW_KEY_D:
-					gk4::units[gk4::focusedUnit].x=std::min((int)gk4::tiles.size()-1,gk4::units[gk4::focusedUnit].x+1);
+					front::units[front::focusedUnit].x=std::min((int)front::tiles.size()-1,front::units[front::focusedUnit].x+1);
 				break;
 			case GLFW_KEY_G:
-					gk4::isGridOn=!gk4::isGridOn;
+					front::isGridOn=!front::isGridOn;
 				break;
 			case GLFW_KEY_1:
-				gk4::focusedUnit=0;
+				front::focusedUnit=0;
 				break;
 			case GLFW_KEY_2:
-				gk4::focusedUnit=1;
+				front::focusedUnit=1;
 				break;
 			case GLFW_KEY_3:
-				gk4::focusedUnit=2;
+				front::focusedUnit=2;
 				break;
 			case GLFW_KEY_4:
-				gk4::focusedUnit=3;
+				front::focusedUnit=3;
 				break;
 			case GLFW_KEY_5:
-				gk4::focusedUnit=4;
+				front::focusedUnit=4;
 				break;
 			default:
 				break;
@@ -167,23 +211,29 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 }
 GLFWwindow* initWindow();
 
-void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFrame)
-{
-	//calculating
-	gk4::dayPhase+=gk4::deltaTime/DAY_LENGTH;
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
+	if((movingCameraTransform.position.y>front::config.minZoomHeight || yoffset<0.0f) && (movingCameraTransform.position.y<front::config.maxZoomHeight || yoffset>0.0f) )
+		movingCameraTransform.position-=glm::rotateX(glm::vec3(0.f,yoffset*.5f,0.f),(float)M_PI_4-movingCameraTransform.rotation.x*.25f);
+	else
+		movingCameraTransform.position.y=std::min(40.0f,std::max(3.0f,movingCameraTransform.position.y));
+}
 
-	float dayPart=0.5f*(1.0f+std::sin(M_PI*2.0f*gk4::dayPhase));
-	if(gk4::fogDensity>=0.05f)
+void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFrame){
+	//calculating
+	front::dayPhase+=front::deltaTime/DAY_LENGTH;
+
+	float dayPart=0.5f*(1.0f+std::sin(M_PI*2.0f*front::dayPhase));
+	if(front::fogDensity>=0.05f)
 		glClearColor(dayPart*0.7f, dayPart*0.7f, dayPart*0.7f, 1.0f);
 	else
 	{
-		float fog_per=gk4::fogDensity/0.05f;
+		float fog_per=front::fogDensity/0.05f;
 		glClearColor(dayPart*(0.2f+0.5f*fog_per), dayPart*0.7f, dayPart*(1.0f-0.3f*fog_per), 1.0f);
 	}
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	//
-	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), gk4::aspect, 0.1f, 100.0f);
+	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), front::aspect, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
 	//shader initialization
 	lightingShader.use();
@@ -194,7 +244,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	//default value
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	//fog parameters
-	lightingShader.setFloat("fog_density", gk4::fogDensity);
+	lightingShader.setFloat("fog_density", front::fogDensity);
 	lightingShader.setVec4("fog_color", 0.7f*dayPart, 0.7f*dayPart, 0.7f*dayPart, 1.0f);
 
 	//Setting lights
@@ -205,7 +255,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightingShader.setVec3("dirLight.specular", 0.9f*dayPart, 0.9f*dayPart, 0.9f*dayPart);
 	// point lights
 	for(int i=0;i<NR_POINT_LIGHTS;i++) {
-		lightingShader.setVec3("pointLights["+std::to_string(i)+"].position", gk4::pointLightPositions[i]);
+		lightingShader.setVec3("pointLights["+std::to_string(i)+"].position", front::pointLightPositions[i]);
 		lightingShader.setVec3("pointLights["+std::to_string(i)+"].ambient", 0.0f, 0.0f, 0.0f);
 		lightingShader.setVec3("pointLights["+std::to_string(i)+"].diffuse", 0.8f*(1.0f-dayPart), 0.8f*(1.0f-dayPart), 0.8f*(1.0f-dayPart));
 		lightingShader.setVec3("pointLights["+std::to_string(i)+"].specular", 1.0f*(1.0f-dayPart), 1.0f*(1.0f-dayPart), 1.0f*(1.0f-dayPart));
@@ -230,38 +280,37 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	// render the loaded models
 	//draw tiles
-	for(int i=0;i<gk4::tiles.size();i++)
+	for(int i=0;i<front::tiles.size();i++)
 	{
-		for(int j=0;j<gk4::tiles[i].size();j++)
+		for(int j=0;j<front::tiles[i].size();j++)
 		{
 			Object object;
-			if(gk4::tiles[i][j].type<0 || gk4::tiles[i][j].type>tileTypeModels.size())
+			if(front::tiles[i][j].type<0 || front::tiles[i][j].type>tileTypeModels.size())
 				object = Object(tileTypeModels[0],glm::vec3((float)i,0.0f,(float)j));
 			else
-				object = Object(tileTypeModels[gk4::tiles[i][j].type],glm::vec3(i,gk4::tiles[i][j].level*0.5f,j));
+				object = Object(tileTypeModels[front::tiles[i][j].type],glm::vec3(i,front::tiles[i][j].level*0.5f,j));
 			object.Draw(lightingShader);
 		}
 	}
 	//draw units
 	int ind=0;
-	for(auto unit: gk4::units)
-	{
-		float height=0.5f*gk4::tiles[unit.x][unit.y].level;
+	for(auto unit: front::units){
+		float height=0.5f*(float)front::tiles[unit.x][unit.y].level;
 		//last two parameters needed by that models
 		Object object;
-		if(ind!=gk4::focusedUnit)
+		if(ind!=front::focusedUnit)
 			lightingShader.setVec4("color_mod", 0.7f,0.7f,0.7f, 1.0f);
 		if(unit.type==0)
 			object={unitTypeModels[unit.type],glm::vec3(unit.x,height,unit.y),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f)};
 		else
 			object={unitTypeModels[unit.type],glm::vec3(unit.x,height,unit.y),glm::vec3(-90.0f,0.0f,0.0f),glm::vec3(0.1f,0.1f,0.1f)};
 		object.Draw(lightingShader);
-		if(ind!=gk4::focusedUnit)
+		if(ind!=front::focusedUnit)
 			lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 		ind++;
 	}
-	if(gk4::isGridOn)
-		for (const auto & gridObject : gk4::gridObjects)
+	if(front::isGridOn)
+		for (const auto & gridObject : front::gridObjects)
 		{
 			gridObject.Draw(lightingShader);
 		}
@@ -276,18 +325,18 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightCubeShader.setMat4("projection", projection);
 	lightCubeShader.setMat4("view", view);
 
-	lightCubeShader.setFloat("fog_density", gk4::fogDensity);
+	lightCubeShader.setFloat("fog_density", front::fogDensity);
 	lightCubeShader.setVec4("fog_color", 0.5f, 0.5f, 0.5f, 1.0f);
 	lightCubeShader.setVec3("camera_position", camera.Position);
 
 	//set night value
 	lightCubeShader.setVec4("color", 1.0f,1.0f,1.0f,1.0f);
 	// we now draw as many light bulbs as we have point lights.
-	glBindVertexArray(gk4::lightCubeVAO);
+	glBindVertexArray(front::lightCubeVAO);
 	for (unsigned int i = 0; i < NR_POINT_LIGHTS; i++)
 	{
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, gk4::pointLightPositions[i]);
+		model = glm::translate(model, front::pointLightPositions[i]);
 		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
 		lightCubeShader.setMat4("model", model);
 		glm::mat4 inv_model = glm::mat4(1.0f);
@@ -368,11 +417,11 @@ int my_main() {
 			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 	// create objects
-	gk4::units.emplace_back(0,10,10);
-	gk4::units.emplace_back(1,15,15);
-	gk4::units.emplace_back(1,19,19);
-	gk4::units.emplace_back(1,15,17);
-	gk4::units.emplace_back(1,20,14);
+	front::units.emplace_back(0,10,10);
+	front::units.emplace_back(1,15,15);
+	front::units.emplace_back(1,19,19);
+	front::units.emplace_back(1,15,17);
+	front::units.emplace_back(1,20,14);
 	//object
 	for(int i=0;i<40;i++) {
 		std::vector<TileType> tmpTiles;
@@ -383,13 +432,13 @@ int my_main() {
 				tmpTiles.back().type=rand()%3;
 			else
 				tmpTiles.back().type=1+rand()%2;
-			//gk4::gridObjects.push_back({grid_model, glm::vec3(i, 0.01f, j)});
+			//front::gridObjects.push_back({grid_model, glm::vec3(i, 0.01f, j)});
 		}
-		gk4::tiles.push_back(tmpTiles);
+		front::tiles.push_back(tmpTiles);
 	}
 
 	// positions of the point lights
-	gk4::pointLightPositions = {
+	front::pointLightPositions = {
 			glm::vec3( 0.0f,  5.0f,  0.0f),
 			glm::vec3( 0.0f,  5.0f,  20.0f),
 			glm::vec3( 0.0f,  5.0f,  40.0f),
@@ -423,8 +472,8 @@ int my_main() {
 	glEnableVertexAttribArray(2);
 
 	// second, configure the light's VAO (VBO stays the same; the vertices are the same for the light object which is also a 3D cube)
-	glGenVertexArrays(1, &gk4::lightCubeVAO);
-	glBindVertexArray(gk4::lightCubeVAO);
+	glGenVertexArrays(1, &front::lightCubeVAO);
+	glBindVertexArray(front::lightCubeVAO);
 
 	// we only need to bind to the VBO (to link it with glVertexAttribPointer), no need to fill it; the VBO's data already contains all we need (it's already bound, but we do it again for educational purposes)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -444,7 +493,7 @@ int my_main() {
 	{
 		//calculating deltaTime
 		auto currentFrame = (float)glfwGetTime();
-		gk4::deltaTime = currentFrame - lastFrame;
+		front::deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		//input
 		processInput(window);
@@ -458,7 +507,7 @@ int my_main() {
 		glfwPollEvents();
 	}
 	//glDeleteVertexArrays(1, &cubeVAO);
-	glDeleteVertexArrays(1, &gk4::lightCubeVAO);
+	glDeleteVertexArrays(1, &front::lightCubeVAO);
 	glDeleteBuffers(1, &VBO);
 	//end of program
 	glfwTerminate();
@@ -467,12 +516,14 @@ int my_main() {
 	return 0;
 }
 
-GLFWwindow* initWindow()
-{
-	gk4::aspect=(float)SRC_WIDTH/(float)SRC_HEIGHT;
-	GLFWwindow* window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "LearnOpenGL", nullptr, nullptr);
-	if (window == nullptr)
-	{
+GLFWwindow* front::initWindow(){
+	config.load();
+	//set values
+	movingCameraTransform=Transform(glm::vec3(20.0f, 20.0f, 20.0f),glm::vec3(glm::radians(config.angle),glm::radians(180.0f),0.0f));
+	camera.Zoom=config.fov;
+	front::aspect=(float)config.screenWidth/config.screenHeight;
+	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, "LearnOpenGL", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
+	if (window == nullptr){
 		std::cerr << "Failed to create GLFW window\n";
 		glfwTerminate();
 		exit(EXIT_FAILURE);

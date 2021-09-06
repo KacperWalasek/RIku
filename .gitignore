@@ -224,3 +224,4 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+/Riku/frontend_config.json

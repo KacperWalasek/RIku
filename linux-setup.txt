@@ -3,10 +3,12 @@
 #libglew-dev (GLEW)
 #libgl-dev (OpenGL)
 #libglfw3-dev (GLFW)
+#libjsoncpp-dev (JsonCpp)
 
 sudo -i
 sudo apt install libgl-dev
 sudo apt install libglew-dev
 sudo apt install libglfw3-dev
 sudo apt install libassimp-dev
+sudo apt install libjsoncpp-dev
 exit
