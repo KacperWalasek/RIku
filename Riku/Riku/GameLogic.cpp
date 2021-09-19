@@ -15,7 +15,7 @@ GameLogic::GameLogic()
 		for (int i = 0; i < 6; i++)
 			row.push_back(Tile(4, resources.areas[0], resources.grounds[1], resources.biomes[0]));
 
-	communicator.setHandlers({ new MapRequestHandler(gameState.map) });
+	communicator.setHandlers({ std::make_shared<MapRequestHandler>( gameState.map) });
 
 	std::cout << "<GameLogic.cpp>" << std::endl << "Element mapy:" << std::endl <<
 		"\t Biome - " << gameState.map[4][2].biome.getName() << std::endl <<
@@ -39,7 +39,7 @@ GameLogic::GameLogic()
 	
 }
 
-Response* GameLogic::getInfo(std::shared_ptr<Request> request)
+std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request)
 {
 	return communicator.handleRequest(request);
 }
