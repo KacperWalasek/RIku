@@ -10,6 +10,6 @@ class Area :
     double mult;
 public:
     Area(std::string name, double mult);
-    virtual double modifyCost(double cost) const override;
+    virtual double getModifiedCost(double cost) const override;
 };
 

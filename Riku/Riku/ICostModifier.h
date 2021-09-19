@@ -4,6 +4,6 @@
 class ICostModifier
 {
 public:
-	virtual double modifyCost(double cost) const = 0;
+	virtual double getModifiedCost(double cost) const = 0;
 };
 
