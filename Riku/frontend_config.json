@@ -1,0 +1,10 @@
+{
+	"angle" : 50,
+	"fov" : 60,
+	"is_fullscreen" : false,
+	"max_zoom_height" : 60,
+	"min_zoom_height" : 3,
+	"screen_height" : 600,
+	"screen_width" : 800,
+	"lang": "en_US"
+}
