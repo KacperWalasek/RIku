@@ -25,6 +25,9 @@
     <Filter Include="GameLogic\Player">
       <UniqueIdentifier>{390e02d8-ae2c-4777-af55-227d622a614b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLogic\GameObject">
+      <UniqueIdentifier>{63fb1e63-af70-43dd-8e10-2c12ac5d2fbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Riku.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameLogic\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TileObject.cpp">
+      <Filter>GameLogic\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameLogic\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
