@@ -1,0 +1,9 @@
+{
+	"angle" : 80.0,
+	"fov" : 45.0,
+	"is_fullscreen" : false,
+	"max_zoom_height" : 60.0,
+	"min_zoom_height" : 3.0,
+	"screen_height" : 600,
+	"screen_width" : 800
+}

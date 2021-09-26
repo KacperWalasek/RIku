@@ -8,7 +8,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 class Model;
-class Shader;
+struct Shader;
 
 namespace front {
 	glm::vec3 rotate(const glm::vec3 &pos, const glm::vec3 &rot);
