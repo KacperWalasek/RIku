@@ -28,6 +28,12 @@
     <Filter Include="GameLogic\GameObject">
       <UniqueIdentifier>{63fb1e63-af70-43dd-8e10-2c12ac5d2fbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLogic\StateUpdate">
+      <UniqueIdentifier>{65857a14-8b32-48dc-b99a-ece547243553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\StateUpdate\Move">
+      <UniqueIdentifier>{cfd8f4a6-efca-4eea-aff9-aaee27318b93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Riku.cpp">
@@ -59,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="SimpleTileObject.cpp">
       <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="StateUpdate.cpp">
+      <Filter>GameLogic\StateUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="RemovePlayerResources.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPlayerResources.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +115,18 @@
     </ClInclude>
     <ClInclude Include="TileObjectDecorator.h">
       <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="StateUpdate.h">
+      <Filter>GameLogic\StateUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="IMove.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="RemovePlayerResources.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPlayerResources.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

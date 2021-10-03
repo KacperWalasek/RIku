@@ -2,8 +2,10 @@
 #include "GameLogic.h"
 #include <iostream>
 #include "SimpleTileObject.h"
+#include "AddPlayerResources.h"
+#include "RemovePlayerResources.h"
 
-GameLogic::GameLogic()
+GameLogic::GameLogic() : stateUpdate(this->gameState)
 {
 	resources.initialize();
 	gameState.map = { 6, std::vector<Tile>() };
@@ -31,6 +33,13 @@ GameLogic::GameLogic()
 		 std::boolalpha <<
 		"\t\t return - " << gameState.players[0].useResources(woodIndex,10) << std::endl <<
 		"\t\t quantity - " << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
-
 	
+	AddPlayerResources move = AddPlayerResources(0, woodIndex, 20);
+	RemovePlayerResources move1 = RemovePlayerResources(0, woodIndex, 10);
+	
+	stateUpdate.handleMoveRequest(move);
+	std::cout << "\t After adding 20 resources using Move - " << gameState.players[0].getResourceQuantity(0) << std::endl;
+	
+	stateUpdate.handleMoveRequest(move1);
+	std::cout << "\t After removing 10 resources using Move - " << gameState.players[0].getResourceQuantity(0) << std::endl;
 }

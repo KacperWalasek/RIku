@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddPlayerResources.cpp" />
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Biome.cpp" />
     <ClCompile Include="GameLogic.cpp" />
@@ -158,21 +159,27 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="LogicResources.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RemovePlayerResources.cpp" />
     <ClCompile Include="Riku.cpp" />
+    <ClCompile Include="StateUpdate.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="SimpleTileObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddPlayerResources.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="Biome.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="ICostModifier.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="IMove.h" />
     <ClInclude Include="ITileObject.h" />
     <ClInclude Include="LogicResources.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RemovePlayerResources.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="StateUpdate.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="SimpleTileObject.h" />
     <ClInclude Include="TileObjectDecorator.h" />
