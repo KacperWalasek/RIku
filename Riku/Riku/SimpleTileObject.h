@@ -9,14 +9,14 @@ class SimpleTileObject : public ITileObject
 	std::string name;
 public: 
 	SimpleTileObject(std::string name);
-
+	
 	virtual double getModifiedCost(double cost) const override;
 
-	virtual void onDestroy(bool byOwner) override {};
+	virtual std::shared_ptr<IMove> onDestroy(bool byOwner) override { return nullptr; }
 
-	virtual void onTurnEnd() override {};
+	virtual std::shared_ptr<IMove> onTurnEnd() override { return nullptr; }
 
-	virtual void onTurnBegin() override {};
+	virtual std::shared_ptr<IMove> onTurnBegin() override { return nullptr; }
 
 	virtual std::string getName() const override;
 
