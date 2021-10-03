@@ -160,7 +160,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Riku.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="TileObject.cpp" />
+    <ClCompile Include="SimpleTileObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Area.h" />
@@ -169,11 +169,13 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="ICostModifier.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="ITileObject.h" />
     <ClInclude Include="LogicResources.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileObject.h" />
+    <ClInclude Include="SimpleTileObject.h" />
+    <ClInclude Include="TileObjectDecorator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -57,7 +57,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameLogic\Player</Filter>
     </ClCompile>
-    <ClCompile Include="TileObject.cpp">
+    <ClCompile Include="SimpleTileObject.cpp">
       <Filter>GameLogic\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,7 +92,13 @@
     <ClInclude Include="Player.h">
       <Filter>GameLogic\Player</Filter>
     </ClInclude>
-    <ClInclude Include="TileObject.h">
+    <ClInclude Include="ITileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TileObjectDecorator.h">
       <Filter>GameLogic\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

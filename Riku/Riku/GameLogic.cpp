@@ -1,13 +1,14 @@
 // Kacper Walasek
 #include "GameLogic.h"
 #include <iostream>
+#include "SimpleTileObject.h"
 
 GameLogic::GameLogic()
 {
 	resources.initialize();
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { 2, (int)resources.playerResources.size() };
-
+	SimpleTileObject obj = SimpleTileObject("jakiesImie");
 
 	for (std::vector<Tile>& row : gameState.map)
 		for (int i = 0; i < 6; i++)
