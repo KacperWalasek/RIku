@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="3ce8e2dd-4b20-4c29-b757-5c960b1c46e7" name="Debug" defaultType="TOOL">
+      <configuration id="82c41d06-37f5-41b2-96c3-e56eaaca4dff" name="Debug" toolchainName="Default">
+        <build type="TOOL">
+          <tool actionId="Tool_External Tools_clean_with_make" />
+        </build>
+        <clean type="TOOL">
+          <tool actionId="Tool_External Tools_clean_with_make" />
+        </clean>
+      </configuration>
+    </target>
+  </component>
+</project>
