@@ -7,12 +7,11 @@
 
 class Communicator : public IRequestHandler
 {
-	std::vector<IRequestHandler*> handlers;
+	std::vector<std::shared_ptr<IRequestHandler>> handlers;
 public: 
 	Communicator();
-	~Communicator();
-	virtual Response* handleRequest(std::shared_ptr<Request> request) override;
+	virtual std::shared_ptr<Response> handleRequest(std::shared_ptr<Request> request) override;
 	virtual bool canHandle(const Request& request) const override;
-	void setHandlers(std::vector<IRequestHandler*>&& handlers);
+	void setHandlers(std::vector<std::shared_ptr<IRequestHandler>>&& handlers);
 };
 

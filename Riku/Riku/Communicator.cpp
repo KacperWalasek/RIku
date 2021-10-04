@@ -3,31 +3,25 @@
 Communicator::Communicator() 
 {}
 
-Communicator::~Communicator()
-{
-	for (IRequestHandler* handler : handlers)
-		delete handler;
-}
-
 bool Communicator::canHandle(const Request & request) const
 {
-	for (IRequestHandler* handler : handlers)
+	for (std::shared_ptr<IRequestHandler> handler : handlers)
 		if (handler->canHandle(request))
 			return true;
 	return false;
 }
 
-void Communicator::setHandlers(std::vector<IRequestHandler*>&& handlers)
+void Communicator::setHandlers(std::vector<std::shared_ptr<IRequestHandler>>&& handlers)
 {
 	this->handlers = std::move(handlers);
 }
 
-Response*  Communicator::handleRequest(std::shared_ptr<Request> request)
+std::shared_ptr<Response> Communicator::handleRequest(std::shared_ptr<Request> request)
 {
-	for (IRequestHandler* handler : handlers)
+	for (std::shared_ptr<IRequestHandler> handler : handlers)
 	{
-		if (handler->canHandle(*request))
+		if (handler->canHandle(*request.get()))
 			return handler->handleRequest(request);
 	}
-	return new Response(request, 1);
+	return std::make_shared<Response>(Response(request, 1));
 }

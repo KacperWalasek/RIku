@@ -26,7 +26,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 int main(void)
 {
 	GameLogic logic;
-	MapResponse* response = (MapResponse*)logic.getInfo(std::make_shared<Request>("map"));
+	std::shared_ptr<MapResponse> response = std::static_pointer_cast<MapResponse>(logic.getInfo(std::make_shared<Request>("map")));
 	const std::vector<std::vector<Tile>>& map = response->getMap();
 	std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
 	// Initialise GLFW

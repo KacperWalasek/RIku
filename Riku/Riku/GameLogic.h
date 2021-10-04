@@ -11,6 +11,6 @@ class GameLogic
 	Communicator communicator;
 public:
 	GameLogic();
-	Response* getInfo(std::shared_ptr<Request> request);
+	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request);
 };
 
