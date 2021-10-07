@@ -16,8 +16,5 @@ public:
 	virtual std::shared_ptr<IMove> onTurnEnd() = 0;
 	// wywo³ywane na koniec tury
 	virtual std::shared_ptr<IMove> onTurnBegin() = 0;
-	/*
-		TODO - onDestroy, onTurnEnd i onTurnBegin powinny zwracaæ akcjê, które mo¿na wywo³aæ na stanie gry. Na ten moment zwracaj¹ voida, bo akcje jeszcze nie zimplementowane
-	*/
 };
 

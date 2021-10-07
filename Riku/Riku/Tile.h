@@ -4,6 +4,7 @@
 #include "Area.h"
 #include "Ground.h"
 #include "Biome.h"
+#include "ITileObject.h"
 
 class Tile
 {
@@ -17,10 +18,10 @@ public:
 
 	double getCost() const;
 
+	std::shared_ptr<ITileObject> object;
 	/*
 		TODO:
 		- Resource
-		- Tile Object
 	*/
 };
 

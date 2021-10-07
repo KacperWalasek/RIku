@@ -34,6 +34,12 @@
     <Filter Include="GameLogic\StateUpdate\Move">
       <UniqueIdentifier>{cfd8f4a6-efca-4eea-aff9-aaee27318b93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLogic\StateUpdate\Patch">
+      <UniqueIdentifier>{73df7a0f-4973-4a80-9b24-7cfb1a083ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\StateUpdate\PatchHandlers">
+      <UniqueIdentifier>{9f12c4ca-352d-42f7-8646-0d1b91cefe19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Riku.cpp">
@@ -69,10 +75,13 @@
     <ClCompile Include="StateUpdate.cpp">
       <Filter>GameLogic\StateUpdate</Filter>
     </ClCompile>
-    <ClCompile Include="RemovePlayerResources.cpp">
-      <Filter>GameLogic\StateUpdate\Move</Filter>
+    <ClCompile Include="ResourceFactory.cpp">
+      <Filter>GameLogic\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="AddPlayerResources.cpp">
+    <ClCompile Include="PlayerPatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangePlayerResources.cpp">
       <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,10 +131,22 @@
     <ClInclude Include="IMove.h">
       <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
-    <ClInclude Include="RemovePlayerResources.h">
-      <Filter>GameLogic\StateUpdate\Move</Filter>
+    <ClInclude Include="ResourceFactory.h">
+      <Filter>GameLogic\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="AddPlayerResources.h">
+    <ClInclude Include="Patch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPatch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="IPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangePlayerResources.h">
       <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>

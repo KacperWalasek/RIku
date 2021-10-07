@@ -1,11 +1,21 @@
 //Kacper Walasek
 #include "StateUpdate.h"
+#include "PlayerPatchHandler.h"
+void StateUpdate::handlePatch(std::shared_ptr<Patch> patch)
+{
+	for (auto handler : patchHandlers)
+		handler->handlePatch(state, *patch);
+}
+
+void StateUpdate::setHandlers(std::vector<std::shared_ptr<IPatchHandler>> patchHandlers)
+{
+	this->patchHandlers = patchHandlers;
+}
 
 StateUpdate::StateUpdate(GameState& state) : state(state) {}
 
-void StateUpdate::handleMoveRequest(const IMove& move)
+void StateUpdate::handleMove(const IMove& move)
 {
 	if (move.isDoable(state))
-		move.apply(state);
-		//TODO - updatowaæ liczbê punktów ruchu na podstawie wartoœci zwróconej przez apply, kiedy ju¿ bêd¹ zaimplementowane
+		handlePatch(move.apply(state));
 }
