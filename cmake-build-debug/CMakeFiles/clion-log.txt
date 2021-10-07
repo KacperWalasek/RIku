@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/kamil-hp/CLionProjects/Riku Select CMakeLists.txt

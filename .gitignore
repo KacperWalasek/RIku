@@ -1,4 +1,6 @@
 .vs
+.idea
+cmake-build-debug
 **/.vs
 packages
 **/Riku/x64
