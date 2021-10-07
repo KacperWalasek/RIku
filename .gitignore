@@ -7,3 +7,5 @@ packages
 *.user
 *.aps
 Riku/.vs/Riku/v16/Browse.VC.db
+Riku/out
+
