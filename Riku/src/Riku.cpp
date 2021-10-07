@@ -18,8 +18,15 @@
 #include "Config.h"
 #include <cstdlib>
 #include <ctime>
-//#include <cegui-0.8.7/CEGUI/CEGUI.h>
-//#include <cegui-0.8.7/CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#ifdef _WIN32
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#undef max
+#undef min
+#else
+#include <cegui-0.8.7/CEGUI/CEGUI.h>
+#include <cegui-0.8.7/CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#endif
 #include <cmath>
 #include <optional>
 
