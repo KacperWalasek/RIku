@@ -39,6 +39,17 @@
     </Filter>
     <Filter Include="GameLogic\StateUpdate\PatchHandlers">
       <UniqueIdentifier>{9f12c4ca-352d-42f7-8646-0d1b91cefe19}</UniqueIdentifier>
+    <Filter Include="GameLogic\FrontendCommunicator">
+      <UniqueIdentifier>{3cdf2b67-19cb-423f-a8f0-eee8f5b5f0c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\FrontendCommunicator\Responses">
+      <UniqueIdentifier>{1093d0ba-5f1f-4ab9-b849-35df0084200d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\FrontendCommunicator\Requests">
+      <UniqueIdentifier>{d4a9a033-0ed1-4bce-9788-d4dc3080d456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\FrontendCommunicator\RequestHandlers">
+      <UniqueIdentifier>{9a4aa2c6-7cd4-4c8f-955f-a1796639481e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +94,20 @@
     </ClCompile>
     <ClCompile Include="ChangePlayerResources.cpp">
       <Filter>GameLogic\StateUpdate\Move</Filter>
+    <ClCompile Include="Communicator.cpp">
+      <Filter>GameLogic\FrontendCommunicator</Filter>
+    </ClCompile>
+    <ClCompile Include="Request.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="Response.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="MapResponse.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="MapRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +173,23 @@
     </ClInclude>
     <ClInclude Include="ChangePlayerResources.h">
       <Filter>GameLogic\StateUpdate\Move</Filter>
+    <ClInclude Include="Communicator.h">
+      <Filter>GameLogic\FrontendCommunicator</Filter>
+    </ClInclude>
+    <ClInclude Include="IRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Request.h">
+      <Filter>GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="Response.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="MapResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="MapRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

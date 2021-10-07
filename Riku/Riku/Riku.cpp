@@ -12,6 +12,8 @@ GLFWwindow* window;
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "GameLogic.h"
+#include <iostream>
+#include "MapResponse.h"
 glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 {
 	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.f);
@@ -23,7 +25,10 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 }
 int main(void)
 {
-	GameLogic login;
+	GameLogic logic;
+	std::shared_ptr<MapResponse> response = std::static_pointer_cast<MapResponse>(logic.getInfo(std::make_shared<Request>("map")));
+	const std::vector<std::vector<Tile>>& map = response->getMap();
+	std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
 	// Initialise GLFW
 	if (!glfwInit())
 	{
