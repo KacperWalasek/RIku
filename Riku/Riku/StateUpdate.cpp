@@ -17,5 +17,5 @@ StateUpdate::StateUpdate(GameState& state) : state(state) {}
 void StateUpdate::handleMove(const IMove& move)
 {
 	if (move.isDoable(state))
-		handlePatch(move.apply(state));
+		handlePatch(move.createPatch(state));
 }

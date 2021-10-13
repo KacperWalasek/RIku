@@ -3,7 +3,7 @@
 
 ChangePlayerResources::ChangePlayerResources(int player, int resource, int quantity) : player(player), resource(resource), quantity(quantity) {}
 
-std::shared_ptr<Patch> ChangePlayerResources::apply(const GameState& state) const
+std::shared_ptr<Patch> ChangePlayerResources::createPatch(const GameState& state) const
 {
     return std::make_shared<Patch>(PlayerPatch(player,resource,quantity));
 }

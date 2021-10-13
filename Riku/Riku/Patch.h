@@ -9,7 +9,5 @@ public:
 		playerPatches.insert({ playerPatch.player, playerPatch });
 	}
 	std::map<int,PlayerPatch> playerPatches;
-
-
 };
 
