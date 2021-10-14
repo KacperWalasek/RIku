@@ -1,15 +1,22 @@
 // Kacper Walasek
 #include "GameLogic.h"
 #include <iostream>
+#include <memory>
+#include "SimpleTileObject.h"
+#include "ChangePlayerResources.h"
+#include "PlayerPatchHandler.h"
+#include "ResourceFactory.h"
 #include "MapRequestHandler.h"
 #include "MapResponse.h"
 
-GameLogic::GameLogic()
+GameLogic::GameLogic() : stateUpdate(this->gameState)
 {
 	resources.initialize();
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { 2, (int)resources.playerResources.size() };
+	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(PlayerPatchHandler()) });
 
+	SimpleTileObject obj = SimpleTileObject("jakiesImie");
 
 	for (std::vector<Tile>& row : gameState.map)
 		for (int i = 0; i < 6; i++)
@@ -35,8 +42,25 @@ GameLogic::GameLogic()
 		std::boolalpha <<
 		"\t\t return - " << gameState.players[0].useResources(woodIndex, 10) << std::endl <<
 		"\t\t quantity - " << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
-
 	
+	ChangePlayerResources move = ChangePlayerResources(0, woodIndex, 20);
+	ChangePlayerResources move1 = ChangePlayerResources(0, woodIndex, -10);
+	
+	stateUpdate.handleMove(move);
+	std::cout << "\t After adding 20 resources using Move - " << gameState.players[0].getResourceQuantity(0) << std::endl;
+	
+	stateUpdate.handleMove(move1);
+	std::cout << "\t After removing 10 resources using Move - " << gameState.players[0].getResourceQuantity(0) << std::endl;
+
+	gameState.map[4][2].object = std::make_shared<ResourceFactory>(std::make_shared<SimpleTileObject>("tartak"), woodIndex, 35);
+	std::cout << "\t After building a wood factory giving 35 resources per turn"  << std::endl;
+	stateUpdate.handleMove(*(gameState.map[4][2].object->onTurnEnd()));
+	std::cout << "\t First turn..." << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
+	stateUpdate.handleMove(*(gameState.map[4][2].object->onTurnEnd()));
+	std::cout << "\t Second turn..." << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
+	stateUpdate.handleMove(*(gameState.map[4][2].object->onTurnEnd()));
+	std::cout << "\t Third turn..." << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
+
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request)

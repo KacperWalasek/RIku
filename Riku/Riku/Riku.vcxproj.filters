@@ -25,6 +25,21 @@
     <Filter Include="GameLogic\Player">
       <UniqueIdentifier>{390e02d8-ae2c-4777-af55-227d622a614b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLogic\GameObject">
+      <UniqueIdentifier>{63fb1e63-af70-43dd-8e10-2c12ac5d2fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\StateUpdate">
+      <UniqueIdentifier>{65857a14-8b32-48dc-b99a-ece547243553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\StateUpdate\Move">
+      <UniqueIdentifier>{cfd8f4a6-efca-4eea-aff9-aaee27318b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\StateUpdate\Patch">
+      <UniqueIdentifier>{73df7a0f-4973-4a80-9b24-7cfb1a083ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\StateUpdate\PatchHandlers">
+      <UniqueIdentifier>{9f12c4ca-352d-42f7-8646-0d1b91cefe19}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameLogic\FrontendCommunicator">
       <UniqueIdentifier>{3cdf2b67-19cb-423f-a8f0-eee8f5b5f0c2}</UniqueIdentifier>
     </Filter>
@@ -65,6 +80,21 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameLogic\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleTileObject.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="StateUpdate.cpp">
+      <Filter>GameLogic\StateUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceFactory.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangePlayerResources.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="Communicator.cpp">
       <Filter>GameLogic\FrontendCommunicator</Filter>
@@ -112,6 +142,39 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameLogic\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ITileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TileObjectDecorator.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="StateUpdate.h">
+      <Filter>GameLogic\StateUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="IMove.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceFactory.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Patch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPatch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="IPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangePlayerResources.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
     <ClInclude Include="Communicator.h">
       <Filter>GameLogic\FrontendCommunicator</Filter>
