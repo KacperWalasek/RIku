@@ -1,3 +1,4 @@
+//Kacper Walasek
 #include "Request.h"
 
 Request::Request(std::string key):key(key)

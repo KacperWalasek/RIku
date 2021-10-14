@@ -1,7 +1,7 @@
 // Kacper Walasek
-#include "LogicResources.h"
+#include "LogicAssets.h"
 
-void LogicResources::initialize()
+void LogicAssets::initialize()
 {
 	biomes = { {"Forest", 10}, {"Desert", 50}, {"Mountains", 30} };
 	areas = { {"Wet", 2}, {"Dry", 1.2} };

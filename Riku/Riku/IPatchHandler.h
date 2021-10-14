@@ -1,3 +1,4 @@
+//Kacper Walasek
 #pragma once
 #include "GameState.h"
 #include "Patch.h"

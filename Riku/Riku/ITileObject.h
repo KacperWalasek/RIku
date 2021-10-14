@@ -1,12 +1,12 @@
 // Kacper Walasek
 
 #pragma once
-#include "Resource.h"
+#include "IAsset.h"
 #include "ICostModifier.h"
 #include "IMove.h"
 #include <map>
 
-class ITileObject : public IResource, public ICostModifier
+class ITileObject : public IAsset, public ICostModifier
 {
 public:
 	// wywo³ane po zniszczeniu obiektu

@@ -1,3 +1,4 @@
+//Kacper Walasek
 #include "Communicator.h"
 
 Communicator::Communicator() 
@@ -23,5 +24,5 @@ std::shared_ptr<Response> Communicator::handleRequest(std::shared_ptr<Request> r
 		if (handler->canHandle(*request.get()))
 			return handler->handleRequest(request);
 	}
-	return std::make_shared<Response>(Response(request, 1));
+	return std::make_shared<Response>(request, false);
 }

@@ -1,3 +1,4 @@
+//Kacper Walasek
 #pragma once
 #include "IRequestHandler.h"
 #include <vector>

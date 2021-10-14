@@ -60,9 +60,6 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="Biome.cpp">
       <Filter>GameLogic\Tile\TileCost</Filter>
     </ClCompile>
@@ -74,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>GameLogic\Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicResources.cpp">
-      <Filter>GameLogic</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameLogic\Player</Filter>
@@ -111,6 +105,9 @@
     <ClCompile Include="MapRequestHandler.cpp">
       <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="LogicAssets.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogic.h">
@@ -133,12 +130,6 @@
     </ClInclude>
     <ClInclude Include="ICostModifier.h">
       <Filter>GameLogic\Tile\TileCost</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicResources.h">
-      <Filter>GameLogic</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameLogic\Player</Filter>
@@ -193,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="MapRequestHandler.h">
       <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>GameLogic\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IAsset.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicAssets.h">
+      <Filter>GameLogic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

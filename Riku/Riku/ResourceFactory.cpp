@@ -1,3 +1,4 @@
+//Kacper Walasek
 #include "ResourceFactory.h"
 #include "ChangePlayerResources.h"
 

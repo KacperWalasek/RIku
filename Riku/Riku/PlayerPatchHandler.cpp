@@ -1,3 +1,4 @@
+//Kacper Walasek
 #include "PlayerPatchHandler.h"
 
 void PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const

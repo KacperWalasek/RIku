@@ -5,7 +5,7 @@
 #include "Area.h"
 #include "Ground.h"
 
-struct LogicResources
+struct LogicAssets
 {
 	std::vector<Biome> biomes;
 	std::vector<Area> areas;

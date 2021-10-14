@@ -1,3 +1,4 @@
+//Kacper Walasek
 #include "MapRequestHandler.h"
 #include "MapResponse.h"
 

@@ -1,14 +1,14 @@
 // Kacper Walasek
 #pragma once
 #include "GameState.h"
-#include "LogicResources.h"
+#include "LogicAssets.h"
 #include "StateUpdate.h"
 #include "Communicator.h"
 
 class GameLogic
 {
 	GameState gameState;
-	LogicResources resources;
+	LogicAssets resources;
 	StateUpdate stateUpdate;
 	Communicator communicator;
 public:

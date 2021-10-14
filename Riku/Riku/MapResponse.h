@@ -1,3 +1,4 @@
+//Kacper Walasek
 #pragma once
 #include "Response.h"
 #include <vector>
