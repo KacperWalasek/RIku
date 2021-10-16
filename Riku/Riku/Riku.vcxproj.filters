@@ -87,9 +87,6 @@
     <ClCompile Include="PlayerPatchHandler.cpp">
       <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
     </ClCompile>
-    <ClCompile Include="ChangePlayerResources.cpp">
-      <Filter>GameLogic\StateUpdate\Move</Filter>
-    </ClCompile>
     <ClCompile Include="Communicator.cpp">
       <Filter>GameLogic\FrontendCommunicator</Filter>
     </ClCompile>
@@ -107,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="LogicAssets.cpp">
       <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateResources.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +164,6 @@
     <ClInclude Include="PlayerPatchHandler.h">
       <Filter>GameLogic\StateUpdate\PatchHandlers</Filter>
     </ClInclude>
-    <ClInclude Include="ChangePlayerResources.h">
-      <Filter>GameLogic\StateUpdate\Move</Filter>
-    </ClInclude>
     <ClInclude Include="Communicator.h">
       <Filter>GameLogic\FrontendCommunicator</Filter>
     </ClInclude>
@@ -193,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="LogicAssets.h">
       <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GenerateResources.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

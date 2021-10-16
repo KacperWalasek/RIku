@@ -8,7 +8,7 @@
 class GameLogic
 {
 	GameState gameState;
-	LogicAssets resources;
+	LogicAssets assets;
 	StateUpdate stateUpdate;
 	Communicator communicator;
 public:

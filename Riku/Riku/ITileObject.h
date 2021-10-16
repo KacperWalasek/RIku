@@ -16,5 +16,7 @@ public:
 	virtual std::shared_ptr<IMove> onTurnEnd() = 0;
 	// wywo³ywane na koniec tury
 	virtual std::shared_ptr<IMove> onTurnBegin() = 0;
+	// wywo³ywane gdy zostanie postawiony na polu
+	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) = 0;
 };
 

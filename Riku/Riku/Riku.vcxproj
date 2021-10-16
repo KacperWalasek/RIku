@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ChangePlayerResources.cpp" />
+    <ClCompile Include="GenerateResources.cpp" />
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Biome.cpp" />
     <ClCompile Include="Communicator.cpp" />
@@ -171,7 +171,7 @@
     <ClCompile Include="SimpleTileObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChangePlayerResources.h" />
+    <ClInclude Include="GenerateResources.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="Biome.h" />
     <ClInclude Include="Communicator.h" />

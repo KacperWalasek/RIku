@@ -13,6 +13,6 @@ class StateUpdate
 public:
 	void setHandlers(std::vector<std::shared_ptr<IPatchHandler>> patchHandlers);
 	StateUpdate(GameState& state);
-	void handleMove(const IMove& move);
+	void handleMove(const std::shared_ptr<IMove> move);
 };
 
