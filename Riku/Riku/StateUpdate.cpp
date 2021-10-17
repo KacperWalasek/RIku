@@ -14,8 +14,8 @@ void StateUpdate::setHandlers(std::vector<std::shared_ptr<IPatchHandler>> patchH
 
 StateUpdate::StateUpdate(GameState& state) : state(state) {}
 
-void StateUpdate::handleMove(const IMove& move)
+void StateUpdate::handleMove(const std::shared_ptr<IMove> move)
 {
-	if (move.isDoable(state))
-		handlePatch(move.createPatch(state));
+	if (move != nullptr && move->isDoable(state))
+		handlePatch(move->createPatch(state));
 }

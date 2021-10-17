@@ -20,5 +20,7 @@ public:
 
 	virtual std::string getName() const override;
 
+	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override { return nullptr; };
+
 };
 
