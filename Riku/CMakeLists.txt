@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.17)
 SET(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE} CACHE STRING "" FORCE)
 project(Riku)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -lGLEW -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lassimp -ljsoncpp -Wall -Wextra -llua5.3")
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lGLEW -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lassimp -ljsoncpp -Wall -Wextra -llua5.3")
+set(CMAKE_CXX_STANDARD 20)
 
 include_directories(Riku ${PROJECT_SOURCE_DIR}/lib "/usr/include/lua5.3")
 add_executable(Riku src/stb_image.cpp src/Texture.cpp src/Shader.cpp src/Mesh.cpp src/Model.cpp src/Object.cpp src/Riku.cpp src/Config.cpp src/logic/Asset.cpp)

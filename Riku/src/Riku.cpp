@@ -12,7 +12,6 @@
 #include "Texture.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-#include "Camera.h"
 #include "Model.h"
 #include "Object.h"
 #include "Config.h"
@@ -27,7 +26,7 @@
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
 
-Camera camera=glm::vec3(0.0f, 0.0f, 0.0f);
+//Camera camera=glm::vec3(0.0f, 0.0f, 0.0f);
 front::Transform movingCameraTransform;
 
 bool firstMouse=true;
@@ -35,7 +34,6 @@ constexpr uint16_t NR_POINT_LIGHTS=9;
 constexpr uint16_t NR_SPOT_LIGHTS=1;
 
 // lighting
-//glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 constexpr int SRC_WIDTH=1024;
 constexpr int SRC_HEIGHT=768;
 constexpr float DAY_LENGTH=30.0f;
@@ -90,7 +88,7 @@ namespace front
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
-	front::aspect=width/height;
+	front::aspect=(float)width/height;
 }
 //function for processing input
 void processInput(GLFWwindow *window)
@@ -146,9 +144,10 @@ void processInput(GLFWwindow *window)
 		movingCameraTransform.rotation.y+=rotSpeed;
 	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
 		movingCameraTransform.rotation.y-=rotSpeed;
-	camera.Front=glm::rotateY(glm::rotateX(glm::vec3(0.0f,0.0f,1.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
-	camera.Up=glm::rotateY(glm::rotateX(glm::vec3(0.0f,1.0f,0.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
-	camera.Position=movingCameraTransform.position;
+	//camera.Front=glm::rotateY(glm::rotateX(glm::vec3(0.0f,0.0f,1.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
+	//camera.Up=glm::rotateY(glm::rotateX(glm::vec3(0.0f,1.0f,0.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
+	//camera.Position=movingCameraTransform.position;
+	//camera.Zoom=front::config.fov;
 }
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -229,13 +228,13 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	//
-	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), front::aspect, 0.1f, 100.0f);
-	glm::mat4 view = camera.GetViewMatrix();
+	glm::mat4 projection = glm::perspective(glm::radians(front::config.fov), front::aspect, 0.1f, 100.0f);
+	glm::mat4 view = movingCameraTransform.calculateViewMatrix();
 	//shader initialization
 	lightingShader.use();
 	lightingShader.setMat4("projection", projection);
 	lightingShader.setMat4("view", view);
-	lightingShader.setVec3("viewPos", camera.Position);
+	lightingShader.setVec3("viewPos", movingCameraTransform.position);
 	lightingShader.setFloat("material.shininess", 32.0f);
 	//default value
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
@@ -323,7 +322,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 
 	lightCubeShader.setFloat("fog_density", front::fogDensity);
 	lightCubeShader.setVec4("fog_color", 0.5f, 0.5f, 0.5f, 1.0f);
-	lightCubeShader.setVec3("camera_position", camera.Position);
+	lightCubeShader.setVec3("camera_position", movingCameraTransform.position);
 
 	//set night value
 	lightCubeShader.setVec4("color", 1.0f,1.0f,1.0f,1.0f);
@@ -351,9 +350,6 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#if defined(__APPLE__) || defined (__MACH__)
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
 	GLFWwindow* window= front::initWindow();
 	//init shaders
 	Shader lightingShader("../shaders/phong-vertex.shader","../shaders/phong-fragment.shader");
@@ -522,7 +518,6 @@ GLFWwindow* front::initWindow(){
 	config.load();
 	//set values
 	movingCameraTransform=Transform(glm::vec3(20.0f, 20.0f, 20.0f),glm::vec3(glm::radians(config.angle),glm::radians(180.0f),0.0f));
-	camera.Zoom=config.fov;
 	front::aspect=(float)config.screenWidth/config.screenHeight;
 	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, "LearnOpenGL", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr){

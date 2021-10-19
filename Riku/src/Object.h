@@ -26,6 +26,14 @@ namespace front {
 		glm::vec3 CalculateRelativeFront(const glm::vec3 &pos) const;
 
 		[[nodiscard]] glm::mat4 CalculateMatrix(const Transform &relativeTo = Default) const;
+
+		glm::mat4 calculateViewMatrix() {
+			auto front=rotate({0.0f,0.0f,1.0f},rotation);
+			auto up=rotate({0.0f,1.0f,0.0f},rotation);
+			//Front=glm::rotateY(glm::rotateX(glm::vec3(0.0f,0.0f,1.0f),rotation.x),rotation.y);
+			//Up=glm::rotateY(glm::rotateX(glm::vec3(0.0f,1.0f,0.0f),rotation.x),rotation.y);
+			return glm::lookAt(position, position + front, up);
+		}
 	};
 
 	class Object {
