@@ -15,6 +15,7 @@
 #include "Model.h"
 #include "Object.h"
 #include "Config.h"
+#include "logic/Asset.h"
 #include <cstdlib>
 #include <ctime>
 #ifdef _WIN32
