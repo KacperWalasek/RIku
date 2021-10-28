@@ -168,6 +168,7 @@
     <ClCompile Include="..\src\Frontend\Shader.cpp" />
     <ClCompile Include="..\src\Frontend\stb_image.cpp" />
     <ClCompile Include="..\src\Frontend\Texture.cpp" />
+    <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
@@ -185,7 +186,6 @@
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Area.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Biome.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp" />
-    <ClCompile Include="..\src\logic\Asset.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +196,7 @@
     <ClInclude Include="..\src\Frontend\Shader.h" />
     <ClInclude Include="..\src\Frontend\stb_image.h" />
     <ClInclude Include="..\src\Frontend\Texture.h" />
+    <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
@@ -224,7 +225,6 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\Biome.h" />
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\Ground.h" />
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h" />
-    <ClInclude Include="..\src\logic\Asset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
