@@ -28,8 +28,8 @@
 #undef max
 #undef min
 #else
-#include <cegui-0.8.7/CEGUI/CEGUI.h>
-#include <cegui-0.8.7/CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #endif
 #include <cmath>
 #include <optional>
@@ -352,6 +352,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 int main() {
 	srand(time(0));
 	 GameLogic logic;
+	//getting map request
 	 std::shared_ptr<MapResponse> response = std::static_pointer_cast<MapResponse>(logic.getInfo(std::make_shared<Request>("map")));
 	 const std::vector<std::vector<Tile>>& map = response->getMap();
 	 std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
