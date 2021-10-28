@@ -7,15 +7,19 @@
 #include <cmath>
 #include <iostream>
 #include <filesystem>
-#include "Shader.h"
-#include "stb_image.h"
-#include "Texture.h"
+#include "Frontend/Shader.h"
+#include "Frontend/stb_image.h"
+#include "Frontend/Texture.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-#include "Model.h"
-#include "Object.h"
-#include "Config.h"
+#include "Frontend/Model.h"
+#include "Frontend/Object.h"
+#include "Frontend/Config.h"
 #include "logic/Asset.h"
+
+#include "GameLogic/GameLogic.h"
+#include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
+
 #include <cstdlib>
 #include <ctime>
 #ifdef _WIN32
@@ -339,7 +343,6 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 		glm::mat4 inv_model = glm::mat4(1.0f);
 		inv_model = glm::inverse(model);
 		inv_model = glm::transpose(inv_model);
-		//glm::mat4 inv-model = glm::;
 		lightCubeShader.setMat4("ti_model", inv_model);
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -348,6 +351,11 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 
 int main() {
 	srand(time(0));
+	 GameLogic logic;
+	 std::shared_ptr<MapResponse> response = std::static_pointer_cast<MapResponse>(logic.getInfo(std::make_shared<Request>("map")));
+	 const std::vector<std::vector<Tile>>& map = response->getMap();
+	 std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
+	
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

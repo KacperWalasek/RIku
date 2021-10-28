@@ -161,31 +161,70 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Config.cpp" />
+    <ClCompile Include="..\src\Frontend\Config.cpp" />
+    <ClCompile Include="..\src\Frontend\Mesh.cpp" />
+    <ClCompile Include="..\src\Frontend\Model.cpp" />
+    <ClCompile Include="..\src\Frontend\Object.cpp" />
+    <ClCompile Include="..\src\Frontend\Shader.cpp" />
+    <ClCompile Include="..\src\Frontend\stb_image.cpp" />
+    <ClCompile Include="..\src\Frontend\Texture.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameLogic.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\LogicAssets.cpp" />
+    <ClCompile Include="..\src\GameLogic\Player\Player.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp" />
+    <ClCompile Include="..\src\GameLogic\Tile\Tile.cpp" />
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Area.cpp" />
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Biome.cpp" />
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp" />
     <ClCompile Include="..\src\logic\Asset.cpp" />
-    <ClCompile Include="..\src\Mesh.cpp" />
-    <ClCompile Include="..\src\Model.cpp" />
-    <ClCompile Include="..\src\Object.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
-    <ClCompile Include="..\src\Shader.cpp" />
-    <ClCompile Include="..\src\stb_image.cpp" />
-    <ClCompile Include="..\src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\lib\sol\config.hpp" />
-    <ClInclude Include="..\lib\sol\sol.hpp" />
-    <ClInclude Include="..\src\Camera.h" />
-    <ClInclude Include="..\src\Config.h" />
+    <ClInclude Include="..\src\Frontend\Config.h" />
+    <ClInclude Include="..\src\Frontend\Mesh.h" />
+    <ClInclude Include="..\src\Frontend\Model.h" />
+    <ClInclude Include="..\src\Frontend\Object.h" />
+    <ClInclude Include="..\src\Frontend\Shader.h" />
+    <ClInclude Include="..\src\Frontend\stb_image.h" />
+    <ClInclude Include="..\src\Frontend\Texture.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
+    <ClInclude Include="..\src\GameLogic\GameLogic.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\ITileObject.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h" />
+    <ClInclude Include="..\src\GameLogic\GameState.h" />
+    <ClInclude Include="..\src\GameLogic\IAsset.h" />
+    <ClInclude Include="..\src\GameLogic\LogicAssets.h" />
+    <ClInclude Include="..\src\GameLogic\Player\Player.h" />
+    <ClInclude Include="..\src\GameLogic\Resource.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\StateUpdate.h" />
+    <ClInclude Include="..\src\GameLogic\Tile\Tile.h" />
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Area.h" />
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Biome.h" />
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Ground.h" />
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h" />
     <ClInclude Include="..\src\logic\Asset.h" />
-    <ClInclude Include="..\src\Mesh.h" />
-    <ClInclude Include="..\src\Model.h" />
-    <ClInclude Include="..\src\Object.h" />
-    <ClInclude Include="..\src\Shader.h" />
-    <ClInclude Include="..\src\stb_image.h" />
-    <ClInclude Include="..\src\Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
