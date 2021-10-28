@@ -17,16 +17,21 @@
 #include "Config.h"
 #include <cstdlib>
 #include <ctime>
-#include "logic/Asset.h"
-//#include <cegui-0.8.7/CEGUI/CEGUI.h>
-//#include <cegui-0.8.7/CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#ifdef _WIN32
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#undef max
+#undef min
+#else
+#include <cegui-0.8.7/CEGUI/CEGUI.h>
+#include <cegui-0.8.7/CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#endif
 #include <cmath>
 #include <optional>
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
 
-//Camera camera=glm::vec3(0.0f, 0.0f, 0.0f);
 front::Transform movingCameraTransform;
 
 bool firstMouse=true;
@@ -426,7 +431,6 @@ int main() {
 				tmpTiles.back().type=rand()%3;
 			else
 				tmpTiles.back().type=1+rand()%2;
-			//front::gridObjects.push_back({grid_model, glm::vec3(i, 0.01f, j)});
 		}
 		front::tiles.push_back(tmpTiles);
 	}
@@ -505,8 +509,6 @@ int main() {
 	glDeleteBuffers(1, &VBO);
 	//end of program
 	glfwTerminate();
-	//CEGUI::System::destroy();
-	//CEGUI::OpenGL3Renderer::destroy(static_cast<CEGUI::OpenGL3Renderer&>(*d_renderer));
 	return 0;
 }
 
