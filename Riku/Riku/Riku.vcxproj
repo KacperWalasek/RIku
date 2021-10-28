@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\hash-library\sha256.cpp" />
     <ClCompile Include="..\src\Frontend\Config.cpp" />
     <ClCompile Include="..\src\Frontend\Mesh.cpp" />
     <ClCompile Include="..\src\Frontend\Model.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\lib\hash-library\sha256.h" />
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\Mesh.h" />
     <ClInclude Include="..\src\Frontend\Model.h" />
