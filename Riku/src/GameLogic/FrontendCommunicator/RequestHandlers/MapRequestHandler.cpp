@@ -1,6 +1,6 @@
 //Kacper Walasek
 #include "MapRequestHandler.h"
-#include "MapResponse.h"
+#include "../Responses/MapResponse.h"
 
 
 

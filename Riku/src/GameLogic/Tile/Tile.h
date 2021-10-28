@@ -1,10 +1,10 @@
 // Kacper Walasek
 #pragma once
 #include <memory>
-#include "Area.h"
-#include "Ground.h"
-#include "Biome.h"
-#include "ITileObject.h"
+#include "TileCost/Area.h"
+#include "TileCost/Ground.h"
+#include "TileCost/Biome.h"
+#include "../GameObject/ITileObject.h"
 
 class Tile
 {

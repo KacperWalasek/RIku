@@ -1,15 +1,15 @@
 // Kacper Walasek
 #pragma once
 #include "ICostModifier.h"
-#include "Resource.h"
+#include "../../Resource.h"
 #include <string>
 
-class Area :
+class Ground :
     public ICostModifier, public Resource
 {
-    double mult;
+    double mult = 0;
 public:
-    Area(std::string name, double mult);
+    Ground(std::string name, double mult);
     virtual double getModifiedCost(double cost) const override;
 };
 

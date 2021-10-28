@@ -2,8 +2,8 @@
 #pragma once
 #include "GameState.h"
 #include "LogicAssets.h"
-#include "StateUpdate.h"
-#include "Communicator.h"
+#include "StateUpdate/StateUpdate.h"
+#include "FrontendCommunicator/Communicator.h"
 
 class GameLogic
 {

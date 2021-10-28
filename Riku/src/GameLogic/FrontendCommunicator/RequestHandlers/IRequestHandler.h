@@ -1,7 +1,7 @@
 //Kacper Walasek
 #pragma once
-#include "Request.h"
-#include "Response.h"
+#include "../Requests/Request.h"
+#include "../Responses/Response.h"
 class IRequestHandler
 {
 public:

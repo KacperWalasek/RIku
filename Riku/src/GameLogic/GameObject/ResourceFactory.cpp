@@ -1,6 +1,6 @@
 //Kacper Walasek
 #include "ResourceFactory.h"
-#include "ExtractResources.h"
+#include "../StateUpdate/Move/ExtractResources.h"
 
 ResourceFactory::ResourceFactory(std::shared_ptr<ITileObject> next, int resource, int quantity) : TileObjectDecorator(next), resource(resource), quantity(quantity) {}
 

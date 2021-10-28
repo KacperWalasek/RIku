@@ -1,6 +1,6 @@
 //Kacper Walasek
 #pragma once
-#include "Request.h"
+#include "../Requests/Request.h"
 #include <memory>
 class Response
 { 

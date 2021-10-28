@@ -1,9 +1,9 @@
 // Kacper Walasek
 
 #pragma once
-#include "IAsset.h"
-#include "ICostModifier.h"
-#include "IMove.h"
+#include "../IAsset.h"
+#include "../Tile/TileCost/ICostModifier.h"
+#include "../StateUpdate/Move/IMove.h"
 #include <map>
 
 class ITileObject : public IAsset, public ICostModifier

@@ -1,8 +1,8 @@
 // Kacper Walasek
 #pragma once
 #include <vector>
-#include "Tile.h"
-#include "Player.h"
+#include "Tile/Tile.h"
+#include "Player/Player.h"
 
 class GameState
 {

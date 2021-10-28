@@ -1,10 +1,10 @@
 //Kacper Walasek
 #pragma once
-#include "Request.h"
-#include "Response.h"
+#include "Requests/Request.h"
+#include "Responses/Response.h"
 #include <vector>
 #include <memory>
-#include "IRequestHandler.h"
+#include "RequestHandlers/IRequestHandler.h"
 
 class Communicator : public IRequestHandler
 {

@@ -1,6 +1,6 @@
 //Kacper Walasek
 #pragma once
-#include "Resource.h"
+#include "../Resource.h"
 #include "ITileObject.h"
 #include <map>
 

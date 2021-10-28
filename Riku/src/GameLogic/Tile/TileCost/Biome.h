@@ -1,7 +1,7 @@
 // Kacper Walasek
 #pragma once
 #include "ICostModifier.h"
-#include "Resource.h"
+#include "../../Resource.h"
 #include <string>
 
 class Biome : public Resource

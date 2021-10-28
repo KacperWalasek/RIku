@@ -1,7 +1,7 @@
 //Kacper Walasek
 #pragma once
-#include "GameState.h"
-#include "Patch.h"
+#include "../../GameState.h"
+#include "../Patch/Patch.h"
 class IPatchHandler
 {
 public:

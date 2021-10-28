@@ -2,7 +2,8 @@
 #pragma once
 #include "Response.h"
 #include <vector>
-#include "Tile.h"
+#include "../../Tile/Tile.h"
+
 class MapResponse : public Response
 {
 	const std::vector<std::vector<Tile>>& map;

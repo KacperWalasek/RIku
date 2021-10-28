@@ -1,9 +1,9 @@
 //Kacper Walasek
 #pragma once
-#include "GameState.h"
-#include "IMove.h"
-#include "Patch.h"
-#include "IPatchHandler.h"
+#include "../GameState.h"
+#include "Move/IMove.h"
+#include "./Patch/Patch.h"
+#include "./PatchHandler/IPatchHandler.h"
 
 class StateUpdate
 {

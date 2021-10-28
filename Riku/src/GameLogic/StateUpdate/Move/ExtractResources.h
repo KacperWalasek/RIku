@@ -1,7 +1,7 @@
 //Kacper Walasek
 #pragma once
 #include "IMove.h"
-#include "GameState.h"
+#include "../../GameState.h"
 
 class ExtractResources :
     public IMove

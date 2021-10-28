@@ -1,6 +1,6 @@
 //Kacper Walasek
 #pragma once
-#include "Patch.h"
+#include "../Patch/Patch.h"
 #include <memory>
 
 class GameState;

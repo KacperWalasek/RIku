@@ -2,12 +2,12 @@
 #include "GameLogic.h"
 #include <iostream>
 #include <memory>
-#include "SimpleTileObject.h"
-#include "ExtractResources.h"
-#include "PlayerPatchHandler.h"
-#include "ResourceFactory.h"
-#include "MapRequestHandler.h"
-#include "MapResponse.h"
+#include "GameObject/SimpleTileObject.h"
+#include "StateUpdate/Move/ExtractResources.h"
+#include "StateUpdate/PatchHandler/PlayerPatchHandler.h"
+#include "GameObject/ResourceFactory.h"
+#include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
+#include "FrontendCommunicator/Responses/MapResponse.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState)
 {

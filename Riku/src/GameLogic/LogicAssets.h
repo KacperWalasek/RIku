@@ -1,9 +1,9 @@
 // Kacper Walasek
 #pragma once
 #include <vector>
-#include "Biome.h"
-#include "Area.h"
-#include "Ground.h"
+#include "Tile/TileCost/Biome.h"
+#include "Tile/TileCost/Area.h"
+#include "Tile/TileCost/Ground.h"
 
 struct LogicAssets
 {

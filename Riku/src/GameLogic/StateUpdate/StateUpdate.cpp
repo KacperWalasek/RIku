@@ -1,6 +1,6 @@
 //Kacper Walasek
 #include "StateUpdate.h"
-#include "PlayerPatchHandler.h"
+#include "PatchHandler/PlayerPatchHandler.h"
 void StateUpdate::handlePatch(std::shared_ptr<Patch> patch)
 {
 	for (auto handler : patchHandlers)

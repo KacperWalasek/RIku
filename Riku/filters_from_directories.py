@@ -1,3 +1,4 @@
+# Kacper Walasek
 import os
 
 def _process_directory(prefix, path):
@@ -18,7 +19,7 @@ def _process_file(prefix,path,name):
         return '\t\t<Filter Include=\"Riku' + path + '\\' + name +'\"></Filter>\n'+inFilters, inCpp, inH
     else:
         path_without_slash = path[1:] + '\\' if len(path)!=0 else ''
-        plik = "Include=\"" + path_without_slash + name + "\"> \n \t\t\t<Filter>Riku" + path + "</Filter> \n\t\t"
+        plik = "Include=\"..\\src\\" + path_without_slash + name + "\"> \n \t\t\t<Filter>Riku" + path + "</Filter> \n\t\t"
         if os.path.splitext(name)[1] == '.h':
             return '','','\t\t<ClInclude ' + plik + '</ClInclude>\n'
         elif os.path.splitext(name)[1] == '.cpp':
@@ -28,7 +29,7 @@ def _process_file(prefix,path,name):
 
 
 if __name__ == "__main__":
-    filters, cpps, hs =  _process_directory('./Riku','')
+    filters, cpps, hs =  _process_directory('./src','')
 
     print('<?xml version="1.0" encoding="utf-8"?>\n' 
         + '<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">\n'
