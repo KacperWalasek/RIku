@@ -28,7 +28,6 @@ private:
 	void processNode(aiNode *node, const aiScene *scene, float x_tex_scale=1.0f, float y_tex_scale=1.0f);
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene, float x_tex_scale=1.0f, float y_tex_scale=1.0f);
 	std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string& typeName);
-	;
 };
 
 

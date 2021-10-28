@@ -63,6 +63,7 @@ void front::Object::Draw(const Shader &shader, int index) const{
 		mat_model=transform.CalculateMatrix(*parent);
 	else
 		mat_model=transform.CalculateMatrix();
+	
 	glm::mat4 inv_model = glm::mat4(1.0f);
 	inv_model = glm::inverse(mat_model);
 	inv_model = glm::transpose(inv_model);
@@ -72,9 +73,6 @@ void front::Object::Draw(const Shader &shader, int index) const{
 	model->Draw(shader, index);
 }
 
-front::Object::Object(const Model& model, glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): transform(pos, rot, sc){
-	this->model=&model;
-}
-front::Object::Object(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): transform(pos, rot, sc){
-	this->model=nullptr;
-}
+front::Object::Object(const Model& model, glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): transform(pos, rot, sc), model(&model){}
+
+front::Object::Object(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): transform(pos, rot, sc), model(nullptr) {}

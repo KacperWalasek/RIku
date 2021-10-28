@@ -23,7 +23,5 @@ vec4 FogColor(vec4 my_color, float fog_c)
 void main()
 {
    float fogCoordinate = abs(ioEyeSpacePosition.z / ioEyeSpacePosition.w);
-   //fog_c=0.0;
    FragColor=FogColor(color, fogCoordinate);
-   //FragColor = vec4(vec3(vec3(ci_o * color.r, ci_o * color.g, ci_o * color.b)+vec3(ci_f * fog_color.r, ci_f * fog_color.g, ci_f * fog_color.b)), 1.0);
 }

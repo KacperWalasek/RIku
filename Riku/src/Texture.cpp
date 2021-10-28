@@ -19,17 +19,13 @@ void Texture::init(const std::string& type, const std::string& path, const std::
 	std::string dir_tmp=dir;
 	std::string path_tmp=path;
 	glGenTextures(1, &ID);
-	//if(dir=="\n")
-	{
 		dir_tmp = std::filesystem::current_path().parent_path().string() + "/" + dir;
 		for(int i=0;i<path_tmp.size();i++)
 		{
 			if(path_tmp[i] == '\\')
 				path_tmp[i]='/';
 		}
-	}
 	// load image, create texture and generate mipmaps
-	//std::cout << (std::filesystem::current_path().parent_path().string()+"/"+a).c_str() << "\n";
 	// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
 	unsigned char *data = stbi_load((dir_tmp+"/"+path_tmp).c_str(), &width, &height, &nrChannels, 0);
 	if (data)
@@ -37,7 +33,6 @@ void Texture::init(const std::string& type, const std::string& path, const std::
 		GLenum format;
 		if(nrChannels==1)
 			format=GL_RED;
-		//if(a.substr(a.length()-4,4)==".png" || a.substr(a.length()-4,4)==".PNG")
 		else if(nrChannels == 3)
 			format=GL_RGB;
 		else if(nrChannels == 4)

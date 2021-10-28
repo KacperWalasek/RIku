@@ -21,11 +21,17 @@ namespace front {
 
 		static const Transform Default;
 
-		glm::vec3 CalculateRelativePosition(const glm::vec3 &pos) const;
+		[[nodiscard]] glm::vec3 CalculateRelativePosition(const glm::vec3 &pos) const;
 
-		glm::vec3 CalculateRelativeFront(const glm::vec3 &pos) const;
+		[[nodiscard]] glm::vec3 CalculateRelativeFront(const glm::vec3 &pos) const;
 
 		[[nodiscard]] glm::mat4 CalculateMatrix(const Transform &relativeTo = Default) const;
+
+		glm::mat4 calculateViewMatrix() {
+			auto front=rotate({0.0f,0.0f,1.0f},rotation);
+			auto up=rotate({0.0f,1.0f,0.0f},rotation);
+			return glm::lookAt(position, position + front, up);
+		}
 	};
 
 	class Object {
