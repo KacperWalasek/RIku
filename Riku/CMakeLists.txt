@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lGLEW -lglfw -lGL -lX11 -lpthread -lXra
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(Riku ${PROJECT_SOURCE_DIR}/lib "/usr/include/lua5.3")
-add_executable(Riku src/stb_image.cpp src/Texture.cpp src/Shader.cpp src/Mesh.cpp src/Model.cpp src/Object.cpp src/Riku.cpp src/Config.cpp src/logic/Asset.cpp)
+add_executable(Riku lib/hash-library/sha256.cpp src/stb_image.cpp src/Texture.cpp src/Shader.cpp src/Mesh.cpp src/Model.cpp src/Object.cpp src/Riku.cpp src/Config.cpp src/logic/Asset.cpp)
 
 target_link_libraries(Riku dl)
 target_link_libraries(Riku Xi)

@@ -6,6 +6,8 @@
 
 #include <memory>
 #include <filesystem>
+#include <fstream>
+#include <hash-library/sha256.h>
 
 namespace logic {
 
@@ -116,7 +118,16 @@ const AssetData& AssetData::operator[] (const std::string& key) const {
 
 void Asset::load(const std::string& path, const std::string& fileName) {
 	this->path = path;
+	//load file and calculate hash
+	std::ifstream file(path+"/"+fileName);
+	std::string fileContent(std::istreambuf_iterator<char>{file}, {});
+	SHA256 sha;
+	hash = sha(fileContent);
+	file.close();
+	//init lua
 	lua.open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
+
+	lua.load(fileContent);
 	lua.script_file(path+"/"+fileName);
 
 	type = lua["asset_type"];
@@ -221,6 +232,18 @@ void AssetHandler::traverse(Asset* assetPtr) {
 
 void AssetHandler::resolve() {
 	traverse(&assetNodes["root"]);
+	//calculating hash
+	std::vector<std::string> hashdata;
+	for(const auto& a: assetNodes) {
+		hashdata.push_back(a.second.getHash());
+	}
+	std::sort(hashdata.begin(), hashdata.end());
+	std::string hashed;
+	for(const std::string& s: hashdata) {
+		hashed+=s;
+	}
+	SHA256 sha256;
+	hash = sha256(hashed);
 }
 
 void AssetHandler::findFiles(const std::string& path) {

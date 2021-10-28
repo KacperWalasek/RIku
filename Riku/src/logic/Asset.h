@@ -68,6 +68,7 @@ class Asset {
 	std::string parent_name;
 	std::string type;
 	std::string path;
+	std::string hash;
 	bool abstract=false;
 	void updateFromParent(const Asset& parent);
 	std::map<std::string, AssetData> data;
@@ -91,6 +92,7 @@ public:
 	[[nodiscard]] const std::map<std::string, sol::function>& getFunctions() const {return functions;}
 	sol::function& getFunction(const std::string& key) {return functions[key];}
 	[[nodiscard]] const sol::function& getFunction(const std::string& key) const {return functions.at(key);}
+	const std::string& getHash() const {return hash;}
 };
 
 class AssetHandler {
@@ -99,11 +101,13 @@ private:
 	void traverse(Asset* assetPtr);
 	void passFile(const std::string& path, const std::string& fileName);
 	//root name
+	std::string hash;
 public:
 	std::map<std::string, Asset> assetNodes;
 	void resolve();
 	void findFiles(const std::string& path);
 	//Asset& getRoot() {return *assetNodes["root"];}
+	const std::string& getHash() const {return hash;}
 
 };
 
