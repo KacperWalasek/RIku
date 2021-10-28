@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include "SimpleTileObject.h"
-#include "GenerateResources.h"
+#include "ExtractResources.h"
 #include "PlayerPatchHandler.h"
 #include "ResourceFactory.h"
 #include "MapRequestHandler.h"
@@ -73,7 +73,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	stateUpdate.handleMove(gameState.map[2][2].object->onTurnEnd());
 	std::cout << "\t Third turn...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
 	gameState.map[2][2].resource = 0;
-	std::cout << "\t I cheted a little and put wood in 2,2 tile: " << assets.playerResources[gameState.map[2][2].resource].getName() << std::endl;
+	std::cout << "\t I cheated a little and put wood in 2,2 tile: " << assets.playerResources[gameState.map[2][2].resource].getName() << std::endl;
 	stateUpdate.handleMove(gameState.map[1][1].object->onTurnEnd());
 	stateUpdate.handleMove(gameState.map[2][2].object->onTurnEnd());
 	std::cout << "\t Forth turn...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
