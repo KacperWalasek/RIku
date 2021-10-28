@@ -165,7 +165,7 @@ Asset& Asset::operator=(Asset&& other) noexcept {
 	return *this;
 }
 
-void Asset::actualizeFromParent(const Asset& parent) {
+void Asset::updateFromParent(const Asset& parent) {
 	for(const auto& d: parent.data) {
 		auto& key = d.first;
 		auto& value = d.second;
@@ -214,7 +214,7 @@ void AssetHandler::traverse(Asset* assetPtr) {
 	for(Asset* child: children) {
 		if(child==nullptr)
 			continue;
-		child->actualizeFromParent(*assetPtr);
+		child->updateFromParent(*assetPtr);
 		traverse(child);
 	}
 }
@@ -230,7 +230,7 @@ void AssetHandler::findFiles(const std::string& path) {
 			std::string path2 = entry.path().string()+"/script.lua";
 			if(std::filesystem::exists(path2)) {
 				std::cout << "Loading asset " << std::filesystem::relative(entry.path(), path) << "\n";
-				passFile(entry.path(), "script.lua");
+				passFile(entry.path().string(), "script.lua");
 			}
 			else
 				std::cerr << entry.path() << " is not a valid asset\n";

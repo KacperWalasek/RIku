@@ -144,10 +144,6 @@ void processInput(GLFWwindow *window)
 		movingCameraTransform.rotation.y+=rotSpeed;
 	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
 		movingCameraTransform.rotation.y-=rotSpeed;
-	//camera.Front=glm::rotateY(glm::rotateX(glm::vec3(0.0f,0.0f,1.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
-	//camera.Up=glm::rotateY(glm::rotateX(glm::vec3(0.0f,1.0f,0.0f),movingCameraTransform.rotation.x),movingCameraTransform.rotation.y);
-	//camera.Position=movingCameraTransform.position;
-	//camera.Zoom=front::config.fov;
 }
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {

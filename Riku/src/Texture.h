@@ -9,8 +9,8 @@
 #include <GL/glew.h>
 
 class Texture {
+	void init(const std::string& type = "", const std::string& path = "", const std::string& dir = "", GLenum widthWrapping = GL_REPEAT, GLenum heightWrapping = GL_REPEAT);
 public:
-	[[maybe_unused]] constexpr static unsigned int Uninitialized=UINT_MAX;
 	unsigned int ID;
 	std::string type;
 	std::string path; // we store the path of the texture to compare with other textures
@@ -18,7 +18,6 @@ public:
 	int height;
 	int nrChannels;
 	explicit Texture(const std::string& type="", const std::string& path="", const std::string& dir="", GLenum widthWrapping=GL_REPEAT, GLenum heightWrapping=GL_REPEAT);
-	void init(const std::string& type="", const std::string& path="", const std::string& dir="", GLenum widthWrapping=GL_REPEAT, GLenum heightWrapping=GL_REPEAT);
 };
 
 

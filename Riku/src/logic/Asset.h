@@ -68,8 +68,8 @@ class Asset {
 	std::string parent_name;
 	std::string type;
 	std::string path;
-	bool abstract={};
-	void actualizeFromParent(const Asset& parent);
+	bool abstract=false;
+	void updateFromParent(const Asset& parent);
 	std::map<std::string, AssetData> data;
 	std::map<std::string, sol::function> functions;
 	friend class AssetHandler;
