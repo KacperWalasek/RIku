@@ -15,7 +15,7 @@
 #include "Frontend/Model.h"
 #include "Frontend/Object.h"
 #include "Frontend/Config.h"
-#include "GameLogic/Assets/Asset.h"
+#include "GameLogic/Assets/AssetHandler.h"
 
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"

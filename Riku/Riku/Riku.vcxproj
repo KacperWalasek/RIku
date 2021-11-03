@@ -170,6 +170,8 @@
     <ClCompile Include="..\src\Frontend\stb_image.cpp" />
     <ClCompile Include="..\src\Frontend\Texture.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
+    <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp" />
+    <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
@@ -199,6 +201,8 @@
     <ClInclude Include="..\src\Frontend\stb_image.h" />
     <ClInclude Include="..\src\Frontend\Texture.h" />
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />
+    <ClInclude Include="..\src\GameLogic\Assets\AssetData.h" />
+    <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
