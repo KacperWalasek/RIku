@@ -1,22 +1,229 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Pliki źródłowe">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Riku">
     </Filter>
-    <Filter Include="Pliki nagłówkowe">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Riku\Frontend">
     </Filter>
-    <Filter Include="Pliki zasobów">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Riku\GameLogic">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Assets">
+    </Filter>
+    <Filter Include="Riku\GameLogic\FrontendCommunicator">
+    </Filter>
+    <Filter Include="Riku\GameLogic\FrontendCommunicator\RequestHandlers">
+    </Filter>
+    <Filter Include="Riku\GameLogic\FrontendCommunicator\Requests">
+    </Filter>
+    <Filter Include="Riku\GameLogic\FrontendCommunicator\Responses">
+    </Filter>
+    <Filter Include="Riku\GameLogic\GameObject">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Player">
+    </Filter>
+    <Filter Include="Riku\GameLogic\StateUpdate">
+    </Filter>
+    <Filter Include="Riku\GameLogic\StateUpdate\Move">
+    </Filter>
+    <Filter Include="Riku\GameLogic\StateUpdate\Patch">
+    </Filter>
+    <Filter Include="Riku\GameLogic\StateUpdate\PatchHandler">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Tile">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Tile\TileCost">
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Riku.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="..\src\Frontend\Config.cpp">
+      <Filter>Riku\Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\Mesh.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Model.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Object.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Shader.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\stb_image.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Texture.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameLogic.cpp">
+      <Filter>Riku\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\LogicAssets.cpp">
+      <Filter>Riku\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Player\Player.cpp">
+      <Filter>Riku\GameLogic\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp">
+      <Filter>Riku\GameLogic\StateUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\Tile.cpp">
+      <Filter>Riku\GameLogic\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Area.cpp">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Biome.cpp">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Riku.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Frontend\Config.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Mesh.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Model.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Object.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Shader.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\stb_image.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Texture.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\Asset.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameLogic.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\ITileObject.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameState.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\IAsset.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\LogicAssets.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Player\Player.h">
+      <Filter>Riku\GameLogic\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Resource.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\StateUpdate.h">
+      <Filter>Riku\GameLogic\StateUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\Tile.h">
+      <Filter>Riku\GameLogic\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Area.h">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Biome.h">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Ground.h">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h">
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\hash-library\sha256.h" />
   </ItemGroup>
 </Project>
