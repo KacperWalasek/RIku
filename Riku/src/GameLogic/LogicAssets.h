@@ -4,6 +4,7 @@
 #include "Tile/TileCost/Biome.h"
 #include "Tile/TileCost/Area.h"
 #include "Tile/TileCost/Ground.h"
+#include "Assets/AssetHandler.h"
 
 struct LogicAssets
 {
@@ -11,8 +12,5 @@ struct LogicAssets
 	std::vector<Area> areas;
 	std::vector<Ground> grounds;
 	std::vector<Resource> playerResources;
-
-	//TODO inicjalizacja z pliku
 	void initialize();
 };
-
