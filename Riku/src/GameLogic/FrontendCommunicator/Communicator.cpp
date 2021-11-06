@@ -17,7 +17,7 @@ void Communicator::setHandlers(std::vector<std::shared_ptr<IRequestHandler>>&& h
 	this->handlers = std::move(handlers);
 }
 
-std::shared_ptr<Response> Communicator::handleRequest(std::shared_ptr<Request> request)
+std::shared_ptr<Response> Communicator::handleRequest(std::shared_ptr<Request> request) const
 {
 	for (std::shared_ptr<IRequestHandler> handler : handlers)
 	{
