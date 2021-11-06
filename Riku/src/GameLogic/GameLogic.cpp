@@ -12,6 +12,7 @@
 GameLogic::GameLogic() : stateUpdate(this->gameState)
 {
 	assets.initialize();
+
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { 2, (int)assets.playerResources.size() };
 	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(PlayerPatchHandler()) });

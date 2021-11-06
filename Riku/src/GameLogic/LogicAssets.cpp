@@ -1,10 +1,15 @@
 // Kacper Walasek
 #include "LogicAssets.h"
+#include "Assets/AssetUtils.h"
 
 void LogicAssets::initialize()
 {
-	biomes = { {"Forest", 10}, {"Desert", 50}, {"Mountains", 30} };
-	areas = { {"Wet", 2}, {"Dry", 1.2} };
-	grounds = { {"Stone", 0.8}, {"Sand", 1.2}, {"Grass", 1} };
-	playerResources = { { "Wood" }, { "Stone" }, { "Money" } };
+	logic::AssetHandler handler;
+	handler.findFiles("../assets");
+
+	biomes = AssetUtils::readNumericAsset<Biome>("biomes", handler);
+	areas = AssetUtils::readNumericAsset<Area>("areas", handler);
+	grounds = AssetUtils::readNumericAsset<Ground>("grounds", handler);
+	playerResources = AssetUtils::readStringArray<Resource>("resources",handler);
+	// TODO - catch wrong structure and types as errors
 }

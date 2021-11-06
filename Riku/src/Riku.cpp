@@ -15,7 +15,6 @@
 #include "Frontend/Model.h"
 #include "Frontend/Object.h"
 #include "Frontend/Config.h"
-#include "GameLogic/Assets/AssetHandler.h"
 
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
@@ -420,10 +419,6 @@ int main() {
 			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
-	//check Asset
-	logic::AssetHandler handler;
-	handler.findFiles("../assets");
-	//as usual
 
 	// create objects
 	front::units.emplace_back(0,10,10);

@@ -14,7 +14,7 @@ namespace logic {
 	std::map<std::string, AssetData> getData(const sol::table& table) {
 		std::map<std::string, AssetData> data;
 		for (const std::pair<sol::object, sol::object>& v : table) {
-			std::string key = v.first.as<std::string>();
+			std::string key = v.first.get_type() == sol::type::string ? v.first.as<std::string>() : std::to_string(v.first.as<int>());
 			auto& value = v.second;
 			switch (value.get_type()) {
 			case sol::type::nil:
@@ -32,10 +32,12 @@ namespace logic {
 				break;
 			case sol::type::table: {
 				auto readTable = getData(value.as<sol::table>());
-				data[key] = std::map<std::string, AssetData>();
-				for (const auto& v : readTable) {
-					data[key][v.first] = v.second;
-				}
+				std::vector<AssetData> dataArray;
+				std::transform(readTable.begin(), readTable.end(), std::back_insert_iterator(dataArray),
+					[](std::pair<std::string, AssetData> record) {
+						return record.second;
+					});
+				data[key] = dataArray;
 			}
 				break;
 			case sol::type::lightuserdata:

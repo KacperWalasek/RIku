@@ -203,6 +203,7 @@
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetData.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h" />
+    <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
