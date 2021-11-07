@@ -180,6 +180,7 @@
     <ClCompile Include="..\src\GameLogic\GameLogic.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\LogicAssets.cpp" />
     <ClCompile Include="..\src\GameLogic\Player\Player.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
     <ClInclude Include="..\src\GameLogic\GameLogic.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\ITileObject.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h" />

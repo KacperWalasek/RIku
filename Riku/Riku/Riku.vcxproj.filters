@@ -120,6 +120,9 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -239,6 +242,9 @@
     <ClInclude Include="..\lib\hash-library\sha256.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
       <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectFactory.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

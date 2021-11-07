@@ -11,5 +11,7 @@ void LogicAssets::initialize()
 	areas = AssetUtils::readNumericAsset<Area>("areas", handler);
 	grounds = AssetUtils::readNumericAsset<Ground>("grounds", handler);
 	playerResources = AssetUtils::readStringArray<Resource>("resources",handler);
+
+	
 	// TODO - catch wrong structure and types as errors
 }
