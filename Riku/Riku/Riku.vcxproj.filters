@@ -117,6 +117,9 @@
     <ClCompile Include="..\src\Frontend\GUI.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\GUIFactory.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
     <ClInclude Include="..\src\Frontend\GUI.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUIFactory.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,31 +3,31 @@
 CEGUI::OpenGL3Renderer* CEGUI::GUI::m_renderer = nullptr;
 CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey);
 
-void CEGUI::GUI::init(const CEGUI::String& resourceDirectory) {
+void CEGUI::GUI::init() {
     // Check if the renderer and system were not already initialized
-    if (m_renderer == nullptr) {
+    if (m_renderer == nullptr)
         m_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
-        //front::focusedUnit = 4;
-        CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
-        rp->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets/");
-        rp->setResourceGroupDirectory("schemes", resourceDirectory + "/schemes/");
-        rp->setResourceGroupDirectory("fonts", resourceDirectory + "/fonts/");
-        rp->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
-        rp->setResourceGroupDirectory("looknfeels", resourceDirectory + "/looknfeel/");
-        rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
-
-        CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-        CEGUI::Scheme::setDefaultResourceGroup("schemes");
-        CEGUI::Font::setDefaultResourceGroup("fonts");
-        CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-        CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-        CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
-    }
-
+    
     m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
     m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
-    m_context->setRootWindow(m_root);
-    
+    m_context->setRootWindow(m_root);   
+}
+
+void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
+    CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
+    rp->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets/");
+    rp->setResourceGroupDirectory("schemes", resourceDirectory + "/schemes/");
+    rp->setResourceGroupDirectory("fonts", resourceDirectory + "/fonts/");
+    rp->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
+    rp->setResourceGroupDirectory("looknfeels", resourceDirectory + "/looknfeel/");
+    rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
+
+    CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
+    CEGUI::Scheme::setDefaultResourceGroup("schemes");
+    CEGUI::Font::setDefaultResourceGroup("fonts");
+    CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
+    CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+    CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 }
 
 void CEGUI::GUI::destroy() {
@@ -68,6 +68,28 @@ void CEGUI::GUI::on_mouse_pos(float x, float y) {
     m_context->injectMousePosition(x, y);
 }
 
+void CEGUI::GUI::on_mouse_click(int button, int action) {
+    CEGUI::MouseButton guiButton = CEGUI::MouseButton::NoButton;
+    switch (button)
+    {
+    case GLFW_MOUSE_BUTTON_LEFT: 
+        guiButton = CEGUI::MouseButton::LeftButton;
+        break;
+    case GLFW_MOUSE_BUTTON_RIGHT:
+        guiButton = CEGUI::MouseButton::RightButton;
+        break;
+    case GLFW_MOUSE_BUTTON_MIDDLE:
+        guiButton = CEGUI::MouseButton::MiddleButton;
+        break;
+    default:
+        break;
+    }
+    if (action == GLFW_PRESS)
+        m_context->injectMouseButtonDown(guiButton);
+    else if (action == GLFW_RELEASE)
+        m_context->injectMouseButtonUp(guiButton);
+}
+
 void CEGUI::GUI::loadScheme(const CEGUI::String& schemeFile) {
     CEGUI::SchemeManager::getSingleton().createFromFile(schemeFile);
 }
@@ -87,6 +109,11 @@ CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::ve
 
 CEGUI::Window* CEGUI::GUI::getWidgetByName(const CEGUI::String& name){
     return m_root->getChildRecursive(name);
+}
+
+void CEGUI::GUI::setButtonCallback(const CEGUI::String& name, CEGUI::Event::Subscriber sub) {
+    CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(getWidgetByName(name));
+    button->subscribeEvent(CEGUI::PushButton::EventClicked, sub);
 }
 
 void CEGUI::GUI::setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destRectPerc, const glm::vec4& destRectPix) {

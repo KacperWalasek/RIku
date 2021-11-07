@@ -17,6 +17,7 @@
 #include "Frontend/Config.h"
 #include "GameLogic/Assets/Asset.h"
 #include "Frontend/GUI.h"
+#include "Frontend/GUIFactory.h"
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 
@@ -63,7 +64,7 @@ struct Unit
 	int y;
 	explicit Unit(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
 };
-
+bool OnButtonClicked(const CEGUI::EventArgs& e);
 namespace front
 {
 	float aspect;
@@ -79,7 +80,7 @@ namespace front
 	bool isGridOn=false;
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
-	CEGUI::GUI my_gui;
+	CEGUI::GUI* my_gui;
 	Config config;
 	GLFWwindow* initWindow();
 	std::optional<glm::vec2> getRelativeCursorPosition(GLFWwindow* window){
@@ -166,7 +167,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		;
 	if(action==GLFW_PRESS)
 	{
-		front::my_gui.on_key_press(key);
+		front::my_gui->on_key_press(key);
 		switch(key)
 		{
 			case GLFW_KEY_ESCAPE:
@@ -210,7 +211,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void mouse_pos_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	front::my_gui.on_mouse_pos(xpos, ypos);
+	front::my_gui->on_mouse_pos(xpos, ypos);
+	//TODO
+
+}
+
+void mouse_click_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	
+	front::my_gui->on_mouse_click(button, action);
 	//TODO
 
 }
@@ -501,17 +510,27 @@ int main() {
 	float lastFrame = 0.0f; // Time of last frame
 
 	// Cegui config
-	front::my_gui = CEGUI::GUI();
-	front::my_gui.init("GUI");
-	front::my_gui.loadScheme("TaharezLook.scheme");
-	front::my_gui.loadScheme("AlfiskoSkin.scheme");
-	front::my_gui.setFont("DejaVuSans-10");
-	front::my_gui.loadLayout("application_templates.layout");
+	CEGUI::GUIFactory fac = CEGUI::GUIFactory();
+	fac.init(window);
+	front::my_gui = fac.GetDemoWindow();
+	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui->getWidgetByName("Button"));
+	testButton->setText("Hello");
+	//front::my_gui = CEGUI::GUI();
+	//front::my_gui.init();
+	//CEGUI::GUI::setResourceDirectory("GUI");
+	////front::my_gui.loadScheme("TaharezLook.scheme");
+	////front::my_gui.loadScheme("AlfiskoSkin.scheme");
+	//CEGUI::GUI::loadScheme("TaharezLook.scheme");
+	//CEGUI::GUI::loadScheme("AlfiskoSkin.scheme");
+	//front::my_gui.setFont("DejaVuSans-10");
+	//front::my_gui.loadLayout("application_templates.layout");
 	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui.getWidgetByName("Button"));
 	//testButton->setText("hell'o world");
+	////testButton->subscribeEvent(CEGUI::PushButton::EventClicked, &OnButtonClicked);
+	//front::my_gui.setButtonCallback("Button", &OnButtonClicked);
 
-	front::my_gui.setMouseCursor("TaharezLook/MouseArrow");
-	front::my_gui.showMouseCursor();
+	//front::my_gui.setMouseCursor("TaharezLook/MouseArrow");
+	//front::my_gui.showMouseCursor();
 
 	/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui.createWidget("AlfiskoSkin/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
 	testButton = static_cast<CEGUI::PushButton*>(front::my_gui.getWidgetByName("TestButton"));
@@ -530,7 +549,7 @@ int main() {
 		// ------
 		//day/night
 		drawScene(lightingShader,lightCubeShader,currentFrame);
-		front::my_gui.draw();
+		front::my_gui->draw();
 		//check and call events and swap the buffers
 		glfwSwapBuffers(window);
 
@@ -544,6 +563,11 @@ int main() {
 	return 0;
 }
 
+bool OnButtonClicked(const CEGUI::EventArgs& e) {
+	//front::my_gui.destroy();
+	front::focusedUnit = 2;
+	return false;
+}
 GLFWwindow* front::initWindow(){
 	config.load();
 	//set values
@@ -559,7 +583,7 @@ GLFWwindow* front::initWindow(){
 	//glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetCursorPosCallback(window, mouse_pos_callback);
-	//glfwSetMouseButtonCallback(window, mouse_click_callback);
+	glfwSetMouseButtonCallback(window, mouse_click_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetKeyCallback(window, key_callback);
 	//GLEW: check errors
