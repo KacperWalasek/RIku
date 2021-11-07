@@ -1,6 +1,7 @@
 #include "GUIFactory.h"
 #define RESPATH "GUI"
 #include <iostream>
+#include <functional>
 
 namespace front {
 	extern int focusedUnit;
@@ -31,7 +32,8 @@ CEGUI::GUI* CEGUI::GUIFactory::GetDemoWindow() {
 	//testButton->subscribeEvent(CEGUI::PushButton::EventClicked, &OnButtonClicked);
 
 	//CEGUI::GUI* shit = &my_gui;
-	auto OnExitButtonClicked = [=](const CEGUI::EventArgs& e)
+	my_fun* OnExitButtonClicked1 = new my_fun(my_gui);
+	std::function<bool(const CEGUI::EventArgs&)>* OnExitButtonClicked2 = new std::function<bool(const CEGUI::EventArgs&)>([=](const CEGUI::EventArgs& e)
 	{
 		//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(shit->getWidgetByName("Button"));
 		//testButton->setText("u sick pervert");
@@ -39,10 +41,12 @@ CEGUI::GUI* CEGUI::GUIFactory::GetDemoWindow() {
 		//CEGUI::GUI* win = &my_gui;
 		//std::cout << "dgfgfg\n";
 		//CEGUI::GUI* gui = shit;
+		std::cout << "lambda dzia³a\n";
 		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(my_gui->getWidgetByName("Button"));
 		return false;
-	};
-	my_gui->setButtonCallback("Button", &OnExitButtonClicked);
+	});
+	my_gui->setButtonCallback("Button", OnExitButtonClicked1);
+	my_gui->setButtonCallback("Button", OnExitButtonClicked2);
 
 	my_gui->setMouseCursor("TaharezLook/MouseArrow");
 	my_gui->showMouseCursor();
