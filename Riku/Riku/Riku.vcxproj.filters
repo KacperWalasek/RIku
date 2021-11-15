@@ -33,6 +33,9 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Tile\TileCost">
     </Filter>
+    <Filter Include="Riku\GameLogic\Unit">
+      <UniqueIdentifier>{6e581dd0-c376-41b9-bc54-1fc2c76b3d5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Config.cpp">
@@ -120,6 +123,7 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -240,5 +244,7 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\IHookable.h" />
+    <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
   </ItemGroup>
 </Project>
