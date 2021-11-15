@@ -1,8 +1,8 @@
 asset_type = "resources"
 
 resources = {
-    'Wood',
-    'Iron',
-    'Stone',
-    'Money'
+    'wood',
+    'iron',
+    'stone',
+    'money'
 }

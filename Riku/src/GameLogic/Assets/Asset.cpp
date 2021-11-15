@@ -32,12 +32,22 @@ namespace logic {
 				break;
 			case sol::type::table: {
 				auto readTable = getData(value.as<sol::table>());
-				std::vector<AssetData> dataArray;
-				std::transform(readTable.begin(), readTable.end(), std::back_insert_iterator(dataArray),
-					[](std::pair<std::string, AssetData> record) {
-						return record.second;
-					});
-				data[key] = dataArray;
+				if (readTable.size() == 0)
+				{
+					data[key] = std::vector<AssetData>();
+					break;
+				}
+				if (readTable.begin()->first == "1")
+				{
+					std::vector<AssetData> dataArray;
+					std::transform(readTable.begin(), readTable.end(), std::back_insert_iterator(dataArray),
+						[](std::pair<std::string, AssetData> record) {
+							return record.second;
+						});
+					data[key] = dataArray;
+				}
+				else
+					data[key] = readTable;
 			}
 				break;
 			case sol::type::lightuserdata:
@@ -104,6 +114,11 @@ namespace logic {
 		}
 	}
 
+
+	Asset::Asset(const Asset& asset) 
+		: name(asset.name), parent_name(asset.parent_name), type(asset.type), path(asset.path), 
+		  hash(asset.hash), abstract(asset.abstract), data(asset.data), functions(asset.functions)
+	{}
 
 	Asset& Asset::operator=(Asset&& other) noexcept {
 		this->name = other.name;

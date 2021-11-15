@@ -1,6 +1,6 @@
 //Kacper Walasek
 #include "ExtractResources.h"
-
+#include "../Patch/Patch.h"
 ExtractResources::ExtractResources(int player, int resource, int quantity, int mapX, int mapY, int requiredResource)
     : player(player), resource(resource), requiredResource(requiredResource), quantity(quantity), mapX(mapX), mapY(mapY) {}
 

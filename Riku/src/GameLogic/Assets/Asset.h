@@ -27,6 +27,7 @@ namespace logic {
 		friend class AssetHandler;
 	public:
 		Asset(const std::string& path, const std::string& fileName) { load(path, fileName);}
+		Asset(const Asset& asset);
 		Asset()=default;
 		Asset& operator=(Asset&& other) noexcept;
 		void load(const std::string& path, const std::string& fileName);
@@ -37,7 +38,11 @@ namespace logic {
 
 		[[nodiscard]] bool hasData(const std::string& key) const {return data.find(key)!=data.end();}
 		[[nodiscard]] const std::map<std::string, AssetData>& getMap() const {return data;}
-		[[nodiscard]] const AssetData& getByKey(const std::string& key) const {return !hasData(key) ? AssetData() : data.at(key);}
+		[[nodiscard]] const AssetData& getByKey(const std::string& key) const {
+			if (!hasData(key))
+				throw std::out_of_range("No value with key: " + key);
+			return data.at(key);
+		}
 
 		bool hasFunction(const std::string& key) {return functions.find(key)!=functions.end();}
 		[[nodiscard]] const std::map<std::string, sol::function>& getFunctions() const {return functions;}
