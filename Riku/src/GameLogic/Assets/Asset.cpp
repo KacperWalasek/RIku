@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <fstream>
 #include <hash-library/sha256.h>
+#include "../../../Riku/TestMove.h"
 
 namespace logic {
 
@@ -64,6 +65,10 @@ namespace logic {
 		file.close();
 		//init lua
 		lua.open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
+		
+		sol::usertype<TestMove> player_type = lua.new_usertype<TestMove>("TestMove",
+			sol::constructors<TestMove()>()
+			);
 
 		lua.load(fileContent);
 		lua.script_file(path + "/" + fileName);

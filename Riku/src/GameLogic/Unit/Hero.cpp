@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero(int baseMovementPoints) : Unit("hero", baseMovementPoints), exp(0), lvl(0)
+Hero::Hero(int baseMovementPoints, std::string name) : Unit("hero", name, baseMovementPoints, {}), exp(0), lvl(0)
 {}
 
 std::shared_ptr<IMove> Hero::onDestroy(bool byOwner)

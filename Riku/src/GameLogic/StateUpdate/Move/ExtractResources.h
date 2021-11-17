@@ -2,7 +2,7 @@
 #pragma once
 #include "IMove.h"
 #include "../../GameState.h"
-
+#include "../Patch/Patch.h"
 class ExtractResources :
     public IMove
 {

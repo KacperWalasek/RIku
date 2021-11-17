@@ -123,7 +123,19 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
+    <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\LoadedHookable.cpp">
+      <Filter>Riku\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMove.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -244,7 +256,21 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\IHookable.h" />
-    <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
+    <ClInclude Include="..\src\GameLogic\IHookable.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Unit\Hero.h">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Unit\Unit.h">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\LoadedHookable.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMove.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

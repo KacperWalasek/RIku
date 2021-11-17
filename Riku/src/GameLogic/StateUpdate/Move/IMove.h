@@ -1,9 +1,9 @@
 //Kacper Walasek
 #pragma once
-#include "../Patch/Patch.h"
 #include <memory>
 
 class GameState;
+class Patch;
 class IMove
 {
 public:	

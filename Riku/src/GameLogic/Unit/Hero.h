@@ -1,13 +1,13 @@
 #pragma once
 #include "Unit.h"
 class Hero :
-    public Unit, public IHookable
+    public Unit
 {
     // Na ten moment hardcoduje. Byæ mo¿e kiedyœ siê to zmieni
     const int requiredExp = 200;
     int lvl;
 public:
-    Hero(int baseMovementPoints);
+    Hero(int baseMovementPoints, std::string name);
     // publiczne, ¿eby mog³o byæ zmieniane przez hooki
     int exp;
 
