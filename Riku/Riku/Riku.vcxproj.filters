@@ -136,6 +136,16 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -272,5 +282,18 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectFactory.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h" />
   </ItemGroup>
 </Project>

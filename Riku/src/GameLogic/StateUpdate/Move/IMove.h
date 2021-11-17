@@ -2,6 +2,7 @@
 #pragma once
 #include <memory>
 
+class Patch;
 class GameState;
 class Patch;
 class IMove
