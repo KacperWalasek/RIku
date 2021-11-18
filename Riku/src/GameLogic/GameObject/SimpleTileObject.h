@@ -10,7 +10,7 @@ class SimpleTileObject : public ITileObject
 	LoadedHookable loadedHookable;
  	std::string name;
 public: 
-	SimpleTileObject(std::string name, std::map<std::string, sol::function> hooks);
+	SimpleTileObject(std::string name, const std::map<std::string, sol::function>& hooks);
 
 	virtual std::string getName() const override;
 	virtual double getModifiedCost(double cost) const override;

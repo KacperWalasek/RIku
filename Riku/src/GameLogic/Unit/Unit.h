@@ -9,7 +9,7 @@ class Unit : public IHookable, public IAsset
 	std::string name;
 	LoadedHookable loadedHookable;
 public:
-	Unit(std::string type, std::string name, int baseMovementPoints, std::map<std::string, sol::function> hooks);
+	Unit(std::string type, std::string name, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
 	// te pola s¹ publiczne, ¿eby hooki mog³y je zmieniaæ
 	int movementPoints;
 	int baseMovementPoints;

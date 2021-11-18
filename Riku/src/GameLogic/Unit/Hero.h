@@ -7,7 +7,7 @@ class Hero :
     const int requiredExp = 200;
     int lvl;
 public:
-    Hero(int baseMovementPoints, std::string name);
+    Hero(int baseMovementPoints, std::string name, const std::map<std::string, sol::function>& hooks);
     // publiczne, ¿eby mog³o byæ zmieniane przez hooki
     int exp;
 

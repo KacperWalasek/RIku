@@ -5,8 +5,8 @@
 class Player
 {
 	std::vector<int> resources;
-	std::vector<std::shared_ptr<Unit>> units;
 public:
+	std::vector<std::shared_ptr<Unit>> units;
 	Player(int numberOfResources);
 	void acceptResources(int type, int quantity);
 	bool useResources(int type, int quantity);

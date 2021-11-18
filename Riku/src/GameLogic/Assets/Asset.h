@@ -14,7 +14,7 @@
 
 namespace logic {
 	class Asset {
-		sol::state lua;
+		std::shared_ptr<sol::state> lua;
 		std::string name;
 		std::string parent_name;
 		std::string type;
@@ -45,7 +45,7 @@ namespace logic {
 		}
 
 		bool hasFunction(const std::string& key) {return functions.find(key)!=functions.end();}
-		[[nodiscard]] const std::map<std::string, sol::function>& getFunctions() const {return functions;}
+		[[nodiscard]] const std::map<std::string, sol::function>& getFunctions() {return functions;}
 		sol::function& getFunction(const std::string& key) {return functions[key];}
 		[[nodiscard]] const sol::function& getFunction(const std::string& key) const {return functions.at(key);}
 		const std::string& getHash() const {return hash;}

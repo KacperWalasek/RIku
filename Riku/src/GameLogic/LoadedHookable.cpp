@@ -1,4 +1,5 @@
 #include "LoadedHookable.h"
+#include "../../Riku/TestMove.h"
 
 
 std::shared_ptr<IMove> LoadedHookable::callFuncWithNoArgs(IHookable& hookable, std::string name)
@@ -6,7 +7,7 @@ std::shared_ptr<IMove> LoadedHookable::callFuncWithNoArgs(IHookable& hookable, s
     auto func = functions.find(name);
     if (func == functions.end())
         return std::shared_ptr<IMove>();
-    return func->second(hookable);
+    return std::make_shared<TestMove>(func->second(hookable));
 }
 std::shared_ptr<IMove> LoadedHookable::onDestroy(IHookable& hookable, bool byOwner)
 {

@@ -1,7 +1,7 @@
 #include "Unit.h"
 
 
-Unit::Unit(std::string type, std::string name, int baseMovementPoints, std::map<std::string, sol::function> hooks)
+Unit::Unit(std::string type, std::string name, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
 	: type(type), name(name), loadedHookable(hooks), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints)
 {}
 

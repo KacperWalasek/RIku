@@ -21,7 +21,6 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
 							  std::make_shared<TilePatchHandler>() });
 
-	SimpleTileObject obj = SimpleTileObject("jakiesImie", std::map<std::string, sol::function>());
 
 	for (std::vector<Tile>& row : gameState.map)
 		for (int i = 0; i < 6; i++)
@@ -83,9 +82,10 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	stateUpdate.handleMove(gameState.map[1][1].object->onTurnEnd());
 	stateUpdate.handleMove(gameState.map[2][2].object->onTurnEnd());
 	std::cout << "\t Forth turn...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
-	auto cu = std::make_shared<CreateUnit>(0,"unit", assets);
+	auto cu = std::make_shared<CreateUnit>(0,"stefan", assets);
 	stateUpdate.handleMove(cu);
 
+	stateUpdate.handleMove(gameState.players[0].units[0]->onTurnEnd());
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request)

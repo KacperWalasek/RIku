@@ -2,7 +2,7 @@
 
 #include "SimpleTileObject.h"
 
-SimpleTileObject::SimpleTileObject(std::string name, std::map<std::string, sol::function> hooks) : loadedHookable(hooks), name(name) {}
+SimpleTileObject::SimpleTileObject(std::string name, const std::map<std::string, sol::function>& hooks) : loadedHookable(hooks), name(name) {}
 
 std::string SimpleTileObject::getName() const
 {

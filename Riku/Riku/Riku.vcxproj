@@ -186,8 +186,6 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp" />
-    <ClCompile Include="..\src\GameLogic\LogicAssets.cpp" />
-    <ClCompile Include="..\src\GameLogic\Player\Player.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />

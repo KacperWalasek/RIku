@@ -12,8 +12,8 @@ std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state) cons
     auto assetIt = assets.tileObjects.find(tileObject);
     if (assetIt == assets.tileObjects.end())
         return nullptr;
-    logic::Asset asset = assetIt->second;
-    std::shared_ptr<ITileObject> object= std::make_shared<SimpleTileObject>( tileObject );
+    logic::Asset& asset = assetIt->second;
+    std::shared_ptr<ITileObject> object= std::make_shared<SimpleTileObject>( tileObject, asset.getFunctions() );
     for (auto& behavior : asset.getByKey("behavior").asMap())
     {
         std::string type = behavior.first;
