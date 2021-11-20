@@ -7,7 +7,7 @@ PlayerUnitsRequestHandler::PlayerUnitsRequestHandler(const GameState& gameState)
     // TODO: zamiast zerowego gracza, w stanie gry powinna byæ informacja którym graczem jesteœmy
 }
 
-std::shared_ptr<Response> PlayerUnitsRequestHandler::handleRequest(std::shared_ptr<Request> request)
+std::shared_ptr<Response> PlayerUnitsRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
     std::vector<std::shared_ptr<const Unit>> units;
     std::copy(player.units.begin(), player.units.end(),

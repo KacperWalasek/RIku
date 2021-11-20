@@ -1,7 +1,7 @@
 #include "AvailableBuildingsRequestHandler.h"
 #include "../Responses/StringListResponse.h"
 
-std::shared_ptr<Response> AvailableBuildingsRequestHandler::handleRequest(std::shared_ptr<Request> request)
+std::shared_ptr<Response> AvailableBuildingsRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
     std::vector<std::string> names;
     std::transform(assets.tileObjects.begin(), assets.tileObjects.end(),

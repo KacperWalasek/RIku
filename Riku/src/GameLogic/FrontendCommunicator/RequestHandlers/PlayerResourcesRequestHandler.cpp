@@ -7,7 +7,7 @@ PlayerResourcesRequestHandler::PlayerResourcesRequestHandler(const GameState& ga
     // TODO: zamiast zerowego gracza, w stanie gry powinna byæ informacja którym graczem jesteœmy
 }
 
-std::shared_ptr<Response> PlayerResourcesRequestHandler::handleRequest(std::shared_ptr<Request> request)
+std::shared_ptr<Response> PlayerResourcesRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
     const auto& quantities = player.getResourceQuantities();
     std::map<std::string, int> resourceMap;
