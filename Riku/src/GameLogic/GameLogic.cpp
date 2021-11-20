@@ -9,6 +9,8 @@
 #include "GameObject/ResourceFactory.h"
 #include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
 #include "FrontendCommunicator/Responses/MapResponse.h"
+#include "StateUpdate/MoveFactory/TestMoveHandler.h"
+#include "StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
 #include "StateUpdate/Move/CreateUnit.h"
 #include "StateUpdate/Move/BuildTileObject.h"
 #include "FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.h"
@@ -21,9 +23,10 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { 2, (int)assets.playerResources.size() };
+  
 	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
 							  std::make_shared<TilePatchHandler>() });
-
+	factory.setHandlers({ std::make_shared<TestMoveHandler>() });
 
 	for (std::vector<Tile>& row : gameState.map)
 		for (int i = 0; i < 6; i++)
@@ -90,13 +93,28 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	stateUpdate.handleMove(gameState.map[1][1].object->onTurnEnd());
 	stateUpdate.handleMove(gameState.map[2][2].object->onTurnEnd());
 	std::cout << "\t Forth turn...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
+	makeMove(std::make_shared<SimpleMoveDescription>("test"));
+	std::cout << "\t Increase by 10 with  move description...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
 	auto cu = std::make_shared<CreateUnit>(0,"stefan", assets);
 	stateUpdate.handleMove(cu);
 
 	stateUpdate.handleMove(gameState.players[0].units[0]->onTurnEnd());
 }
 
-std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request)
+std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const
 {
 	return communicator.handleRequest(request);
+}
+
+void GameLogic::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
+{
+	stateUpdate.handleMove(factory.createMove(*moveDescription));
+}
+
+bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const
+{
+	std::shared_ptr<IMove> move = factory.createMove(*moveDescription);
+	if (!move)
+		return false;
+	return move->isDoable(gameState);
 }
