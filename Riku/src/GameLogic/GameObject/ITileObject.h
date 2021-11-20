@@ -4,19 +4,13 @@
 #include "../IAsset.h"
 #include "../Tile/TileCost/ICostModifier.h"
 #include "../StateUpdate/Move/IMove.h"
+#include "../IHookable.h"
 #include <map>
 
-class ITileObject : public IAsset, public ICostModifier
+class ITileObject : public IAsset, public ICostModifier, public IHookable
 {
-public:
-	// wywo³ane po zniszczeniu obiektu
-	// byOwner mówi czy zniszczenie zosta³o wywo³ane przez w³aœciciela budynku. Przydatne np. ¿eby zwróciæ czêœæ zasobów graczowi jeœli to on zburzy³ budynek, który wczeœniej zbudowa³
-	virtual std::shared_ptr<IMove> onDestroy(bool byOwner) = 0;
-	// wywo³ywane na koniec tury
-	virtual std::shared_ptr<IMove> onTurnEnd() = 0;
-	// wywo³ywane na koniec tury
-	virtual std::shared_ptr<IMove> onTurnBegin() = 0;
-	// wywo³ywane gdy zostanie postawiony na polu
-	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) = 0;
 };
 
+//
+//public:
+//	ITileObject(std::map<std::string, sol::function> hooks) : LoadedHookable(hooks) {};

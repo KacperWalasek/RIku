@@ -2,6 +2,7 @@
 #pragma once
 #include <string>
 #include "AssetHandler.h"
+
 class AssetUtils
 {
 public:
@@ -35,6 +36,17 @@ public:
 				return T(record.second.asString());
 			});
 		return data;
+	}
+
+	static std::map<std::string, logic::Asset> getAllAssetsWithType(std::string type, logic::AssetHandler& handler)
+	{
+		std::map<std::string, logic::Asset> assetsWithType = {};
+		std::copy_if(handler.assetNodes.begin(), handler.assetNodes.end(),
+			std::inserter(assetsWithType, assetsWithType.end()),
+			[type](const auto& nameAssetPair) {
+				return nameAssetPair.second.getType() == type;
+			});
+		return assetsWithType;
 	}
 };
 

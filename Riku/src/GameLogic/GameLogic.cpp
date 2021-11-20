@@ -5,9 +5,12 @@
 #include "GameObject/SimpleTileObject.h"
 #include "StateUpdate/Move/ExtractResources.h"
 #include "StateUpdate/PatchHandler/PlayerPatchHandler.h"
+#include "StateUpdate/PatchHandler/TilePatchHandler.h"
 #include "GameObject/ResourceFactory.h"
 #include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
 #include "FrontendCommunicator/Responses/MapResponse.h"
+#include "StateUpdate/Move/CreateUnit.h"
+#include "StateUpdate/Move/BuildTileObject.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState)
 {
@@ -15,9 +18,9 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { 2, (int)assets.playerResources.size() };
-	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(PlayerPatchHandler()) });
+	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
+							  std::make_shared<TilePatchHandler>() });
 
-	SimpleTileObject obj = SimpleTileObject("jakiesImie");
 
 	for (std::vector<Tile>& row : gameState.map)
 		for (int i = 0; i < 6; i++)
@@ -46,8 +49,8 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 
 	std::cout << "Factory test" << std::endl;
 	std::cout << "\t Btw. Tile 1,1 has some resources inside: " << assets.playerResources[gameState.map[1][1].resource].getName() << std::endl;
-
-	gameState.map[1][1].object = std::make_shared<ResourceFactory>(std::make_shared<SimpleTileObject>("Stone main"), 1, 10);
+	auto m = std::map < std::string, sol::function >();
+	gameState.map[1][1].object = std::make_shared<ResourceFactory>(std::make_shared<SimpleTileObject>("Stone main", m), 1, 10);
 	gameState.map[1][1].object->onBeingPlaced(1, 1);
 
 	std::cout << "\t Let's build main there: " << gameState.map[1][1].object->getName() << std::endl;
@@ -60,8 +63,9 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	std::cout << "\t Third turn..." << gameState.players[0].getResourceQuantity(1) << std::endl;
 
 	std::cout << "\t Let's see whats on 2,2 tile: " << assets.playerResources[gameState.map[2][2].resource].getName() << std::endl;
-	gameState.map[2][2].object = std::make_shared<ResourceFactory>(std::make_shared<SimpleTileObject>("Wood main"), 0, 10);
-	gameState.map[2][2].object->onBeingPlaced(2, 2);
+
+	std::shared_ptr<BuildTileObject> build = std::make_shared<BuildTileObject>(0, std::pair(2, 2), "wood_factory", assets);
+	stateUpdate.handleMove(build);
 	std::cout << "\t Let's build wood factory there for no reason: " << gameState.map[2][2].object->getName() << std::endl;
 	std::cout << "\t Let's see what happens with (" << assets.playerResources[0].getName() << ',' << assets.playerResources[1].getName() << ") quantity."<< std::endl;
 	stateUpdate.handleMove(gameState.map[1][1].object->onTurnEnd());
@@ -78,6 +82,10 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	stateUpdate.handleMove(gameState.map[1][1].object->onTurnEnd());
 	stateUpdate.handleMove(gameState.map[2][2].object->onTurnEnd());
 	std::cout << "\t Forth turn...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
+	auto cu = std::make_shared<CreateUnit>(0,"stefan", assets);
+	stateUpdate.handleMove(cu);
+
+	stateUpdate.handleMove(gameState.players[0].units[0]->onTurnEnd());
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request)

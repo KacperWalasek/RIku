@@ -33,6 +33,8 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Tile\TileCost">
     </Filter>
+    <Filter Include="Riku\GameLogic\Unit">
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Config.cpp">
@@ -89,16 +91,28 @@
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp">
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\LogicAssets.cpp">
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\LoadedHookable.cpp">
       <Filter>Riku\GameLogic</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\Player\Player.cpp">
-      <Filter>Riku\GameLogic\Player</Filter>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp">
@@ -116,10 +130,25 @@
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp">
       <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Riku.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\GameLogic\LogicAssets.cpp">
+      <Filter>Riku\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Player\Player.cpp">
+      <Filter>Riku\GameLogic\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -150,6 +179,9 @@
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
@@ -185,10 +217,22 @@
     <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h">
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectFactory.h">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\GameState.h">
       <Filter>Riku\GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\IAsset.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\IHookable.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\LoadedHookable.h">
       <Filter>Riku\GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\LogicAssets.h">
@@ -199,6 +243,12 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Resource.h">
       <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
@@ -212,10 +262,16 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h">
       <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\StateUpdate.h">
@@ -236,9 +292,18 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h">
       <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Unit\Hero.h">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Unit\Unit.h">
+      <Filter>Riku\GameLogic\Unit</Filter>
+    </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
-    <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
-      <Filter>Riku\GameLogic\Assets</Filter>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\MoveWrapper.h">
+      <Filter>Riku\GameLogic\StateUpdate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
