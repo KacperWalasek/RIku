@@ -55,12 +55,12 @@ struct TileType
 	int level;
 	int type; //0 - grass, 1 - water
 };
-struct Unit
+struct Unit1
 {
 	int type; //0 - Sara, 1 - assassin
 	int x;
 	int y;
-	explicit Unit(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
+	explicit Unit1(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
 };
 
 namespace front
@@ -73,7 +73,7 @@ namespace front
 	float dayPhase=0.6f;
 	int focusedUnit=0;
 	std::vector<std::vector<TileType> > tiles;
-	std::vector<Unit> units;
+	std::vector<Unit1> units;
 	std::vector<Object> gridObjects;
 	bool isGridOn=false;
 	unsigned int lightCubeVAO;

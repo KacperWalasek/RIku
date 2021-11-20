@@ -14,7 +14,7 @@
 
 namespace logic {
 	class Asset {
-		sol::state lua;
+		std::shared_ptr<sol::state> lua;
 		std::string name;
 		std::string parent_name;
 		std::string type;

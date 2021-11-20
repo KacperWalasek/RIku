@@ -13,5 +13,7 @@ void PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 			else
 				player.acceptResources(resourceChange.first, resourceChange.second);
 		}
+		for (std::shared_ptr<Unit> unit : p.second.addedUnits)
+			player.addUnit(unit);
 	}
 }

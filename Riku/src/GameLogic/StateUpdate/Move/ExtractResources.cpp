@@ -15,3 +15,8 @@ bool ExtractResources::isDoable(const GameState& state) const
         && state.players[player].getResourceQuantity(resource) + quantity >= 0 
         && (requiredResource < 0 || state.map[mapX][mapY].resource == requiredResource);
 }
+
+std::shared_ptr<IMove> ExtractResources::asPointner() const
+{
+    return std::make_shared<ExtractResources>(player, resource, quantity, mapX, mapY, requiredResource);
+}

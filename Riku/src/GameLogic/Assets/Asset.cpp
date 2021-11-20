@@ -8,6 +8,8 @@
 #include <filesystem>
 #include <fstream>
 #include <hash-library/sha256.h>
+#include "../StateUpdate/Move/TestMove.h"
+#include "../MoveWrapper.h"
 
 namespace logic {
 
@@ -65,6 +67,7 @@ namespace logic {
 	}
 
 	void Asset::load(const std::string& path, const std::string& fileName) {
+		lua = std::make_shared<sol::state>();
 		this->path = path;
 		//load file and calculate hash
 		std::ifstream file(path + "/" + fileName);
@@ -73,20 +76,34 @@ namespace logic {
 		hash = sha(fileContent);
 		file.close();
 		//init lua
-		lua.open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
+		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
+		
+		sol::usertype<TestMove> testMove = lua->new_usertype<TestMove>("TestMove",
+			sol::constructors<TestMove()>()
+			);
+		sol::usertype<MoveWrapper> wrapper = lua->new_usertype<MoveWrapper>("MoveWrapper",
+			sol::constructors<MoveWrapper(TestMove)>()
+			);
 
-		lua.load(fileContent);
-		lua.script_file(path + "/" + fileName);
+		/*
+		Na razie ten kod zostawiam, bo mo¿e go bêdê u¿ywa³
+		auto factories = sol::factories([]() { return std::make_shared<TestMove>(); });
+		lua->new_usertype< TestMove>("TestMove",
+			sol::meta_function::construct, factories,
+			sol::call_constructor, factories);*/
 
-		type = lua["asset_type"];
+		lua->load(fileContent);
+		lua->script_file(path + "/" + fileName);
+
+		type = (*lua)["asset_type"];
 		//get name from file
-		sol::optional<std::string> pn = lua["name"];
+		sol::optional<std::string> pn = (*lua)["name"];
 		if (pn.has_value())
 			name = *pn;
 		else
 			name = type;
 		//get parent name from file
-		sol::optional<std::string> op = lua["parent"];
+		sol::optional<std::string> op = (*lua)["parent"];
 		if (op.has_value())
 			parent_name = *op;
 		else if (name != type)
@@ -96,18 +113,19 @@ namespace logic {
 		else
 			parent_name = ""; //it is root
 		//get is abstract name from file
-		sol::optional<bool> ab = lua["is_abstract"];
+		sol::optional<bool> ab = (*lua)["is_abstract"];
 		if (ab.has_value())
 			abstract = *ab;
 		else {
 			abstract = (name == type) || (name == "root");
 		}
-		sol::table parameterTable = lua[type];
+		sol::table parameterTable = (*lua)[type];
 		data = getData(parameterTable);
 		//load functions
-		for (const auto& v : lua) {
+		for (const auto& v : lua->globals()) {
 			auto key = v.first.as<std::string>();
-			if (v.second.get_type() == sol::type::function) {
+			if (v.second.get_type() == sol::type::function && key.substr(0,2)=="on") {
+				std::cout << std::boolalpha << "\t" << key << ": " << "valid=" << v.second.valid() << std::endl;
 				//it is a function
 				functions[key] = v.second.as<sol::function>();
 			}
@@ -116,16 +134,18 @@ namespace logic {
 
 
 	Asset::Asset(const Asset& asset) 
-		: name(asset.name), parent_name(asset.parent_name), type(asset.type), path(asset.path), 
+		: lua(asset.lua), name(asset.name), parent_name(asset.parent_name), type(asset.type), path(asset.path),
 		  hash(asset.hash), abstract(asset.abstract), data(asset.data), functions(asset.functions)
 	{}
 
 	Asset& Asset::operator=(Asset&& other) noexcept {
+		this->lua = std::move(other.lua);
 		this->name = other.name;
 		this->parent_name = other.parent_name;
 		this->type = other.type;
 		this->abstract = other.abstract;
 		this->data = std::move(other.data);
+		this->functions = other.functions;
 		return *this;
 	}
 
