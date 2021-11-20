@@ -1,5 +1,6 @@
 #include "LoadedHookable.h"
-#include "../../Riku/TestMove.h"
+#include "StateUpdate/Move/TestMove.h"
+#include "MoveWrapper.h"
 
 
 std::shared_ptr<IMove> LoadedHookable::callFuncWithNoArgs(IHookable& hookable, std::string name)
@@ -7,14 +8,16 @@ std::shared_ptr<IMove> LoadedHookable::callFuncWithNoArgs(IHookable& hookable, s
     auto func = functions.find(name);
     if (func == functions.end())
         return std::shared_ptr<IMove>();
-    return std::make_shared<TestMove>(func->second(hookable));
+    MoveWrapper wrapper = func->second(hookable);
+    return wrapper.move;
 }
 std::shared_ptr<IMove> LoadedHookable::onDestroy(IHookable& hookable, bool byOwner)
 {
     auto func = functions.find("onDestroy");
     if (func == functions.end())
         return std::shared_ptr<IMove>();
-    return func->second(hookable, byOwner);
+    MoveWrapper wrapper = func->second(hookable, byOwner);
+    return wrapper.move;
 }
 
 std::shared_ptr<IMove> LoadedHookable::onTurnEnd(IHookable& hookable)
@@ -32,5 +35,6 @@ std::shared_ptr<IMove> LoadedHookable::onBeingPlaced(IHookable& hookable, int ma
     auto func = functions.find("onBeingPlaced");
     if (func == functions.end())
         return std::shared_ptr<IMove>();
-    return func->second(hookable, mapX, mapY);
+    MoveWrapper wrapper = func->second(hookable, mapX, mapY);
+    return wrapper.move;
 }

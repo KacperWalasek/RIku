@@ -188,6 +188,7 @@
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp" />
@@ -198,7 +199,6 @@
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
-    <ClCompile Include="TestMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
@@ -231,12 +231,14 @@
     <ClInclude Include="..\src\GameLogic\IHookable.h" />
     <ClInclude Include="..\src\GameLogic\LoadedHookable.h" />
     <ClInclude Include="..\src\GameLogic\LogicAssets.h" />
+    <ClInclude Include="..\src\GameLogic\MoveWrapper.h" />
     <ClInclude Include="..\src\GameLogic\Player\Player.h" />
     <ClInclude Include="..\src\GameLogic\Resource.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h" />
@@ -251,7 +253,6 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Hero.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
-    <ClInclude Include="TestMove.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

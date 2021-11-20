@@ -8,7 +8,8 @@
 #include <filesystem>
 #include <fstream>
 #include <hash-library/sha256.h>
-#include "../../../Riku/TestMove.h"
+#include "../StateUpdate/Move/TestMove.h"
+#include "../MoveWrapper.h"
 
 namespace logic {
 
@@ -77,9 +78,19 @@ namespace logic {
 		//init lua
 		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
 		
-		sol::usertype<TestMove> player_type = lua->new_usertype<TestMove>("TestMove",
+		sol::usertype<TestMove> testMove = lua->new_usertype<TestMove>("TestMove",
 			sol::constructors<TestMove()>()
 			);
+		sol::usertype<MoveWrapper> wrapper = lua->new_usertype<MoveWrapper>("MoveWrapper",
+			sol::constructors<MoveWrapper(TestMove)>()
+			);
+
+		/*
+		Na razie ten kod zostawiam, bo mo¿e go bêdê u¿ywa³
+		auto factories = sol::factories([]() { return std::make_shared<TestMove>(); });
+		lua->new_usertype< TestMove>("TestMove",
+			sol::meta_function::construct, factories,
+			sol::call_constructor, factories);*/
 
 		lua->load(fileContent);
 		lua->script_file(path + "/" + fileName);

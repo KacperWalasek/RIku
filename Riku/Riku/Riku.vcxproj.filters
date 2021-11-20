@@ -140,12 +140,14 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="TestMove.cpp" />
     <ClCompile Include="..\src\GameLogic\LogicAssets.cpp">
       <Filter>Riku\GameLogic</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Player\Player.cpp">
       <Filter>Riku\GameLogic\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +299,11 @@
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
-    <ClInclude Include="TestMove.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\MoveWrapper.h">
+      <Filter>Riku\GameLogic\StateUpdate</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

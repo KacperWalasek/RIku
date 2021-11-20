@@ -13,5 +13,6 @@ public:
 	BuildTileObject(int player, std::pair<int, int> tile, std::string tileObject, LogicAssets& assets);
 	virtual std::shared_ptr<Patch> createPatch(const GameState& state) const override;
 	virtual bool isDoable(const GameState& state) const override;
+	virtual std::shared_ptr<IMove> asPointner() const override;
 };
 

@@ -12,10 +12,10 @@ class CreateUnit :
     LogicAssets& assets;
 public:
     CreateUnit(int player, std::string unit, LogicAssets& assets);
-    // Odziedziczono za poœrednictwem elementu IMove
-    virtual std::shared_ptr<Patch> createPatch(const GameState& state) const override;
 
+    virtual std::shared_ptr<Patch> createPatch(const GameState& state) const override;
     virtual bool isDoable(const GameState& state) const override;
+    virtual std::shared_ptr<IMove> asPointner() const override;
 
 };
 

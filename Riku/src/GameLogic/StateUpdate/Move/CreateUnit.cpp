@@ -19,3 +19,8 @@ bool CreateUnit::isDoable(const GameState& state) const
 {
     return true;
 }
+
+std::shared_ptr<IMove> CreateUnit::asPointner() const
+{
+    return std::make_shared<CreateUnit>(player, name, assets);
+}

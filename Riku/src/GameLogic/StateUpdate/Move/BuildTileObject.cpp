@@ -28,3 +28,8 @@ bool BuildTileObject::isDoable(const GameState& state) const
 {
     return true;
 }
+
+std::shared_ptr<IMove> BuildTileObject::asPointner() const
+{
+    return std::make_shared<BuildTileObject>(player,tile,tileObject,assets);
+}

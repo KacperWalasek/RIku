@@ -5,5 +5,5 @@ unit = {
 }
 
 function onTurnEnd(hookable) --W przyszlosci prawdopodobnie to bedzie Unit a nie Hookable
-    return TestMove.new()
+    return MoveWrapper.new(TestMove.new())
 end
