@@ -4,7 +4,7 @@
 
 
 
-std::shared_ptr<Response> MapRequestHandler::handleRequest(std::shared_ptr<Request> request)
+std::shared_ptr<Response> MapRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
     return std::make_shared<MapResponse>(request, map);
 }
