@@ -3,6 +3,7 @@
 #include "../Move/IMove.h"
 #include "../MoveDescriptions/IMoveDescription.h"
 #include "IMoveDescriptionHandler.h"
+#include <vector>
 
 class MoveFactory {
 	std::vector<std::shared_ptr<IMoveDescriptionHandler>> handlers;
