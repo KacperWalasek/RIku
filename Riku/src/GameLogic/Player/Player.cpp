@@ -29,6 +29,11 @@ int Player::getResourceQuantity(int type) const
 	return resources[type];
 }
 
+const std::vector<int>& Player::getResourceQuantities() const
+{
+	return resources;
+}
+
 void Player::addUnit(std::shared_ptr<Unit> unit)
 {
 	units.push_back(unit);

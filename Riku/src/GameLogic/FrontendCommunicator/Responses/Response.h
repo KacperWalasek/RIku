@@ -5,8 +5,8 @@
 class Response
 { 
 	bool status; 
-	std::shared_ptr<Request> request;
 public:
+	std::shared_ptr<Request> request;
 	Response(std::shared_ptr<Request> request, bool status);
 	bool getStatus() const;
 };

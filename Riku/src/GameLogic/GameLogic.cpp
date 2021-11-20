@@ -11,6 +11,9 @@
 #include "FrontendCommunicator/Responses/MapResponse.h"
 #include "StateUpdate/Move/CreateUnit.h"
 #include "StateUpdate/Move/BuildTileObject.h"
+#include "FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState)
 {
@@ -26,7 +29,12 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 		for (int i = 0; i < 6; i++)
 			row.push_back(Tile(4, assets.areas[0], assets.grounds[1], assets.biomes[0], 1));
 
-	communicator.setHandlers({ std::make_shared<MapRequestHandler>(gameState.map) });
+	communicator.setHandlers({ 
+		std::make_shared<MapRequestHandler>(gameState.map),
+		std::make_shared<AvailableBuildingsRequestHandler>(assets),
+		std::make_shared<PlayerUnitsRequestHandler>(gameState),
+		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets)
+		});
 
 	std::cout << "<GameLogic.cpp>" << std::endl << "Element mapy:" << std::endl <<
 		"\t Biome - " << gameState.map[4][2].biome.getName() << std::endl <<
