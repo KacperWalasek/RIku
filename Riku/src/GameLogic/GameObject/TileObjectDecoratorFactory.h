@@ -7,6 +7,6 @@ class TileObjectDecoratorFactory
 {
 public:
 	static std::shared_ptr<TileObjectDecorator> createTileObject(std::string type, 
-		std::map<std::string, logic::AssetData> data, std::shared_ptr<ITileObject> base, LogicAssets& assets);
+		std::map<std::string, logic::AssetData> data, std::shared_ptr<ITileObject> base, const LogicAssets& assets);
 };
 

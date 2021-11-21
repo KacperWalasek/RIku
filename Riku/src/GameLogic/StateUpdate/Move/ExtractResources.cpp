@@ -4,12 +4,12 @@
 ExtractResources::ExtractResources(int player, int resource, int quantity, int mapX, int mapY, int requiredResource)
     : player(player), resource(resource), requiredResource(requiredResource), quantity(quantity), mapX(mapX), mapY(mapY) {}
 
-std::shared_ptr<Patch> ExtractResources::createPatch(const GameState& state) const
+std::shared_ptr<Patch> ExtractResources::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     return std::make_shared<Patch>(PlayerPatch(player,resource,quantity));
 }
 
-bool ExtractResources::isDoable(const GameState& state) const
+bool ExtractResources::isDoable(const GameState& state, const LogicAssets& assets) const
 {  
     return player < state.players.size() 
         && state.players[player].getResourceQuantity(resource) + quantity >= 0 
