@@ -95,7 +95,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState)
 	std::cout << "\t Forth turn...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
 	makeMove(std::make_shared<SimpleMoveDescription>("test"));
 	std::cout << "\t Increase by 10 with  move description...(" << gameState.players[0].getResourceQuantity(0) << ',' << gameState.players[0].getResourceQuantity(1) << ")" << std::endl;
-	auto cu = std::make_shared<CreateUnit>(0,"stefan", assets);
+	auto cu = std::make_shared<CreateUnit>(0,"stefan", 1,1, assets);
 	stateUpdate.handleMove(cu);
 
 	stateUpdate.handleMove(gameState.players[0].units[0]->onTurnEnd());

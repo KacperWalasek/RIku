@@ -5,6 +5,7 @@
 #include "TileCost/Ground.h"
 #include "TileCost/Biome.h"
 #include "../GameObject/ITileObject.h"
+#include "../Unit/Unit.h"
 
 class Tile
 {
@@ -19,6 +20,7 @@ public:
 	double getCost() const;
 
 	std::shared_ptr<ITileObject> object;
+	std::shared_ptr<Unit> unit;
 	int resource; // -1 for no resource
 };
 
