@@ -159,6 +159,15 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -329,6 +338,24 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\MoveWrapper.h">
       <Filter>Riku\GameLogic\StateUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

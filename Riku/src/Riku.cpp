@@ -32,6 +32,9 @@
 #endif
 #include <cmath>
 #include <optional>
+#include "GameLogic/FrontendCommunicator/Responses/StringIntMapResponse.h"
+#include "GameLogic/FrontendCommunicator/Responses/StringListResponse.h"
+#include "GameLogic/FrontendCommunicator/Responses/UnitListResponse.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
@@ -351,8 +354,12 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 int main() {
 	srand(time(0));
 	 GameLogic logic;
-	//getting map request
-	 std::shared_ptr<MapResponse> response = std::static_pointer_cast<MapResponse>(logic.getInfo(std::make_shared<Request>("map")));
+
+	 auto response = logic.getInfo<MapResponse>("map");
+	 auto player_resources = logic.getInfo<StringIntMapResponse>("player_resources");
+	 auto available_buildings = logic.getInfo<StringListResponse>("available_buildings");
+	 auto player_units = logic.getInfo<UnitListResponse>("player_units");
+
 	 const std::vector<std::vector<Tile>>& map = response->getMap();
 	 std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
 	

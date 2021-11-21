@@ -16,6 +16,16 @@ class GameLogic
 public:
 	GameLogic();
 	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;
+	template<typename T>
+	std::shared_ptr<T> getInfo(std::shared_ptr<Request> request) const
+	{
+		return std::static_pointer_cast<T>(getInfo(request));
+	}
+	template<typename T>
+	std::shared_ptr<T> getInfo(std::string requestType) const
+	{
+		return getInfo<T>(std::make_shared<Request>(requestType));
+	}
 	void makeMove(std::shared_ptr<IMoveDescription> moveDescription);
 	bool isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const;
 };
