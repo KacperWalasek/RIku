@@ -98,9 +98,6 @@
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp">
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectFactory.cpp">
-      <Filter>Riku\GameLogic\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameLogic\LoadedHookable.cpp">
       <Filter>Riku\GameLogic</Filter>
     </ClCompile>
@@ -167,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,9 +237,6 @@
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h">
-      <Filter>Riku\GameLogic\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectFactory.h">
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\GameState.h">
@@ -356,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

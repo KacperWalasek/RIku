@@ -15,3 +15,8 @@ tileobject = {
         }
     }
 }
+
+
+function onBeingPlaced(hookable) 
+    return MoveWrapper.new(TestMove.new())
+end

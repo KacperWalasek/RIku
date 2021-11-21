@@ -3,8 +3,9 @@
 #include "PatchHandler/PlayerPatchHandler.h"
 void StateUpdate::handlePatch(std::shared_ptr<Patch> patch)
 {
+	// During patch handling new moves may be created by hooks
 	for (auto handler : patchHandlers)
-		handler->handlePatch(state, *patch);
+		handleMove(handler->handlePatch(state, *patch));
 }
 
 void StateUpdate::setHandlers(std::vector<std::shared_ptr<IPatchHandler>> patchHandlers)
