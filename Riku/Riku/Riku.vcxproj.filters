@@ -168,6 +168,15 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -355,6 +364,21 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\BuildMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\TranslateUnitMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
