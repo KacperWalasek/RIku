@@ -30,7 +30,7 @@ public:
 		}
 		return *this;
 	}
-	friend PlayerPatch operator+(PlayerPatch p1, const PlayerPatch& p2)
+	friend PlayerPatch operator+(PlayerPatch& p1, const PlayerPatch& p2)
 	{
 		if (p1.player != p2.player)
 			return p1;

@@ -16,7 +16,7 @@ public:
 	std::map<int,PlayerPatch> playerPatches;
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
 
-	friend Patch operator+(Patch p1, const Patch& p2)
+	friend Patch operator+(Patch& p1, const Patch& p2)
 	{
 		for (auto plPatch2 : p2.playerPatches)
 		{
