@@ -181,8 +181,10 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp" />
     <ClCompile Include="..\src\GameLogic\GameLogic.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\RequireResources.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp" />
     <ClCompile Include="..\src\GameLogic\LoadedHookable.cpp" />
     <ClCompile Include="..\src\GameLogic\LogicAssets.cpp" />
     <ClCompile Include="..\src\GameLogic\Player\Player.cpp" />
@@ -194,6 +196,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\UseResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp" />
@@ -231,11 +234,13 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h" />
     <ClInclude Include="..\src\GameLogic\GameLogic.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\ITileObject.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\UseResourceOnBuild.h" />
     <ClInclude Include="..\src\GameLogic\GameState.h" />
     <ClInclude Include="..\src\GameLogic\IAsset.h" />
     <ClInclude Include="..\src\GameLogic\IHookable.h" />
@@ -255,6 +260,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\UseResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h" />

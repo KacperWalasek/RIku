@@ -33,3 +33,8 @@ std::shared_ptr<IMove> SimpleTileObject::onBeingPlaced(int mapX, int mapY)
 {
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
+
+bool SimpleTileObject::canBeBuilt(const GameState& state, int mapX, int mapY)
+{
+	return loadedHookable.canBeBuilt(*this, state, mapX, mapY);
+}

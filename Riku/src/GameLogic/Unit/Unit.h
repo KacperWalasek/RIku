@@ -17,7 +17,7 @@ public:
 	void useMovementPoints(int points);
 	void restoreMovementPoints();
 
-	// Odziedziczono za poœrednictwem elementu IHookable
+
 	virtual std::shared_ptr<IMove> onDestroy(bool byOwner) override;
 
 	virtual std::shared_ptr<IMove> onTurnEnd() override;
@@ -26,8 +26,8 @@ public:
 
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override;
 
+	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) override;
 
-	// Odziedziczono za poœrednictwem elementu IAsset
 	virtual std::string getName() const override;
 
 };

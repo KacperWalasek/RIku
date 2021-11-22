@@ -1,7 +1,8 @@
 // Kacper Walasek
 #pragma once
 #include <vector>
-#include "../Unit/Unit.h"
+#include <memory>
+class Unit;
 class Player
 {
 	std::vector<int> resources;
