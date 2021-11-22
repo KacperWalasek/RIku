@@ -34,7 +34,7 @@ public:
 			else
 				p1.tilePatches.insert({ tilePatch2 });
 		}
-		return p1;
+		return std::move(p1);
 	}
 };
 

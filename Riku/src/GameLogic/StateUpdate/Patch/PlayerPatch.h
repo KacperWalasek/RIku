@@ -44,6 +44,6 @@ public:
 			else
 				resource1->second += resourceChange.second;
 		}
-		return p1;
+		return std::move(p1);
 	}
 };
