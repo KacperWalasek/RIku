@@ -15,9 +15,7 @@
 #include "Frontend/Model.h"
 #include "Frontend/Object.h"
 #include "Frontend/Config.h"
-#include "GameLogic/Assets/Asset.h"
-#include "Frontend/GUI.h"
-#include "Frontend/GUIFactory.h"
+
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 
@@ -34,6 +32,9 @@
 #endif
 #include <cmath>
 #include <optional>
+#include "GameLogic/FrontendCommunicator/Responses/StringIntMapResponse.h"
+#include "GameLogic/FrontendCommunicator/Responses/StringListResponse.h"
+#include "GameLogic/FrontendCommunicator/Responses/UnitListResponse.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
@@ -57,14 +58,14 @@ struct TileType
 	int level;
 	int type; //0 - grass, 1 - water
 };
-struct Unit
+struct Unit1
 {
 	int type; //0 - Sara, 1 - assassin
 	int x;
 	int y;
-	explicit Unit(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
+	explicit Unit1(int type=0, int x=0, int y=0): type(type), x(x), y(y) {}
 };
-bool OnButtonClicked(const CEGUI::EventArgs& e);
+
 namespace front
 {
 	float aspect;
@@ -75,12 +76,11 @@ namespace front
 	float dayPhase=0.6f;
 	int focusedUnit=0;
 	std::vector<std::vector<TileType> > tiles;
-	std::vector<Unit> units;
+	std::vector<Unit1> units;
 	std::vector<Object> gridObjects;
 	bool isGridOn=false;
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
-	CEGUI::GUI* my_gui;
 	Config config;
 	GLFWwindow* initWindow();
 	std::optional<glm::vec2> getRelativeCursorPosition(GLFWwindow* window){
@@ -167,7 +167,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		;
 	if(action==GLFW_PRESS)
 	{
-		front::my_gui->on_key_press(key);
 		switch(key)
 		{
 			case GLFW_KEY_ESCAPE:
@@ -209,17 +208,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-void mouse_pos_callback(GLFWwindow* window, double xpos, double ypos)
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	front::my_gui->on_mouse_pos(xpos, ypos);
-	//TODO
-
-}
-
-void mouse_click_callback(GLFWwindow* window, int button, int action, int mods)
-{
-	
-	front::my_gui->on_mouse_click(button, action);
 	//TODO
 
 }
@@ -364,8 +354,12 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 int main() {
 	srand(time(0));
 	 GameLogic logic;
-	//getting map request
-	 std::shared_ptr<MapResponse> response = std::static_pointer_cast<MapResponse>(logic.getInfo(std::make_shared<Request>("map")));
+
+	 auto response = logic.getInfo<MapResponse>("map");
+	 auto player_resources = logic.getInfo<StringIntMapResponse>("player_resources");
+	 auto available_buildings = logic.getInfo<StringListResponse>("available_buildings");
+	 auto player_units = logic.getInfo<UnitListResponse>("player_units");
+
 	 const std::vector<std::vector<Tile>>& map = response->getMap();
 	 std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
 	
@@ -432,10 +426,6 @@ int main() {
 			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
-	//check Asset
-	logic::AssetHandler handler;
-	handler.findFiles("../assets");
-	//as usual
 
 	// create objects
 	front::units.emplace_back(0,10,10);
@@ -508,34 +498,6 @@ int main() {
 	lightingShader.setInt("material.specular", 1);
 
 	float lastFrame = 0.0f; // Time of last frame
-
-	// Cegui config
-	CEGUI::GUIFactory fac = CEGUI::GUIFactory();
-	fac.init(window);
-	front::my_gui = fac.GetDemoWindow();
-	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui->getWidgetByName("Button"));
-	testButton->setText("Hello");
-	//front::my_gui = CEGUI::GUI();
-	//front::my_gui.init();
-	//CEGUI::GUI::setResourceDirectory("GUI");
-	////front::my_gui.loadScheme("TaharezLook.scheme");
-	////front::my_gui.loadScheme("AlfiskoSkin.scheme");
-	//CEGUI::GUI::loadScheme("TaharezLook.scheme");
-	//CEGUI::GUI::loadScheme("AlfiskoSkin.scheme");
-	//front::my_gui.setFont("DejaVuSans-10");
-	//front::my_gui.loadLayout("application_templates.layout");
-	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui.getWidgetByName("Button"));
-	//testButton->setText("hell'o world");
-	////testButton->subscribeEvent(CEGUI::PushButton::EventClicked, &OnButtonClicked);
-	//front::my_gui.setButtonCallback("Button", &OnButtonClicked);
-
-	//front::my_gui.setMouseCursor("TaharezLook/MouseArrow");
-	//front::my_gui.showMouseCursor();
-
-	/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui.createWidget("AlfiskoSkin/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
-	testButton = static_cast<CEGUI::PushButton*>(front::my_gui.getWidgetByName("TestButton"));
-	testButton->setText("Hello World!");*/
-
 	//main loop
 	while(!glfwWindowShouldClose(window))
 	{
@@ -549,7 +511,6 @@ int main() {
 		// ------
 		//day/night
 		drawScene(lightingShader,lightCubeShader,currentFrame);
-		front::my_gui->draw();
 		//check and call events and swap the buffers
 		glfwSwapBuffers(window);
 
@@ -563,11 +524,6 @@ int main() {
 	return 0;
 }
 
-bool OnButtonClicked(const CEGUI::EventArgs& e) {
-	//front::my_gui.destroy();
-	front::focusedUnit = 2;
-	return false;
-}
 GLFWwindow* front::initWindow(){
 	config.load();
 	//set values
@@ -582,8 +538,7 @@ GLFWwindow* front::initWindow(){
 	glfwMakeContextCurrent(window);
 	//glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetCursorPosCallback(window, mouse_pos_callback);
-	glfwSetMouseButtonCallback(window, mouse_click_callback);
+	//glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetKeyCallback(window, key_callback);
 	//GLEW: check errors

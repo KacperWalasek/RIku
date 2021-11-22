@@ -1,5 +1,6 @@
 // Kacper Walasek
 #include "Player.h"
+#include <memory>
 
 Player::Player(int numberOfResources)
 {
@@ -26,4 +27,14 @@ int Player::getResourceQuantity(int type) const
 	if (type < 0 || type >= resources.size() )
 		return -1;
 	return resources[type];
+}
+
+const std::vector<int>& Player::getResourceQuantities() const
+{
+	return resources;
+}
+
+void Player::addUnit(std::shared_ptr<Unit> unit)
+{
+	units.push_back(unit);
 }
