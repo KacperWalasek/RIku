@@ -1,5 +1,7 @@
 #pragma once
 #include "IMove.h"
+#include "../Patch/Patch.h"
+#include "../../GameState.h"
 class TranslateUnit :
     public IMove
 {

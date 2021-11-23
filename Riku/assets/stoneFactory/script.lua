@@ -25,7 +25,7 @@ tileobject = {
             },
             {
                 resource = "stone",
-                quantity = 5000
+                quantity = 5
             }
         }
     }

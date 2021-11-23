@@ -40,7 +40,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 
 	communicator.setHandlers({ 
 		std::make_shared<MapRequestHandler>(gameState.map),
-		std::make_shared<AvailableBuildingsRequestHandler>(assets),
+		std::make_shared<AvailableBuildingsRequestHandler>(gameState,assets),
 		std::make_shared<PlayerUnitsRequestHandler>(gameState),
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets)
 		});
@@ -107,10 +107,10 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 	stateUpdate.handleMove(gameState.players[0].units[0]->onTurnEnd());
 
 	gameState.map[2][3].resource = 2;
-	std::shared_ptr<BuildTileObject> build1 = std::make_shared<BuildTileObject>(0, std::pair(2, 3), "stone_factory");
-	stateUpdate.handleMove(build1);
 	gameState.players[0].acceptResources(2, 10);
-	bool x = gameState.map[2][3].object->canBeBuilt(gameState, 2, 3);
+	std::shared_ptr<BuildTileObject> build1 = std::make_shared<BuildTileObject>(0, std::pair(2, 3), "stone_factory");
+	if (build1->isDoable(gameState,assets))
+		stateUpdate.handleMove(build1);
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const

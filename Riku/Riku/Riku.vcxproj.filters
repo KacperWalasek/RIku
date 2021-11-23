@@ -104,9 +104,6 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
@@ -180,6 +177,9 @@
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
@@ -277,9 +277,6 @@
       <Filter>Riku\GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h">
-      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h">
@@ -392,8 +389,14 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Requests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
