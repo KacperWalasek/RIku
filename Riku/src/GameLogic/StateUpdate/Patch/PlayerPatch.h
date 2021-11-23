@@ -30,7 +30,7 @@ public:
 		}
 		return *this;
 	}
-	friend PlayerPatch operator+(PlayerPatch p1, const PlayerPatch& p2)
+	friend PlayerPatch operator+(PlayerPatch& p1, const PlayerPatch& p2)
 	{
 		if (p1.player != p2.player)
 			return p1;
@@ -44,6 +44,6 @@ public:
 			else
 				resource1->second += resourceChange.second;
 		}
-		return p1;
+		return std::move(p1);
 	}
 };

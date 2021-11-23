@@ -26,7 +26,7 @@ std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state, cons
 
 bool BuildTileObject::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return true;
+    return assets.tileObjects.find(tileObject) != assets.tileObjects.end();
 }
 
 std::shared_ptr<IMove> BuildTileObject::asPointner() const

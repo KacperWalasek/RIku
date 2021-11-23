@@ -16,6 +16,8 @@
 #include "FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.h"
+#include "StateUpdate/MoveFactory/BuildMoveHandler.h"
+#include "StateUpdate/MoveFactory/TranslateUnitMoveHandler.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -26,7 +28,11 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
   
 	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
 							  std::make_shared<TilePatchHandler>() });
-	factory.setHandlers({ std::make_shared<TestMoveHandler>() });
+	factory.setHandlers({ 
+		std::make_shared<TestMoveHandler>(),
+		std::make_shared<BuildMoveHandler>(),
+		std::make_shared<TranslateUnitMoveHandler>()
+		});
 
 	for (std::vector<Tile>& row : gameState.map)
 		for (int i = 0; i < 6; i++)
