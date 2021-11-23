@@ -4,6 +4,6 @@
 class TilePatchHandler : public IPatchHandler
 {
 public:
-	virtual void handlePatch(GameState& state, const Patch& patch) const override;
+	virtual std::shared_ptr<IMove> handlePatch(GameState& state, const Patch& patch) const override;
 };
 

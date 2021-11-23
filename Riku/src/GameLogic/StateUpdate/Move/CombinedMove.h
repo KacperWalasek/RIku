@@ -1,22 +1,18 @@
-//Kacper Walasek
 #pragma once
 #include "IMove.h"
-#include "../../GameState.h"
 #include "../Patch/Patch.h"
-class ExtractResources :
+
+class CombinedMove :
     public IMove
 {
-    int player;
-    int resource;
-    int requiredResource;
-    int quantity;
-    int mapX;
-    int mapY;
+    std::shared_ptr<IMove> move1, move2;
 public:
-    // requireResource<0 => require no resources
-    ExtractResources(int player, int resource, int quantity, int mapX, int mapY, int requiredResource = -1);
+    CombinedMove(std::shared_ptr<IMove> move1, std::shared_ptr<IMove> move2);
     virtual std::shared_ptr<Patch> createPatch(const GameState& state, const LogicAssets& assets) const override;
+
     virtual bool isDoable(const GameState& state, const LogicAssets& assets) const override;
+
     virtual std::shared_ptr<IMove> asPointner() const override;
+
 };
 

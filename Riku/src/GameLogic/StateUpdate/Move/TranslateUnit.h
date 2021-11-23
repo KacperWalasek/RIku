@@ -1,23 +1,13 @@
 #pragma once
 #include "IMove.h"
-#include "../../Unit/Unit.h"
-#include "../Patch/Patch.h"
-#include "../../LogicAssets.h"
-#include <string>
-
-class CreateUnit :
+class TranslateUnit :
     public IMove
 {
-    int player;
-    std::string name;
-    int mapX;
-    int mapY;
+    int fromX, fromY, toX, toY;
 public:
-    CreateUnit(int player, std::string unit, int mapX, int mapY);
-
+    TranslateUnit(int fromX, int fromY, int toX, int toY);
     virtual std::shared_ptr<Patch> createPatch(const GameState& state, const LogicAssets& assets) const override;
     virtual bool isDoable(const GameState& state, const LogicAssets& assets) const override;
     virtual std::shared_ptr<IMove> asPointner() const override;
-
 };
 

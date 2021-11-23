@@ -10,7 +10,3 @@
 class ITileObject : public IAsset, public ICostModifier, public IHookable
 {
 };
-
-//
-//public:
-//	ITileObject(std::map<std::string, sol::function> hooks) : LoadedHookable(hooks) {};
