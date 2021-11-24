@@ -15,7 +15,9 @@
 #include "Frontend/Model.h"
 #include "Frontend/Object.h"
 #include "Frontend/Config.h"
-
+#include "GameLogic/Assets/Asset.h"
+#include "Frontend/GUI.h"
+#include "Frontend/GUIFactory.h"
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 
@@ -81,6 +83,8 @@ namespace front
 	bool isGridOn=false;
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
+	CEGUI::GUI* activeGUI;
+	std::map<std::string, CEGUI::GUI*> guiDic;
 	Config config;
 	GLFWwindow* initWindow();
 	std::optional<glm::vec2> getRelativeCursorPosition(GLFWwindow* window){
@@ -167,10 +171,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		;
 	if(action==GLFW_PRESS)
 	{
+		//(*front::activeGUI->on_key_press)(key);
+		if (front::activeGUI->on_key_press(key)) return;
 		switch(key)
 		{
 			case GLFW_KEY_ESCAPE:
-				glfwSetWindowShouldClose(window, true);
+				//glfwSetWindowShouldClose(window, true);
 				break;
 			case GLFW_KEY_W:
 				front::units[front::focusedUnit].y=std::max(0,front::units[front::focusedUnit].y-1);
@@ -208,8 +214,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+void mouse_pos_callback(GLFWwindow* window, double xpos, double ypos)
 {
+	front::activeGUI->on_mouse_pos(xpos, ypos);
+	//TODO
+
+}
+
+void mouse_click_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	front::activeGUI->on_mouse_click(button, action);
 	//TODO
 
 }
@@ -498,6 +512,22 @@ int main() {
 	lightingShader.setInt("material.specular", 1);
 
 	float lastFrame = 0.0f; // Time of last frame
+
+	// Cegui config
+	CEGUI::GUIFactory fac = CEGUI::GUIFactory();
+	fac.init(window);
+	/*front::guiDic.insert(std::pair("demo", fac.GetDemoWindow()));
+	front::guiDic["demo2"]->show();
+	front::activeGUI = front::guiDic["demo"];*/
+	front::guiDic.insert(std::pair("GameUI", fac.GetGameUI()));
+	front::guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
+	front::activeGUI = front::guiDic["GameUI"];
+	front::activeGUI->show();
+
+	/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(front::my_gui.createWidget("AlfiskoSkin/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
+	testButton = static_cast<CEGUI::PushButton*>(front::my_gui.getWidgetByName("TestButton"));
+	testButton->setText("Hello World!");*/
+
 	//main loop
 	while(!glfwWindowShouldClose(window))
 	{
@@ -511,6 +541,11 @@ int main() {
 		// ------
 		//day/night
 		drawScene(lightingShader,lightCubeShader,currentFrame);
+		for (auto p : front::guiDic)
+		{
+			p.second->draw();
+		}
+		//front::activeGUI->draw();
 		//check and call events and swap the buffers
 		glfwSwapBuffers(window);
 
@@ -538,7 +573,8 @@ GLFWwindow* front::initWindow(){
 	glfwMakeContextCurrent(window);
 	//glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	//glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetCursorPosCallback(window, mouse_pos_callback);
+	glfwSetMouseButtonCallback(window, mouse_click_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetKeyCallback(window, key_callback);
 	//GLEW: check errors

@@ -168,6 +168,12 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\GUI.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\GUIFactory.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -356,6 +362,15 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUI.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUIFactory.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks.h">
+      <Filter>Riku\Frontend</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -211,6 +211,7 @@
     <ClInclude Include="..\lib\hash-library\sha256.h" />
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\Mesh.h" />
     <ClInclude Include="..\src\Frontend\Model.h" />

@@ -1,4 +1,5 @@
 #include "GUI.h"
+#define RESPATH "GUI"
 //#include "../src/Riku.cpp"
 CEGUI::OpenGL3Renderer* CEGUI::GUI::m_renderer = nullptr;
 CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey);
@@ -6,11 +7,17 @@ CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey);
 void CEGUI::GUI::init() {
     // Check if the renderer and system were not already initialized
     if (m_renderer == nullptr)
+    {
         m_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
+        CEGUI::GUI::setResourceDirectory(RESPATH);
+    }
     
     m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
     m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
-    m_context->setRootWindow(m_root);   
+    m_context->setRootWindow(m_root);
+    /*on_key_press = new std::function<bool(int)>([](int key){
+            return false;
+        });*/
 }
 
 void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
@@ -30,15 +37,35 @@ void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
     CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 }
 
-void CEGUI::GUI::destroy() {
+//void CEGUI::GUI::destroy() {
+//    CEGUI::System::getSingleton().destroyGUIContext(*m_context);
+//}
+void CEGUI::GUI::destroyWindowRecursive(CEGUI::Window &window)
+{
+    while (window.getChildCount() > 0)
+        destroyWindowRecursive(*window.getChildAtIdx(0));
+    printf("destroying %s \n", window.getName());
+    window.destroy();
+}
+
+CEGUI::GUI::~GUI() {
+    //destroyWindowRecursive(*m_root);
     CEGUI::System::getSingleton().destroyGUIContext(*m_context);
+    
 }
 
 void CEGUI::GUI::draw() {
+    if (!visible) return;
     m_renderer->beginRendering();
     m_context->draw();
     m_renderer->endRendering();
     glDisable(GL_SCISSOR_TEST);
+}
+void CEGUI::GUI::show() {
+    visible = true;
+}
+void CEGUI::GUI::hide() {
+    visible = false;
 }
 
 void CEGUI::GUI::setMouseCursor(const CEGUI::String& imageFile) {
@@ -51,24 +78,18 @@ void CEGUI::GUI::hideMouseCursor() {
     m_context->getMouseCursor().hide();
 }
 
-void CEGUI::GUI::on_key_press(int key){
-    //CEGUI::Key::Scan guiKey = GlfwToCeguiKey(key);
-    switch (key)
-    {
-    case GLFW_KEY_F1: destroy();
-        break;
-    case GLFW_KEY_F2: 
-        break;
-    default:
-        break;
-    }
+bool CEGUI::GUI::on_key_press(int key){
+    CEGUI::Key::Scan guiKey = GlfwToCeguiKey(key);
+    auto b = m_context->injectKeyDown(guiKey);
+    m_context->injectKeyUp(guiKey);
+    return b;
 }
 
-void CEGUI::GUI::on_mouse_pos(float x, float y) {
-    m_context->injectMousePosition(x, y);
+bool CEGUI::GUI::on_mouse_pos(float x, float y) {
+    return m_context->injectMousePosition(x, y);
 }
 
-void CEGUI::GUI::on_mouse_click(int button, int action) {
+bool CEGUI::GUI::on_mouse_click(int button, int action) {
     CEGUI::MouseButton guiButton = CEGUI::MouseButton::NoButton;
     switch (button)
     {
@@ -85,9 +106,17 @@ void CEGUI::GUI::on_mouse_click(int button, int action) {
         break;
     }
     if (action == GLFW_PRESS)
-        m_context->injectMouseButtonDown(guiButton);
+        return m_context->injectMouseButtonDown(guiButton);
     else if (action == GLFW_RELEASE)
-        m_context->injectMouseButtonUp(guiButton);
+        return m_context->injectMouseButtonUp(guiButton);
+}
+
+void CEGUI::GUI::setPushButtonCallback(const CEGUI::String& name, CEGUI::Event::Subscriber sub) {
+    CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(getWidgetByName(name));
+    button->subscribeEvent(CEGUI::PushButton::EventClicked, sub);
+}
+void CEGUI::GUI::setKeyCallback(CEGUI::Event::Subscriber sub) {
+    m_root->subscribeEvent(CEGUI::Window::EventKeyDown, sub);
 }
 
 void CEGUI::GUI::loadScheme(const CEGUI::String& schemeFile) {
@@ -107,13 +136,14 @@ CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::ve
     return newWindow;
 }
 
-CEGUI::Window* CEGUI::GUI::getWidgetByName(const CEGUI::String& name){
-    return m_root->getChildRecursive(name);
+CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const CEGUI::String& name) {
+    CEGUI::Window* newWindow = CEGUI::WindowManager::getSingleton().createWindow(type, name);
+    m_root->addChild(newWindow);
+    return newWindow;
 }
 
-void CEGUI::GUI::setButtonCallback(const CEGUI::String& name, CEGUI::Event::Subscriber sub) {
-    CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(getWidgetByName(name));
-    button->subscribeEvent(CEGUI::PushButton::EventClicked, sub);
+CEGUI::Window* CEGUI::GUI::getWidgetByName(const CEGUI::String& name){
+    return m_root->getChildRecursive(name);
 }
 
 void CEGUI::GUI::setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destRectPerc, const glm::vec4& destRectPix) {

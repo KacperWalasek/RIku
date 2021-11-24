@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Image" >
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Image" value="Riku/Background" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="AutoRenderingSurface" value="true" />
+            <Window type="WindowsLook/Button" name="ExitButton" >
+                <Property name="Area" value="{{0.4,0},{0.7,0},{0.4,184},{0.7,64}}" />
+                <Property name="Text" value="Exit" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
