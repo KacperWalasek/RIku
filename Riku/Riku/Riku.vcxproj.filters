@@ -185,6 +185,9 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Tile\MapGenerator.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendState.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -402,5 +405,8 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h" />
     <ClInclude Include="..\src\GameLogic\Tile\MapGenerator.h" />
     <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
+    <ClInclude Include="..\src\Frontend\FrontendState.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
