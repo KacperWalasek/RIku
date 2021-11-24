@@ -8,6 +8,7 @@ class Unit : public IHookable, public IAsset
 	std::string type;
 	std::string name;
 	LoadedHookable loadedHookable;
+	int mapX = 0, mapY = 0;
 public:
 	Unit(std::string type, std::string name, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
 	// te pola s¹ publiczne, ¿eby hooki mog³y je zmieniaæ
@@ -29,5 +30,8 @@ public:
 	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) override;
 
 	virtual std::string getName() const override;
+	
+	int getMapX();
+	int getMapY();
 
 };
