@@ -229,7 +229,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	//calculating
 	front::dayPhase+=front::deltaTime/DAY_LENGTH;
 
-	float dayPart=0.5f*(1.0f+std::sin(M_PI*2.0f*front::dayPhase));
+	float dayPart=0.5f/* *(1.0f+std::sin(M_PI*2.0f*front::dayPhase))*/;
 	if(front::fogDensity>=0.05f)
 		glClearColor(dayPart*0.7f, dayPart*0.7f, dayPart*0.7f, 1.0f);
 	else
