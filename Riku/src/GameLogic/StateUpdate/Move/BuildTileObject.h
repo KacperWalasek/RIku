@@ -8,11 +8,11 @@ class BuildTileObject : public IMove
 	int player;
 	std::pair<int, int> tile;
 	std::string tileObject;
-	LogicAssets& assets;
+	std::shared_ptr<ITileObject> createObject(const LogicAssets& assets) const;
 public:
-	BuildTileObject(int player, std::pair<int, int> tile, std::string tileObject, LogicAssets& assets);
-	virtual std::shared_ptr<Patch> createPatch(const GameState& state) const override;
-	virtual bool isDoable(const GameState& state) const override;
+	BuildTileObject(int player, std::pair<int, int> tile, std::string tileObject);
+	virtual std::shared_ptr<Patch> createPatch(const GameState& state, const LogicAssets& assets) const override;
+	virtual bool isDoable(const GameState& state, const LogicAssets& assets) const override;
 	virtual std::shared_ptr<IMove> asPointner() const override;
 };
 

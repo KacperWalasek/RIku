@@ -1,7 +1,7 @@
 //Kacper Walasek
 #include "PlayerPatchHandler.h"
 
-void PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
+std::shared_ptr<IMove> PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
 	for (auto p : patch.playerPatches)
 	{
@@ -16,4 +16,5 @@ void PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 		for (std::shared_ptr<Unit> unit : p.second.addedUnits)
 			player.addUnit(unit);
 	}
+	return nullptr;
 }

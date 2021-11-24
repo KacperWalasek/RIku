@@ -7,17 +7,17 @@ class AssetUtils
 {
 public:
 	template<typename T>
-	static std::vector<T> readNumericAsset(std::string name, logic::AssetHandler& handler)
+	static std::map<std::string,T> readNumericAsset(std::string name, logic::AssetHandler& handler)
 	{
 		auto assetOpt = handler.findAsset(name);
 		if (!assetOpt.has_value())
 			return {};
 		std::map<std::string, logic::AssetData> asset = assetOpt.value().get().getMap();
-		std::vector<T> data = {};
+		std::map<std::string, T> data = {};
 		std::transform(asset.begin(), asset.end(),
-			std::back_insert_iterator<std::vector<T>>(data),
+			std::inserter(data,data.begin()),
 			[](std::pair<std::string, logic::AssetData> record) {
-				return T(record.first, record.second.asNumber());
+				return std::pair<std::string,T>(record.first,T(record.first, record.second.asNumber()));
 			});
 		return data;
 	}

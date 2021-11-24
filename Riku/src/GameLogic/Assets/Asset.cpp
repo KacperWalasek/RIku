@@ -10,6 +10,8 @@
 #include <hash-library/sha256.h>
 #include "../StateUpdate/Move/TestMove.h"
 #include "../MoveWrapper.h"
+#include "../Tile/TileDescription.h"
+#include "RandomWrapper.h"
 
 namespace logic {
 
@@ -84,7 +86,14 @@ namespace logic {
 		sol::usertype<MoveWrapper> wrapper = lua->new_usertype<MoveWrapper>("MoveWrapper",
 			sol::constructors<MoveWrapper(TestMove)>()
 			);
+		sol::usertype<TileDescription> tiledesc = lua->new_usertype<TileDescription>("TileDescription",
+			sol::constructors<TileDescription(int,std::string,std::string,std::string)>()
+			);
+		sol::usertype<RandomWrapper> rand = lua->new_usertype<RandomWrapper>("RandomWrapper",
+			sol::constructors<RandomWrapper()>()
+			);
 
+		
 		/*
 		Na razie ten kod zostawiam, bo mo¿e go bêdê u¿ywa³
 		auto factories = sol::factories([]() { return std::make_shared<TestMove>(); });
