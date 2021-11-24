@@ -184,6 +184,9 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\FrontendState.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -397,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\FrontendState.h">
+      <Filter>Riku\Frontend</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

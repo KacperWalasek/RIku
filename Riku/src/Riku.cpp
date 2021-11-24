@@ -38,6 +38,7 @@
 #include "GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
 #include "GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
 #include "GameLogic/FrontendCommunicator/Requests/TileRequest.h"
+#include "Frontend/FrontendState.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
@@ -71,6 +72,8 @@ struct Unit1
 
 namespace front
 {
+	GameLogic logic; 
+	FrontendState state(logic);
 	float aspect;
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	const glm::vec3 Zero=glm::vec3(0.0f);
@@ -356,17 +359,14 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 
 int main() {
 	 srand(time(0));
-	 GameLogic logic;
+	 auto player_resources = front::state.getResources();
+	 auto available_buildings = front::state.getAvailableBuildings(2, 3);
+	 auto player_units = front::state.getUnits();
 
-	 auto response = logic.getInfo<MapResponse>("map");
-	 auto player_resources = logic.getInfo<StringIntMapResponse>("player_resources");
-	 auto available_buildings = logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("available_buildings",2,3));
-	 auto player_units = logic.getInfo<UnitListResponse>("player_units");
+	 front::state.build("wood_factory", 2, 1);
+	 front::state.moveUnit(1, 1, 1, 2);
 
-	 logic.makeMove(std::make_shared<BuildMoveDescription>("stone_factory", 2, 1));
-	 logic.makeMove(std::make_shared<TranslateUnitMoveDescription>(1, 1, 1, 2));
-
-	 const std::vector<std::vector<Tile>>& map = response->getMap();
+	 const std::vector<std::vector<Tile>>& map = front::state.getMap();
 	 std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
 	
 	glfwInit();
