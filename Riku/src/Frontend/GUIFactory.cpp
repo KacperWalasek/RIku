@@ -13,7 +13,7 @@ struct Unit1
 namespace front {
 	extern int focusedUnit;
 	extern CEGUI::GUI* activeGUI;
-	extern std::vector<Unit1> units;
+	//extern std::vector<Unit1> units;
 }
 
 void CEGUI::GUIFactory::init(GLFWwindow* win){
@@ -103,18 +103,18 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	//my_gui->setFont("DejaVuSans-10");
 
 	auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("UnitsList"));
-	auto player_units = front::units; //logic.getInfo<UnitListResponse>("player_units");
+	//auto player_units //= front::units; //logic.getInfo<UnitListResponse>("player_units");
 	//CEGUI::PushButton* unit;
 	int i = 1;
 	float y = 0.1f;
-	for (auto u : player_units)
+	/*for (auto u : player_units)
 	{
 		CEGUI::PushButton* unit = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button", glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), "unit"+std::to_string(i)));
 		unit->setText("unit"+std::to_string(i));
 		unitsList->addChild(unit);
 		i++;
 		y += 0.3;
-	}
+	}*/
 	//CEGUI::PushButton* unit1 = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button", glm::vec4(0.4f, 0.5f, 0.5f, 1.5f), glm::vec4(0.0f), "unit1"));
 	//CEGUI::PushButton* unit1 = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button", "unit1"));
 	//unitsList->addChild(unit1);
