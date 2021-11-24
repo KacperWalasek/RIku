@@ -11,7 +11,6 @@ class Tile
 {
 public:
 	Tile(int height, const Area& area, const Ground& ground, const Biome& biome, int resource = -1);
-
 	int height;
 	const Area& area;
 	const Ground& ground;

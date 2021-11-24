@@ -9,13 +9,13 @@
 
 struct LogicAssets
 {
-	std::vector<Biome> biomes;
-	std::vector<Area> areas;
-	std::vector<Ground> grounds;
+	std::map<std::string, Biome> biomes;
+	std::map<std::string, Area> areas;
+	std::map<std::string, Ground> grounds;
 	std::vector<Resource> playerResources;
 	std::map<std::string, logic::Asset> tileObjects;
 	std::map<std::string, logic::Asset> units;
-
+	logic::Asset mapGenerator;
 	//TODO inicjalizacja z pliku
 	void initialize();
 };
