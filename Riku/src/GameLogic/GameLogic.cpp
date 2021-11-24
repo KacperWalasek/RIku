@@ -27,7 +27,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };
-
+  
 	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
 							  std::make_shared<TilePatchHandler>() });
 	factory.setHandlers({ 
@@ -38,7 +38,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 
 	communicator.setHandlers({ 
 		std::make_shared<MapRequestHandler>(gameState.map),
-		std::make_shared<AvailableBuildingsRequestHandler>(assets),
+		std::make_shared<AvailableBuildingsRequestHandler>(gameState,assets),
 		std::make_shared<PlayerUnitsRequestHandler>(gameState),
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets)
 		});
@@ -46,8 +46,6 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 	MapGenerator generator(assets.mapGenerator);
 	gameState.map = generator.getMap(assets);
 
-	auto stefan = std::make_shared<CreateUnit>(0,"stefan", 50, 50);
-	stateUpdate.handleMove(stefan);
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const

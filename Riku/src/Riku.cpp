@@ -37,6 +37,7 @@
 #include "GameLogic/FrontendCommunicator/Responses/UnitListResponse.h"
 #include "GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
 #include "GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
+#include "GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
@@ -359,7 +360,7 @@ int main() {
 
 	 auto response = logic.getInfo<MapResponse>("map");
 	 auto player_resources = logic.getInfo<StringIntMapResponse>("player_resources");
-	 auto available_buildings = logic.getInfo<StringListResponse>("available_buildings");
+	 auto available_buildings = logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("available_buildings",2,3));
 	 auto player_units = logic.getInfo<UnitListResponse>("player_units");
 
 	 logic.makeMove(std::make_shared<BuildMoveDescription>("stone_factory", 2, 1));

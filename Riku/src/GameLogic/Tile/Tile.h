@@ -5,8 +5,8 @@
 #include "TileCost/Ground.h"
 #include "TileCost/Biome.h"
 #include "../GameObject/ITileObject.h"
-#include "../Unit/Unit.h"
 
+class Unit;
 class Tile
 {
 public:

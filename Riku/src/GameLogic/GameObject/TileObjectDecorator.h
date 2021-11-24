@@ -3,6 +3,8 @@
 #pragma once
 #include "ITileObject.h"
 #include <memory>
+#include "../GameState.h"
+
 class TileObjectDecorator :
     public ITileObject
 {
@@ -20,6 +22,7 @@ public:
 
     virtual std::shared_ptr<IMove> onTurnBegin() override { return next->onTurnBegin(); }
 
-    virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override { return next->onBeingPlaced(mapX, mapY); };
-};
+    virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override { return next->onBeingPlaced(mapX, mapY); }
 
+    virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) { return next->canBeBuilt(state, mapX, mapY); }
+};
