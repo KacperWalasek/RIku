@@ -54,9 +54,6 @@ constexpr int SRC_WIDTH=1024;
 constexpr int SRC_HEIGHT=768;
 constexpr float DAY_LENGTH=30.0f;
 
-std::vector<Model> tileTypeModels;
-std::vector<Model> unitTypeModels;
-
 struct TileType
 {
 	int level;
@@ -80,11 +77,9 @@ namespace front
 	const glm::vec3 One=glm::vec3(1.0f);
 	float fogDensity=0.01f; //to-change
 	float dayPhase=0.6f;
-	int focusedUnit=0;
-	std::vector<std::vector<TileType> > tiles;
-	std::vector<Unit1> units;
-	std::vector<Object> gridObjects;
-	bool isGridOn=false;
+	std::pair<int,int> focusedUnitPosition=std::make_pair(0,0);
+	/*std::vector<Object> gridObjects;
+	bool isGridOn=false;*/
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
 	Config config;
@@ -100,6 +95,9 @@ namespace front
 			return glm::vec2(x,y);
 		return {};
 	}
+	std::map<std::string, Model> groundModels;
+	std::map<std::string, Model> biomeModels;
+	Model unitModel;
 }
 
 //1 directional light, 16 point lights and spotlights
@@ -173,41 +171,40 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		;
 	if(action==GLFW_PRESS)
 	{
+		auto& map = front::state.getMap();
+		//position [front::focusedUnitPosition.first,front::focusedUnitPosition.second];
 		switch(key)
 		{
 			case GLFW_KEY_ESCAPE:
 				glfwSetWindowShouldClose(window, true);
 				break;
 			case GLFW_KEY_W:
-				front::units[front::focusedUnit].y=std::max(0,front::units[front::focusedUnit].y-1);
+				if(front::focusedUnitPosition.second<=0)
+					break;
+				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first, front::focusedUnitPosition.second-1);
+				front::focusedUnitPosition.second--;
 				break;
 			case GLFW_KEY_S:
-				front::units[front::focusedUnit].y=std::min((int)front::tiles[0].size()-1,front::units[front::focusedUnit].y+1);
+				if(front::focusedUnitPosition.second>=map[0].size()-1)
+					break;
+				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first, front::focusedUnitPosition.second+1);
+				front::focusedUnitPosition.second++;
 				break;
 			case GLFW_KEY_A:
-				front::units[front::focusedUnit].x=std::max(0,front::units[front::focusedUnit].x-1);
+				if(front::focusedUnitPosition.first<=0)
+					break;
+				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first-1, front::focusedUnitPosition.second);
+				front::focusedUnitPosition.first--;
 				break;
 			case GLFW_KEY_D:
-				front::units[front::focusedUnit].x=std::min((int)front::tiles.size()-1,front::units[front::focusedUnit].x+1);
+				if(front::focusedUnitPosition.first>=map.size()-1)
+					break;
+				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first+1, front::focusedUnitPosition.second);
+				front::focusedUnitPosition.first++;
 				break;
-			case GLFW_KEY_G:
+			/*case GLFW_KEY_G:
 				front::isGridOn=!front::isGridOn;
-				break;
-			case GLFW_KEY_1:
-				front::focusedUnit=0;
-				break;
-			case GLFW_KEY_2:
-				front::focusedUnit=1;
-				break;
-			case GLFW_KEY_3:
-				front::focusedUnit=2;
-				break;
-			case GLFW_KEY_4:
-				front::focusedUnit=3;
-				break;
-			case GLFW_KEY_5:
-				front::focusedUnit=4;
-				break;
+				break;*/
 			default:
 				break;
 		}
@@ -289,41 +286,32 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	// render the loaded models
 	//draw tiles
-	for(int i=0;i<front::tiles.size();i++)
+	auto& map = front::state.getMap();
+	for(int i=0;i<map.size();i++)
 	{
-		for(int j=0;j<front::tiles[i].size();j++)
+		for(int j=0;j<map[i].size();j++)
 		{
 			front::Object object;
-			if(front::tiles[i][j].type<0 || front::tiles[i][j].type>tileTypeModels.size())
-				object = front::Object(tileTypeModels[0],glm::vec3((float)i,0.0f,(float)j));
+			if(map[i][j].area.getName()=="wet")
+				object = front::Object(front::groundModels["wet"],glm::vec3(i,(float)map[i][j].height*0.5f,j));
 			else
-				object = front::Object(tileTypeModels[front::tiles[i][j].type],glm::vec3(i,front::tiles[i][j].level*0.5f,j));
+				object = front::Object(front::groundModels[map[i][j].ground.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j));
 			object.Draw(lightingShader);
+			if(front::biomeModels.count(map[i][j].biome.getName())) {
+				front::Object biomeObject = front::Object(front::biomeModels[map[i][j].biome.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j));
+				biomeObject.Draw(lightingShader);
+			}
+			if(map[i][j].unit) {
+				front::Object unitObject = front::Object(front::unitModel,glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
+				unitObject.Draw(lightingShader);
+			}
 		}
 	}
-	//draw units
-	int ind=0;
-	for(auto unit: front::units){
-		float height=0.5f*(float)front::tiles[unit.x][unit.y].level;
-		//last two parameters needed by that models
-		front::Object object;
-		if(ind!=front::focusedUnit)
-			lightingShader.setVec4("color_mod", 0.7f,0.7f,0.7f, 1.0f);
-		if(unit.type==0)
-			object={unitTypeModels[unit.type],glm::vec3(unit.x,height,unit.y),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f)};
-		else
-			object={unitTypeModels[unit.type],glm::vec3(unit.x,height,unit.y),glm::vec3(-90.0f,0.0f,0.0f),glm::vec3(0.1f,0.1f,0.1f)};
-		object.Draw(lightingShader);
-		if(ind!=front::focusedUnit)
-			lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
-		ind++;
-	}
-	if(front::isGridOn)
+	/*if(front::isGridOn)
 		for (const auto & gridObject : front::gridObjects)
 		{
 			gridObject.Draw(lightingShader);
-		}
-	// render the loaded models
+		}*/
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	//return to default value
@@ -380,12 +368,15 @@ int main() {
 	Shader lightCubeShader("../shaders/light-vertex.shader","../shaders/light-fragment.shader");
 
 	//load used models
-	tileTypeModels.emplace_back("models/floor/water.obj",1,1);
-	tileTypeModels.emplace_back("models/floor/grass.obj",1,1);
-	tileTypeModels.emplace_back("models/floor/sand.obj",1,1);
-	Model grid_model("models/floor/grid.obj",1,1);
-	unitTypeModels.emplace_back("models/sara/model/sara.blend",1,-1);
-	unitTypeModels.emplace_back("models/Assassin/Assassin.blend",1,-1);
+	//grounds
+	front::groundModels.insert(std::make_pair("grass",Model("models/grounds/grass.obj",1,1)));
+	front::groundModels.insert(std::make_pair("sand",Model("models/grounds/sand.obj",1,1)));
+	front::groundModels.insert(std::make_pair("stone",Model("models/grounds/stone.obj",1,1)));
+	front::groundModels.insert(std::make_pair("wet",Model("models/grounds/water.obj",1,1)));
+	//biomes
+	front::biomeModels.insert(std::make_pair("forest",Model("models/biomes/forest.blend",1,1)));
+	//units
+	front::unitModel = Model("models/units/sara/model/sara.blend",1,-1);
 	//vertices info (light cube)
 	float vertices[] = {
 			// positions          // normals           // texture coords
@@ -431,27 +422,6 @@ int main() {
 			-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
 			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
-
-
-	// create objects
-	front::units.emplace_back(0,10,10);
-	front::units.emplace_back(1,15,15);
-	front::units.emplace_back(1,19,19);
-	front::units.emplace_back(1,15,17);
-	front::units.emplace_back(1,20,14);
-	//object
-	for(int i=0;i<40;i++) {
-		std::vector<TileType> tmpTiles;
-		for (int j = 0; j < 40; j++) {
-			tmpTiles.emplace_back();
-			tmpTiles.back().level=rand()%3;
-			if(tmpTiles.back().level==0)
-				tmpTiles.back().type=rand()%3;
-			else
-				tmpTiles.back().type=1+rand()%2;
-		}
-		front::tiles.push_back(tmpTiles);
-	}
 
 	// positions of the point lights
 	front::pointLightPositions = {

@@ -19,6 +19,7 @@ public:
 
 	// constructor, expects a filepath to a 3D model.
 	explicit Model(std::string const &path, float x_tex_scale=1.0f, float y_tex_scale=1.0f, bool gamma = false);
+	Model() = default;
 
 	// draws the model, and thus all its meshes
 	void Draw(const Shader &shader, int index=0) const;
