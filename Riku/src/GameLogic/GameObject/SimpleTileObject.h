@@ -4,6 +4,7 @@
 #include "ITileObject.h"
 #include "../LoadedHookable.h"
 #include <map>
+#include "../GameState.h"
 
 class SimpleTileObject : public ITileObject
 {
@@ -19,5 +20,6 @@ public:
 	virtual std::shared_ptr<IMove> onTurnEnd() override;
 	virtual std::shared_ptr<IMove> onTurnBegin() override;
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override;
+	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) override;
 };
 

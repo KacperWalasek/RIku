@@ -12,6 +12,21 @@ tileobject = {
                 resource = "stone",
                 quantity = 200
             }
+        },
+        require_resources = {
+            {
+                resource = "stone"
+            }
+        },
+        use_resources = {
+            {
+                resource = "wood",
+                quantity = 5
+            },
+            {
+                resource = "stone",
+                quantity = 5
+            }
         }
     }
 }

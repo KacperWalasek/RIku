@@ -1,8 +1,8 @@
 #pragma once
 #include "IMove.h"
-#include "../../Unit/Unit.h"
 #include "../Patch/Patch.h"
 #include "../../LogicAssets.h"
+#include "../../GameState.h"
 #include <string>
 
 class CreateUnit :

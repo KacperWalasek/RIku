@@ -24,7 +24,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 	assets.initialize();
 
 	gameState.map = { 6, std::vector<Tile>() };
-	gameState.players = { 2, (int)assets.playerResources.size() };
+	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };
   
 	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
 							  std::make_shared<TilePatchHandler>() });
@@ -40,7 +40,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 
 	communicator.setHandlers({ 
 		std::make_shared<MapRequestHandler>(gameState.map),
-		std::make_shared<AvailableBuildingsRequestHandler>(assets),
+		std::make_shared<AvailableBuildingsRequestHandler>(gameState,assets),
 		std::make_shared<PlayerUnitsRequestHandler>(gameState),
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets)
 		});
@@ -63,7 +63,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::boolalpha <<
 		"\t\t return - " << gameState.players[0].useResources(woodIndex, 10) << std::endl <<
 		"\t\t quantity - " << gameState.players[0].getResourceQuantity(woodIndex) << std::endl;
-
+	;
 	std::cout << "Factory test" << std::endl;
 	std::cout << "\t Btw. Tile 1,1 has some resources inside: " << assets.playerResources[gameState.map[1][1].resource].getName() << std::endl;
 	auto m = std::map < std::string, sol::function >();
@@ -105,6 +105,12 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 	stateUpdate.handleMove(cu);
 
 	stateUpdate.handleMove(gameState.players[0].units[0]->onTurnEnd());
+
+	gameState.map[2][3].resource = 2;
+	gameState.players[0].acceptResources(2, 10);
+	std::shared_ptr<BuildTileObject> build1 = std::make_shared<BuildTileObject>(0, std::pair(2, 3), "stone_factory");
+	if (build1->isDoable(gameState,assets))
+		stateUpdate.handleMove(build1);
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const
