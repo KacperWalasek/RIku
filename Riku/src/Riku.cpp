@@ -97,6 +97,7 @@ namespace front
 	}
 	std::map<std::string, Model> groundModels;
 	std::map<std::string, Model> biomeModels;
+	std::map<std::string, Model> objectModels;
 	Model unitModel;
 }
 
@@ -305,13 +306,12 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 				front::Object unitObject = front::Object(front::unitModel,glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
 				unitObject.Draw(lightingShader);
 			}
+			if(map[i][j].object && front::objectModels.count(map[i][j].object->getName())) {
+				front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
+				mapObject.Draw(lightingShader);
+			}
 		}
 	}
-	/*if(front::isGridOn)
-		for (const auto & gridObject : front::gridObjects)
-		{
-			gridObject.Draw(lightingShader);
-		}*/
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	//return to default value
@@ -374,7 +374,9 @@ int main() {
 	front::groundModels.insert(std::make_pair("stone",Model("models/grounds/stone.obj",1,1)));
 	front::groundModels.insert(std::make_pair("wet",Model("models/grounds/water.obj",1,1)));
 	//biomes
-	front::biomeModels.insert(std::make_pair("forest",Model("models/biomes/forest.blend",1,1)));
+	front::biomeModels.insert(std::make_pair("forest",Model("models/biomes/forest.blend",1,-1)));
+	//objects
+	front::objectModels.insert(std::make_pair("wood_factory",Model("models/objects/sawmill_animated_textured.blend",1,-1)));
 	//units
 	front::unitModel = Model("models/units/sara/model/sara.blend",1,-1);
 	//vertices info (light cube)
@@ -435,6 +437,8 @@ int main() {
 			glm::vec3( 40.0f,  5.0f,  20.0f),
 			glm::vec3( 40.0f,  5.0f,  40.0f),
 	};
+	//set camera transform
+	movingCameraTransform=front::Transform(glm::vec3(map.size()*0.5f, 10.0f, map.size()*0.5f),glm::vec3(glm::radians(front::config.angle),glm::radians(180.0f),0.0f));
 
 	//vertex attributes
 	// first, configure the cube's VAO (and VBO)
@@ -503,7 +507,6 @@ int main() {
 GLFWwindow* front::initWindow(){
 	config.load();
 	//set values
-	movingCameraTransform=Transform(glm::vec3(20.0f, 20.0f, 20.0f),glm::vec3(glm::radians(config.angle),glm::radians(180.0f),0.0f));
 	front::aspect=(float)config.screenWidth/config.screenHeight;
 	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, "LearnOpenGL", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr){
