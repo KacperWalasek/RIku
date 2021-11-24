@@ -49,12 +49,12 @@ std::string Unit::getName() const
 	return name;
 }
 
-int Unit::getMapX()
+int Unit::getMapX() const
 {
 	return mapX;
 }
 
-int Unit::getMapY()
+int Unit::getMapY() const
 {
 	return mapY;
 }
