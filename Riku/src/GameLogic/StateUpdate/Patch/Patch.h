@@ -3,6 +3,8 @@
 #include <vector>
 #include "PlayerPatch.h"
 #include "TilePatch.h"
+#include "RegisterHookablePatch.h"
+
 class Patch
 {
 public:
@@ -13,8 +15,14 @@ public:
 	Patch(TilePatch tilePatch) {
 		tilePatches.insert({ tilePatch.tile, tilePatch });
 	}
+	Patch(RegisterHookablePatch registerHookablePatch) {
+		registerHookablePatches.insert({ registerHookablePatch.hookable, registerHookablePatch });
+	}
+
+
 	std::map<int,PlayerPatch> playerPatches;
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
+	std::map<std::shared_ptr<IHookable>, RegisterHookablePatch> registerHookablePatches;
 
 	friend Patch operator+(Patch p1, const Patch& p2)
 	{
@@ -33,6 +41,14 @@ public:
 				tilePatch1->second += tilePatch2.second;
 			else
 				p1.tilePatches.insert({ tilePatch2 });
+		}
+		for (auto registerPatch2 : p2.registerHookablePatches)
+		{
+			auto registerPatch1 = p1.registerHookablePatches.find(registerPatch2.first);
+			if (registerPatch1 != p1.registerHookablePatches.end())
+				registerPatch1->second += registerPatch2.second;
+			else
+				p1.registerHookablePatches.insert({ registerPatch2 });
 		}
 		return std::move(p1);
 	}

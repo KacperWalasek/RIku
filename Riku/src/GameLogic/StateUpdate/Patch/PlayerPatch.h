@@ -19,7 +19,8 @@ public:
 		if (player != patch.player)
 			return *this;
 		auto units = patch.addedUnits;
-		units.insert(addedUnits.end(), units.begin(), units.end());
+		if(units.size()>0)
+			units.insert(addedUnits.end(), units.begin(), units.end());
 		for (auto& resourceChange : patch.resourceChanges)
 		{
 			auto resource1 = resourceChanges.find(resourceChange.first);

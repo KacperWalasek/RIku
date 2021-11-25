@@ -16,5 +16,6 @@ public:
 
 	void build(std::string name, int mapX, int mapY);
 	void moveUnit(int fromX, int fromY, int toX, int toY);
+	void finishTurn();
 };
 
