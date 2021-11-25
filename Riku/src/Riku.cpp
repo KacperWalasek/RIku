@@ -373,10 +373,10 @@ int main() {
 
 	 front::state.build("wood_factory", 2, 1);
 	 front::state.moveUnit(1, 1, 1, 2);
-
 	 const std::vector<std::vector<Tile>>& map = front::state.getMap();
 	 std::cout << "<Riku.cpp>" << map[0][0].biome.getName() << std::endl;
-	
+	 front::state.finishTurn();
+	 player_resources = front::state.getResources();
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
