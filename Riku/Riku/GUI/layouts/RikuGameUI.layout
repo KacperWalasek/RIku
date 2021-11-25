@@ -81,5 +81,10 @@
             <Property name="Text" value="Buildings" />
             <Property name="TooltipText" value="Open building menu" />
         </Window>
+        <Window type="WindowsLook/Button" name="EndTurnButton" >
+            <Property name="Area" value="{{0.8,0},{0.3,32},{1,0},{0.3,64}}" />
+            <Property name="Text" value="End Turn" />
+            <Property name="TooltipText" value="Open building menu" />
+        </Window>
     </Window>
 </GUILayout>

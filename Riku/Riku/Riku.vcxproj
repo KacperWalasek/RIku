@@ -162,10 +162,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="..\src\Frontend\Config.cpp" />  
+    <ClCompile Include="..\src\Frontend\Config.cpp" />
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
     <ClCompile Include="..\src\Frontend\GUI.cpp" />
-    <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />  
+    <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />
     <ClCompile Include="..\src\Frontend\Mesh.cpp" />
     <ClCompile Include="..\src\Frontend\Model.cpp" />
     <ClCompile Include="..\src\Frontend\Object.cpp" />
@@ -192,6 +192,7 @@
     <ClCompile Include="..\src\GameLogic\LogicAssets.cpp" />
     <ClCompile Include="..\src\GameLogic\Player\Player.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
@@ -200,10 +201,12 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\UseResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\MapGenerator.cpp" />
@@ -222,6 +225,7 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h" />
+    <ClInclude Include="..\src\Frontend\GUIUpdate.h" />
     <ClInclude Include="..\src\Frontend\Mesh.h" />
     <ClInclude Include="..\src\Frontend\Model.h" />
     <ClInclude Include="..\src\Frontend\Object.h" />
@@ -267,6 +271,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\SimpleMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\TranslateUnitMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
@@ -275,15 +280,18 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\UseResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\StateUpdate.h" />
     <ClInclude Include="..\src\GameLogic\Tile\MapGenerator.h" />
