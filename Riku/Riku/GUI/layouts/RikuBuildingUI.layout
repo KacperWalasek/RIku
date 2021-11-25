@@ -5,9 +5,10 @@
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="AutoRenderingSurface" value="true" />
-        <Window type="WindowsLook/FrameWindow" name="FrameWindow" >
+        <Window type="WindowsLook/FrameWindow" name="BuildingWindow" >
             <Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
             <Property name="Text" value="Building menu" />
+            <Property name="RollUpEnabled" value="false" />
             <Window type="OgreTray/ScrollablePane" name="BuildingsList" >
                 <Property name="Area" value="{{0,0},{0,90},{1,0},{1,-40}}" />
                 <AutoWindow namePath="__auto_container__" >

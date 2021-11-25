@@ -148,10 +148,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	my_gui->init();
 	my_gui->loadLayout("RikuBuildingUI.layout");
 
-	/*auto onCloseButton = new CEGUI::Functor::ReturnToGame();
-	callbacks.push_back(onCloseButton);
-	my_gui->setPushButtonCallback("FrameWindow__auto_closebutton__", onCloseButton);*/
-
 	auto buildingsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("BuildingsList"));
 	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
 	auto avaible_buildings = front::state.getAvailableBuildings(0, 0);
@@ -173,10 +169,14 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 
 	auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress();
 	auto onConfirmButton = new CEGUI::Functor::BuildBuildingFromLabel(nameLabel);
+	auto onCloseButton = new CEGUI::Functor::ReturnToGame();
 	callbacks.push_back(onKeyPress);
 	callbacks.push_back(onConfirmButton);
+	callbacks.push_back(onCloseButton);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("BuildButton", onConfirmButton);
+	auto frameWindow = static_cast<CEGUI::FrameWindow*>(my_gui->getWidgetByName("BuildingWindow"));
+	frameWindow->getCloseButton()->subscribeEvent(CEGUI::PushButton::EventClicked, onCloseButton);
 
 	return my_gui;
 }
