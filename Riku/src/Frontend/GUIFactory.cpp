@@ -156,10 +156,13 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 
 	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress();
 	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI");
+	auto onEndTurnButton = new CEGUI::Functor::EndTurn();
 	callbacks.push_back(onKeyPress);
 	callbacks.push_back(onBuildingsButton);
+	callbacks.push_back(onEndTurnButton);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("BuildingsButton", onBuildingsButton);
+	my_gui->setPushButtonCallback("EndTurnButton", onEndTurnButton);
 
 	return my_gui;
 }

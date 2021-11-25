@@ -59,6 +59,19 @@ namespace CEGUI::Functor {
         };
     };
 
+    class EndTurn : public Functor
+    {
+    public:
+        EndTurn() : Functor() {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            front::state.finishTurn();
+            CEGUI::GUIUpdate::UpdateResources();
+            return true;
+        };
+    };
+
     class FocusUnitWithIndex : public Functor
     {
     private:
@@ -142,6 +155,12 @@ namespace CEGUI::Functor {
                 case CEGUI::Key::B:
                 {
                     auto f = CEGUI::Functor::SwitchActiveGUI("BuildingUI");
+                    return f(e);
+                }
+                case CEGUI::Key::NumpadEnter:
+                case CEGUI::Key::Return:
+                {
+                    auto f = CEGUI::Functor::EndTurn();
                     return f(e);
                 }
                 default: break;
