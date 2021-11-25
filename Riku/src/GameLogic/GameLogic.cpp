@@ -6,6 +6,7 @@
 #include "StateUpdate/Move/ExtractResources.h"
 #include "StateUpdate/PatchHandler/PlayerPatchHandler.h"
 #include "StateUpdate/PatchHandler/TilePatchHandler.h"
+#include "StateUpdate/PatchHandler/RegisterHookablePatchHandler.h"
 #include "GameObject/ResourceFactory.h"
 #include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
 #include "FrontendCommunicator/Responses/MapResponse.h"
@@ -20,6 +21,7 @@
 #include "StateUpdate/MoveFactory/TranslateUnitMoveHandler.h"
 #include "Tile/TileDescription.h"
 #include "Tile/MapGenerator.h"
+#include "StateUpdate/MoveFactory/FinishGameMoveHandler.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -28,12 +30,16 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };
   
-	stateUpdate.setHandlers({ std::make_shared<PlayerPatchHandler>(),
-							  std::make_shared<TilePatchHandler>() });
+	stateUpdate.setHandlers({ 
+		std::make_shared<PlayerPatchHandler>(),
+		std::make_shared<TilePatchHandler>(),
+		std::make_shared<RegisterHookablePatchHandler>()
+		});
 	factory.setHandlers({ 
 		std::make_shared<TestMoveHandler>(),
 		std::make_shared<BuildMoveHandler>(),
-		std::make_shared<TranslateUnitMoveHandler>()
+		std::make_shared<TranslateUnitMoveHandler>(),
+		std::make_shared<FinishGameMoveHandler>()
 		});
 
 	communicator.setHandlers({ 

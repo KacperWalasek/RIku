@@ -6,6 +6,7 @@
 #include "../GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -39,4 +40,9 @@ void FrontendState::build(std::string name, int mapX, int mapY)
 void FrontendState::moveUnit(int fromX, int fromY, int toX, int toY)
 {
 	logic.makeMove(std::make_shared<TranslateUnitMoveDescription>(fromX, fromY, toX, toY));
+}
+
+void FrontendState::finishTurn()
+{
+	logic.makeMove(std::make_shared<SimpleMoveDescription>("finish_turn"));
 }
