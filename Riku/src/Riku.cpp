@@ -139,17 +139,18 @@ void processInput(GLFWwindow *window)
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,-moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dy++;
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dy--;
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(-moveSpeed,0.0,0.0),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dx++;
 	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(moveSpeed,0.0,0.0),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dx--;
+	movingCameraTransform.position+=front::rotate({moveSpeed*dx,0.0f,moveSpeed*dy}, {0.0f, movingCameraTransform.rotation.y, 0.0f});
 	if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS)
-		movingCameraTransform.rotation.y-=moveSpeed;
+		movingCameraTransform.position.y-=moveSpeed;
 	if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
-		movingCameraTransform.rotation.y+=moveSpeed;
+		movingCameraTransform.position.y+=moveSpeed;
 	//process zoom
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
 		if(movingCameraTransform.position.y>front::config.minZoomHeight)
@@ -307,7 +308,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	// render the loaded models
 	//draw tiles
-	auto& map = front::state.getMap();
+	const auto& map = front::state.getMap();
 	for(int i=0;i<map.size();i++)
 	{
 		for(int j=0;j<map[i].size();j++)
@@ -322,16 +323,24 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 				front::Object biomeObject = front::Object(front::biomeModels[map[i][j].biome.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.1f,0.1f,0.1f));
 				biomeObject.Draw(lightingShader);
 			}*/
-			if(map[i][j].unit) {
-				front::Object unitObject = front::Object(front::unitModel,glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
-				unitObject.Draw(lightingShader);
-			}
 			if(map[i][j].object && front::objectModels.count(map[i][j].object->getName())) {
-				front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
+				front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.1f,0.1f,0.1f));
 				mapObject.Draw(lightingShader);
 			}
 		}
 	}
+	const auto& unit = front::state.getUnits();
+	for(int i=0;i<unit.size();i++) {
+		if(i!=front::focusedUnitIndex)
+			lightingShader.setVec4("color_mod", 0.7f,0.7f,0.7f, 1.0f);
+		int x = unit[i]->getMapX();
+		int y = unit[i]->getMapY();
+		front::Object object = front::Object(front::unitModel,glm::vec3(x,(float)map[x][y].height*0.5f,y),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
+		object.Draw(lightingShader);
+		lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
+
+	}
+
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 	//return to default value
