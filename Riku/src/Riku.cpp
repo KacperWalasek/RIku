@@ -77,7 +77,8 @@ namespace front
 	const glm::vec3 One=glm::vec3(1.0f);
 	float fogDensity=0.01f; //to-change
 	float dayPhase=0.6f;
-	std::pair<int,int> focusedUnitPosition=std::make_pair(0,0);
+	int focusedUnitIndex=0;
+	//std::pair<int,int> focusedUnitPosition=std::make_pair(0,0);
 	/*std::vector<Object> gridObjects;
 	bool isGridOn=false;*/
 	unsigned int lightCubeVAO;
@@ -173,6 +174,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if(action==GLFW_PRESS)
 	{
 		auto& map = front::state.getMap();
+		const auto& units = front::state.getUnits();
+		const Unit* unit = nullptr;
+		if(front::focusedUnitIndex>=0 && front::focusedUnitIndex<units.size())
+			unit = units[front::focusedUnitIndex].get();
+
+		std::optional<std::pair<int, int> > unitPos;
+		if(unit)
+			unitPos = std::make_pair(unit->getMapX(),unit->getMapY());
 		//position [front::focusedUnitPosition.first,front::focusedUnitPosition.second];
 		switch(key)
 		{
@@ -180,28 +189,24 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 				glfwSetWindowShouldClose(window, true);
 				break;
 			case GLFW_KEY_W:
-				if(front::focusedUnitPosition.second<=0)
+				if(!unit || unitPos->second<=0)
 					break;
-				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first, front::focusedUnitPosition.second-1);
-				front::focusedUnitPosition.second--;
+				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first, unitPos->second-1);
 				break;
 			case GLFW_KEY_S:
-				if(front::focusedUnitPosition.second>=map[0].size()-1)
+				if(!unit || unitPos->second>=map[0].size()-1)
 					break;
-				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first, front::focusedUnitPosition.second+1);
-				front::focusedUnitPosition.second++;
+				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first, unitPos->second+1);
 				break;
 			case GLFW_KEY_A:
-				if(front::focusedUnitPosition.first<=0)
+				if(!unit || unitPos->first<=0)
 					break;
-				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first-1, front::focusedUnitPosition.second);
-				front::focusedUnitPosition.first--;
+				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first-1, unitPos->second);
 				break;
 			case GLFW_KEY_D:
-				if(front::focusedUnitPosition.first>=map.size()-1)
+				if(!unit || unitPos->first>=map.size()-1)
 					break;
-				front::state.moveUnit(front::focusedUnitPosition.first, front::focusedUnitPosition.second, front::focusedUnitPosition.first+1, front::focusedUnitPosition.second);
-				front::focusedUnitPosition.first++;
+				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first+1, unitPos->second);
 				break;
 			/*case GLFW_KEY_G:
 				front::isGridOn=!front::isGridOn;
@@ -298,10 +303,10 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 			else
 				object = front::Object(front::groundModels[map[i][j].ground.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j));
 			object.Draw(lightingShader);
-			if(front::biomeModels.count(map[i][j].biome.getName())) {
-				front::Object biomeObject = front::Object(front::biomeModels[map[i][j].biome.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j));
+			/*if(front::biomeModels.count(map[i][j].biome.getName())) {
+				front::Object biomeObject = front::Object(front::biomeModels[map[i][j].biome.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.1f,0.1f,0.1f));
 				biomeObject.Draw(lightingShader);
-			}
+			}*/
 			if(map[i][j].unit) {
 				front::Object unitObject = front::Object(front::unitModel,glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
 				unitObject.Draw(lightingShader);

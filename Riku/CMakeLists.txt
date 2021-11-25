@@ -13,6 +13,7 @@ add_executable(Riku
 		src/GameLogic/Tile/TileCost/Area.cpp
 		src/GameLogic/Tile/TileCost/Ground.cpp
 		src/GameLogic/Tile/Tile.cpp
+		src/GameLogic/Tile/MapGenerator.cpp
 		src/GameLogic/GameObject/SimpleTileObject.cpp
 		src/GameLogic/GameObject/TileObjectDecoratorFactory.cpp
 		src/GameLogic/GameObject/ResourceFactory.cpp
