@@ -135,17 +135,18 @@ void processInput(GLFWwindow *window)
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,-moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dy++;
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(0.0,0.0,moveSpeed),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dy--;
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(-moveSpeed,0.0,0.0),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dx++;
 	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
-		movingCameraTransform.position+=glm::rotateY(glm::vec3(moveSpeed,0.0,0.0),0.0f*glm::radians(movingCameraTransform.rotation.y));
+		dx--;
+	movingCameraTransform.position+=front::rotate({moveSpeed*dx,0.0f,moveSpeed*dy}, {0.0f, movingCameraTransform.rotation.y, 0.0f});
 	if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS)
-		movingCameraTransform.rotation.y-=moveSpeed;
+		movingCameraTransform.position.y-=moveSpeed;
 	if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
-		movingCameraTransform.rotation.y+=moveSpeed;
+		movingCameraTransform.position.y+=moveSpeed;
 	//process zoom
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
 		if(movingCameraTransform.position.y>front::config.minZoomHeight)
