@@ -8,6 +8,7 @@
 #include <iostream>
 #include "FrontendState.h"
 #include "../GameLogic/GameLogic.h"
+#include "GUIUpdate.h"
 
 namespace front {
     extern int focusedUnit;
@@ -19,7 +20,7 @@ namespace front {
 }
 
 namespace CEGUI::Functor {
-   
+
     class Functor
     {
     public:     
@@ -54,6 +55,19 @@ namespace CEGUI::Functor {
             front::activeGUI->hide();
             front::activeGUI = front::guiDic[guiName];
             front::activeGUI->show();
+            return true;
+        };
+    };
+
+    class EndTurn : public Functor
+    {
+    public:
+        EndTurn() : Functor() {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            front::state.finishTurn();
+            CEGUI::GUIUpdate::UpdateResources();
             return true;
         };
     };
@@ -143,6 +157,12 @@ namespace CEGUI::Functor {
                     auto f = CEGUI::Functor::SwitchActiveGUI("BuildingUI");
                     return f(e);
                 }
+                case CEGUI::Key::NumpadEnter:
+                case CEGUI::Key::Return:
+                {
+                    auto f = CEGUI::Functor::EndTurn();
+                    return f(e);
+                }
                 default: break;
             }
 
@@ -194,4 +214,5 @@ namespace CEGUI::Functor {
             return false;
         };
     };
+
 }
