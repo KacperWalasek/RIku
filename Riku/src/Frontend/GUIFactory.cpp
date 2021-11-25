@@ -87,7 +87,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 
 	auto onKeyPress = new CEGUI::Functor::MainMenuOnkeyPress();
 	auto onExitButton = new CEGUI::Functor::ExitApp(window);
-	auto onReturnButton = new CEGUI::Functor::ReturnToGame();
+	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("GameUI");
 	callbacks.push_back(onKeyPress);
 	callbacks.push_back(onExitButton);
 	callbacks.push_back(onReturnButton);
@@ -131,13 +131,35 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 		y += 0.3;
 		i++;
 	}
+
+	auto resourcesList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("ResourcesList"));
+	auto resources = front::state.getResources();
+	CEGUI::PushButton* resButton;
+	//CEGUI::DefaultWindow* label;
+	float x = 0.05f;
+	for (auto res : resources)
+	{		
+		resButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
+			glm::vec4(x, 0.1f, 0.15f, 0.8f), glm::vec4(0.0f), res.first));
+		resButton->setText(res.first + ": " + std::to_string(res.second));
+		//resButton->disable();
+		//label = static_cast<CEGUI::DefaultWindow*>(my_gui->createWidget("WindowsLook/Label",
+			//glm::vec4(x, 0.1f, 0.15f, 0.8f), glm::vec4(0.0f), res.first + "Label"));
+		//label->setAlwaysOnTop(true);
+		resourcesList->addChild(resButton);
+		//resourcesList->addChild(label);
+		x += 0.2;
+	}
 	//auto list = static_cast<CEGUI::Listbox*>(my_gui->getWidgetByName("Listbox"));
 	//Window* board = (my_gui->createWidget("OgreTray/ListboxItem", glm::vec4(0.5f, 0.5f, 1.1f, 1.05f), glm::vec4(0.0f), "item1"));
 	//list->addChild(board);
 
 	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress();
+	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI");
 	callbacks.push_back(onKeyPress);
+	callbacks.push_back(onBuildingsButton);
 	my_gui->setKeyCallback(onKeyPress);
+	my_gui->setPushButtonCallback("BuildingsButton", onBuildingsButton);
 
 	return my_gui;
 }
@@ -169,7 +191,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 
 	auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress();
 	auto onConfirmButton = new CEGUI::Functor::BuildBuildingFromLabel(nameLabel);
-	auto onCloseButton = new CEGUI::Functor::ReturnToGame();
+	auto onCloseButton = new CEGUI::Functor::SwitchActiveGUI("GameUI");
 	callbacks.push_back(onKeyPress);
 	callbacks.push_back(onConfirmButton);
 	callbacks.push_back(onCloseButton);

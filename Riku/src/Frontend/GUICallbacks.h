@@ -42,15 +42,17 @@ namespace CEGUI::Functor {
         };
     };
 
-    class ReturnToGame : public Functor // ==switch gui
+    class SwitchActiveGUI : public Functor
     {
+    private:
+        std::string guiName;
     public:
-        ReturnToGame() : Functor() {}
+        SwitchActiveGUI(std::string guiName) : Functor(), guiName(guiName) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             front::activeGUI->hide();
-            front::activeGUI = front::guiDic["GameUI"];
+            front::activeGUI = front::guiDic[guiName];
             front::activeGUI->show();
             return true;
         };
@@ -96,7 +98,12 @@ namespace CEGUI::Functor {
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            front::state.build(label->getText().c_str(), 0, 0);
+            auto units = front::state.getUnits();
+            if (front::focusedUnitIndex >= 0 && front::focusedUnitIndex < units.size())
+            {
+                auto unit = units[front::focusedUnitIndex].get();
+                front::state.build(label->getText().c_str(), unit->getMapX(), unit->getMapY());
+            }
             return true;
         };
     };
@@ -128,17 +135,13 @@ namespace CEGUI::Functor {
             {
                 case CEGUI::Key::Escape:
                 {
-                    front::activeGUI->hide();
-                    front::activeGUI = front::guiDic["MainMenu"];
-                    front::activeGUI->show();
-                    return true;
+                    auto f = CEGUI::Functor::SwitchActiveGUI("MainMenu");
+                    return f(e);
                 }
                 case CEGUI::Key::B:
                 {
-                    front::activeGUI->hide();
-                    front::activeGUI = front::guiDic["BuildingUI"];
-                    front::activeGUI->show();
-                    return true;
+                    auto f = CEGUI::Functor::SwitchActiveGUI("BuildingUI");
+                    return f(e);
                 }
                 default: break;
             }
@@ -157,7 +160,7 @@ namespace CEGUI::Functor {
             auto args = static_cast<const CEGUI::KeyEventArgs&>(e);
             if (args.scancode == CEGUI::Key::Escape)
             {
-                auto f = CEGUI::Functor::ReturnToGame();
+                auto f = CEGUI::Functor::SwitchActiveGUI("GameUI");
                 return f(e);
             }
 
@@ -177,17 +180,13 @@ namespace CEGUI::Functor {
             {
             case CEGUI::Key::Escape:
             {
-                front::activeGUI->hide();
-                front::activeGUI = front::guiDic["GameUI"];
-                front::activeGUI->show();
-                return true;
+                auto f = CEGUI::Functor::SwitchActiveGUI("GameUI");
+                return f(e);
             }
             case CEGUI::Key::B:
             {
-                front::activeGUI->hide();
-                front::activeGUI = front::guiDic["GameUI"];
-                front::activeGUI->show();
-                return true;
+                auto f = CEGUI::Functor::SwitchActiveGUI("GameUI");
+                return f(e);
             }
             default: break;
             }
