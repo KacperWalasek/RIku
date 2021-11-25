@@ -327,7 +327,7 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 				unitObject.Draw(lightingShader);
 			}
 			if(map[i][j].object && front::objectModels.count(map[i][j].object->getName())) {
-				front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
+				front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j - 0.25f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.02f,0.02f,0.02f));
 				mapObject.Draw(lightingShader);
 			}
 		}
@@ -396,7 +396,7 @@ int main() {
 	//biomes
 	front::biomeModels.insert(std::make_pair("forest",Model("models/biomes/forest.blend",1,-1)));
 	//objects
-	front::objectModels.insert(std::make_pair("wood_factory",Model("models/objects/sawmill_animated_textured.blend",1,-1)));
+	front::objectModels.insert(std::make_pair("wood_factory",Model("models/objects/farmhouse_obj.obj",1,-1)));
 	//units
 	front::unitModel = Model("models/units/sara/model/sara.blend",1,-1);
 	//vertices info (light cube)
