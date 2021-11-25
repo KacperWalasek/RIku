@@ -188,6 +188,12 @@
     <ClCompile Include="..\src\Frontend\FrontendState.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\GUI.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\GUIFactory.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -406,6 +412,15 @@
     <ClInclude Include="..\src\GameLogic\Tile\MapGenerator.h" />
     <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUI.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUIFactory.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
   </ItemGroup>
