@@ -11,7 +11,7 @@ class Unit : public IHookable, public IAsset
 	int mapX = 0, mapY = 0;
 public:
 	Unit(std::string type, std::string name, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
-	// te pola s¹ publiczne, ¿eby hooki mog³y je zmieniaæ
+	// te pola sï¿½ publiczne, ï¿½eby hooki mogï¿½y je zmieniaï¿½
 	int movementPoints;
 	int baseMovementPoints;
 
@@ -31,7 +31,7 @@ public:
 
 	virtual std::string getName() const override;
 	
-	int getMapX();
-	int getMapY();
+	int getMapX() const;
+	int getMapY() const;
 
 };
