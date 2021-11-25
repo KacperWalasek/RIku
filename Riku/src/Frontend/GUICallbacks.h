@@ -8,6 +8,7 @@
 #include <iostream>
 #include "FrontendState.h"
 #include "../GameLogic/GameLogic.h"
+#include "GUIUpdate.h"
 
 namespace front {
     extern int focusedUnit;
@@ -19,7 +20,7 @@ namespace front {
 }
 
 namespace CEGUI::Functor {
-   
+
     class Functor
     {
     public:     
@@ -194,4 +195,5 @@ namespace CEGUI::Functor {
             return false;
         };
     };
+
 }

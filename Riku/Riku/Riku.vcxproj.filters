@@ -423,5 +423,8 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUIUpdate.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

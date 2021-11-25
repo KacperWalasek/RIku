@@ -202,3 +202,15 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 
 	return my_gui;
 }
+
+//void CEGUI::GUIFactory::UpdateResources()
+//{
+//	auto resources = front::state.getResources();
+//	CEGUI::PushButton* resButton;
+//	for (auto res : resources)
+//	{
+//		auto resButton = static_cast<CEGUI::PushButton*>(front::guiDic["GameUI"]->getWidgetByName(res.first));
+//		if (resButton != nullptr)
+//			resButton->setText(res.first + ": " + std::to_string(res.second));
+//	}
+//}

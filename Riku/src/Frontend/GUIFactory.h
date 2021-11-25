@@ -16,7 +16,7 @@ namespace CEGUI {
         CEGUI::GUI* GetDemoWindow();
         CEGUI::GUI* GetMainMenu();
         CEGUI::GUI* GetGameUI();
-        CEGUI::GUI* GetBuildingUI();
+        CEGUI::GUI* GetBuildingUI();   
 
     private:
         GLFWwindow* window;
