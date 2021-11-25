@@ -1,3 +1,3 @@
-<Imageset autoScaled="" imagefile="SpaceBackground.jpg" name="Riku" nativeHorzRes="800" nativeVertRes="600" version="2">
-    <Image height="840" name="Background" width="1294" xPos="203" yPos="120" />
+<Imageset autoScaled="" imagefile="wizardtower.png" name="Riku" nativeHorzRes="800" nativeVertRes="600" version="2">
+    <Image height="700" name="Background" width="1000" xPos="0" yPos="0" />
 </Imageset>

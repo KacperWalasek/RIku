@@ -6,21 +6,24 @@
 #include <GLFW/glfw3.h>
 #include "GUI.h"
 #include <iostream>
+#include "FrontendState.h"
+#include "../GameLogic/GameLogic.h"
 
 namespace front {
     extern int focusedUnit;
     extern CEGUI::GUI* activeGUI;
     extern std::map<std::string, CEGUI::GUI*> guiDic;
+    extern int focusedUnitIndex;
+    extern GameLogic logic;
+    extern FrontendState state;
 }
 
 namespace CEGUI::Functor {
    
     class Functor
     {
-    protected:
-        CEGUI::GUI* my_gui;
     public:     
-        Functor(CEGUI::GUI* my_gui) : my_gui(my_gui) {}
+        Functor() {}
         virtual bool operator()(const CEGUI::EventArgs& e) { return true; }
         
     };
@@ -30,7 +33,7 @@ namespace CEGUI::Functor {
     private:
         GLFWwindow* window;
     public:
-        ExitApp(CEGUI::GUI* m_gui, GLFWwindow* window) : Functor(m_gui), window(window) {}
+        ExitApp(GLFWwindow* window) : Functor(), window(window) {}
 
         bool operator()(const CEGUI::EventArgs& e) override
         {
@@ -39,35 +42,105 @@ namespace CEGUI::Functor {
         };
     };
 
-    class onKeyPress : public Functor
+    class ReturnToGame : public Functor // ==switch gui
     {
     public:
-        onKeyPress(CEGUI::GUI* m_gui) : Functor(m_gui) {}
+        ReturnToGame() : Functor() {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            front::activeGUI->hide();
+            front::activeGUI = front::guiDic["GameUI"];
+            front::activeGUI->show();
+            return true;
+        };
+    };
+
+    class FocusUnitWithIndex : public Functor
+    {
+    private:
+        int idx;
+        CEGUI::PushButton* button;
+    public:
+        FocusUnitWithIndex(int idx, CEGUI::PushButton* button) : Functor(), idx(idx), button(button) {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            front::focusedUnitIndex = idx;
+            //button->setProperty("NormalImage", "set:FTSUI image:full_image");
+            return true;
+        };
+    };
+
+    class SelectBuildingWithName : public Functor
+    {
+    private:
+        std::string name;
+        CEGUI::DefaultWindow* label;
+    public:
+        SelectBuildingWithName(std::string name, CEGUI::DefaultWindow* label) : Functor(), name(name), label(label) {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            label->setText(name);
+            return true;
+        };
+    };
+
+    class BuildBuildingFromLabel : public Functor
+    {
+    private:
+        CEGUI::DefaultWindow* label;
+    public:
+        BuildBuildingFromLabel(CEGUI::DefaultWindow* label) : Functor(), label(label) {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            front::state.build(label->getText().c_str(), 0, 0);
+            return true;
+        };
+    };
+
+   /* class onKeyPress : public Functor
+    {
+    public:
+        onKeyPress() : Functor() {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             auto args = static_cast<const CEGUI::KeyEventArgs&>(e);
             if (args.scancode == CEGUI::Key::F1)
-                std::cout << "funktor zajebisty\n";
+                std::cout << "funktor dziala\n";
             
             return false;
         };
-    };
+    };*/
 
     class GameUIOnKeyPress : public Functor
     {
     public:
-        GameUIOnKeyPress(CEGUI::GUI* m_gui) : Functor(m_gui) {}
+        GameUIOnKeyPress() : Functor() {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             auto args = static_cast<const CEGUI::KeyEventArgs&>(e);
-            if (args.scancode == CEGUI::Key::Escape)
-            {        
-                front::activeGUI->hide();
-                front::activeGUI = front::guiDic["MainMenu"];
-                front::activeGUI->show();
-                return true;
+            switch (args.scancode)
+            {
+                case CEGUI::Key::Escape:
+                {
+                    front::activeGUI->hide();
+                    front::activeGUI = front::guiDic["MainMenu"];
+                    front::activeGUI->show();
+                    return true;
+                }
+                case CEGUI::Key::B:
+                {
+                    front::activeGUI->hide();
+                    front::activeGUI = front::guiDic["BuildingUI"];
+                    front::activeGUI->show();
+                    return true;
+                }
+                default: break;
             }
 
             return false;
@@ -77,17 +150,46 @@ namespace CEGUI::Functor {
     class MainMenuOnkeyPress : public Functor
     {
     public:
-        MainMenuOnkeyPress(CEGUI::GUI* m_gui) : Functor(m_gui) {}
+        MainMenuOnkeyPress() : Functor() {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             auto args = static_cast<const CEGUI::KeyEventArgs&>(e);
             if (args.scancode == CEGUI::Key::Escape)
             {
+                auto f = CEGUI::Functor::ReturnToGame();
+                return f(e);
+            }
+
+            return false;
+        };
+    };
+
+    class BuildingUIOnKeyPress : public Functor
+    {
+    public:
+        BuildingUIOnKeyPress() : Functor() {}
+
+        bool operator()(const CEGUI::EventArgs& e)
+        {
+            auto args = static_cast<const CEGUI::KeyEventArgs&>(e);
+            switch (args.scancode)
+            {
+            case CEGUI::Key::Escape:
+            {
                 front::activeGUI->hide();
                 front::activeGUI = front::guiDic["GameUI"];
                 front::activeGUI->show();
                 return true;
+            }
+            case CEGUI::Key::B:
+            {
+                front::activeGUI->hide();
+                front::activeGUI = front::guiDic["GameUI"];
+                front::activeGUI->show();
+                return true;
+            }
+            default: break;
             }
 
             return false;

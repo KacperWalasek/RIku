@@ -1,6 +1,8 @@
 #include "GUIFactory.h"
 #include <iostream>
 #include <functional>
+#include "FrontendState.h"
+#include "../GameLogic/GameLogic.h"
 
 struct Unit1
 {
@@ -13,6 +15,9 @@ struct Unit1
 namespace front {
 	extern int focusedUnit;
 	extern CEGUI::GUI* activeGUI;
+	extern int focusedUnitIndex;
+	extern GameLogic logic;
+	extern FrontendState state;
 	//extern std::vector<Unit1> units;
 }
 
@@ -49,8 +54,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetDemoWindow() {
 	my_gui->setFont("DejaVuSans-10");
 	my_gui->loadLayout("application_templates.layout");
 
-	auto OnExitButtonClicked1 = new CEGUI::Functor::ExitApp(my_gui, window);
-	auto onF1 = new CEGUI::Functor::onKeyPress(my_gui);
+	auto OnExitButtonClicked1 = new CEGUI::Functor::ExitApp(window);
 	//std::function<bool(const CEGUI::EventArgs&)>* OnExitButtonClicked2 = new std::function<bool(const CEGUI::EventArgs&)>([=](const CEGUI::EventArgs& e)
 	//{
 	//	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(my_gui->getWidgetByName("Button"));
@@ -61,9 +65,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetDemoWindow() {
 	//});
 
 	callbacks.push_back(OnExitButtonClicked1);
-	callbacks.push_back(onF1);
 	my_gui->setPushButtonCallback("Button", OnExitButtonClicked1);
-	my_gui->setKeyCallback(onF1);
 
 
 	//my_gui->setMouseCursor("TaharezLook/MouseArrow");
@@ -83,12 +85,15 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	//auto img = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("StaticImage"));
 	//img->setProperty("Image", "Riku/Background");
 
-	auto onKeyPress = new CEGUI::Functor::MainMenuOnkeyPress(my_gui);
-	auto onExitButton = new CEGUI::Functor::ExitApp(my_gui, window);
+	auto onKeyPress = new CEGUI::Functor::MainMenuOnkeyPress();
+	auto onExitButton = new CEGUI::Functor::ExitApp(window);
+	auto onReturnButton = new CEGUI::Functor::ReturnToGame();
 	callbacks.push_back(onKeyPress);
 	callbacks.push_back(onExitButton);
+	callbacks.push_back(onReturnButton);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ExitButton", onExitButton);
+	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 
 
 	return my_gui;
@@ -103,28 +108,75 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	//my_gui->setFont("DejaVuSans-10");
 
 	auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("UnitsList"));
-	//auto player_units //= front::units; //logic.getInfo<UnitListResponse>("player_units");
-	//CEGUI::PushButton* unit;
-	int i = 1;
+	auto player_units = front::state.getUnits(); //logic.getInfo<UnitListResponse>("player_units");
+	CEGUI::PushButton* unitButton;
+	CEGUI::Functor::FocusUnitWithIndex* func;
 	float y = 0.1f;
-	/*for (auto u : player_units)
+	std::map<std::string, int> repeats;
+	int i = 0;
+	for (auto u : player_units)
 	{
-		CEGUI::PushButton* unit = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button", glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), "unit"+std::to_string(i)));
-		unit->setText("unit"+std::to_string(i));
-		unitsList->addChild(unit);
-		i++;
+		std::string name = u.get()->getName();
+		if (repeats.find(name) == repeats.end())
+			repeats.insert(std::pair<std::string, int>(name, 0));
+		repeats[name]++;
+		int count = repeats[name];
+		unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
+			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), name + std::to_string(count)));
+		unitButton->setText(name + std::to_string(count));
+		func = new CEGUI::Functor::FocusUnitWithIndex(i, unitButton);
+		callbacks.push_back(func);
+		my_gui->setPushButtonCallback(name + std::to_string(count), func);
+		unitsList->addChild(unitButton);
 		y += 0.3;
-	}*/
-	//CEGUI::PushButton* unit1 = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button", glm::vec4(0.4f, 0.5f, 0.5f, 1.5f), glm::vec4(0.0f), "unit1"));
-	//CEGUI::PushButton* unit1 = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button", "unit1"));
-	//unitsList->addChild(unit1);
+		i++;
+	}
 	//auto list = static_cast<CEGUI::Listbox*>(my_gui->getWidgetByName("Listbox"));
 	//Window* board = (my_gui->createWidget("OgreTray/ListboxItem", glm::vec4(0.5f, 0.5f, 1.1f, 1.05f), glm::vec4(0.0f), "item1"));
 	//list->addChild(board);
 
-	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(my_gui);
+	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress();
 	callbacks.push_back(onKeyPress);
 	my_gui->setKeyCallback(onKeyPress);
+
+	return my_gui;
+}
+
+CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
+
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuBuildingUI.layout");
+
+	/*auto onCloseButton = new CEGUI::Functor::ReturnToGame();
+	callbacks.push_back(onCloseButton);
+	my_gui->setPushButtonCallback("FrameWindow__auto_closebutton__", onCloseButton);*/
+
+	auto buildingsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("BuildingsList"));
+	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
+	auto avaible_buildings = front::state.getAvailableBuildings(0, 0);
+	CEGUI::PushButton* buildingButton;
+	CEGUI::Functor::SelectBuildingWithName* func;
+	float y = 0.1f;
+	//std::map<std::string, int> repeats;
+	for (auto b : avaible_buildings)
+	{
+		buildingButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
+			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), b));
+		buildingButton->setText(b);
+		func = new CEGUI::Functor::SelectBuildingWithName(b, nameLabel);
+		callbacks.push_back(func);
+		my_gui->setPushButtonCallback(b, func);
+		buildingsList->addChild(buildingButton);
+		y += 0.3;
+	}
+
+	auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress();
+	auto onConfirmButton = new CEGUI::Functor::BuildBuildingFromLabel(nameLabel);
+	callbacks.push_back(onKeyPress);
+	callbacks.push_back(onConfirmButton);
+	my_gui->setKeyCallback(onKeyPress);
+	my_gui->setPushButtonCallback("BuildButton", onConfirmButton);
 
 	return my_gui;
 }

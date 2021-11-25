@@ -213,6 +213,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 					break;
 				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first+1, unitPos->second);
 				break;
+			case GLFW_KEY_1: front::focusedUnitIndex = 0; break;
+			case GLFW_KEY_2: front::focusedUnitIndex = 1; break;
 			/*case GLFW_KEY_G:
 				front::isGridOn=!front::isGridOn;
 				break;*/
@@ -502,6 +504,7 @@ int main() {
 	fac.init(window);
 	front::guiDic.insert(std::pair("GameUI", fac.GetGameUI()));
 	front::guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
+	front::guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
 	front::activeGUI = front::guiDic["GameUI"];
 	front::activeGUI->show();
 
@@ -520,7 +523,7 @@ int main() {
 		drawScene(lightingShader,lightCubeShader,currentFrame);
 		for (auto p : front::guiDic)
 		{
-			p.second->draw();
+			p.second->draw(); // wyswietla tylko gui nawet jak nie sa poukrywane
 		}
 		//front::activeGUI->draw();
 		//check and call events and swap the buffers

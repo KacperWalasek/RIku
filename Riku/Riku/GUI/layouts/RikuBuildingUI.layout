@@ -6,17 +6,10 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="AutoRenderingSurface" value="true" />
         <Window type="WindowsLook/FrameWindow" name="FrameWindow" >
-            <Property name="Area" value="{{0.8,0},{0,0},{1,0},{0.3,0}}" />
-            <Property name="FrameEnabled" value="false" />
-            <Property name="SizingEnabled" value="false" />
-            <Property name="TitlebarEnabled" value="false" />
-            <Property name="DragMovingEnabled" value="false" />
-            <Property name="CloseButtonEnabled" value="false" />
-            <AutoWindow namePath="__auto_titlebar__" >
-                <Property name="DraggingEnabled" value="false" />
-            </AutoWindow>
-            <Window type="OgreTray/ScrollablePane" name="UnitsList" >
-                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+            <Property name="Text" value="Building menu" />
+            <Window type="OgreTray/ScrollablePane" name="BuildingsList" >
+                <Property name="Area" value="{{0,0},{0,90},{1,0},{1,-40}}" />
                 <AutoWindow namePath="__auto_container__" >
                     <Property name="MouseInputPropagationEnabled" value="true" />
                 </AutoWindow>
@@ -38,6 +31,24 @@
                         <Property name="Visible" value="false" />
                     </AutoWindow>
                 </AutoWindow>
+            </Window>
+            <Window type="WindowsLook/Label" name="Label" >
+                <Property name="Area" value="{{0,-7},{0,3},{0,171},{0,35}}" />
+                <Property name="Text" value="Chosen Building info" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Label" name="Label2" >
+                <Property name="Area" value="{{0,-4},{0,45},{0,73},{0,77}}" />
+                <Property name="Text" value="Name: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Label" name="NameLabel" >
+                <Property name="Area" value="{{0,75},{0,45},{0,203},{0,77}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="OgreTray/Button" name="BuildButton" >
+                <Property name="Area" value="{{0,4},{1,-36},{0,100},{1,-4}}" />
+                <Property name="Text" value="Confirm" />
             </Window>
         </Window>
     </Window>

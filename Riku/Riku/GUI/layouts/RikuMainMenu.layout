@@ -10,8 +10,32 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AutoRenderingSurface" value="true" />
             <Window type="WindowsLook/Button" name="ExitButton" >
-                <Property name="Area" value="{{0.4,0},{0.7,0},{0.4,184},{0.7,64}}" />
+                <Property name="Area" value="{{0.4,0},{0.8,0},{0.58,0},{0.883,0}}" />
                 <Property name="Text" value="Exit" />
+            </Window>
+            <Window type="WindowsLook/Button" name="OptionsButton" >
+                <Property name="Area" value="{{0.4,0},{0.7,0},{0.58,0},{0.783,0}}" />
+                <Property name="Text" value="Options" />
+                <Property name="Disabled" value="true" />
+            </Window>
+            <Window type="WindowsLook/Button" name="LoadButton" >
+                <Property name="Area" value="{{0.4,0},{0.6,0},{0.58,0},{0.683,0}}" />
+                <Property name="Text" value="Load Game" />
+                <Property name="Disabled" value="true" />
+            </Window>
+            <Window type="WindowsLook/Button" name="SaveButton" >
+                <Property name="Area" value="{{0.4,0},{0.5,0},{0.58,0},{0.583,0}}" />
+                <Property name="Text" value="Save Game" />
+                <Property name="Disabled" value="true" />
+            </Window>
+            <Window type="WindowsLook/Button" name="NewGameButton" >
+                <Property name="Area" value="{{0.4,0},{0.4,0},{0.58,0},{0.483,0}}" />
+                <Property name="Text" value="New Game" />
+                <Property name="Disabled" value="true" />
+            </Window>
+            <Window type="WindowsLook/Button" name="ReturnButton" >
+                <Property name="Area" value="{{0,24},{0,19},{0.1,24},{0.05,19}}" />
+                <Property name="Text" value="Return to game" />
             </Window>
         </Window>
     </Window>
