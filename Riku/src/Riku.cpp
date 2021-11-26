@@ -379,6 +379,7 @@ int main() {
 	 auto player_resources = front::state.getResources();
 	 auto available_buildings = front::state.getAvailableBuildings(2, 3);
 	 auto player_units = front::state.getUnits();
+	 auto handler = front::state.getAssetHandler();
 
 	 front::state.build("wood_factory", 2, 1);
 	 front::state.moveUnit(1, 1, 1, 2);
