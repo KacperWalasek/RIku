@@ -176,6 +176,7 @@
     <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
     <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
@@ -245,6 +247,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
