@@ -78,7 +78,7 @@ namespace logic {
 		hash = sha(fileContent);
 		file.close();
 		//init lua
-		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
+		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io, sol::lib::math, sol::lib::os);
 		
 		sol::usertype<TestMove> testMove = lua->new_usertype<TestMove>("TestMove",
 			sol::constructors<TestMove()>()
