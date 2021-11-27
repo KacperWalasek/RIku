@@ -54,8 +54,7 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 
 void front::Asset::draw(const Shader &shader, Transform transform) const {
 	for(const auto& a: assetModels) {
-		//TODO: better drawing related objects
-		auto pos=transform.position+a.transform.position;
+		auto pos=transform.position+front::rotate(a.transform.position,transform.rotation);
 		auto rot=transform.rotation+a.transform.rotation;
 		auto scale=transform.scale*a.transform.scale;
 		Object object(*a.model,pos,rot,scale);
