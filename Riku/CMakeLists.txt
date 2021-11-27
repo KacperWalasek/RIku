@@ -43,6 +43,7 @@ add_executable(Riku
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/MapRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/Responses/MapResponse.cpp
 		src/GameLogic/FrontendCommunicator/Responses/Response.cpp
@@ -55,6 +56,9 @@ add_executable(Riku
 		src/GameLogic/GameLogic.cpp
 		src/GameLogic/LogicAssets.cpp
 		src/GameLogic/LoadedHookable.cpp
+		src/Frontend/Asset/AssetHandler.cpp
+		src/Frontend/Asset/AssetModel.cpp
+		src/Frontend/Asset/Asset.cpp
 		src/Frontend/FrontendState.cpp
 		src/Frontend/Texture.cpp
 		src/Frontend/stb_image.cpp
