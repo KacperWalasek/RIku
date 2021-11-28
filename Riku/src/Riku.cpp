@@ -18,7 +18,7 @@
 #include "GameLogic/Assets/Asset.h"
 #include "Frontend/GUI.h"
 #include "Frontend/GUIFactory.h"
-#include "Frontend/Asset/AssetHandler.h"
+#include "Frontend/Asset/FAssetHandler.h"
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 
@@ -212,6 +212,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 				if(!unit || unitPos->first>=map.size()-1)
 					break;
 				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first+1, unitPos->second);
+				break;
+			case GLFW_KEY_T:
+				front::config.angle+=4.0f;
+			case GLFW_KEY_Y:
+				front::config.angle-=2.0f;
+				if(front::config.angle<0.0f)
+					front::config.angle=0.0f;
+				if(front::config.angle>90.0f)
+					front::config.angle=90.0f;
+				movingCameraTransform.rotation.x=glm::radians(front::config.angle);
 				break;
 			case GLFW_KEY_1: front::focusedUnitIndex = 0; break;
 			case GLFW_KEY_2: front::focusedUnitIndex = 1; break;

@@ -56,9 +56,9 @@ add_executable(Riku
 		src/GameLogic/GameLogic.cpp
 		src/GameLogic/LogicAssets.cpp
 		src/GameLogic/LoadedHookable.cpp
-		src/Frontend/Asset/AssetHandler.cpp
+		src/Frontend/Asset/FAssetHandler.cpp
 		src/Frontend/Asset/AssetModel.cpp
-		src/Frontend/Asset/Asset.cpp
+        src/Frontend/Asset/FAsset.cpp
 		src/Frontend/FrontendState.cpp
 		src/Frontend/Texture.cpp
 		src/Frontend/stb_image.cpp
