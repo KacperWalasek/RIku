@@ -3,15 +3,6 @@
 #include <functional>
 #include "FrontendState.h"
 #include "../GameLogic/GameLogic.h"
-//
-//namespace front {
-//	extern int focusedUnit;
-//	extern CEGUI::GUI* activeGUI;
-//	extern int focusedUnitIndex;
-//	extern GameLogic logic;
-//	extern FrontendState state;
-//	//extern std::vector<Unit1> units;
-//}
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
 	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex)
