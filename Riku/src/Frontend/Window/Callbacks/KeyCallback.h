@@ -10,9 +10,12 @@ namespace front {
 		FrontendState& state;
 		int& focusedUnitIndex;
 		CEGUI::GUI*& activeGUI;
+		Config& config;
+		Transform& movingCameraTransform;
 	public:
-		KeyCallback(FrontendState& state, int& focusedUnitIndex, CEGUI::GUI*& activeGUI)
-			: state(state), focusedUnitIndex(focusedUnitIndex), activeGUI(activeGUI)
+		KeyCallback(FrontendState& state, int& focusedUnitIndex, CEGUI::GUI*& activeGUI,
+			Config& config,	Transform& movingCameraTransform)
+			: state(state), focusedUnitIndex(focusedUnitIndex), activeGUI(activeGUI), config(config), movingCameraTransform(movingCameraTransform)
 		{}
 
 		void operator()(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -56,6 +59,16 @@ namespace front {
 					if (!unit || unitPos->first >= map.size() - 1)
 						break;
 					state.moveUnit(unitPos->first, unitPos->second, unitPos->first + 1, unitPos->second);
+					break; 
+				case GLFW_KEY_T:
+					config.angle += 4.0f;
+				case GLFW_KEY_Y:
+					config.angle -= 2.0f;
+					if (config.angle < 0.0f)
+						config.angle = 0.0f;
+					if (config.angle > 90.0f)
+						config.angle = 90.0f;
+					movingCameraTransform.rotation.x = glm::radians(config.angle);
 					break;
 				case GLFW_KEY_1: focusedUnitIndex = 0; break;
 				case GLFW_KEY_2: focusedUnitIndex = 1; break;

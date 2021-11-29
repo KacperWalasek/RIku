@@ -13,8 +13,8 @@
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
 
-front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, float& aspect)
-	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect)
+front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
+	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler)
 {}
 
 void front::Scene::update()
@@ -30,18 +30,6 @@ void front::Scene::init(GLFWwindow* window)
 {
 	lightingShader.init("../shaders/phong-vertex.shader", "../shaders/phong-fragment.shader");
 	light.init();
-	//grounds
-	groundModels.insert(std::make_pair("grass", Model("models/grounds/grass.obj", 1, 1)));
-	groundModels.insert(std::make_pair("sand", Model("models/grounds/sand.obj", 1, 1)));
-	groundModels.insert(std::make_pair("stone", Model("models/grounds/stone.obj", 1, 1)));
-	groundModels.insert(std::make_pair("wet", Model("models/grounds/water.obj", 1, 1)));
-	//biomes
-	biomeModels.insert(std::make_pair("forest", Model("models/biomes/forest.blend", 1, -1)));
-	//objects
-	objectModels.insert(std::make_pair("wood_factory", Model("models/objects/farmhouse_obj.obj", 1, -1)));
-	//units
-	unitModel = Model("models/units/sara/model/sara.blend", 1, -1);
-
 
 	//set camera transform
 	const auto& map = state.getMap();
@@ -97,16 +85,15 @@ void front::Scene::draw()
 	{
 		for (int j = 0; j < map[i].size(); j++)
 		{
-			front::Object object;
+			auto transform = front::Transform(glm::vec3((float)i, (float)map[i][j].height * 0.5f, (float)j));
 			if (map[i][j].area.getName() == "wet")
-				object = Object(groundModels["wet"], glm::vec3(i, (float)map[i][j].height * 0.5f, j));
+				handler.tryDraw("wet", lightingShader, transform);
 			else
-				object = Object(groundModels[map[i][j].ground.getName()], glm::vec3(i, (float)map[i][j].height * 0.5f, j));
-			object.Draw(lightingShader);
-			if (map[i][j].object && objectModels.count(map[i][j].object->getName())) {
-				Object mapObject = Object(objectModels[map[i][j].object->getName()], glm::vec3(i, (float)map[i][j].height * 0.5f, j - 0.25f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.02f, 0.02f, 0.02f));
-				mapObject.Draw(lightingShader);
-			}
+				handler.tryDraw(map[i][j].ground.getName(), lightingShader, transform);
+			if (map[i][j].object) 
+				handler.tryDraw(map[i][j].object->getName(), lightingShader, transform);
+				/*front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j - 0.25f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.02f,0.02f,0.02f));
+				mapObject.Draw(lightingShader);*/
 		}
 	}
 	const auto& unit = state.getUnits();
@@ -115,8 +102,8 @@ void front::Scene::draw()
 			lightingShader.setVec4("color_mod", 0.7f, 0.7f, 0.7f, 1.0f);
 		int x = unit[i]->getMapX();
 		int y = unit[i]->getMapY();
-		front::Object object = front::Object(unitModel, glm::vec3(x, (float)map[x][y].height * 0.5f, y), glm::vec3(-90.0f, 0.0f, 180.0f), glm::vec3(0.01f, 0.01f, 0.01f));
-		object.Draw(lightingShader);
+		auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
+		handler.tryDraw(unit[i]->getName(), lightingShader, transform);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 
 	}

@@ -7,8 +7,8 @@
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
 
-front::Window::Window(Config& config, GameLogic& logic, FrontendState& state)
-	: config(config), scene(config, logic, state, aspect)
+front::Window::Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler)
+	: config(config), scene(config, logic, state, handler, aspect)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -99,7 +99,7 @@ void front::Window::setCallbacks()
 
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		KeyCallback(scene->state, scene->focusedUnitIndex, scene->activeGUI)(window, key, scancode, action, mods);
+		KeyCallback(scene->state, scene->focusedUnitIndex, scene->activeGUI, scene->config, scene->movingCameraTransform)(window, key, scancode, action, mods);
 		});
 
 }

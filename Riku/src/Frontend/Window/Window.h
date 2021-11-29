@@ -27,7 +27,7 @@ namespace front {
 		void setCallbacks();
 		void processInput();
 	public:
-		Window(Config& config, GameLogic& logic, FrontendState& state);
+		Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& hadler);
 		~Window();
 		bool update();
 	};

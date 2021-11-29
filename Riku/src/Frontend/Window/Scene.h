@@ -13,12 +13,15 @@
 #include "../Config.h"
 #include "../Model.h"
 #include "Light.h"
+#include "../Asset/FAssetHandler.h"
+
 namespace front {
 	class Window;
 	class Scene
 	{
 		FrontendState& state;
 		Config& config;
+		const AssetHandler& handler;
 
 		Transform movingCameraTransform;
 
@@ -33,14 +36,11 @@ namespace front {
 		CEGUI::GUI* activeGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;
 
-		std::map<std::string, Model> groundModels;
 		std::map<std::string, Model> biomeModels;
-		std::map<std::string, Model> objectModels;
-		Model unitModel;
 
 		void init(GLFWwindow* window);
 	public:
-		Scene(Config& config, GameLogic& logic, FrontendState& state, float& aspect);
+		Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect);
 		void update();//input
 		void draw();
 
