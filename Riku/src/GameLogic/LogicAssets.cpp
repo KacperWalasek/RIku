@@ -13,5 +13,6 @@ void LogicAssets::initialize()
 	tileObjects = AssetUtils::getAllAssetsWithType("tileobject", handler);
 	units = AssetUtils::getAllAssetsWithType("unit", handler);
 	mapGenerator = std::move(handler.findAsset("map_generator").value().get());
+	handler.assetNodes.erase("map_generator");
 	// TODO - catch wrong structure and types as errors
 }
