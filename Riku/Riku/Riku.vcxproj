@@ -162,6 +162,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\FAsset.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\FAssetHandler.cpp" />
     <ClCompile Include="..\src\Frontend\Config.cpp" />
     <ClCompile Include="..\src\Frontend\Frontend.cpp" />
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
@@ -225,6 +228,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\Frontend\Asset\AssetModel.h" />
+    <ClInclude Include="..\src\Frontend\Asset\FAsset.h" />
+    <ClInclude Include="..\src\Frontend\Asset\FAssetHandler.h" />
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />

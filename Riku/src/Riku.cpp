@@ -1,4 +1,4 @@
-﻿#include <ctime>
+#include <ctime>
 #include "GameLogic/GameLogic.h"
 #include "Frontend/Frontend.h"
 
