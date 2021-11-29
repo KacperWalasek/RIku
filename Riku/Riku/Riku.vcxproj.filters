@@ -39,10 +39,10 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Unit">
     </Filter>
-    <Filter Include="Riku\Frontend\Scene">
+    <Filter Include="Riku\Frontend\Window">
       <UniqueIdentifier>{0de115e3-59a5-49ac-9bc8-07d5a4adbf96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Riku\Frontend\Scene\Callbacks">
+    <Filter Include="Riku\Frontend\Window\Callbacks">
       <UniqueIdentifier>{71dfe169-a231-44ff-bcd9-e19df9954c38}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -227,13 +227,16 @@
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\Scene\Scene.cpp">
-      <Filter>Riku\Frontend\Scene</Filter>
+      <Filter>Riku\Frontend\Window</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\Scene\Light.cpp">
-      <Filter>Riku\Frontend\Scene</Filter>
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Scene\Window.cpp">
+      <Filter>Riku\Frontend\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -506,22 +509,22 @@
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Scene.h">
-      <Filter>Riku\Frontend\Scene</Filter>
+      <Filter>Riku\Frontend\Window</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Callbacks\ScrollCallback.h">
-      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Callbacks\FramebufferSizeCallback.h">
-      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Callbacks\KeyCallback.h">
-      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Callbacks\MouseClickCallback.h">
-      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Callbacks\MousePositionCallback.h">
-      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
@@ -530,7 +533,10 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Light.h">
-      <Filter>Riku\Frontend\Scene</Filter>
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Window.h">
+      <Filter>Riku\Frontend\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

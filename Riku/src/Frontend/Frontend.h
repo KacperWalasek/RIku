@@ -1,7 +1,7 @@
 #pragma once
 #include "FrontendState.h"
 #include "Config.h"
-#include "Scene/Scene.h"
+#include "Scene/Window.h"
 
 class GameLogic;
 namespace front {
@@ -9,7 +9,7 @@ namespace front {
 	{
 		GameLogic& logic;
 		FrontendState state;
-		Scene scene;
+		Window window;
 		Config config;
 	public:
 		Frontend(GameLogic& logic);
