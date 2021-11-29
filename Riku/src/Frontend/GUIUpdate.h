@@ -8,23 +8,14 @@
 #include <iostream>
 #include "GUICallbacks.h"
 
-namespace front {
-    extern int focusedUnit;
-    extern CEGUI::GUI* activeGUI;
-    extern std::map<std::string, CEGUI::GUI*> guiDic;
-    extern int focusedUnitIndex;
-    extern GameLogic logic;
-    extern FrontendState state;
-}
-
 namespace CEGUI::GUIUpdate {
-    static void UpdateResources()
+    static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
     {
-        auto resources = front::state.getResources();
+        auto resources = state.getResources();
         CEGUI::PushButton* resButton;
         for (auto res : resources)
         {
-            auto resButton = static_cast<CEGUI::PushButton*>(front::guiDic["GameUI"]->getWidgetByName(res.first));
+            auto resButton = static_cast<CEGUI::PushButton*>(guiDic["GameUI"]->getWidgetByName(res.first));
             if (resButton != nullptr)
                 resButton->setText(res.first + ": " + std::to_string(res.second));
         }

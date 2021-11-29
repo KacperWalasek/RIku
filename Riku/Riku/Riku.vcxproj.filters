@@ -39,6 +39,12 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Unit">
     </Filter>
+    <Filter Include="Riku\Frontend\Scene">
+      <UniqueIdentifier>{0de115e3-59a5-49ac-9bc8-07d5a4adbf96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\Frontend\Scene\Callbacks">
+      <UniqueIdentifier>{71dfe169-a231-44ff-bcd9-e19df9954c38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Config.cpp">
@@ -216,6 +222,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Frontend\GUIFactory.cpp">
       <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Frontend.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Scene\Scene.cpp">
+      <Filter>Riku\Frontend\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -483,6 +495,27 @@
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUIUpdate.h">
       <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Frontend.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Scene.h">
+      <Filter>Riku\Frontend\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Callbacks\ScrollCallback.h">
+      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Callbacks\FramebufferSizeCallback.h">
+      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Callbacks\KeyCallback.h">
+      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Callbacks\MouseClickCallback.h">
+      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Callbacks\MousePositionCallback.h">
+      <Filter>Riku\Frontend\Scene\Callbacks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

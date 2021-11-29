@@ -11,6 +11,14 @@
 namespace CEGUI {
     class GUIFactory {
     public:
+        int& focusedUnitIndex;
+
+        GameLogic& logic;
+        FrontendState& state;
+        CEGUI::GUI*& activeGUI;
+        std::map<std::string, CEGUI::GUI*>& guiDic;
+        GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
+            std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex);
         void init(GLFWwindow* win);
         ~GUIFactory();
         CEGUI::GUI* GetDemoWindow();

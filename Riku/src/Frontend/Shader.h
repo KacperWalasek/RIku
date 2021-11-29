@@ -12,9 +12,13 @@ struct Shader {
 	// the program ID
 	unsigned int ID;
 
+	//TODO delete this constructor !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	Shader(): ID(0) {};
 	// constructor reads and builds the shader
 	Shader(const char* vertexPath, const char* fragmentPath);
 	~Shader();
+
+	void init(const char* vertexPath, const char* fragmentPath);
 	// use/activate the shader
 	void use();
 	// utility uniform functions
