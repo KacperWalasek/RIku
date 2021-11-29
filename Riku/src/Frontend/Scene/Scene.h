@@ -12,30 +12,26 @@
 #undef min
 #endif
 #include "../Model.h"
+#include "Light.h"
 namespace front {
 	class Scene
 	{
 		GameLogic& logic;
 		FrontendState& state;
-		uint16_t NR_SPOT_LIGHTS = 1;
 		GLFWwindow* window;
 		Config& config;
 
 		Transform movingCameraTransform;
 		float aspect;
-		std::vector<glm::vec3> pointLightPositions;
 
 		Shader lightingShader;
-		Shader lightCubeShader;
 
-		unsigned int VBO;
-		unsigned int lightCubeVAO;
 		float lastFrame = 0.0f;
 		float deltaTime;
 		float fogDensity = 0.01f;
-		float spotLightAngle = 0.0f;
 		int focusedUnitIndex = 0;
 
+		Light light;
 		CEGUI::GUIFactory fac;
 		CEGUI::GUI* activeGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;

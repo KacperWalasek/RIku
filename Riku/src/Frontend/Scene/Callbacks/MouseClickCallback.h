@@ -13,7 +13,6 @@ namespace front {
 
 		void operator()(GLFWwindow* window, int button, int action, int mods)
 		{
-			std::cout << "mouseCLick";
 			activeGUI->on_mouse_click(button, action);
 		}
 	};

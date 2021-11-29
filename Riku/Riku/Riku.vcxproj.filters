@@ -232,6 +232,9 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\Scene\Light.cpp">
+      <Filter>Riku\Frontend\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -525,6 +528,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Scene\Light.h">
+      <Filter>Riku\Frontend\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
