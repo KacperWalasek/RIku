@@ -7,6 +7,7 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
+#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -30,6 +31,11 @@ std::vector<std::string> FrontendState::getAvailableBuildings(int mapX, int mapY
 std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()
 {
 	return logic.getInfo<UnitListResponse>("player_units")->getUnits();
+}
+
+const logic::AssetHandler& FrontendState::getAssetHandler()
+{
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getHandler();
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)

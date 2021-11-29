@@ -229,6 +229,9 @@
     <ClCompile Include="..\src\Frontend\Scene\Scene.cpp">
       <Filter>Riku\Frontend\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Config.h">
@@ -516,6 +519,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Scene\Callbacks\MousePositionCallback.h">
       <Filter>Riku\Frontend\Scene\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

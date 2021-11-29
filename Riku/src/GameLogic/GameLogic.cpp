@@ -22,6 +22,7 @@
 #include "Tile/TileDescription.h"
 #include "Tile/MapGenerator.h"
 #include "StateUpdate/MoveFactory/FinishGameMoveHandler.h"
+#include "FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -46,7 +47,8 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<MapRequestHandler>(gameState.map),
 		std::make_shared<AvailableBuildingsRequestHandler>(gameState,assets),
 		std::make_shared<PlayerUnitsRequestHandler>(gameState),
-		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets)
+		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets),
+		std::make_shared<AssetHandlerRequestHandler>(assets)
 		});
 	
 	MapGenerator generator(assets.mapGenerator);

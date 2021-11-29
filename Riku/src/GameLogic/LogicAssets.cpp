@@ -4,7 +4,6 @@
 
 void LogicAssets::initialize()
 {
-	logic::AssetHandler handler;
 	handler.findFiles("../assets");
 
 	biomes = AssetUtils::readNumericAsset<Biome>("biomes", handler);
