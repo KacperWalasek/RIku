@@ -18,6 +18,7 @@
 #include "GameLogic/Assets/Asset.h"
 #include "Frontend/GUI.h"
 #include "Frontend/GUIFactory.h"
+#include "Frontend/Asset/FAssetHandler.h"
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 
@@ -73,6 +74,7 @@ namespace front
 {
 	GameLogic logic; 
 	FrontendState state(logic);
+	AssetHandler handler;
 	float aspect;
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	const glm::vec3 Zero=glm::vec3(0.0f);
@@ -100,10 +102,7 @@ namespace front
 			return glm::vec2(x,y);
 		return {};
 	}
-	std::map<std::string, Model> groundModels;
 	std::map<std::string, Model> biomeModels;
-	std::map<std::string, Model> objectModels;
-	Model unitModel;
 }
 
 //1 directional light, 16 point lights and spotlights
@@ -214,6 +213,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 					break;
 				front::state.moveUnit(unitPos->first, unitPos->second, unitPos->first+1, unitPos->second);
 				break;
+			case GLFW_KEY_T:
+				front::config.angle+=4.0f;
+			case GLFW_KEY_Y:
+				front::config.angle-=2.0f;
+				if(front::config.angle<0.0f)
+					front::config.angle=0.0f;
+				if(front::config.angle>90.0f)
+					front::config.angle=90.0f;
+				movingCameraTransform.rotation.x=glm::radians(front::config.angle);
+				break;
 			case GLFW_KEY_1: front::focusedUnitIndex = 0; break;
 			case GLFW_KEY_2: front::focusedUnitIndex = 1; break;
 			/*case GLFW_KEY_G:
@@ -313,19 +322,15 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	{
 		for(int j=0;j<map[i].size();j++)
 		{
-			front::Object object;
+			auto transform = front::Transform(glm::vec3((float)i,(float)map[i][j].height*0.5f,(float)j));
 			if(map[i][j].area.getName()=="wet")
-				object = front::Object(front::groundModels["wet"],glm::vec3(i,(float)map[i][j].height*0.5f,j));
+				front::handler.tryDraw("wet",lightingShader,transform);
 			else
-				object = front::Object(front::groundModels[map[i][j].ground.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j));
-			object.Draw(lightingShader);
-			/*if(front::biomeModels.count(map[i][j].biome.getName())) {
-				front::Object biomeObject = front::Object(front::biomeModels[map[i][j].biome.getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.1f,0.1f,0.1f));
-				biomeObject.Draw(lightingShader);
-			}*/
-			if(map[i][j].object && front::objectModels.count(map[i][j].object->getName())) {
-				front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j - 0.25f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.02f,0.02f,0.02f));
-				mapObject.Draw(lightingShader);
+				front::handler.tryDraw(map[i][j].ground.getName(),lightingShader,transform);
+			if(map[i][j].object) {
+				front::handler.tryDraw(map[i][j].object->getName(),lightingShader,transform);
+				/*front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j - 0.25f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.02f,0.02f,0.02f));
+				mapObject.Draw(lightingShader);*/
 			}
 		}
 	}
@@ -335,8 +340,8 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 			lightingShader.setVec4("color_mod", 0.7f,0.7f,0.7f, 1.0f);
 		int x = unit[i]->getMapX();
 		int y = unit[i]->getMapY();
-		front::Object object = front::Object(front::unitModel,glm::vec3(x,(float)map[x][y].height*0.5f,y),glm::vec3(-90.0f,0.0f,180.0f),glm::vec3(0.01f,0.01f,0.01f));
-		object.Draw(lightingShader);
+		auto transform = front::Transform(glm::vec3((float)x,(float)map[x][y].height*0.5f,(float)y));
+		front::handler.tryDraw(unit[i]->getName(),lightingShader,transform);
 		lightingShader.setVec4("color_mod", 1.0f,1.0f,1.0f, 1.0f);
 
 	}
@@ -396,19 +401,9 @@ int main() {
 	Shader lightingShader("../shaders/phong-vertex.shader","../shaders/phong-fragment.shader");
 
 	Shader lightCubeShader("../shaders/light-vertex.shader","../shaders/light-fragment.shader");
+	//load assets for frontend
+	front::handler.loadFiles();
 
-	//load used models
-	//grounds
-	front::groundModels.insert(std::make_pair("grass",Model("models/grounds/grass.obj",1,1)));
-	front::groundModels.insert(std::make_pair("sand",Model("models/grounds/sand.obj",1,1)));
-	front::groundModels.insert(std::make_pair("stone",Model("models/grounds/stone.obj",1,1)));
-	front::groundModels.insert(std::make_pair("wet",Model("models/grounds/water.obj",1,1)));
-	//biomes
-	front::biomeModels.insert(std::make_pair("forest",Model("models/biomes/forest.blend",1,-1)));
-	//objects
-	front::objectModels.insert(std::make_pair("wood_factory",Model("models/objects/farmhouse_obj.obj",1,-1)));
-	//units
-	front::unitModel = Model("models/units/sara/model/sara.blend",1,-1);
 	//vertices info (light cube)
 	float vertices[] = {
 			// positions          // normals           // texture coords
@@ -553,7 +548,7 @@ GLFWwindow* front::initWindow(){
 	config.load();
 	//set values
 	front::aspect=(float)config.screenWidth/config.screenHeight;
-	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, "LearnOpenGL", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, "Riku", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr){
 		std::cerr << "Failed to create GLFW window\n";
 		glfwTerminate();
