@@ -1,0 +1,12 @@
+{
+"en": {
+	"grounds_grass": "Grass",
+	"grounds_sand": "Sand",
+	"grounds_stone": "Stone"
+},
+"pl": {
+	"grounds_grass": "Trawa",
+	"grounds_sand": "Piasek",
+	"grounds_stone": "Kamień"
+}
+}
