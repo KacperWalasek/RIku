@@ -221,6 +221,12 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\Frontend\JsonUtil.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Lang.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -488,5 +494,11 @@
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\Frontend\JsonUtil.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Lang.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
