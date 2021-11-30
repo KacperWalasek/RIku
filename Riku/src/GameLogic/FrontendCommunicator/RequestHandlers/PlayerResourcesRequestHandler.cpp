@@ -4,7 +4,7 @@
 PlayerResourcesRequestHandler::PlayerResourcesRequestHandler(const GameState& gamestate, const LogicAssets& assets)
     : player(gamestate.players[gamestate.playerOnMove]), assets(assets)
 {
-    // TODO: zamiast zerowego gracza, w stanie gry powinna byæ informacja którym graczem jesteœmy
+    // TODO: zamiast obecnie graj¹cego gracza ostatni lokalny
 }
 
 std::shared_ptr<Response> PlayerResourcesRequestHandler::handleRequest(std::shared_ptr<Request> request) const

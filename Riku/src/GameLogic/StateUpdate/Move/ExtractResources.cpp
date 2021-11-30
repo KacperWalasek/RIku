@@ -6,7 +6,8 @@ ExtractResources::ExtractResources(int player, int resource, int quantity, int m
 
 std::shared_ptr<Patch> ExtractResources::createPatch(const GameState& state, const LogicAssets& assets) const
 {
-    return std::make_shared<Patch>(PlayerPatch(player,resource,quantity));
+    // TODO: operator ?: nie bêdzie potrzebny jak onTurnEnd bedzie mial dostep do GameState. Poprawiæ wtedy w ResourceFactory
+    return std::make_shared<Patch>(PlayerPatch(player < 0 ? state.playerOnMove : player,resource,quantity));
 }
 
 bool ExtractResources::isDoable(const GameState& state, const LogicAssets& assets) const
