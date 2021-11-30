@@ -1,6 +1,6 @@
 #pragma once
 #define _USE_MATH_DEFINES 
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 #include "../../Object.h"
 #include "../../Config.h"
 

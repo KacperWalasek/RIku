@@ -123,21 +123,6 @@ namespace CEGUI::Functor {
         };
     };
 
-   /* class onKeyPress : public Functor
-    {
-    public:
-        onKeyPress() : Functor() {}
-
-        bool operator()(const CEGUI::EventArgs& e)
-        {
-            auto args = static_cast<const CEGUI::KeyEventArgs&>(e);
-            if (args.scancode == CEGUI::Key::F1)
-                std::cout << "funktor dziala\n";
-            
-            return false;
-        };
-    };*/
-
     class GameUIOnKeyPress : public Functor
     {
         CEGUI::GUI*& activeGUI;

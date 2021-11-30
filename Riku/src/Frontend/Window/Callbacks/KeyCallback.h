@@ -1,6 +1,6 @@
 #pragma once
 #define _USE_MATH_DEFINES 
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 #include "../../Object.h"
 #include "../../Config.h"
 
@@ -9,11 +9,11 @@ namespace front {
 	{
 		FrontendState& state;
 		int& focusedUnitIndex;
-		CEGUI::GUI*& activeGUI;
+		CEGUI::GUI* activeGUI;
 		Config& config;
 		Transform& movingCameraTransform;
 	public:
-		KeyCallback(FrontendState& state, int& focusedUnitIndex, CEGUI::GUI*& activeGUI,
+		KeyCallback(FrontendState& state, int& focusedUnitIndex, CEGUI::GUI* activeGUI,
 			Config& config,	Transform& movingCameraTransform)
 			: state(state), focusedUnitIndex(focusedUnitIndex), activeGUI(activeGUI), config(config), movingCameraTransform(movingCameraTransform)
 		{}
