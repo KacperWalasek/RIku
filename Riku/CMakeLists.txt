@@ -69,6 +69,8 @@ add_executable(Riku
 		src/Frontend/Mesh.cpp
 		src/Frontend/Config.cpp
 		src/Frontend/GUI.cpp
+		src/Frontend/Lang.cpp
+		src/Frontend/JsonUtil.cpp
 		src/Riku.cpp)
 
 target_link_libraries(Riku dl)

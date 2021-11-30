@@ -42,6 +42,7 @@
 #include "GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
 #include "GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 #include "Frontend/FrontendState.h"
+#include "Frontend/Lang.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
@@ -385,7 +386,6 @@ int main() {
 	 auto available_buildings = front::state.getAvailableBuildings(2, 3);
 	 auto player_units = front::state.getUnits();
 	 auto handler = front::state.getAssetHandler();
-
 	 front::state.build("wood_factory", 2, 1);
 	 front::state.moveUnit(1, 1, 1, 2);
 	 const std::vector<std::vector<Tile>>& map = front::state.getMap();
@@ -546,9 +546,10 @@ int main() {
 
 GLFWwindow* front::initWindow(){
 	config.load();
+	front::Lang::loadLanguage(front::state.getAssetHandler(), front::config.language);
 	//set values
 	front::aspect=(float)config.screenWidth/config.screenHeight;
-	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, "Riku", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr){
 		std::cerr << "Failed to create GLFW window\n";
 		glfwTerminate();
