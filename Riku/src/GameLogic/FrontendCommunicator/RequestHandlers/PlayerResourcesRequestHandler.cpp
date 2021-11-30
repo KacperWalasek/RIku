@@ -2,7 +2,7 @@
 #include "../Responses/StringIntMapResponse.h"
 
 PlayerResourcesRequestHandler::PlayerResourcesRequestHandler(const GameState& gamestate, const LogicAssets& assets)
-    : player(gamestate.players[0]), assets(assets)
+    : player(gamestate.players[gamestate.playerOnMove]), assets(assets)
 {
     // TODO: zamiast zerowego gracza, w stanie gry powinna byæ informacja którym graczem jesteœmy
 }

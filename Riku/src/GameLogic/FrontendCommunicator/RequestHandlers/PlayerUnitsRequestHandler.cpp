@@ -2,9 +2,9 @@
 #include "../Responses/UnitListResponse.h"
 
 PlayerUnitsRequestHandler::PlayerUnitsRequestHandler(const GameState& gameState) 
-    : player(gameState.players[0]) 
+    : player(gameState.players[gameState.playerOnMove]) 
 {
-    // TODO: zamiast zerowego gracza, w stanie gry powinna byæ informacja którym graczem jesteœmy
+    // TODO: zamiast obecnie graj¹cego gracza powinien byæ ostatni lokalny
 }
 
 std::shared_ptr<Response> PlayerUnitsRequestHandler::handleRequest(std::shared_ptr<Request> request) const

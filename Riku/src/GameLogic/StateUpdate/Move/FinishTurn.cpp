@@ -8,7 +8,9 @@ std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const Log
     {
         move = move ? std::make_shared<CombinedMove>(move, h->onTurnEnd()) : h->onTurnEnd();
     }
-    return move ? move->createPatch(state, assets) : std::make_shared<Patch>();
+    std::shared_ptr<Patch> patch = move ? move->createPatch(state, assets) : std::make_shared<Patch>();
+    int nextPlayer = (state.playerOnMove + 1) % state.players.size();
+    return std::make_shared<Patch>(Patch(nextPlayer) + *patch);
 }
 
 bool FinishTurn::isDoable(const GameState& state, const LogicAssets& assets) const
