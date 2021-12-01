@@ -1,0 +1,14 @@
+{
+"en": {
+	"resource_wood": "Wood",
+	"resource_iron": "Iron",
+	"resource_stone": "Stone",
+	"resource_money": "Money"
+},
+"pl": {
+	"resource_wood": "Drewno",
+	"resource_iron": "Żelazo",
+	"resource_stone": "Kamień",
+	"resource_money": "Kasa"
+}
+}

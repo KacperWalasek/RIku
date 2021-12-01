@@ -73,6 +73,8 @@ add_executable(Riku
 		src/Frontend/Config.cpp
 		src/Frontend/Frontend.cpp
 		src/Frontend/GUI.cpp
+		src/Frontend/Lang.cpp
+		src/Frontend/JsonUtil.cpp
 		src/Frontend/Window/Callbacks/MouseClickCallback.cpp
 		src/Riku.cpp)
 

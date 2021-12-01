@@ -170,6 +170,8 @@
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
     <ClCompile Include="..\src\Frontend\GUI.cpp" />
     <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />
+    <ClCompile Include="..\src\Frontend\JsonUtil.cpp" />
+    <ClCompile Include="..\src\Frontend\Lang.cpp" />
     <ClCompile Include="..\src\Frontend\Mesh.cpp" />
     <ClCompile Include="..\src\Frontend\Model.cpp" />
     <ClCompile Include="..\src\Frontend\Object.cpp" />
@@ -241,6 +243,8 @@
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h" />
     <ClInclude Include="..\src\Frontend\GUIUpdate.h" />
+    <ClInclude Include="..\src\Frontend\JsonUtil.h" />
+    <ClInclude Include="..\src\Frontend\Lang.h" />
     <ClInclude Include="..\src\Frontend\Mesh.h" />
     <ClInclude Include="..\src\Frontend\Model.h" />
     <ClInclude Include="..\src\Frontend\Object.h" />

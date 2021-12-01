@@ -44,7 +44,7 @@ void CEGUI::GUI::destroyWindowRecursive(CEGUI::Window &window)
 {
     while (window.getChildCount() > 0)
         destroyWindowRecursive(*window.getChildAtIdx(0));
-    printf("destroying %s \n", window.getName());
+    printf("destroying %s \n", window.getName().c_str());
     window.destroy();
 }
 
