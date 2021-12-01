@@ -25,7 +25,7 @@ void CEGUI::GUIFactory::init(GLFWwindow* win){
 	CEGUI::GUI::loadScheme("OgreTray.scheme");
 	CEGUI::GUI::loadScheme("VanillaSkin.scheme");
 	CEGUI::GUI::loadScheme("VanillaCommonDialogs.scheme");
-	CEGUI::GUIUpdate::LoadIcons();
+	CEGUI::GUIUpdate::LoadIcons(state);
 }
 CEGUI::GUIFactory::~GUIFactory()
 {
@@ -99,8 +99,8 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("UnitsList"));
 	
 
-	auto resourcesList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("ResourcesList"));
-	CEGUI::GUIUpdate::CreateResources(my_gui, resourcesList);
+	
+	CEGUI::GUIUpdate::CreateResources(my_gui, "ResourcesList", state);
 	//auto list = static_cast<CEGUI::Listbox*>(my_gui->getWidgetByName("Listbox"));
 	//Window* board = (my_gui->createWidget("OgreTray/ListboxItem", glm::vec4(0.5f, 0.5f, 1.1f, 1.05f), glm::vec4(0.0f), "item1"));
 	//list->addChild(board);

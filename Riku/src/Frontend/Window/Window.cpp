@@ -115,19 +115,19 @@ void front::Window::processInput()
 	//camera move
 	if (optCursorPos.has_value()) {
 		auto cursorPos = optCursorPos.value();
-		if (cursorPos.x < 0.1f) {
+		if (cursorPos.x < 0.03f) {
 			dx = 1.0f;
 			dy = 1.0f - 2.0f * cursorPos.y;
 		}
-		else if (cursorPos.x > 0.9f) {
+		else if (cursorPos.x > 0.97f) {
 			dx = -1.0f;
 			dy = 1.0f - 2.0f * cursorPos.y;
 		}
-		else if (cursorPos.y < 0.1f) {
+		else if (cursorPos.y < 0.04f) {
 			dy = 1.0f;
 			dx = 1.0f - 2.0f * cursorPos.x;
 		}
-		else if (cursorPos.y > 0.9f) {
+		else if (cursorPos.y > 0.96f) {
 			dy = -1.0f;
 			dx = 1.0f - 2.0f * cursorPos.x;
 		}

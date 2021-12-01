@@ -19,8 +19,9 @@ namespace CEGUI::GUIUpdate {
             resourceElem->setText(std::to_string(res.second));
         }
     }
-    static void CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& resourcesListName)
+    static void CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& resourcesListName, FrontendState& state)
     {
+        auto resourcesList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(resourcesListName));
         if (my_gui == nullptr) return;
         auto resources = state.getResources();
         float x = 0.05f;
@@ -53,7 +54,7 @@ namespace CEGUI::GUIUpdate {
             resourcesList->addChild(resourceElem);     
         }
     }
-    static void LoadIcons()
+    static void LoadIcons(FrontendState& state)
     {
         auto resources = state.getResources();
         for (auto res : resources)
@@ -61,6 +62,7 @@ namespace CEGUI::GUIUpdate {
             try
             {
                 CEGUI::GUI::loadIcon(res.first, res.first + ".png"); //TODO wczytywanie ró¿nych formatów
+                printf("Successfully loaded icon for: %s\n", res.first.c_str());
             }
             catch (...) {}            
         }
