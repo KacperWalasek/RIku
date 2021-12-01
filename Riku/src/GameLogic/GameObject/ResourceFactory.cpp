@@ -9,8 +9,8 @@ std::shared_ptr<IMove> ResourceFactory::onTurnEnd()
 {
 	if (mapX < 0 || mapY < 0) // fabryka nie stoi na ¿adnym polu
 		return TileObjectDecorator::onTurnEnd();
-
-	auto extract = std::make_shared<ExtractResources>(0, resource, quantity, mapX, mapY, resource);
+	// TODO: player index
+	auto extract = std::make_shared<ExtractResources>(-1, resource, quantity, mapX, mapY, resource);
 	return std::make_shared<CombinedMove>(extract, TileObjectDecorator::onTurnEnd());
 }
 
