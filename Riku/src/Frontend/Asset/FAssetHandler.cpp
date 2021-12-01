@@ -13,7 +13,6 @@ front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
 
 void front::AssetHandler::loadFiles() {
 	std::cout << "Loading assets for frontend\n";
-	const auto& handler = state.getAssetHandler();
 	for(const auto& node: handler.assetNodes) {
 		std::string path = node.second.getPath()+"/";
 		Json::Value root = getJsonFromFile(path+"front.json",false);

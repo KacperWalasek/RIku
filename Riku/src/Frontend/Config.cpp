@@ -19,7 +19,7 @@ bool front::Config::load() {
 	fov = root.get("fov",45.f).asFloat();
 	maxZoomHeight=root.get("max_zoom_height",60.f).asFloat();
 	minZoomHeight=root.get("min_zoom_height",3.f).asFloat();
-	language=root.get("language","en").asString();
+	language=root.get("language",std::string("en")).asString();
 	return EXIT_SUCCESS;
 }
 

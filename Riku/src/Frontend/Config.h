@@ -20,7 +20,7 @@ namespace front {
 		float fov = 45.f;
 		float maxZoomHeight = 60.f;
 		float minZoomHeight = 3.f;
-		std::string language;
+		std::string language="en";
 	};
 }
 

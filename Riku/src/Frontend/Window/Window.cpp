@@ -6,6 +6,7 @@
 #include "Callbacks/MousePositionCallback.h"
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
+#include "../Lang.h"
 
 front::Window::Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler)
 	: config(config), scene(config, logic, state, handler, aspect)
@@ -45,7 +46,7 @@ void front::Window::initWindow()
 	config.load();
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
-	window = glfwCreateWindow(config.screenWidth, config.screenHeight, "LearnOpenGL", config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
+	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr) {
 		std::cerr << "Failed to create GLFW window\n";
 		glfwTerminate();
