@@ -8,7 +8,7 @@ UseResources::UseResources(int resource, int quantity)
 std::shared_ptr<Patch> UseResources::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     //TODO: player index
-    return std::make_shared<Patch>(PlayerPatch(0,resource,-quantity));
+    return std::make_shared<Patch>(PlayerPatch(state.playerOnMove,resource,-quantity));
 }
 
 bool UseResources::isDoable(const GameState& state, const LogicAssets& assets) const

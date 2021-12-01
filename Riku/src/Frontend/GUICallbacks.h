@@ -66,6 +66,7 @@ namespace CEGUI::Functor {
 
         bool operator()(const CEGUI::EventArgs& e)
         {
+            std::cout << "GUICallbacks - EndTurn: player on move = " << front::state.getPlayerOnMove();
             front::state.finishTurn();
             CEGUI::GUIUpdate::UpdateResources();
             return true;
