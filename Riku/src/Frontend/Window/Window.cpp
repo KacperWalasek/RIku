@@ -94,7 +94,7 @@ void front::Window::setCallbacks()
 
 	glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		MouseClickCallback(scene->activeGUI)(window, button, action, mods);
+		MouseClickCallback(scene->activeGUI, scene)(window, button, action, mods);
 		});
 
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {

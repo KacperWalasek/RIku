@@ -1,20 +1,21 @@
 #pragma once
-#define _USE_MATH_DEFINES 
-#include <GLFW/glfw3.h>
-#include "../../Object.h"
-#include "../../Config.h"
+#define _USE_MATH_DEFINES
+
+struct GLFWwindow;
+namespace CEGUI {
+	class GUI;
+}
 
 namespace front {
+	class Scene;
 	class MouseClickCallback
 	{
 		CEGUI::GUI* activeGUI;
+		Scene* scene;
 	public:
-		MouseClickCallback(CEGUI::GUI* activeGUI) : activeGUI(activeGUI) {}
+		MouseClickCallback(CEGUI::GUI* activeGUI, Scene* scene) : activeGUI(activeGUI), scene(scene) {}
 
-		void operator()(GLFWwindow* window, int button, int action, int mods)
-		{
-			activeGUI->on_mouse_click(button, action);
-		}
+		void operator()(GLFWwindow* window, int button, int action, int mods);
 	};
 }
 

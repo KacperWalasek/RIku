@@ -73,6 +73,7 @@ add_executable(Riku
 		src/Frontend/Config.cpp
 		src/Frontend/Frontend.cpp
 		src/Frontend/GUI.cpp
+		src/Frontend/Window/Callbacks/MouseClickCallback.cpp
 		src/Riku.cpp)
 
 target_link_libraries(Riku dl)
