@@ -14,6 +14,7 @@ void CEGUI::GUI::init() {
     
     m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
     m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
+    m_root->activate();
     m_context->setRootWindow(m_root);
     /*on_key_press = new std::function<bool(int)>([](int key){
             return false;
@@ -28,6 +29,7 @@ void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
     rp->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
     rp->setResourceGroupDirectory("looknfeels", resourceDirectory + "/looknfeel/");
     rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
+    rp->setResourceGroupDirectory("icons", resourceDirectory + "/icons/");
 
     CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
     CEGUI::Scheme::setDefaultResourceGroup("schemes");
@@ -127,6 +129,11 @@ CEGUI::Window* CEGUI::GUI::loadLayout(const CEGUI::String& layoutFile) {
     CEGUI::Window* newWindow = WindowManager::getSingleton().loadLayoutFromFile(layoutFile);
     m_root->addChild(newWindow);
     return newWindow;
+}
+
+void CEGUI::GUI::loadIcon(const CEGUI::String& name, const CEGUI::String& path)
+{
+    CEGUI::ImageManager::getSingleton().addFromImageFile(name, path, "icons");
 }
 
 CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name /*= ""*/) {

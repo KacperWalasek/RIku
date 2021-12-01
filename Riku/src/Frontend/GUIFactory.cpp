@@ -24,7 +24,8 @@ void CEGUI::GUIFactory::init(GLFWwindow* win){
 	CEGUI::GUI::loadScheme("HUDDemo.scheme");
 	CEGUI::GUI::loadScheme("OgreTray.scheme");
 	CEGUI::GUI::loadScheme("VanillaSkin.scheme");
-	CEGUI::GUI::loadScheme("VanillaCommonDialogs.scheme");	
+	CEGUI::GUI::loadScheme("VanillaCommonDialogs.scheme");
+	CEGUI::GUIUpdate::LoadIcons();
 }
 CEGUI::GUIFactory::~GUIFactory()
 {
@@ -96,48 +97,10 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	//my_gui->setFont("DejaVuSans-10");
 
 	auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("UnitsList"));
-	auto player_units = state.getUnits(); //logic.getInfo<UnitListResponse>("player_units");
-	CEGUI::PushButton* unitButton;
-	CEGUI::Functor::FocusUnitWithIndex* func;
-	float y = 0.1f;
-	std::map<std::string, int> repeats;
-	int i = 0;
-	for (auto u : player_units)
-	{
-		std::string name = u.get()->getName();
-		if (repeats.find(name) == repeats.end())
-			repeats.insert(std::pair<std::string, int>(name, 0));
-		repeats[name]++;
-		int count = repeats[name];
-		unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
-			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), name + std::to_string(count)));
-		unitButton->setText(name + std::to_string(count));
-		func = new CEGUI::Functor::FocusUnitWithIndex(i, unitButton, focusedUnitIndex);
-		callbacks.push_back(func);
-		my_gui->setPushButtonCallback(name + std::to_string(count), func);
-		unitsList->addChild(unitButton);
-		y += 0.3;
-		i++;
-	}
+	
 
 	auto resourcesList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("ResourcesList"));
-	auto resources = state.getResources();
-	CEGUI::PushButton* resButton;
-	//CEGUI::DefaultWindow* label;
-	float x = 0.05f;
-	for (auto res : resources)
-	{		
-		resButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
-			glm::vec4(x, 0.1f, 0.15f, 0.8f), glm::vec4(0.0f), res.first));
-		resButton->setText(res.first + ": " + std::to_string(res.second));
-		//resButton->disable();
-		//label = static_cast<CEGUI::DefaultWindow*>(my_gui->createWidget("WindowsLook/Label",
-			//glm::vec4(x, 0.1f, 0.15f, 0.8f), glm::vec4(0.0f), res.first + "Label"));
-		//label->setAlwaysOnTop(true);
-		resourcesList->addChild(resButton);
-		//resourcesList->addChild(label);
-		x += 0.2;
-	}
+	CEGUI::GUIUpdate::CreateResources(my_gui, resourcesList);
 	//auto list = static_cast<CEGUI::Listbox*>(my_gui->getWidgetByName("Listbox"));
 	//Window* board = (my_gui->createWidget("OgreTray/ListboxItem", glm::vec4(0.5f, 0.5f, 1.1f, 1.05f), glm::vec4(0.0f), "item1"));
 	//list->addChild(board);
@@ -163,7 +126,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 
 	auto buildingsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("BuildingsList"));
 	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
-	auto avaible_buildings = state.getAvailableBuildings(0, 0);
+	auto avaible_buildings = state.getAvailableBuildings(0, 0); //TODO differ by unit position
 	CEGUI::PushButton* buildingButton;
 	CEGUI::Functor::SelectBuildingWithName* func;
 	float y = 0.1f;
@@ -193,15 +156,3 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 
 	return my_gui;
 }
-
-//void CEGUI::GUIFactory::UpdateResources()
-//{
-//	auto resources = front::state.getResources();
-//	CEGUI::PushButton* resButton;
-//	for (auto res : resources)
-//	{
-//		auto resButton = static_cast<CEGUI::PushButton*>(front::guiDic["GameUI"]->getWidgetByName(res.first));
-//		if (resButton != nullptr)
-//			resButton->setText(res.first + ": " + std::to_string(res.second));
-//	}
-//}

@@ -80,6 +80,7 @@
             <Property name="Area" value="{{0.8,0},{0.3,0},{1,0},{0.3,32}}" />
             <Property name="Text" value="Buildings" />
             <Property name="TooltipText" value="Open building menu" />
+            <Property name="TooltipType" value="TaharezLook/Tooltip" />
         </Window>
         <Window type="WindowsLook/Button" name="EndTurnButton" >
             <Property name="Area" value="{{0.8,0},{0.3,32},{1,0},{0.3,64}}" />

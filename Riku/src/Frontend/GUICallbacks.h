@@ -72,11 +72,12 @@ namespace CEGUI::Functor {
     {
     private:
         int idx;
-        CEGUI::PushButton* button;
+        const CEGUI::String& name;
+        CEGUI::Window* unitsList;
         int& focusedUnitIndex;
     public:
-        FocusUnitWithIndex(int idx, CEGUI::PushButton* button, int& focusedUnitIndex) 
-            : Functor(), idx(idx), button(button), focusedUnitIndex(focusedUnitIndex) {}
+        FocusUnitWithIndex(int idx, int& focusedUnitIndex, CEGUI::Window* unitsList, const CEGUI::String& name)
+            : Functor(), idx(idx), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), name(name) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
