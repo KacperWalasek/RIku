@@ -2,7 +2,7 @@
 #pragma once
 #include "../Resource.h"
 #include "ITileObject.h"
-#include "../LoadedHookable.h"
+#include "../Hooks/LoadedHookable.h"
 #include <map>
 #include "../GameState.h"
 

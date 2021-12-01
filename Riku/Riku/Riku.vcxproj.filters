@@ -45,6 +45,9 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Unit">
     </Filter>
+    <Filter Include="Riku\GameLogic\Hooks">
+      <UniqueIdentifier>{44023322-fe66-4e0b-b3a4-00a0e5e9e16f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -155,9 +158,6 @@
     <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp">
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\LoadedHookable.cpp">
-      <Filter>Riku\GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameLogic\LogicAssets.cpp">
       <Filter>Riku\GameLogic</Filter>
     </ClCompile>
@@ -245,6 +245,11 @@
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp">
       <Filter>Riku\Frontend\Window\Callbacks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\JsonUtil.cpp" />
+    <ClCompile Include="..\src\Frontend\Lang.cpp" />
+    <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp">
+      <Filter>Riku\GameLogic\Hooks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -416,16 +421,7 @@
     <ClInclude Include="..\src\GameLogic\IAsset.h">
       <Filter>Riku\GameLogic</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\IHookable.h">
-      <Filter>Riku\GameLogic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\LoadedHookable.h">
-      <Filter>Riku\GameLogic</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\LogicAssets.h">
-      <Filter>Riku\GameLogic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\MoveWrapper.h">
       <Filter>Riku\GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Player\Player.h">
@@ -549,5 +545,16 @@
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\Frontend\JsonUtil.h" />
+    <ClInclude Include="..\src\Frontend\Lang.h" />
+    <ClInclude Include="..\src\GameLogic\Hooks\IHookable.h">
+      <Filter>Riku\GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\LoadedHookable.h">
+      <Filter>Riku\GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\MoveWrapper.h">
+      <Filter>Riku\GameLogic\Hooks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

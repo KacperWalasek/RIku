@@ -9,7 +9,7 @@
 #include <fstream>
 #include <hash-library/sha256.h>
 #include "../StateUpdate/Move/TestMove.h"
-#include "../MoveWrapper.h"
+#include "../Hooks/MoveWrapper.h"
 #include "../Tile/TileDescription.h"
 #include "RandomWrapper.h"
 
@@ -100,9 +100,17 @@ namespace logic {
 		lua->new_usertype< TestMove>("TestMove",
 			sol::meta_function::construct, factories,
 			sol::call_constructor, factories);*/
-
-		lua->load(fileContent);
+		auto load_result = lua->load(fileContent);
+		if (!load_result.valid()) 
+		{
+			sol::error err = load_result;
+			std::string what = err.what();
+			std::cout << "error while loading " + (path + "/" + fileName) << " file" << std::endl;
+			std::cout << "\t" << what << std::endl;
+			return;
+		}
 		lua->script_file(path + "/" + fileName);
+
 
 		type = (*lua)["asset_type"];
 		//get name from file
