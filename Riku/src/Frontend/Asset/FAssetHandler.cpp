@@ -6,8 +6,9 @@
 #include "../FrontendState.h"
 #include "../JsonUtil.h"
 
-namespace front {
-	extern FrontendState state;
+front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
+	: handler(assetHandler)
+{
 }
 
 void front::AssetHandler::loadFiles() {

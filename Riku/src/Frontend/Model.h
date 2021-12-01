@@ -6,6 +6,10 @@
 #define GK_4_MODEL_H
 
 #include "Mesh.h"
+#ifdef _WIN32
+#undef max
+#undef min
+#endif
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"

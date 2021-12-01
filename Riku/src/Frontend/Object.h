@@ -27,7 +27,7 @@ namespace front {
 
 		[[nodiscard]] glm::mat4 CalculateMatrix(const Transform &relativeTo = Default) const;
 
-		glm::mat4 calculateViewMatrix() {
+		glm::mat4 calculateViewMatrix() const {
 			auto front=rotate({0.0f,0.0f,1.0f},rotation);
 			auto up=rotate({0.0f,1.0f,0.0f},rotation);
 			return glm::lookAt(position, position + front, up);
