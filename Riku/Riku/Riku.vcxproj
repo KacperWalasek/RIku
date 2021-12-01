@@ -176,6 +176,7 @@
     <ClCompile Include="..\src\Frontend\Shader.cpp" />
     <ClCompile Include="..\src\Frontend\stb_image.cpp" />
     <ClCompile Include="..\src\Frontend\Texture.cpp" />
+    <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Light.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Scene.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Window.cpp" />
