@@ -1,14 +1,18 @@
 #Needed packages:
-#libassimp-dev (Assimp)
-#libglew-dev (GLEW)
+#libassimp-dev (Assimp >=5.0)
+#libglew-dev (GLEW >=2.1.0)
 #libgl-dev (OpenGL)
-#libglfw3-dev (GLFW)
-#libjsoncpp-dev (JsonCpp)
+#libglfw3-dev (GLFW >=3.3)
+#libjsoncpp-dev (JsonCpp >=1.7.4)
+#liblua5.3-dev (Lua 5.3)
+#libcegui-mk2-dev (CEGUI >=0.8.7)
 
 sudo -i
-sudo apt install libgl-dev
-sudo apt install libglew-dev
-sudo apt install libglfw3-dev
-sudo apt install libassimp-dev
-sudo apt install libjsoncpp-dev
+apt install libgl-dev
+apt install libglew-dev
+apt install libglfw3-dev
+apt install libassimp-dev
+apt install libjsoncpp-dev
+apt install liblua5.3-dev
+apt install libcegui-mk2-dev
 exit

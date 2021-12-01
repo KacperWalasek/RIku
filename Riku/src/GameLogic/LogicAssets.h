@@ -9,6 +9,7 @@
 
 struct LogicAssets
 {
+	logic::AssetHandler handler;
 	std::map<std::string, Biome> biomes;
 	std::map<std::string, Area> areas;
 	std::map<std::string, Ground> grounds;

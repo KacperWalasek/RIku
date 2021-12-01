@@ -2,6 +2,7 @@
 #include <vector>
 #include "../GameLogic/Tile/Tile.h"
 #include "../GameLogic/GameLogic.h"
+#include "../GameLogic/Assets/AssetHandler.h"
 
 class FrontendState
 {
@@ -13,6 +14,7 @@ public:
 	std::map<std::string, int> getResources();
 	std::vector<std::string> getAvailableBuildings(int mapX, int mapY);
 	std::vector<std::shared_ptr<const Unit>> getUnits();
+	const logic::AssetHandler& getAssetHandler();
 
 	void build(std::string name, int mapX, int mapY);
 	void moveUnit(int fromX, int fromY, int toX, int toY);

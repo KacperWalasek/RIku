@@ -162,7 +162,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\FAsset.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\FAssetHandler.cpp" />
     <ClCompile Include="..\src\Frontend\Config.cpp" />
+    <ClCompile Include="..\src\Frontend\Frontend.cpp" />
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
     <ClCompile Include="..\src\Frontend\GUI.cpp" />
     <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />
@@ -172,10 +176,14 @@
     <ClCompile Include="..\src\Frontend\Shader.cpp" />
     <ClCompile Include="..\src\Frontend\stb_image.cpp" />
     <ClCompile Include="..\src\Frontend\Texture.cpp" />
+    <ClCompile Include="..\src\Frontend\Window\Light.cpp" />
+    <ClCompile Include="..\src\Frontend\Window\Scene.cpp" />
+    <ClCompile Include="..\src\Frontend\Window\Window.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp" />
@@ -220,7 +228,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\Frontend\Asset\AssetModel.h" />
+    <ClInclude Include="..\src\Frontend\Asset\FAsset.h" />
+    <ClInclude Include="..\src\Frontend\Asset\FAssetHandler.h" />
     <ClInclude Include="..\src\Frontend\Config.h" />
+    <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
@@ -232,12 +244,21 @@
     <ClInclude Include="..\src\Frontend\Shader.h" />
     <ClInclude Include="..\src\Frontend\stb_image.h" />
     <ClInclude Include="..\src\Frontend\Texture.h" />
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\FramebufferSizeCallback.h" />
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\KeyCallback.h" />
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.h" />
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\MousePositionCallback.h" />
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\ScrollCallback.h" />
+    <ClInclude Include="..\src\Frontend\Window\Light.h" />
+    <ClInclude Include="..\src\Frontend\Window\Scene.h" />
+    <ClInclude Include="..\src\Frontend\Window\Window.h" />
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetData.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
     <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
@@ -245,6 +266,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />

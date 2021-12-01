@@ -78,7 +78,7 @@ namespace logic {
 		hash = sha(fileContent);
 		file.close();
 		//init lua
-		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io);
+		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io, sol::lib::math, sol::lib::os);
 		
 		sol::usertype<TestMove> testMove = lua->new_usertype<TestMove>("TestMove",
 			sol::constructors<TestMove()>()
@@ -95,7 +95,7 @@ namespace logic {
 
 		
 		/*
-		Na razie ten kod zostawiam, bo mo¿e go bêdê u¿ywa³
+		Na razie ten kod zostawiam, bo moï¿½e go bï¿½dï¿½ uï¿½ywaï¿½
 		auto factories = sol::factories([]() { return std::make_shared<TestMove>(); });
 		lua->new_usertype< TestMove>("TestMove",
 			sol::meta_function::construct, factories,
@@ -152,6 +152,8 @@ namespace logic {
 		this->name = other.name;
 		this->parent_name = other.parent_name;
 		this->type = other.type;
+		this->path = std::move(other.path);
+		this->hash = std::move(other.hash);
 		this->abstract = other.abstract;
 		this->data = std::move(other.data);
 		this->functions = other.functions;

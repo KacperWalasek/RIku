@@ -1,5 +1,5 @@
 #include "GUI.h"
-#define RESPATH "GUI"
+#define RESPATH "../GUI"
 //#include "../src/Riku.cpp"
 CEGUI::OpenGL3Renderer* CEGUI::GUI::m_renderer = nullptr;
 CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey);
