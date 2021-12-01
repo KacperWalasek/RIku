@@ -4,10 +4,11 @@
 
 #ifndef RIKU_UTIL_H
 #define RIKU_UTIL_H
+
+#include <GLFW/glfw3.h>
 #include "Object.h"
 
 namespace front {
-	extern std::optional<glm::vec2> getRelativeCursorPosition(GLFWwindow* window);
 	glm::vec3 getRay(GLFWwindow* window, const glm::mat4& projection, const glm::mat4& view, float mouseX, float mouseY) {
 		//based on https://github.com/capnramses/antons_opengl_tutorials_book/blob/master/07_ray_picking/main.cpp by Anton Gerdelan
 		//license in https://github.com/capnramses/antons_opengl_tutorials_book/blob/master/LICENCE.md (CC BY 3.0)

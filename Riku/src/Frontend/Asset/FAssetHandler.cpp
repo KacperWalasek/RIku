@@ -11,12 +11,12 @@
 #include <json/json.h>
 #endif // __linux__
 
-namespace front {
-	extern FrontendState state;
+front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
+	: handler(assetHandler)
+{
 }
 
 void front::AssetHandler::loadFiles() {
-	const auto& handler = state.getAssetHandler();
 	for(const auto& node: handler.assetNodes) {
 		Json::Value root;
 		std::string path = node.second.getPath()+"/";

@@ -7,6 +7,10 @@
     </Filter>
     <Filter Include="Riku\Frontend\Asset">
     </Filter>
+    <Filter Include="Riku\Frontend\Window">
+    </Filter>
+    <Filter Include="Riku\Frontend\Window\Callbacks">
+    </Filter>
     <Filter Include="Riku\GameLogic">
     </Filter>
     <Filter Include="Riku\GameLogic\Assets">
@@ -55,6 +59,9 @@
     <ClCompile Include="..\src\Frontend\Config.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\Frontend.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Frontend\FrontendState.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
@@ -82,6 +89,15 @@
     <ClCompile Include="..\src\Frontend\Texture.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\Window\Light.cpp">
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Window\Scene.cpp">
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Window\Window.cpp">
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClCompile>
@@ -101,6 +117,9 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp">
@@ -184,6 +203,9 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClCompile>
@@ -221,11 +243,8 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp">
-      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp">
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +258,9 @@
       <Filter>Riku\Frontend\Asset</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Config.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Frontend.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\FrontendState.h">
@@ -274,6 +296,30 @@
     <ClInclude Include="..\src\Frontend\Texture.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\FramebufferSizeCallback.h">
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\KeyCallback.h">
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.h">
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\MousePositionCallback.h">
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Callbacks\ScrollCallback.h">
+      <Filter>Riku\Frontend\Window\Callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Light.h">
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Scene.h">
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Window\Window.h">
+      <Filter>Riku\Frontend\Window</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
@@ -304,6 +350,9 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
@@ -317,6 +366,9 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\Requests</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h">
@@ -454,6 +506,9 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClInclude>
@@ -494,14 +549,5 @@
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
-    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h">
-      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h">
-      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
