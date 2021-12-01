@@ -42,6 +42,7 @@
 #include "GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
 #include "GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 #include "Frontend/FrontendState.h"
+#include "Frontend/Util.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 float spotLightAngle=0.0f;
@@ -85,6 +86,7 @@ namespace front
 	//std::pair<int,int> focusedUnitPosition=std::make_pair(0,0);
 	/*std::vector<Object> gridObjects;
 	bool isGridOn=false;*/
+	glm::vec2 clickPos;
 	unsigned int lightCubeVAO;
 	std::vector<glm::vec3> pointLightPositions;
 	CEGUI::GUI* activeGUI;
@@ -245,6 +247,11 @@ void mouse_click_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	front::activeGUI->on_mouse_click(button, action);
 	//TODO
+	double x, y;
+	glfwGetCursorPos(window, &x, &y);
+	if(button==GLFW_MOUSE_BUTTON_LEFT && action==GLFW_PRESS) {
+		front::clickPos = front::getMapClickPosition(window, (float)x, (float)y, movingCameraTransform, front::config.fov, front::aspect, 0.5f);
+	}
 
 }
 
@@ -322,6 +329,10 @@ void drawScene(Shader& lightingShader, Shader& lightCubeShader, float currentFra
 	{
 		for(int j=0;j<map[i].size();j++)
 		{
+			if(i==int(front::clickPos.x+0.5f) && j==int(front::clickPos.y+0.5f))
+				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+			else
+				lightingShader.setVec4("color_mod", 0.8f, 0.75f, 0.75f, 1.0f);
 			auto transform = front::Transform(glm::vec3((float)i,(float)map[i][j].height*0.5f,(float)j));
 			if(map[i][j].area.getName()=="wet")
 				front::handler.tryDraw("wet",lightingShader,transform);
