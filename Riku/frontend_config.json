@@ -4,7 +4,7 @@
 	"is_fullscreen" : false,
 	"max_zoom_height" : 60.0,
 	"min_zoom_height" : 3.0,
-	"screen_height" : 600,
-	"screen_width" : 800,
-	"language": "pl"
+	"screen_height" : 864,
+	"screen_width" : 1152,
+	"language": "ja"
 }

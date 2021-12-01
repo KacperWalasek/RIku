@@ -44,6 +44,7 @@ bool front::Window::update()
 void front::Window::initWindow()
 {
 	config.load();
+	Lang::loadLanguage(scene.state.getAssetHandler(),config.language);
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
 	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);

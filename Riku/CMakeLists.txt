@@ -29,6 +29,7 @@ add_executable(Riku
 		src/GameLogic/StateUpdate/MoveFactory/BuildMoveHandler.cpp
 		src/GameLogic/StateUpdate/PatchHandler/TilePatchHandler.cpp
 		src/GameLogic/StateUpdate/PatchHandler/PlayerPatchHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/PlayerOnMovePatchHandler.cpp
 		src/GameLogic/StateUpdate/PatchHandler/RegisterHookablePatchHandler.cpp
 		src/GameLogic/StateUpdate/Move/UseResources.cpp
 		src/GameLogic/StateUpdate/Move/BuildTileObject.cpp
@@ -45,6 +46,7 @@ add_executable(Riku
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerOnMoveRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/Responses/MapResponse.cpp
 		src/GameLogic/FrontendCommunicator/Responses/Response.cpp
 		src/GameLogic/FrontendCommunicator/Responses/StringListResponse.cpp
@@ -59,24 +61,25 @@ add_executable(Riku
 		src/Frontend/Asset/FAssetHandler.cpp
 		src/Frontend/Asset/AssetModel.cpp
 		src/Frontend/Asset/FAsset.cpp
+		src/Frontend/Window/Callbacks/MouseClickCallback.cpp
 		src/Frontend/Window/Window.cpp
 		src/Frontend/Window/Light.cpp
 		src/Frontend/Window/Scene.cpp
 		src/Frontend/FrontendState.cpp
 		src/Frontend/Texture.cpp
 		src/Frontend/stb_image.cpp
+		src/Frontend/Lang.cpp
 		src/Frontend/Object.cpp
 		src/Frontend/Model.cpp
 		src/Frontend/GUIFactory.cpp
+		src/Frontend/JsonUtil.cpp
 		src/Frontend/Shader.cpp
 		src/Frontend/Mesh.cpp
 		src/Frontend/Config.cpp
 		src/Frontend/Frontend.cpp
 		src/Frontend/GUI.cpp
-		src/Frontend/Lang.cpp
-		src/Frontend/JsonUtil.cpp
-		src/Frontend/Window/Callbacks/MouseClickCallback.cpp
-		src/Riku.cpp)
+		src/Riku.cpp
+		src/Frontend/TextureTransform.cpp src/Frontend/TextureTransform.h)
 
 target_link_libraries(Riku dl)
 target_link_libraries(Riku Xi)
