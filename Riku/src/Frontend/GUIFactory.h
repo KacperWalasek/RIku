@@ -1,12 +1,10 @@
 #pragma once
 
 #include <CEGUI/CEGUI.h>
-#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
-#include <glm/glm.hpp>
-#include <GLFW/glfw3.h>
 #include "GUI.h"
-#include <iostream>
-#include "GUICallbacks.h"
+#include "GUICallbacks/Functor.h"
+#include "FrontendState.h"
+#include "../GameLogic/GameLogic.h"
 
 namespace CEGUI {
     class GUIFactory {

@@ -234,7 +234,16 @@
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\FocusUnitWithIndex.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\Functor.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\GameUIOnKeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildingUIOnKeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\SelectBuildingWithName.h" />
+    <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h" />
     <ClInclude Include="..\src\Frontend\GUIUpdate.h" />

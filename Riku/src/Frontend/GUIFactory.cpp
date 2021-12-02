@@ -1,8 +1,15 @@
 #include "GUIFactory.h"
 #include <iostream>
 #include <functional>
-#include "FrontendState.h"
-#include "../GameLogic/GameLogic.h"
+#include "GUIUpdate.h"
+#include "GUICallbacks/SwitchActiveGUI.h"
+#include "GUICallbacks/EndTurn.h"
+#include "GUICallbacks/ExitApp.h"
+#include "GUICallbacks/BuildBuildingFromLabel.h"
+#include "GUICallbacks/BuildingUIOnKeyPress.h"
+#include "GUICallbacks/GameUIOnKeyPress.h"
+#include "GUICallbacks/MainMenuOnkeyPress.h"
+#include "GUICallbacks/SelectBuildingWithName.h" //to_delete
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
 	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex)
