@@ -85,6 +85,10 @@ void front::Scene::draw()
 	{
 		for (int j = 0; j < map[i].size(); j++)
 		{
+			if(i==int(clickPos.x+0.5f) && j==int(clickPos.y+0.5f))
+				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+			else
+				lightingShader.setVec4("color_mod", 0.8f, 0.75f, 0.75f, 1.0f);
 			auto transform = front::Transform(glm::vec3((float)i, (float)map[i][j].height * 0.5f, (float)j));
 			if (map[i][j].area.getName() == "wet")
 				handler.tryDraw("wet", lightingShader, transform);

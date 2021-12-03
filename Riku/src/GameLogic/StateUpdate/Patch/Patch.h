@@ -18,11 +18,13 @@ public:
 	Patch(RegisterHookablePatch registerHookablePatch) {
 		registerHookablePatches.insert({ registerHookablePatch.hookable, registerHookablePatch });
 	}
+	Patch(int playerOnMove) : playerOnMove(playerOnMove) {}
 
 
 	std::map<int,PlayerPatch> playerPatches;
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
 	std::map<std::shared_ptr<IHookable>, RegisterHookablePatch> registerHookablePatches;
+	int playerOnMove = -1;
 
 	friend Patch operator+(Patch p1, const Patch& p2)
 	{
@@ -50,6 +52,8 @@ public:
 			else
 				p1.registerHookablePatches.insert({ registerPatch2 });
 		}
+		if (p2.playerOnMove != -1)
+			p1.playerOnMove = p2.playerOnMove;
 		return std::move(p1);
 	}
 };

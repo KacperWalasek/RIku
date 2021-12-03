@@ -565,4 +565,5 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
   </ItemGroup>
+</Project>  </ItemGroup>
 </Project>

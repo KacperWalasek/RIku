@@ -18,7 +18,7 @@ std::shared_ptr<Response> AvailableBuildingsRequestHandler::handleRequest(std::s
         std::back_insert_iterator(availableNames),
         [&tileRequest, this](const auto& name) {
             //TODO index playera
-            BuildTileObject obj(0, { tileRequest->getMapX(), tileRequest->getMapY() }, name);
+            BuildTileObject obj(state.playerOnMove, { tileRequest->getMapX(), tileRequest->getMapY() }, name);
             return obj.isDoable(state, assets);
         });
     return std::make_shared<StringListResponse>(tileRequest, availableNames);

@@ -36,7 +36,8 @@ namespace front {
 		CEGUI::GUI* activeGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;
 
-		std::map<std::string, Model> biomeModels;
+		glm::vec2 clickPos;
+		friend class MouseClickCallback;
 
 		void init(GLFWwindow* window);
 	public:

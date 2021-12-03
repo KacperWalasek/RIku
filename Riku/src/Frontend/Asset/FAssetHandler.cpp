@@ -4,12 +4,7 @@
 
 #include "FAssetHandler.h"
 #include "../FrontendState.h"
-#include <fstream>
-#ifdef __linux__
-#include <jsoncpp/json/json.h>
-#elif defined _WIN32
-#include <json/json.h>
-#endif // __linux__
+#include "../JsonUtil.h"
 
 front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
 	: handler(assetHandler)
@@ -17,23 +12,11 @@ front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
 }
 
 void front::AssetHandler::loadFiles() {
+	std::cout << "Loading assets for frontend\n";
 	for(const auto& node: handler.assetNodes) {
-		Json::Value root;
 		std::string path = node.second.getPath()+"/";
-		std::ifstream file(path+"front.json");
-		if(!file.good())
-		{
-			std::cout << "Frontend file for " << path << "front.json not found\n";
-			continue;
-		}
-		std::cout << "Frontend file for " << path << "front.json found\n";
+		Json::Value root = getJsonFromFile(path+"front.json",false);
 		path = path.substr(3);
-		Json::CharReaderBuilder builder;
-		JSONCPP_STRING errs;
-		if (!parseFromStream(builder, file, &root, &errs)) {
-			std::cerr << errs << '\n';
-			continue;
-		}
 		for(auto const& id: root.getMemberNames()) {
 			Asset asset(id, path, root[id]);
 			if(!asset.assetModels.empty()) {
@@ -41,6 +24,7 @@ void front::AssetHandler::loadFiles() {
 			}
 		}
 	}
+	std::cout << "Assets loaded successfully\n\n";
 }
 
 const front::Asset &front::AssetHandler::getAsset(const std::string& key) const {

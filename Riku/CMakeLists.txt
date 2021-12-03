@@ -58,7 +58,10 @@ add_executable(Riku
 		src/GameLogic/LoadedHookable.cpp
 		src/Frontend/Asset/FAssetHandler.cpp
 		src/Frontend/Asset/AssetModel.cpp
-        src/Frontend/Asset/FAsset.cpp
+		src/Frontend/Asset/FAsset.cpp
+		src/Frontend/Window/Window.cpp
+		src/Frontend/Window/Light.cpp
+		src/Frontend/Window/Scene.cpp
 		src/Frontend/FrontendState.cpp
 		src/Frontend/Texture.cpp
 		src/Frontend/stb_image.cpp
@@ -68,7 +71,11 @@ add_executable(Riku
 		src/Frontend/Shader.cpp
 		src/Frontend/Mesh.cpp
 		src/Frontend/Config.cpp
+		src/Frontend/Frontend.cpp
 		src/Frontend/GUI.cpp
+		src/Frontend/Lang.cpp
+		src/Frontend/JsonUtil.cpp
+		src/Frontend/Window/Callbacks/MouseClickCallback.cpp
 		src/Riku.cpp)
 
 target_link_libraries(Riku dl)
