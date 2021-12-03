@@ -62,6 +62,9 @@ namespace CEGUI::Functor {
 
         bool operator()(const CEGUI::EventArgs& e)
         {
+            auto u1 = state.getUnits();
+            state.choseGuiOption(0, 0, 0);
+            auto u2 = state.getUnits();
             state.finishTurn();
             CEGUI::GUIUpdate::UpdateResources(state,guiDic);
             return true;

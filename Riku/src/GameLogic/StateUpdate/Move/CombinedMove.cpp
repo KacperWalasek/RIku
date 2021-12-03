@@ -1,5 +1,9 @@
 #include "CombinedMove.h"
 
+CombinedMove::CombinedMove(MoveWrapper w1, MoveWrapper w2)
+    : move1(w1.move), move2(w2.move)
+{}
+
 CombinedMove::CombinedMove(std::shared_ptr<IMove> move1, std::shared_ptr<IMove> move2)
     : move1(move1), move2(move2)
 {}

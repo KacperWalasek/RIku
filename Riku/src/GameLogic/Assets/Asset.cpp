@@ -12,6 +12,9 @@
 #include "../Hooks/MoveWrapper.h"
 #include "../Tile/TileDescription.h"
 #include "RandomWrapper.h"
+#include "../StateUpdate/Move/CreateUnit.h"
+#include "../StateUpdate/Move/CombinedMove.h"
+#include "../StateUpdate/Move/UseResources.h"
 
 namespace logic {
 
@@ -80,19 +83,24 @@ namespace logic {
 		//init lua
 		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io, sol::lib::math, sol::lib::os);
 		
-		sol::usertype<TestMove> testMove = lua->new_usertype<TestMove>("TestMove",
+		lua->new_usertype<TestMove>("TestMove",
 			sol::constructors<TestMove()>()
 			);
-		sol::usertype<MoveWrapper> wrapper = lua->new_usertype<MoveWrapper>("MoveWrapper",
-			sol::constructors<MoveWrapper(TestMove)>()
+		lua->new_usertype<CreateUnit>("CreateUnit",
+			sol::constructors<CreateUnit(std::string,int,int)>()
 			);
-		sol::usertype<TileDescription> tiledesc = lua->new_usertype<TileDescription>("TileDescription",
+		lua->new_usertype<UseResources>("UseResources",
+			sol::constructors<UseResources(int, int)>()
+			);
+		lua->new_usertype<MoveWrapper>("MoveWrapper",
+			sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
+			);
+		lua->new_usertype<TileDescription>("TileDescription",
 			sol::constructors<TileDescription(int,std::string,std::string,std::string)>()
 			);
-		sol::usertype<RandomWrapper> rand = lua->new_usertype<RandomWrapper>("RandomWrapper",
-			sol::constructors<RandomWrapper()>()
+		lua->new_usertype<CombinedMove>("CombinedMove",
+			sol::constructors<CombinedMove(MoveWrapper,MoveWrapper)>()
 			);
-
 		
 		/*
 		Na razie ten kod zostawiam, bo mo�e go b�d� u�ywa�

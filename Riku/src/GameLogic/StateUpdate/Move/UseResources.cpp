@@ -13,7 +13,7 @@ std::shared_ptr<Patch> UseResources::createPatch(const GameState& state, const L
 
 bool UseResources::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return state.players[0].getResourceQuantity(resource) <= quantity;
+    return state.players[state.playerOnMove].getResourceQuantity(resource) >= quantity;
 }
 
 std::shared_ptr<IMove> UseResources::asPointner() const

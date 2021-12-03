@@ -251,6 +251,15 @@
     <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp">
       <Filter>Riku\GameLogic\Hooks</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Hooks\GUIDescription.cpp">
+      <Filter>Riku\GameLogic\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -475,9 +484,6 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
@@ -555,6 +561,21 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Hooks\MoveWrapper.h">
       <Filter>Riku\GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\GUIDescription.h">
+      <Filter>Riku\GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\ChoseGuiOptionMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,9 +3,13 @@
 CreateUnit::CreateUnit(int player, std::string unit, int mapX, int mapY)
     : player(player), name(unit), mapX(mapX), mapY(mapY)
 {}
+CreateUnit::CreateUnit(std::string unit, int mapX, int mapY)
+    : player(-1), name(unit), mapX(mapX), mapY(mapY)
+{}
 
 std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const LogicAssets& assets) const
 {
+    int player = this->player < 0 ? state.playerOnMove : this->player;
     auto it = assets.units.find(name);
     if (it == assets.units.end())
         return nullptr;
