@@ -9,17 +9,24 @@ namespace CEGUI::Functor {
     {
     private:
         int idx;
-        const CEGUI::String& name;
+        std::string myName;
         CEGUI::Window* unitsList;
         int& focusedUnitIndex;
+        std::vector<std::string> unitElems;
     public:
-        FocusUnitWithIndex(int idx, int& focusedUnitIndex, CEGUI::Window* unitsList, const CEGUI::String& name)
-            : Functor(), idx(idx), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), name(name) {}
+        FocusUnitWithIndex(int idx, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::vector<std::string> unitElems)
+            : Functor(), idx(idx), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), myName(name), unitElems(unitElems) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             focusedUnitIndex = idx;
-            //button->setProperty("NormalImage", "set:FTSUI image:full_image");
+            for (auto name : unitElems)
+            {
+                CEGUI::Window* child = unitsList->getChildRecursive(name);
+                if (name == myName)
+                    child->setProperty("BackgroundEnabled", "true");
+                else child->setProperty("BackgroundEnabled", "false");
+            }
             return true;
         };
     };

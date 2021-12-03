@@ -1,12 +1,9 @@
 #pragma once
 
 #include <CEGUI/CEGUI.h>
-#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
-#include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include "GUI.h"
-#include <iostream>
-//#include "GUICallbacks.h"
+#include "GUICallbacks/FocusUnitWithIndex.h"
 
 namespace CEGUI::GUIUpdate {
     static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
@@ -66,31 +63,73 @@ namespace CEGUI::GUIUpdate {
             }
             catch (...) {}            
         }
+        auto units = state.getUnits();
+        for (auto u : units)
+        {
+            try
+            {
+                CEGUI::GUI::loadIcon(u.get()->getName(), u.get()->getName() + ".png"); //TODO wczytywanie ró¿nych formatów
+                printf("Successfully loaded icon for: %s\n", u.get()->getName().c_str());
+            }
+            catch (...) {}
+        }
     }
-    static void CreateUnits(CEGUI::GUI* my_gui, CEGUI::Window* unitsList)
+    static void CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex)
     {
-        //auto player_units = front::state.getUnits(); //logic.getInfo<UnitListResponse>("player_units");
-        //CEGUI::PushButton* unitButton;
-        //CEGUI::Functor::FocusUnitWithIndex* func;
-        //float y = 0.1f;
-        //std::map<std::string, int> repeats;
-        //int i = 0;
-        //for (auto u : player_units)
-        //{
-        //    std::string name = u.get()->getName();
-        //    if (repeats.find(name) == repeats.end())
-        //        repeats.insert(std::pair<std::string, int>(name, 0));
-        //    repeats[name]++;
-        //    int count = repeats[name];
-        //    unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
-        //        glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), name + std::to_string(count)));
-        //    unitButton->setText(name + std::to_string(count));
-        //    func = new CEGUI::Functor::FocusUnitWithIndex(i, unitsList, name + std::to_string(count));
-        //    //callbacks.push_back(func);
-        //    my_gui->setPushButtonCallback(name + std::to_string(count), func);
-        //    unitsList->addChild(unitButton);
-        //    y += 0.3;
-        //    i++;
-        //}
+        auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(unitsListName));
+        auto player_units = state.getUnits();
+        float y = 0.05f;
+        std::map<std::string, int> repeats;
+        std::vector<std::string> unitNames;
+        for (auto u : player_units)
+        {
+            std::string name = u.get()->getName();
+            if (repeats.find(name) == repeats.end())
+                repeats.insert(std::pair<std::string, int>(name, 0));
+            repeats[name]++;
+            int count = repeats[name];
+            name = name + std::to_string(count);
+            unitNames.push_back(name);
+        }
+        int i = 0;
+        for(auto u : player_units)
+        {
+            std::string name = unitNames[i];
+            CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
+                glm::vec4(0.1f, y, 0.8f, 0.30f), glm::vec4(0.0f), name);
+            resourceElem->setProperty("BackgroundColours", "FF009999");
+            if (focusedUnitIndex == i)
+                resourceElem->setProperty("BackgroundEnabled", "true");
+            else resourceElem->setProperty("BackgroundEnabled", "false");
+
+            CEGUI::PushButton* unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("Generic/ImageButton",
+                glm::vec4(0.05f, 0.1f, 0.8f, 0.8f), glm::vec4(0.0f), name + "/button"));
+            unitButton->setProperty("NormalImage", u.get()->getName());
+            if (unitButton->getProperty("NormalImage").empty())
+            {
+                unitButton->destroy();
+                unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
+                    glm::vec4(0.05f, 0.1f, 0.8f, 0.8f), glm::vec4(0.0f), name + "/button"));
+                unitButton->setText(name);
+            }
+            else
+            {
+                unitButton->setProperty("HoverImage", u.get()->getName());         
+            }
+
+            CEGUI::Window* movementBar = my_gui->createWidget("WindowsLook/Static",
+                glm::vec4(0.85f, 0.1f, 0.1f, 0.8f), glm::vec4(0.0f), name + "/movement");
+            movementBar->setProperty("BackgroundColours", "FF00FF00");
+            movementBar->setProperty("FrameEnabled", "false");
+
+            CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, unitNames);
+            //callbacks.push_back(func);
+            my_gui->setPushButtonCallback(name + "/button", func);
+            resourceElem->addChild(movementBar);
+            resourceElem->addChild(unitButton);
+            unitsList->addChild(resourceElem);
+            y += 0.35;
+            i++;
+        }
     }
 }

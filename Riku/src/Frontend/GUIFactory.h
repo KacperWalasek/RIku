@@ -18,7 +18,6 @@ namespace CEGUI {
         GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
             std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex);
         void init(GLFWwindow* win);
-        ~GUIFactory();
         CEGUI::GUI* GetDemoWindow();
         CEGUI::GUI* GetMainMenu();
         CEGUI::GUI* GetGameUI();
@@ -27,7 +26,6 @@ namespace CEGUI {
     private:
         GLFWwindow* window;
         CEGUI::String resPath;
-        std::vector<CEGUI::Functor::Functor*> callbacks;
     };
     
 }

@@ -12,9 +12,14 @@ namespace CEGUI::Functor {
     {
         CEGUI::GUI*& activeGUI;
         std::map<std::string, CEGUI::GUI*>& guiDic;
+        CEGUI::DefaultWindow* label;
+        FrontendState& state;
+        int& focusedUnitIndex;
     public:
-        BuildingUIOnKeyPress(CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic)
-            : Functor(), activeGUI(activeGUI), guiDic(guiDic) {}
+        BuildingUIOnKeyPress(CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic,
+            CEGUI::DefaultWindow* label, FrontendState& state, int& focusedUnitIndex)
+            : Functor(), activeGUI(activeGUI), guiDic(guiDic),
+            label(label), state(state), focusedUnitIndex(focusedUnitIndex) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
@@ -30,7 +35,9 @@ namespace CEGUI::Functor {
                 case CEGUI::Key::Return:
                 case CEGUI::Key::NumpadEnter:
                 {
-                    return true; // build with enter
+                    auto f = CEGUI::Functor::BuildBuildingFromLabel(label, state, focusedUnitIndex);
+                    CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic)(e);
+                    return f(e); // build with enter
                 }
                 default: break;
             }

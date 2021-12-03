@@ -4,7 +4,7 @@
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
-#include <functional>
+#include "GUICallbacks/Functor.h"
 
 namespace CEGUI {
     class GUI {
@@ -36,8 +36,8 @@ namespace CEGUI {
         CEGUI::Window* createWidget(const CEGUI::String& type, const CEGUI::String& name = "");
         static void setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destRectPerc, const glm::vec4& destRectPix);
         CEGUI::Window* getWidgetByName(const CEGUI::String& name);
-        void setPushButtonCallback(const CEGUI::String& name, CEGUI::Event::Subscriber sub);
-        void setKeyCallback(CEGUI::Event::Subscriber sub);
+        void setPushButtonCallback(const CEGUI::String& name, CEGUI::Functor::Functor* sub);
+        void setKeyCallback(CEGUI::Functor::Functor* sub);
 
         // Getters
         static CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
@@ -47,5 +47,6 @@ namespace CEGUI {
         CEGUI::GUIContext* m_context = nullptr;
         CEGUI::Window* m_root = nullptr;
         bool visible = false;
+        std::vector<CEGUI::Functor::Functor*> callbacks;
     };
 }

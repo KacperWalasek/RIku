@@ -53,7 +53,8 @@ void CEGUI::GUI::destroyWindowRecursive(CEGUI::Window &window)
 CEGUI::GUI::~GUI() {
     //destroyWindowRecursive(*m_root);
     CEGUI::System::getSingleton().destroyGUIContext(*m_context);
-    
+    for (auto fun : callbacks)
+        delete fun;
 }
 
 void CEGUI::GUI::draw() {
@@ -113,11 +114,13 @@ bool CEGUI::GUI::on_mouse_click(int button, int action) {
         return m_context->injectMouseButtonUp(guiButton);
 }
 
-void CEGUI::GUI::setPushButtonCallback(const CEGUI::String& name, CEGUI::Event::Subscriber sub) {
+void CEGUI::GUI::setPushButtonCallback(const CEGUI::String& name, CEGUI::Functor::Functor* sub) {
+    callbacks.push_back(sub);
     CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(getWidgetByName(name));
     button->subscribeEvent(CEGUI::PushButton::EventClicked, sub);
 }
-void CEGUI::GUI::setKeyCallback(CEGUI::Event::Subscriber sub) {
+void CEGUI::GUI::setKeyCallback(CEGUI::Functor::Functor* sub) {
+    callbacks.push_back(sub);
     m_root->subscribeEvent(CEGUI::Window::EventKeyDown, sub);
 }
 

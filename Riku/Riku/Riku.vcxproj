@@ -235,6 +235,7 @@
     <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\FocusUnitWithIndex.h" />

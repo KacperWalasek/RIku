@@ -561,5 +561,8 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
