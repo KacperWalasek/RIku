@@ -15,10 +15,8 @@ void CEGUI::GUI::init() {
     m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
     m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
     m_root->activate();
+    m_root->setMousePassThroughEnabled(true);
     m_context->setRootWindow(m_root);
-    /*on_key_press = new std::function<bool(int)>([](int key){
-            return false;
-        });*/
 }
 
 void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
@@ -57,10 +55,21 @@ CEGUI::GUI::~GUI() {
         delete fun;
 }
 
-void CEGUI::GUI::draw() {
+void CEGUI::GUI::draw(bool render) {
     if (!visible) return;
+    if (render)
+    {
+        m_renderer->beginRendering();
+        m_context->draw();
+        m_renderer->endRendering();
+        glDisable(GL_SCISSOR_TEST);
+    }
+    else m_context->draw();
+}
+void CEGUI::GUI::drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic) {
     m_renderer->beginRendering();
-    m_context->draw();
+    for (auto p : guiDic)
+        p.second->draw(false);
     m_renderer->endRendering();
     glDisable(GL_SCISSOR_TEST);
 }

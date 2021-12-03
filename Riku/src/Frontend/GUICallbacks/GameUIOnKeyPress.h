@@ -30,7 +30,7 @@ namespace CEGUI::Functor {
                 }
                 case CEGUI::Key::B:
                 {
-                    auto f = CEGUI::Functor::SwitchActiveGUI("BuildingUI", activeGUI, guiDic);
+                    auto f = CEGUI::Functor::SwitchActiveGUI("BuildingUI", activeGUI, guiDic, false);
                     return f(e);
                 }
                 case CEGUI::Key::NumpadEnter:

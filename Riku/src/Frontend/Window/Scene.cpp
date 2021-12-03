@@ -20,10 +20,7 @@ front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, cons
 void front::Scene::update()
 {
 	draw();
-	for (auto p : guiDic)
-	{
-		p.second->draw(); // wyswietla tylko gui nawet jak nie sa poukrywane
-	}
+	CEGUI::GUI::drawMultiple(guiDic);
 }
 
 void front::Scene::init(GLFWwindow* window)

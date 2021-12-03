@@ -12,13 +12,15 @@ namespace CEGUI::Functor {
         std::string guiName;
         CEGUI::GUI*& activeGUI;
         std::map<std::string, CEGUI::GUI*>& guiDic;
+        bool hideActive;
     public:
-        SwitchActiveGUI(std::string guiName, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic) 
-            : Functor(), guiName(guiName), activeGUI(activeGUI), guiDic(guiDic) {}
+        SwitchActiveGUI(std::string guiName, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic, bool hideActive = true) 
+            : Functor(), guiName(guiName), activeGUI(activeGUI), guiDic(guiDic), hideActive(hideActive) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            activeGUI->hide();
+            if (hideActive)
+                activeGUI->hide();
             activeGUI = guiDic[guiName];
             activeGUI->show();
             return true;

@@ -100,7 +100,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	CEGUI::GUIUpdate::CreateResources(my_gui, "ResourcesList", state);
 
 	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state,activeGUI,guiDic);
-	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI",activeGUI,guiDic);
+	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI",activeGUI,guiDic,false);
 	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, guiDic);
 	//callbacks.push_back(onKeyPress);
 	//callbacks.push_back(onBuildingsButton);
