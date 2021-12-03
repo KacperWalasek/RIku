@@ -12,13 +12,18 @@ namespace CEGUI::Functor {
     {
         FrontendState& state;
         std::map<std::string, CEGUI::GUI*>& guiDic;
+        CEGUI::GUI*& activeGUI;
     public:
-        EndTurn(FrontendState& state, std::map<std::string, CEGUI::GUI*>& guiDic) : Functor(), state(state), guiDic(guiDic) {}
+        EndTurn(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic)
+            : Functor(), state(state), activeGUI(activeGUI), guiDic(guiDic) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             state.finishTurn();
             CEGUI::GUIUpdate::UpdateResources(state, guiDic);
+            printf("Turn of player %d\n", state.getPlayerOnMove());
+            if (state.getPlayerOnMove() == 0) // tylko do pokazania ze cos sie dzieje
+                CEGUI::Functor::SwitchActiveGUI("PlayerChangedUI", activeGUI, guiDic, false)(e);
             return true;
         };
     };

@@ -101,7 +101,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 
 	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state,activeGUI,guiDic);
 	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI",activeGUI,guiDic,false);
-	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, guiDic);
+	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, activeGUI, guiDic);
 	//callbacks.push_back(onKeyPress);
 	//callbacks.push_back(onBuildingsButton);
 	//callbacks.push_back(onEndTurnButton);
@@ -147,6 +147,19 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	my_gui->setPushButtonCallback("BuildButton", onConfirmButton);
 	auto frameWindow = static_cast<CEGUI::FrameWindow*>(my_gui->getWidgetByName("BuildingWindow"));
 	frameWindow->getCloseButton()->subscribeEvent(CEGUI::PushButton::EventClicked, onCloseButton);
+
+	return my_gui;
+}
+
+CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
+
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuYourTurn.layout");
+	my_gui->setFont("DejaVuSans-10");
+
+	auto onOkButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
+	my_gui->setPushButtonCallback("OkButton", onOkButton);
 
 	return my_gui;
 }

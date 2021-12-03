@@ -36,7 +36,7 @@ namespace CEGUI::Functor {
                 case CEGUI::Key::NumpadEnter:
                 case CEGUI::Key::Return:
                 {
-                    auto f = CEGUI::Functor::EndTurn(state, guiDic);
+                    auto f = CEGUI::Functor::EndTurn(state, activeGUI, guiDic);
                     return f(e);
                 }
                 default: break;
