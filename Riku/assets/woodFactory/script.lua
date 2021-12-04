@@ -25,7 +25,7 @@ tileobject = {
     }
 }
 --MoveWrapper.new(CombinedMove.new(MoveWrapper.new(CreateUnit.new("stefan",1,1)),MoveWrapper.new(CreateUnit.new("stefan",2,1))))
-function onOptionChosen()
+function onOptionChosen(assets)
     return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(CreateUnit.new("stefan",1,1)),MoveWrapper.new(UseResources.new(0,1))))
 end
 

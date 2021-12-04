@@ -1,5 +1,6 @@
 #include "GUIDescription.h"
 #include "MoveWrapper.h"
+#include "../LogicAssets.h"
 
 GUIDescription::GUIDescription(const std::map<std::string, sol::function>& funcs)
 	: funcs(funcs)
@@ -16,7 +17,6 @@ GUIDescription::GUIDescription(const std::map<std::string,logic::AssetData>& gui
 	auto map = gui.at("options").asVector();
 	for (const auto& option : map)
 		options.push_back(option.asMap());
-	
 }
 
 std::string GUIDescription::getName() const
@@ -35,12 +35,12 @@ std::vector<std::string> GUIDescription::getOptions() const
 	return descs;
 }
 
-std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index) const
+std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index, const LogicAssets& assets) const
 {
 	auto onOptionChosenFunc = funcs.find("onOptionChosen");
 	if (options.size() > index && onOptionChosenFunc != funcs.end())
 	{
-		MoveWrapper wrapper = onOptionChosenFunc->second();
+		MoveWrapper wrapper = onOptionChosenFunc->second(assets);
 		return wrapper.move;
 	}
 	return std::shared_ptr<IMove>();

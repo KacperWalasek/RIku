@@ -44,7 +44,7 @@ const GUIDescription& SimpleTileObject::getGuiDescription()
 	return gui;
 }
 
-std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index)
+std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index, const LogicAssets& assets)
 {
-	return gui.onOptionChosen(index);
+	return gui.onOptionChosen(index, assets);
 }
