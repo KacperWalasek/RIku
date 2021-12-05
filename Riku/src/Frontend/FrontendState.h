@@ -16,7 +16,7 @@ public:
 	std::vector<std::shared_ptr<const Unit>> getUnits();
 	const logic::AssetHandler& getAssetHandler();
 	int getPlayerOnMove();
-	std::vector<std::string> getTileObjectGui(int mapX, int mapY);
+	std::vector<std::string> getGuiOptions(int mapX, int mapY);
 
 	void build(std::string name, int mapX, int mapY);
 	void moveUnit(int fromX, int fromY, int toX, int toY);

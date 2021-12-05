@@ -12,5 +12,9 @@ std::shared_ptr<IMove> ChoseGuiOptionMoveHandler::handleDescription(const IMoveD
 
 bool ChoseGuiOptionMoveHandler::canHandle(const IMoveDescription& description) const
 {
-    return description.getMoveType() == "chose_gui_option";
+    if (description.getMoveType() != "chose_gui_option")
+        return false;
+    const ChoseGuiOptionMoveDescription& desc = (const ChoseGuiOptionMoveDescription&)description;
+    auto object = state.map[desc.getMapX()][desc.getMapY()].object;
+    return object && object->getGuiDescription().getOptions().size() > desc.getIndex();
 }

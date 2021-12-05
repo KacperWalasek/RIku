@@ -45,9 +45,12 @@ int FrontendState::getPlayerOnMove()
 	return logic.getInfo<IntResponse>("player_on_move")->get();
 }
 
-std::vector<std::string> FrontendState::getTileObjectGui(int mapX, int mapY)
+std::vector<std::string> FrontendState::getGuiOptions(int mapX, int mapY)
 {
-	return logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY))->getNames();
+	auto response = logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY));
+	if (response->getStatus())
+		return response->getNames();
+	return {};
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)
