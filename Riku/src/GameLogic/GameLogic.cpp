@@ -42,7 +42,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<BuildMoveHandler>(gameState),
 		std::make_shared<TranslateUnitMoveHandler>(),
 		std::make_shared<FinishGameMoveHandler>(),
-		std::make_shared<ChoseGuiOptionMoveHandler>(gameState, assets)
+		std::make_shared<ChoseGuiOptionMoveHandler>(gameState)
 		});
 
 	communicator.setHandlers({

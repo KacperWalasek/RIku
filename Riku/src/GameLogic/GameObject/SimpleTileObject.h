@@ -24,6 +24,6 @@ public:
 	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) override;
 
 	virtual const GUIDescription& getGuiDescription() override;
-	virtual std::shared_ptr<IMove> onOptionChosen(int index, const LogicAssets& assets) override;
+	virtual std::shared_ptr<IMove> onOptionChosen(int index) override;
 };
 

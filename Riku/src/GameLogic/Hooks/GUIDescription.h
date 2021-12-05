@@ -21,6 +21,6 @@ public:
 	GUIDescription(const std::map<std::string, logic::AssetData>& asset, const std::map<std::string, sol::function>& funcs);
 	std::string getName() const;
 	std::vector<std::string> getOptions() const;
-	std::shared_ptr<IMove> onOptionChosen(int index, const LogicAssets& assets) const;
+	std::shared_ptr<IMove> onOptionChosen(int index) const;
 };
 

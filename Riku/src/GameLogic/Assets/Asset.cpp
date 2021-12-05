@@ -82,7 +82,11 @@ namespace logic {
 		file.close();
 		//init lua
 		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io, sol::lib::math, sol::lib::os);
-		
+
+		lua->new_usertype<logic::AssetData>("AssetData",
+			sol::constructors<logic::AssetData(const logic::AssetData&)>(),
+			"as_int", &logic::AssetData::asInt
+			);
 		lua->new_usertype<TestMove>("TestMove",
 			sol::constructors<TestMove()>()
 			);
@@ -90,7 +94,7 @@ namespace logic {
 			sol::constructors<CreateUnit(std::string,int,int)>()
 			);
 		lua->new_usertype<UseResources>("UseResources",
-			sol::constructors<UseResources(int, int)>()
+			sol::constructors<UseResources(int, int), UseResources(std::string, int)>()
 			);
 		lua->new_usertype<MoveWrapper>("MoveWrapper",
 			sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
