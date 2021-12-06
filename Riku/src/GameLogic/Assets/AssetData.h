@@ -45,6 +45,7 @@ namespace logic {
 		[[nodiscard]] bool isNull() const { return getType() == AssetDataType::null; }
 		[[nodiscard]] bool asBool(bool defaultValue) const;
 		[[nodiscard]] double asNumber(double defaultValue = nan("")) const;
+		[[nodiscard]] int asInt(int defaultValue = nan("")) const;
 		[[nodiscard]] std::string asString(const std::string& defaultValue = "", bool areNumbersConverted = true) const;
 		std::vector<AssetData>& asVector();
 		[[nodiscard]] const std::vector<AssetData>& asVector() const;

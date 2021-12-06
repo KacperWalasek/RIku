@@ -2,7 +2,7 @@
 
 #include "SimpleTileObject.h"
 
-SimpleTileObject::SimpleTileObject(std::string name, const std::map<std::string, sol::function>& hooks) : loadedHookable(hooks), name(name) {}
+SimpleTileObject::SimpleTileObject(std::string name, const std::map<std::string, sol::function>& hooks, GUIDescription gui) : loadedHookable(hooks), name(name), gui(gui) {}
 
 std::string SimpleTileObject::getName() const
 {
@@ -37,4 +37,14 @@ std::shared_ptr<IMove> SimpleTileObject::onBeingPlaced(int mapX, int mapY)
 bool SimpleTileObject::canBeBuilt(const GameState& state, int mapX, int mapY)
 {
 	return loadedHookable.canBeBuilt(*this, state, mapX, mapY);
+}
+
+const GUIDescription& SimpleTileObject::getGuiDescription()
+{
+	return gui;
+}
+
+std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index)
+{
+	return gui.onOptionChosen(index);
 }
