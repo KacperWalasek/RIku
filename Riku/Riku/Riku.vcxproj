@@ -192,6 +192,7 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp" />
@@ -273,10 +274,13 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TilePairRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PositionListResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />

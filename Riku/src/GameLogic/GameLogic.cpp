@@ -25,6 +25,7 @@
 #include "FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.h"
 #include "StateUpdate/PatchHandler/PlayerOnMovePatchHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerOnMoveRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -52,7 +53,8 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<PlayerUnitsRequestHandler>(gameState),
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets),
 		std::make_shared<AssetHandlerRequestHandler>(assets),
-		std::make_shared<PlayerOnMoveRequestHandler>(gameState)
+		std::make_shared<PlayerOnMoveRequestHandler>(gameState),
+		std::make_shared<ShortestPathRequestHandler>(gameState)
 		});
 	
 	MapGenerator generator(assets.mapGenerator);
