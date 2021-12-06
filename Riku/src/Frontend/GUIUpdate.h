@@ -6,6 +6,7 @@
 #include "GUICallbacks/FocusUnitWithIndex.h"
 
 namespace CEGUI::GUIUpdate {
+    std::string activeUnitElem;
     static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
     {
         auto resources = state.getResources();
@@ -85,7 +86,7 @@ namespace CEGUI::GUIUpdate {
         auto player_units = state.getUnits();
         float y = 0.05f;
         std::map<std::string, int> repeats;
-        std::vector<std::string> unitNames;
+        int i = 0;
         for (auto u : player_units)
         {
             std::string name = u.get()->getName();
@@ -94,17 +95,15 @@ namespace CEGUI::GUIUpdate {
             repeats[name]++;
             int count = repeats[name];
             name = name + std::to_string(count);
-            unitNames.push_back(name);
-        }
-        int i = 0;
-        for(auto u : player_units)
-        {
-            std::string name = unitNames[i];
+
             CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
                 glm::vec4(0.1f, y, 0.8f, 0.30f), glm::vec4(0.0f), name);
             resourceElem->setProperty("BackgroundColours", "FF009999");
             if (focusedUnitIndex == i)
+            {
                 resourceElem->setProperty("BackgroundEnabled", "true");
+                CEGUI::GUIUpdate::activeUnitElem = name;
+            }
             else resourceElem->setProperty("BackgroundEnabled", "false");
 
             CEGUI::PushButton* unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("Generic/ImageButton",
@@ -127,7 +126,7 @@ namespace CEGUI::GUIUpdate {
             movementBar->setProperty("BackgroundColours", "FF00FF00");
             movementBar->setProperty("FrameEnabled", "false");
 
-            CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, unitNames);
+            CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, CEGUI::GUIUpdate::activeUnitElem);
             //callbacks.push_back(func);
             my_gui->setPushButtonCallback(name + "/button", func);
             resourceElem->addChild(movementBar);

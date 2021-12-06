@@ -12,21 +12,19 @@ namespace CEGUI::Functor {
         std::string myName;
         CEGUI::Window* unitsList;
         int& focusedUnitIndex;
-        std::vector<std::string> unitElems;
+        std::string& activeUnitElem;
     public:
-        FocusUnitWithIndex(int idx, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::vector<std::string> unitElems)
-            : Functor(), idx(idx), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), myName(name), unitElems(unitElems) {}
+        FocusUnitWithIndex(int idx, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::string& activeUnitElem)
+            : Functor(), idx(idx), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), myName(name), activeUnitElem(activeUnitElem) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
             focusedUnitIndex = idx;
-            for (auto name : unitElems)
-            {
-                CEGUI::Window* child = unitsList->getChildRecursive(name);
-                if (name == myName)
-                    child->setProperty("BackgroundEnabled", "true");
-                else child->setProperty("BackgroundEnabled", "false");
-            }
+            CEGUI::Window* child = unitsList->getChildRecursive(activeUnitElem);   
+            child->setProperty("BackgroundEnabled", "false");
+            CEGUI::Window* me = unitsList->getChildRecursive(myName);
+            me->setProperty("BackgroundEnabled", "true");
+            activeUnitElem = myName;
             return true;
         };
     };
