@@ -37,19 +37,7 @@ void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
     CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 }
 
-//void CEGUI::GUI::destroy() {
-//    CEGUI::System::getSingleton().destroyGUIContext(*m_context);
-//}
-void CEGUI::GUI::destroyWindowRecursive(CEGUI::Window &window)
-{
-    while (window.getChildCount() > 0)
-        destroyWindowRecursive(*window.getChildAtIdx(0));
-    printf("destroying %s \n", window.getName().c_str());
-    window.destroy();
-}
-
 CEGUI::GUI::~GUI() {
-    //destroyWindowRecursive(*m_root);
     CEGUI::System::getSingleton().destroyGUIContext(*m_context);
     for (auto fun : callbacks)
         delete fun;

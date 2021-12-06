@@ -10,8 +10,6 @@ namespace CEGUI {
     class GUI {
     public:
         void init();
-        //void destroy();
-        void destroyWindowRecursive(CEGUI::Window& window);
         ~GUI();
         static void setResourceDirectory(const CEGUI::String& resourceDirectory);
 

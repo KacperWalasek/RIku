@@ -17,6 +17,11 @@ front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, cons
 	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler)
 {}
 
+front::Scene::~Scene()
+{
+	for (auto p : guiDic)
+		delete p.second;
+}
 void front::Scene::update()
 {
 	draw();

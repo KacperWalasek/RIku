@@ -42,6 +42,7 @@ namespace front {
 		void init(GLFWwindow* window);
 	public:
 		Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect);
+		~Scene();
 		void update();//input
 		void draw();
 
