@@ -13,6 +13,11 @@ namespace logic {
 			return std::get<double>(data);
 		return defaultValue;
 	}
+	int AssetData::asInt(int defaultValue) const {
+		if (getType() == AssetDataType::number)
+			return std::get<double>(data);
+		return defaultValue;
+	}
 	std::string AssetData::asString(const std::string& defaultValue, bool areNumbersConverted) const {
 		if (getType() == AssetDataType::string)
 			return std::get<std::string>(data);

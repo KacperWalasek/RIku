@@ -13,6 +13,7 @@
 
 #include "../GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 #include "../GameLogic/FrontendCommunicator/Requests/TilePairRequest.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -52,6 +53,13 @@ Path FrontendState::getShortestPath(int fromX, int fromY, int toX, int toY)
 {
 	return logic.getInfo<PathResponse>(std::make_shared<TilePairRequest>("shortest_path", fromX, fromY, toX, toY))->get();
 }
+std::vector<std::string> FrontendState::getGuiOptions(int mapX, int mapY)
+{
+	auto response = logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY));
+	if (response->getStatus())
+		return response->getNames();
+	return {};
+}
 
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
@@ -66,4 +74,9 @@ void FrontendState::moveUnit(int fromX, int fromY, int toX, int toY)
 void FrontendState::finishTurn()
 {
 	logic.makeMove(std::make_shared<SimpleMoveDescription>("finish_turn"));
+}
+
+void FrontendState::choseGuiOption(int mapX, int mapY, int index)
+{
+	logic.makeMove(std::make_shared<ChoseGuiOptionMoveDescription>(mapX, mapY, index));
 }

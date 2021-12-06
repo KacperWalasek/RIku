@@ -12,6 +12,7 @@ std::shared_ptr<Patch> ExtractResources::createPatch(const GameState& state, con
 
 bool ExtractResources::isDoable(const GameState& state, const LogicAssets& assets) const
 {  
+    int player = this->player < 0 ? state.playerOnMove : this->player;
     return player < state.players.size() 
         && state.players[player].getResourceQuantity(resource) + quantity >= 0 
         && (requiredResource < 0 || state.map[mapX][mapY].resource == requiredResource);

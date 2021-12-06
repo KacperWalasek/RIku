@@ -14,10 +14,9 @@ void CEGUI::GUI::init() {
     
     m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
     m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
+    m_root->activate();
+    m_root->setMousePassThroughEnabled(true);
     m_context->setRootWindow(m_root);
-    /*on_key_press = new std::function<bool(int)>([](int key){
-            return false;
-        });*/
 }
 
 void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
@@ -28,6 +27,7 @@ void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
     rp->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
     rp->setResourceGroupDirectory("looknfeels", resourceDirectory + "/looknfeel/");
     rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
+    rp->setResourceGroupDirectory("icons", resourceDirectory + "/icons/");
 
     CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
     CEGUI::Scheme::setDefaultResourceGroup("schemes");
@@ -37,27 +37,27 @@ void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
     CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 }
 
-//void CEGUI::GUI::destroy() {
-//    CEGUI::System::getSingleton().destroyGUIContext(*m_context);
-//}
-void CEGUI::GUI::destroyWindowRecursive(CEGUI::Window &window)
-{
-    while (window.getChildCount() > 0)
-        destroyWindowRecursive(*window.getChildAtIdx(0));
-    printf("destroying %s \n", window.getName().c_str());
-    window.destroy();
-}
-
 CEGUI::GUI::~GUI() {
-    //destroyWindowRecursive(*m_root);
     CEGUI::System::getSingleton().destroyGUIContext(*m_context);
-    
+    for (auto fun : callbacks)
+        delete fun;
 }
 
-void CEGUI::GUI::draw() {
+void CEGUI::GUI::draw(bool render) {
     if (!visible) return;
+    if (render)
+    {
+        m_renderer->beginRendering();
+        m_context->draw();
+        m_renderer->endRendering();
+        glDisable(GL_SCISSOR_TEST);
+    }
+    else m_context->draw();
+}
+void CEGUI::GUI::drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic) {
     m_renderer->beginRendering();
-    m_context->draw();
+    for (auto p : guiDic)
+        p.second->draw(false);
     m_renderer->endRendering();
     glDisable(GL_SCISSOR_TEST);
 }
@@ -111,11 +111,13 @@ bool CEGUI::GUI::on_mouse_click(int button, int action) {
         return m_context->injectMouseButtonUp(guiButton);
 }
 
-void CEGUI::GUI::setPushButtonCallback(const CEGUI::String& name, CEGUI::Event::Subscriber sub) {
+void CEGUI::GUI::setPushButtonCallback(const CEGUI::String& name, CEGUI::Functor::Functor* sub) {
+    callbacks.push_back(sub);
     CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(getWidgetByName(name));
     button->subscribeEvent(CEGUI::PushButton::EventClicked, sub);
 }
-void CEGUI::GUI::setKeyCallback(CEGUI::Event::Subscriber sub) {
+void CEGUI::GUI::setKeyCallback(CEGUI::Functor::Functor* sub) {
+    callbacks.push_back(sub);
     m_root->subscribeEvent(CEGUI::Window::EventKeyDown, sub);
 }
 
@@ -127,6 +129,11 @@ CEGUI::Window* CEGUI::GUI::loadLayout(const CEGUI::String& layoutFile) {
     CEGUI::Window* newWindow = WindowManager::getSingleton().loadLayoutFromFile(layoutFile);
     m_root->addChild(newWindow);
     return newWindow;
+}
+
+void CEGUI::GUI::loadIcon(const CEGUI::String& name, const CEGUI::String& path)
+{
+    CEGUI::ImageManager::getSingleton().addFromImageFile(name, path, "icons");
 }
 
 CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name /*= ""*/) {
