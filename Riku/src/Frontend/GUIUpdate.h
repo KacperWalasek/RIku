@@ -6,7 +6,6 @@
 #include "GUICallbacks/FocusUnitWithIndex.h"
 
 namespace CEGUI::GUIUpdate {
-    std::string activeUnitElem;
     static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
     {
         auto resources = state.getResources();
@@ -86,6 +85,7 @@ namespace CEGUI::GUIUpdate {
         auto player_units = state.getUnits();
         float y = 0.05f;
         std::map<std::string, int> repeats;
+        std::shared_ptr<std::string> activeUnitElem = std::make_shared<std::string>();
         int i = 0;
         for (auto u : player_units)
         {
@@ -102,7 +102,7 @@ namespace CEGUI::GUIUpdate {
             if (focusedUnitIndex == i)
             {
                 resourceElem->setProperty("BackgroundEnabled", "true");
-                CEGUI::GUIUpdate::activeUnitElem = name;
+                *activeUnitElem = name;
             }
             else resourceElem->setProperty("BackgroundEnabled", "false");
 
@@ -126,7 +126,7 @@ namespace CEGUI::GUIUpdate {
             movementBar->setProperty("BackgroundColours", "FF00FF00");
             movementBar->setProperty("FrameEnabled", "false");
 
-            CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, CEGUI::GUIUpdate::activeUnitElem);
+            CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, activeUnitElem);
             //callbacks.push_back(func);
             my_gui->setPushButtonCallback(name + "/button", func);
             resourceElem->addChild(movementBar);
