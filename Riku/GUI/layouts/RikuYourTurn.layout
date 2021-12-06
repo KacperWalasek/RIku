@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,1},{1,0},{1,1}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="WindowsLook/FrameWindow" name="FrameWindow" >
+            <Property name="Area" value="{{0.35,0},{0.35,0},{0.65,0},{0.65,0}}" />
+            <Property name="RollUpEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <Window type="WindowsLook/Label" name="Label" >
+                <Property name="Area" value="{{0.5,-64},{0.3,-16},{0.5,64},{0.3,16}}" />
+                <Property name="Text" value="Your turn" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Button" name="OkButton" >
+                <Property name="Area" value="{{0.5,-48},{0.7,-16},{0.5,48},{0.7,16}}" />
+                <Property name="Text" value="Ok" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
