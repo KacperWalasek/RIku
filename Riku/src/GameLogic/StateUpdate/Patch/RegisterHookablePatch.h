@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "../../IHookable.h"
+#include "../../Hooks/IHookable.h"
 
 class RegisterHookablePatch
 {

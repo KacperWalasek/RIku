@@ -9,7 +9,10 @@ std::shared_ptr<ITileObject> BuildTileObject::createObject(const LogicAssets& as
     if (assetIt == assets.tileObjects.end())
         return nullptr;
     const logic::Asset& asset = assetIt->second;
-    std::shared_ptr<ITileObject> object = std::make_shared<SimpleTileObject>(tileObject, asset.getFunctions());
+    GUIDescription gui(asset.getFunctions());
+    if (asset.hasData("gui"))
+        gui = GUIDescription(asset.getByKey("gui").asMap(), asset.getFunctions());
+    std::shared_ptr<ITileObject> object = std::make_shared<SimpleTileObject>(tileObject, asset.getFunctions(), gui);
     for (auto& behavior : asset.getByKey("behavior").asMap())
     {
         std::string type = behavior.first;

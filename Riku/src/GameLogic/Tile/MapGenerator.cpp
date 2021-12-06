@@ -14,7 +14,7 @@ std::vector<std::vector<Tile>> MapGenerator::getMap(const LogicAssets& assets)
 				std::vector<Tile> tileRow;
 				std::transform(row.begin(), row.end(), std::back_insert_iterator(tileRow),
 					[&assets](const TileDescription& descr) {
-						return Tile(descr.height,assets.areas.at(descr.area), assets.grounds.at(descr.ground), assets.biomes.at(descr.biome), 1);
+						return Tile(descr.height,assets.areas.at(descr.area), assets.grounds.at(descr.ground), assets.biomes.at(descr.biome));
 					});
 				return tileRow;
 			}

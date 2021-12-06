@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "StateUpdate/Move/IMove.h"
+#include "../StateUpdate/Move/IMove.h"
 class MoveWrapper
 {
 public:

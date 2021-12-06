@@ -9,9 +9,12 @@
 #include <fstream>
 #include <hash-library/sha256.h>
 #include "../StateUpdate/Move/TestMove.h"
-#include "../MoveWrapper.h"
+#include "../Hooks/MoveWrapper.h"
 #include "../Tile/TileDescription.h"
 #include "RandomWrapper.h"
+#include "../StateUpdate/Move/CreateUnit.h"
+#include "../StateUpdate/Move/CombinedMove.h"
+#include "../StateUpdate/Move/UseResources.h"
 
 namespace logic {
 
@@ -79,20 +82,29 @@ namespace logic {
 		file.close();
 		//init lua
 		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io, sol::lib::math, sol::lib::os);
-		
-		sol::usertype<TestMove> testMove = lua->new_usertype<TestMove>("TestMove",
+
+		lua->new_usertype<logic::AssetData>("AssetData",
+			sol::constructors<logic::AssetData(const logic::AssetData&)>(),
+			"as_int", &logic::AssetData::asInt
+			);
+		lua->new_usertype<TestMove>("TestMove",
 			sol::constructors<TestMove()>()
 			);
-		sol::usertype<MoveWrapper> wrapper = lua->new_usertype<MoveWrapper>("MoveWrapper",
-			sol::constructors<MoveWrapper(TestMove)>()
+		lua->new_usertype<CreateUnit>("CreateUnit",
+			sol::constructors<CreateUnit(std::string,int,int)>()
 			);
-		sol::usertype<TileDescription> tiledesc = lua->new_usertype<TileDescription>("TileDescription",
+		lua->new_usertype<UseResources>("UseResources",
+			sol::constructors<UseResources(int, int), UseResources(std::string, int)>()
+			);
+		lua->new_usertype<MoveWrapper>("MoveWrapper",
+			sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
+			);
+		lua->new_usertype<TileDescription>("TileDescription",
 			sol::constructors<TileDescription(int,std::string,std::string,std::string)>()
 			);
-		sol::usertype<RandomWrapper> rand = lua->new_usertype<RandomWrapper>("RandomWrapper",
-			sol::constructors<RandomWrapper()>()
+		lua->new_usertype<CombinedMove>("CombinedMove",
+			sol::constructors<CombinedMove(MoveWrapper,MoveWrapper)>()
 			);
-
 		
 		/*
 		Na razie ten kod zostawiam, bo mo�e go b�d� u�ywa�
@@ -100,9 +112,17 @@ namespace logic {
 		lua->new_usertype< TestMove>("TestMove",
 			sol::meta_function::construct, factories,
 			sol::call_constructor, factories);*/
-
-		lua->load(fileContent);
+		auto load_result = lua->load(fileContent);
+		if (!load_result.valid()) 
+		{
+			sol::error err = load_result;
+			std::string what = err.what();
+			std::cout << "error while loading " + (path + "/" + fileName) << " file" << std::endl;
+			std::cout << "\t" << what << std::endl;
+			return;
+		}
 		lua->script_file(path + "/" + fileName);
+
 
 		type = (*lua)["asset_type"];
 		//get name from file

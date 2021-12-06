@@ -1,7 +1,7 @@
 #pragma once
-#include "../IHookable.h"
+#include "../Hooks/IHookable.h"
 #include "../IAsset.h"
-#include "../LoadedHookable.h"
+#include "../Hooks/LoadedHookable.h"
 
 class Unit : public IHookable, public IAsset
 {
