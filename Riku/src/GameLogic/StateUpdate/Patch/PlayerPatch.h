@@ -20,7 +20,7 @@ public:
 			return *this;
 		auto units = patch.addedUnits;
 		if(units.size()>0)
-			units.insert(addedUnits.end(), units.begin(), units.end());
+			addedUnits.insert(addedUnits.end(), units.begin(), units.end());
 		for (auto& resourceChange : patch.resourceChanges)
 		{
 			auto resource1 = resourceChanges.find(resourceChange.first);

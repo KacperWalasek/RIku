@@ -2,29 +2,27 @@
 #include "GameLogic.h"
 #include <iostream>
 #include <memory>
-#include "GameObject/SimpleTileObject.h"
-#include "StateUpdate/Move/ExtractResources.h"
+#include "StateUpdate/Move/CreateUnit.h"
+#include "Tile/MapGenerator.h"
+#include "StateUpdate/MoveFactory/TestMoveHandler.h"
+#include "StateUpdate/MoveFactory/BuildMoveHandler.h"
+#include "StateUpdate/MoveFactory/TranslateUnitMoveHandler.h"
+#include "StateUpdate/MoveFactory/ChoseGuiOptionMoveHandler.h"
+#include "StateUpdate/MoveFactory/FinishGameMoveHandler.h"
+
+#include "StateUpdate/PatchHandler/PlayerOnMovePatchHandler.h"
 #include "StateUpdate/PatchHandler/PlayerPatchHandler.h"
 #include "StateUpdate/PatchHandler/TilePatchHandler.h"
 #include "StateUpdate/PatchHandler/RegisterHookablePatchHandler.h"
-#include "GameObject/ResourceFactory.h"
-#include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
-#include "FrontendCommunicator/Responses/MapResponse.h"
-#include "StateUpdate/MoveFactory/TestMoveHandler.h"
-#include "StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
-#include "StateUpdate/Move/CreateUnit.h"
-#include "StateUpdate/Move/BuildTileObject.h"
+
 #include "FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.h"
-#include "StateUpdate/MoveFactory/BuildMoveHandler.h"
-#include "StateUpdate/MoveFactory/TranslateUnitMoveHandler.h"
-#include "Tile/TileDescription.h"
-#include "Tile/MapGenerator.h"
-#include "StateUpdate/MoveFactory/FinishGameMoveHandler.h"
 #include "FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.h"
-#include "StateUpdate/PatchHandler/PlayerOnMovePatchHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerOnMoveRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/TileObjectGuiRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
+#include "FrontendCommunicator/Responses/MapResponse.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -39,20 +37,22 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<RegisterHookablePatchHandler>(),
 		std::make_shared<PlayerOnMovePatchHandler>()
 		});
-	factory.setHandlers({ 
+	factory.setHandlers({
 		std::make_shared<TestMoveHandler>(),
 		std::make_shared<BuildMoveHandler>(gameState),
 		std::make_shared<TranslateUnitMoveHandler>(),
-		std::make_shared<FinishGameMoveHandler>()
+		std::make_shared<FinishGameMoveHandler>(),
+		std::make_shared<ChoseGuiOptionMoveHandler>(gameState)
 		});
 
-	communicator.setHandlers({ 
+	communicator.setHandlers({
 		std::make_shared<MapRequestHandler>(gameState.map),
 		std::make_shared<AvailableBuildingsRequestHandler>(gameState,assets),
 		std::make_shared<PlayerUnitsRequestHandler>(gameState),
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets),
 		std::make_shared<AssetHandlerRequestHandler>(assets),
-		std::make_shared<PlayerOnMoveRequestHandler>(gameState)
+		std::make_shared<PlayerOnMoveRequestHandler>(gameState),
+		std::make_shared<TileObjectGuiRequestHandler>(gameState)
 		});
 	
 	MapGenerator generator(assets.mapGenerator);

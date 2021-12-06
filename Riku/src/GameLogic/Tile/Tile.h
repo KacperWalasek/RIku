@@ -10,7 +10,7 @@ class Unit;
 class Tile
 {
 public:
-	Tile(int height, const Area& area, const Ground& ground, const Biome& biome, int resource = -1);
+	Tile(int height, const Area& area, const Ground& ground, const Biome& biome, int resource = 0);
 	int height;
 	const Area& area;
 	const Ground& ground;
