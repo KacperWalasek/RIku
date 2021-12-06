@@ -22,8 +22,9 @@ namespace CEGUI::Functor {
             state.finishTurn();
             CEGUI::GUIUpdate::UpdateResources(state, guiDic);
             printf("Turn of player %d\n", state.getPlayerOnMove());
-            if (state.getPlayerOnMove() == 0) // tylko do pokazania ze cos sie dzieje
-                CEGUI::Functor::SwitchActiveGUI("PlayerChangedUI", activeGUI, guiDic, false)(e);
+            CEGUI::GUIUpdate::UpdatePlayerChangedWindow(state, guiDic);
+            //if (state.getPlayerOnMove() == 0) // tylko do pokazania ze cos sie dzieje
+            CEGUI::Functor::SwitchActiveGUI("PlayerChangedUI", activeGUI, guiDic, false)(e);
             return true;
         };
     };

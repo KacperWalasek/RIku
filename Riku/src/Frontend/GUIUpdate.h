@@ -16,6 +16,11 @@ namespace CEGUI::GUIUpdate {
             resourceElem->setText(std::to_string(res.second));
         }
     }
+    static void UpdatePlayerChangedWindow(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
+    {
+        auto label = guiDic["PlayerChangedUI"]->getWidgetByName("Label");
+        label->setText("Turn of player " + std::to_string(state.getPlayerOnMove()));
+    }
     static void CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& resourcesListName, FrontendState& state)
     {
         auto resourcesList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(resourcesListName));

@@ -9,12 +9,12 @@
             <Property name="RollUpEnabled" value="false" />
             <Property name="CloseButtonEnabled" value="false" />
             <Window type="WindowsLook/Label" name="Label" >
-                <Property name="Area" value="{{0,79},{0,32},{0,207},{0,64}}" />
+                <Property name="Area" value="{{0.5,-64},{0.3,-16},{0.5,64},{0.3,16}}" />
                 <Property name="Text" value="Your turn" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="WindowsLook/Button" name="OkButton" >
-                <Property name="Area" value="{{0,99},{0,125},{0,195},{0,157}}" />
+                <Property name="Area" value="{{0.5,-48},{0.7,-16},{0.5,48},{0.7,16}}" />
                 <Property name="Text" value="Ok" />
             </Window>
         </Window>

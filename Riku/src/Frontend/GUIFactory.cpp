@@ -159,7 +159,9 @@ CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
 	my_gui->setFont("DejaVuSans-10");
 
 	auto onOkButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
+	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostk¹
 	my_gui->setPushButtonCallback("OkButton", onOkButton);
+	my_gui->setKeyCallback(onKeyPress);
 
 	return my_gui;
 }
