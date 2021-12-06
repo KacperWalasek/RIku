@@ -45,6 +45,9 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Unit">
     </Filter>
+    <Filter Include="Riku\GameLogic\Utils">
+      <UniqueIdentifier>{edfdcc68-adec-4305-bdff-a6cb1696322a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -248,11 +251,14 @@
     </ClCompile>
     <ClCompile Include="..\src\Frontend\JsonUtil.cpp" />
     <ClCompile Include="..\src\Frontend\Lang.cpp" />
-    <ClCompile Include="..\src\GameLogic\LogicUtils.cpp">
-      <Filter>Riku\GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,17 +565,26 @@
     <ClInclude Include="..\lib\hash-library\sha256.h" />
     <ClInclude Include="..\src\Frontend\JsonUtil.h" />
     <ClInclude Include="..\src\Frontend\Lang.h" />
-    <ClInclude Include="..\src\GameLogic\LogicUtils.h">
-      <Filter>Riku\GameLogic</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TilePairRequest.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Requests</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PositionListResponse.h">
-      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\Path.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\UnitPatch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,6 +26,7 @@
 #include "StateUpdate/PatchHandler/PlayerOnMovePatchHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerOnMoveRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.h"
+#include "StateUpdate/PatchHandler/UnitPatchHandler.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -38,8 +39,10 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<PlayerPatchHandler>(),
 		std::make_shared<TilePatchHandler>(),
 		std::make_shared<RegisterHookablePatchHandler>(),
-		std::make_shared<PlayerOnMovePatchHandler>()
+		std::make_shared<PlayerOnMovePatchHandler>(),
+		std::make_shared<UnitPatchHandler>()
 		});
+
 	factory.setHandlers({ 
 		std::make_shared<TestMoveHandler>(),
 		std::make_shared<BuildMoveHandler>(gameState),

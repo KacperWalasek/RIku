@@ -203,7 +203,6 @@
     <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp" />
     <ClCompile Include="..\src\GameLogic\LoadedHookable.cpp" />
     <ClCompile Include="..\src\GameLogic\LogicAssets.cpp" />
-    <ClCompile Include="..\src\GameLogic\LogicUtils.cpp" />
     <ClCompile Include="..\src\GameLogic\Player\Player.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.cpp" />
@@ -223,6 +222,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\MapGenerator.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\Tile.cpp" />
@@ -231,6 +231,7 @@
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
+    <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -280,7 +281,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h" />
-    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PositionListResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
@@ -299,7 +300,6 @@
     <ClInclude Include="..\src\GameLogic\IHookable.h" />
     <ClInclude Include="..\src\GameLogic\LoadedHookable.h" />
     <ClInclude Include="..\src\GameLogic\LogicAssets.h" />
-    <ClInclude Include="..\src\GameLogic\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\MoveWrapper.h" />
     <ClInclude Include="..\src\GameLogic\Player\Player.h" />
     <ClInclude Include="..\src\GameLogic\Resource.h" />
@@ -327,10 +327,12 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\UnitPatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\StateUpdate.h" />
     <ClInclude Include="..\src\GameLogic\Tile\MapGenerator.h" />
     <ClInclude Include="..\src\GameLogic\Tile\Tile.h" />
@@ -341,6 +343,8 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Hero.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
+    <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
+    <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

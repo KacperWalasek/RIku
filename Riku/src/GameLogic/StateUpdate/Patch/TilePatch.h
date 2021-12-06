@@ -26,7 +26,7 @@ public:
 		object = (patch.object || patch.removeObject)? patch.object : object;
 		unit = (patch.unit || patch.removeUnit) ? patch.unit : unit;
 		removeObject = patch.removeObject || (removeObject && !patch.object);
-		removeObject = patch.removeUnit || (removeUnit && !patch.unit);
+		removeUnit = patch.removeUnit || (removeUnit && !patch.unit);
 		return *this;
 	}
 };

@@ -1,5 +1,6 @@
 #pragma once
-#include "GameState.h"
+#include "../GameState.h"
+#include "Path.h"
 
 struct vertex
 {
@@ -35,11 +36,11 @@ struct vertex
 
 class LogicUtils
 {
-
 	static int h(vertex from, vertex to);
     static int d(const GameState& state, vertex vert);
     static std::vector<std::pair<int, int>> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current);
 public:
-	static std::vector<std::pair<int,int>> getShortestPath(const GameState& state, int fromX, int fromY, int toX, int toY);
+	static Path getShortestPath(
+        const GameState& state, int fromX, int fromY, int toX, int toY);
 };
 

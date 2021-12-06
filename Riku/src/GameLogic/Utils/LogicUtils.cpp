@@ -26,7 +26,8 @@ std::vector<std::pair<int, int>> LogicUtils::reconstructPath(std::map<vertex, ve
              std::make_move_iterator(std::end(totalPath)) };
 }
 
-std::vector<std::pair<int, int>> LogicUtils::getShortestPath(const GameState& state, int fromX, int fromY, int toX, int toY)
+Path LogicUtils::getShortestPath(
+    const GameState& state, int fromX, int fromY, int toX, int toY)
 {
     vertex start(fromX, fromY);
     vertex end(toX, toY);
@@ -45,9 +46,12 @@ std::vector<std::pair<int, int>> LogicUtils::getShortestPath(const GameState& st
     while (openSet.size()>0)
     {
         vertex current = *(openSet.rbegin());
-        if (current.x == toX && current.y == toY)
-            return reconstructPath(cameFrom,current);
-        openSet.erase(openSet.find(current));
+        if (current.x == toX && current.y == toY) {
+            return { reconstructPath(cameFrom, current), gScore[current]};
+        }
+        openSet.erase(std::find_if(openSet.begin(), openSet.end(), [current](const auto& elem) {
+            return elem == current;
+            }));
         for (vertex neighbor : current.getNeighbors(state.map.size(),state.map[0].size()))
         {
             int tentative_gScore = gScore[current] + d(state, neighbor);
@@ -65,5 +69,5 @@ std::vector<std::pair<int, int>> LogicUtils::getShortestPath(const GameState& st
             }
         }
     }
-    return {};
+    return { {}, INT_MAX };
 }

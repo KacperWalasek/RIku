@@ -9,6 +9,10 @@ std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const Log
         move = move ? std::make_shared<CombinedMove>(move, h->onTurnEnd()) : h->onTurnEnd();
     }
     std::shared_ptr<Patch> patch = move ? move->createPatch(state, assets) : std::make_shared<Patch>();
+    for (auto unit : state.players[state.playerOnMove].units)
+    {
+        patch = std::make_shared<Patch>(*patch + UnitPatch(unit, unit->baseMovementPoints));
+    }
     int nextPlayer = (state.playerOnMove + 1) % state.players.size();
     return std::make_shared<Patch>(Patch(nextPlayer) + *patch);
 }

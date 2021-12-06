@@ -12,7 +12,7 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
     const logic::Asset& asset = it->second;
     int mp = asset.getByKey("movement_points").asNumber();
     auto& funcs = asset.getFunctions();
-    auto unitPtr = std::make_shared<Unit>(asset.getType(), name, mp, funcs);
+    auto unitPtr = std::make_shared<Unit>(asset.getType(), name, player, mp, funcs);
     return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr) + (Patch)RegisterHookablePatch(unitPtr));
 }
 

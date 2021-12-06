@@ -4,6 +4,7 @@
 #include "PlayerPatch.h"
 #include "TilePatch.h"
 #include "RegisterHookablePatch.h"
+#include "UnitPatch.h"
 
 class Patch
 {
@@ -11,6 +12,9 @@ public:
 	Patch() {};
 	Patch(PlayerPatch playerPatch) {
 		playerPatches.insert({ playerPatch.player, playerPatch });
+	}
+	Patch(UnitPatch unitPatch) {
+		unitPatches.insert({ unitPatch.unit, unitPatch });
 	}
 	Patch(TilePatch tilePatch) {
 		tilePatches.insert({ tilePatch.tile, tilePatch });
@@ -24,6 +28,7 @@ public:
 	std::map<int,PlayerPatch> playerPatches;
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
 	std::map<std::shared_ptr<IHookable>, RegisterHookablePatch> registerHookablePatches;
+	std::map<std::shared_ptr<Unit>, UnitPatch> unitPatches;
 	int playerOnMove = -1;
 
 	friend Patch operator+(Patch p1, const Patch& p2)
@@ -51,6 +56,14 @@ public:
 				registerPatch1->second += registerPatch2.second;
 			else
 				p1.registerHookablePatches.insert({ registerPatch2 });
+		}
+		for (auto unitPatch2 : p2.unitPatches)
+		{
+			auto unitPatch1 = p1.unitPatches.find(unitPatch2.first);
+			if (unitPatch1 != p1.unitPatches.end())
+				unitPatch1->second += unitPatch2.second;
+			else
+				p1.unitPatches.insert({ unitPatch2 });
 		}
 		if (p2.playerOnMove != -1)
 			p1.playerOnMove = p2.playerOnMove;
