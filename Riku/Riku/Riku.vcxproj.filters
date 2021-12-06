@@ -246,6 +246,11 @@
     <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp">
       <Filter>Riku\Frontend\Window\Callbacks</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\JsonUtil.cpp" />
+    <ClCompile Include="..\src\Frontend\Lang.cpp" />
+    <ClCompile Include="..\src\GameLogic\LogicUtils.cpp">
+      <Filter>Riku\GameLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -549,5 +554,10 @@
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\Frontend\JsonUtil.h" />
+    <ClInclude Include="..\src\Frontend\Lang.h" />
+    <ClInclude Include="..\src\GameLogic\LogicUtils.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
