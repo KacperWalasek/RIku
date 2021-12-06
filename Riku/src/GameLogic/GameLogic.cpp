@@ -56,7 +56,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets),
 		std::make_shared<AssetHandlerRequestHandler>(assets),
 		std::make_shared<PlayerOnMoveRequestHandler>(gameState),
-		std::make_shared<ShortestPathRequestHandler>(gameState)
+		std::make_shared<ShortestPathRequestHandler>(gameState),
 		std::make_shared<TileObjectGuiRequestHandler>(gameState)
 		});
 	
