@@ -1,14 +1,18 @@
 #include "FrontendState.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
+
+#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringIntMapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringListResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/UnitListResponse.h"
-#include "../GameLogic/FrontendCommunicator/Requests/TileRequest.h"
-#include "../GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
-#include "../GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
-#include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
-#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/IntResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/PathResponse.h"
+
+#include "../GameLogic/FrontendCommunicator/Requests/TileRequest.h"
+#include "../GameLogic/FrontendCommunicator/Requests/TilePairRequest.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
@@ -45,6 +49,10 @@ int FrontendState::getPlayerOnMove()
 	return logic.getInfo<IntResponse>("player_on_move")->get();
 }
 
+Path FrontendState::getShortestPath(int fromX, int fromY, int toX, int toY)
+{
+	return logic.getInfo<PathResponse>(std::make_shared<TilePairRequest>("shortest_path", fromX, fromY, toX, toY))->get();
+}
 std::vector<std::string> FrontendState::getGuiOptions(int mapX, int mapY)
 {
 	auto response = logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY));
