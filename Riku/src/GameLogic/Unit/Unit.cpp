@@ -1,8 +1,8 @@
 #include "Unit.h"
 
 
-Unit::Unit(std::string type, std::string name, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
-	: type(type), name(name), loadedHookable(hooks), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints)
+Unit::Unit(std::string type, std::string name, int player, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
+	: type(type), name(name), player(player), loadedHookable(hooks), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints)
 {}
 
 void Unit::useMovementPoints(int points)
@@ -57,4 +57,9 @@ int Unit::getMapX() const
 int Unit::getMapY() const
 {
 	return mapY;
+}
+
+int Unit::getPlayer() const
+{
+	return player;
 }

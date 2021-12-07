@@ -1,7 +1,7 @@
 #include "Hero.h"
 
-Hero::Hero(int baseMovementPoints, std::string name, const std::map<std::string, sol::function>& hooks)
-    : Unit("hero", name, baseMovementPoints, hooks), exp(0), lvl(0)
+Hero::Hero(int baseMovementPoints, std::string name, int player, const std::map<std::string, sol::function>& hooks)
+    : Unit("hero", name, player, baseMovementPoints, hooks), exp(0), lvl(0)
 {}
 
 std::shared_ptr<IMove> Hero::onDestroy(bool byOwner)

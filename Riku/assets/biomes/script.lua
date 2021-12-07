@@ -1,6 +1,6 @@
 asset_type="biomes"
 biomes = {
-    forest = 10,
-    desert = 50,
-    tundra = 20
+    forest = 1,
+    desert = 5,
+    tundra = 2
 }

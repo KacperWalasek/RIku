@@ -17,13 +17,15 @@ front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, cons
 	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler)
 {}
 
+front::Scene::~Scene()
+{
+	for (auto p : guiDic)
+		delete p.second;
+}
 void front::Scene::update()
 {
 	draw();
-	for (auto p : guiDic)
-	{
-		p.second->draw(); // wyswietla tylko gui nawet jak nie sa poukrywane
-	}
+	CEGUI::GUI::drawMultiple(guiDic);
 }
 
 void front::Scene::init(GLFWwindow* window)
@@ -44,6 +46,7 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("GameUI", fac.GetGameUI()));
 	guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
 	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
+	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));
 	activeGUI = guiDic["GameUI"];
 	activeGUI->show();
 }

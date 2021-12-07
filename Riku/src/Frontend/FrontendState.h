@@ -3,6 +3,7 @@
 #include "../GameLogic/Tile/Tile.h"
 #include "../GameLogic/GameLogic.h"
 #include "../GameLogic/Assets/AssetHandler.h"
+#include "../GameLogic/Utils/Path.h"
 
 class FrontendState
 {
@@ -16,6 +17,7 @@ public:
 	std::vector<std::shared_ptr<const Unit>> getUnits();
 	const logic::AssetHandler& getAssetHandler();
 	int getPlayerOnMove();
+	Path getShortestPath(int fromX, int fromY, int toX, int toY);
 	std::vector<std::string> getGuiOptions(int mapX, int mapY);
 
 	void build(std::string name, int mapX, int mapY);

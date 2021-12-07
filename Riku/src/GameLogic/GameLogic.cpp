@@ -20,6 +20,8 @@
 #include "FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerOnMoveRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.h"
+#include "StateUpdate/PatchHandler/UnitPatchHandler.h"
 #include "FrontendCommunicator/RequestHandlers/TileObjectGuiRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
 #include "FrontendCommunicator/Responses/MapResponse.h"
@@ -35,9 +37,11 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<PlayerPatchHandler>(),
 		std::make_shared<TilePatchHandler>(),
 		std::make_shared<RegisterHookablePatchHandler>(),
-		std::make_shared<PlayerOnMovePatchHandler>()
+		std::make_shared<PlayerOnMovePatchHandler>(),
+		std::make_shared<UnitPatchHandler>()
 		});
-	factory.setHandlers({
+
+	factory.setHandlers({ 
 		std::make_shared<TestMoveHandler>(),
 		std::make_shared<BuildMoveHandler>(gameState),
 		std::make_shared<TranslateUnitMoveHandler>(),
@@ -52,6 +56,7 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 		std::make_shared<PlayerResourcesRequestHandler>(gameState, assets),
 		std::make_shared<AssetHandlerRequestHandler>(assets),
 		std::make_shared<PlayerOnMoveRequestHandler>(gameState),
+		std::make_shared<ShortestPathRequestHandler>(gameState),
 		std::make_shared<TileObjectGuiRequestHandler>(gameState)
 		});
 	

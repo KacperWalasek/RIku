@@ -7,7 +7,7 @@
 #include "../../Util.h"
 
 void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int action, int mods) {
-	activeGUI->on_mouse_click(button, action);
+	if (activeGUI->on_mouse_click(button, action)) return;
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
