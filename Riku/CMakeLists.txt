@@ -28,7 +28,6 @@ add_executable(Riku
 		src/Frontend/Shader.cpp
 		src/Frontend/Lang.cpp
 		src/Frontend/stb_image.cpp
-		src/Frontend/TextureTransform.cpp
 		src/Frontend/Config.cpp
 		src/Frontend/Model.cpp
 		src/GameLogic/StateUpdate/MoveFactory/BuildMoveHandler.cpp
