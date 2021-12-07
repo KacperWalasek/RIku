@@ -6,6 +6,7 @@
 #include "GUICallbacks/FocusUnitWithIndex.h"
 
 namespace CEGUI::GUIUpdate {
+    //std::vector<std::string> my_units;
     static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
     {
         auto resources = state.getResources();
@@ -81,14 +82,17 @@ namespace CEGUI::GUIUpdate {
     }
     static void CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex)
     {
+        static int a = 10;
         auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(unitsListName));
         auto player_units = state.getUnits();
-        float y = 0.05f;
+        float y = -0.3f;
         std::map<std::string, int> repeats;
         std::shared_ptr<std::string> activeUnitElem = std::make_shared<std::string>();
-        int i = 0;
+        int i = -1;
         for (auto u : player_units)
         {
+            y += 0.35;
+            i++;
             std::string name = u.get()->getName();
             if (repeats.find(name) == repeats.end())
                 repeats.insert(std::pair<std::string, int>(name, 0));
@@ -96,6 +100,23 @@ namespace CEGUI::GUIUpdate {
             int count = repeats[name];
             name = name + std::to_string(count);
 
+            //if (unitsList->getChildRecursive(name))
+                //continue;
+           /* bool rep = false;
+            for (auto asd : CEGUI::GUIUpdate::my_units)
+                if (asd == name)
+                    rep = true;
+            if (rep)
+                continue;
+            CEGUI::GUIUpdate::my_units.push_back(name);*/
+           /* try {
+                auto c = unitsList->getChild(name);
+                if (unitsList->isChild(c))
+                    unitsList->destroyChild(c);
+            }
+            catch (...) { printf("wtf\n"); }*/
+            a++;
+            printf("%d\n", a);
             CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
                 glm::vec4(0.1f, y, 0.8f, 0.30f), glm::vec4(0.0f), name);
             resourceElem->setProperty("BackgroundColours", "FF009999");
@@ -132,8 +153,7 @@ namespace CEGUI::GUIUpdate {
             resourceElem->addChild(movementBar);
             resourceElem->addChild(unitButton);
             unitsList->addChild(resourceElem);
-            y += 0.35;
-            i++;
+            
         }
     }
 }

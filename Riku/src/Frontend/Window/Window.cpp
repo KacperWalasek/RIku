@@ -15,6 +15,8 @@ front::Window::Window(Config& config, GameLogic& logic, FrontendState& state, co
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	config.load();
+	Lang::loadLanguage(state.getAssetHandler(), config.language);
 	initWindow();
 	scene.init(window);
 }
@@ -43,7 +45,6 @@ bool front::Window::update()
 
 void front::Window::initWindow()
 {
-	config.load();
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
 	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);

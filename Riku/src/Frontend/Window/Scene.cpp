@@ -12,6 +12,7 @@
 #include "Callbacks/MousePositionCallback.h"
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
+#include "../GUIUpdate.h"
 
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
 	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler)
@@ -24,6 +25,7 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
+	CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex);
 	draw();
 	CEGUI::GUI::drawMultiple(guiDic);
 }

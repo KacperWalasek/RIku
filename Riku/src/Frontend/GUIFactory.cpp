@@ -138,13 +138,13 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	}
 
 	auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress(activeGUI, guiDic, nameLabel, state, focusedUnitIndex);
-	auto onConfirmButton = new CEGUI::Functor::ConfirmBuilding(nameLabel, state, focusedUnitIndex, activeGUI, guiDic);
+	//auto onConfirmButton = new CEGUI::Functor::ConfirmBuilding(nameLabel, state, focusedUnitIndex, activeGUI, guiDic);
+	auto onConfirmButton = new CEGUI::Functor::BuildBuildingFromLabel(nameLabel, state, focusedUnitIndex);
 	auto onCloseButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
-	//callbacks.push_back(onKeyPress);
-	//callbacks.push_back(onConfirmButton);
-	//callbacks.push_back(onCloseButton);
+
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("BuildButton", onConfirmButton);
+	my_gui->setPushButtonCallback("BuildButton", onCloseButton);
 	auto frameWindow = static_cast<CEGUI::FrameWindow*>(my_gui->getWidgetByName("BuildingWindow"));
 	frameWindow->getCloseButton()->subscribeEvent(CEGUI::PushButton::EventClicked, onCloseButton);
 
