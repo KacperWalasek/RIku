@@ -15,6 +15,7 @@ add_executable(Riku
 		src/Frontend/Window/Scene.cpp
 		src/Frontend/Asset/AssetModel.cpp
 		src/Frontend/Asset/FAsset.cpp
+		src/Frontend/Asset/AssetTexture.cpp
 		src/Frontend/Asset/FAssetHandler.cpp
 		src/Frontend/Frontend.cpp
 		src/Frontend/FrontendState.cpp
@@ -47,10 +48,12 @@ add_executable(Riku
 		src/GameLogic/StateUpdate/PatchHandler/PlayerOnMovePatchHandler.cpp
 		src/GameLogic/StateUpdate/PatchHandler/TilePatchHandler.cpp
 		src/GameLogic/StateUpdate/PatchHandler/PlayerPatchHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/UnitPatchHandler.cpp
 		src/GameLogic/StateUpdate/PatchHandler/RegisterHookablePatchHandler.cpp
 		src/GameLogic/StateUpdate/StateUpdate.cpp
 		src/GameLogic/Unit/Hero.cpp
 		src/GameLogic/Unit/Unit.cpp
+		src/GameLogic/Utils/LogicUtils.cpp
 		src/GameLogic/Hooks/GUIDescription.cpp
 		src/GameLogic/Hooks/LoadedHookable.cpp
 		src/GameLogic/Player/Player.cpp
@@ -73,6 +76,7 @@ add_executable(Riku
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerOnMoveRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/Responses/Response.cpp
 		src/GameLogic/FrontendCommunicator/Responses/UnitListResponse.cpp

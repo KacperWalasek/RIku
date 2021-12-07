@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include "AssetModel.h"
+#include "AssetTexture.h"
 
 namespace Json {
 	class Value;
@@ -22,6 +23,7 @@ namespace front {
 		std::map<std::string, Transform> asset;
 		std::string name;
 		std::vector<AssetModel> assetModels;
+        std::vector<AssetTexture> assetTextures;
 		friend class AssetHandler;
 	public:
 		[[nodiscard]] const std::string& getName() const {return name;}
