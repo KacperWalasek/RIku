@@ -17,8 +17,7 @@ namespace Json {
 struct Shader;
 
 namespace front {
-	struct Transform;
-	class Asset {
+	class Asset: IDrawable {
 	private:
 		std::map<std::string, Transform> asset;
 		std::string name;
@@ -28,7 +27,7 @@ namespace front {
 	public:
 		[[nodiscard]] const std::string& getName() const {return name;}
 		Asset(std::string name, const std::string& path, const Json::Value& value);
-		void draw(const Shader& shader, Transform transform) const;
+		void draw(const Shader& shader, Transform transform) const override;
 	};
 }
 

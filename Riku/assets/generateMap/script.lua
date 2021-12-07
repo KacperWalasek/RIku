@@ -7,7 +7,6 @@ function onCreateMap()
     local biomes = {"forest","desert","tundra"}
     local grounds = {"sand","stone","grass"}
     local areas = {"wet","dry"}
-    local r = RandomWrapper.new()
     local h = 5.0
     math.randomseed(os.time())  
     for i=1,25 do
