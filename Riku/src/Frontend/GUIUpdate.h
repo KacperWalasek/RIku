@@ -109,12 +109,11 @@ namespace CEGUI::GUIUpdate {
             if (rep)
                 continue;
             CEGUI::GUIUpdate::my_units.push_back(name);*/
-           /* try {
+            try {
                 auto c = unitsList->getChild(name);
-                if (unitsList->isChild(c))
-                    unitsList->destroyChild(c);
+                c->destroy();                         
             }
-            catch (...) { printf("wtf\n"); }*/
+            catch (...) { printf("wtf\n"); }
             a++;
             printf("%d\n", a);
             CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
@@ -147,9 +146,9 @@ namespace CEGUI::GUIUpdate {
             movementBar->setProperty("BackgroundColours", "FF00FF00");
             movementBar->setProperty("FrameEnabled", "false");
 
-            CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, activeUnitElem);
+            //CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, activeUnitElem);
             //callbacks.push_back(func);
-            my_gui->setPushButtonCallback(name + "/button", func);
+            //my_gui->setPushButtonCallback(name + "/button", func);
             resourceElem->addChild(movementBar);
             resourceElem->addChild(unitButton);
             unitsList->addChild(resourceElem);
