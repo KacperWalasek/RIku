@@ -15,6 +15,7 @@ namespace front {
 		{
 			glViewport(0, 0, width, height);
 			aspect = (float)width / height;
+			CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Sizef(width, height));
 		}
 	};
 }
