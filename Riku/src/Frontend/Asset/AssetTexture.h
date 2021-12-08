@@ -6,19 +6,23 @@
 #define RIKU_ASSETTEXTURE_H
 
 #include <map>
+#include <memory>
 #include "../Texture.h"
 #include "../IDrawable.h"
+#include "../Mesh.h"
 
 namespace front {
     class AssetTexture: IDrawable {
     private:
         static std::map<std::string, Texture> texs;
-    public:
+        static std::unique_ptr<Model> model;
+        static Object object;
         Texture *texture;
+    public:
         Transform transform;
         bool isCameraAdaptive;
         AssetTexture(std::string &path, Transform transform, bool isCameraAdaptive);
-        void draw(const Shader& shader, Transform transform) const override;
+        void draw(const Shader& shader, Transform t) const override;
 
     };
 }

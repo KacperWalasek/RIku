@@ -86,7 +86,7 @@ add_executable(Riku
 		src/GameLogic/GameLogic.cpp
 		src/GameLogic/LogicAssets.cpp
 		src/Riku.cpp
-		)
+        src/Frontend/Transform.cpp)
 
 target_link_libraries(Riku dl)
 target_link_libraries(Riku Xi)

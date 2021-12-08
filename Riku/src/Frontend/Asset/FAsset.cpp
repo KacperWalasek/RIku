@@ -69,5 +69,4 @@ void front::Asset::draw(const Shader &shader, Transform transform) const {
     for(const auto& a: assetTextures) {
         a.draw(shader, transform);
     }
-    //TODO: draw textures
 }

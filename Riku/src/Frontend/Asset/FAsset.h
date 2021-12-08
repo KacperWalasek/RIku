@@ -19,12 +19,11 @@ struct Shader;
 namespace front {
 	class Asset: IDrawable {
 	private:
-		std::map<std::string, Transform> asset;
 		std::string name;
 		std::vector<AssetModel> assetModels;
         std::vector<AssetTexture> assetTextures;
 		friend class AssetHandler;
-	public:
+    public:
 		[[nodiscard]] const std::string& getName() const {return name;}
 		Asset(std::string name, const std::string& path, const Json::Value& value);
 		void draw(const Shader& shader, Transform transform) const override;

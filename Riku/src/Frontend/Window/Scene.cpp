@@ -14,7 +14,7 @@
 #include "Callbacks/KeyCallback.h"
 
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
-	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler)
+	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
 {}
 
 front::Scene::~Scene()
@@ -84,36 +84,40 @@ void front::Scene::draw()
 	// render the loaded models
 	//draw tiles
 	const auto& map = state.getMap();
-	for (int i = 0; i < map.size(); i++)
+	for (int i = 0; i < (int)map.size(); i++)
 	{
-		for (int j = 0; j < map[i].size(); j++)
+		for (int j = 0; j < (int)map[i].size(); j++)
 		{
-			if(i==int(clickPos.x+0.5f) && j==int(clickPos.y+0.5f))
+			if(i==clickPos.first && j==clickPos.second)
 				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 			else
 				lightingShader.setVec4("color_mod", 0.8f, 0.75f, 0.75f, 1.0f);
 			auto transform = front::Transform(glm::vec3((float)i, (float)map[i][j].height * 0.5f, (float)j));
 			if (map[i][j].area.getName() == "wet")
 				handler.tryDraw("wet", lightingShader, transform);
-			else
-				handler.tryDraw(map[i][j].ground.getName(), lightingShader, transform);
+			handler.tryDraw(map[i][j].ground.getName(), lightingShader, transform);
+            handler.tryDraw(map[i][j].biome.getName(), lightingShader, transform);
 			if (map[i][j].object) 
 				handler.tryDraw(map[i][j].object->getName(), lightingShader, transform);
-				/*front::Object mapObject = front::Object(front::objectModels[map[i][j].object->getName()],glm::vec3(i,(float)map[i][j].height*0.5f,j - 0.25f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.02f,0.02f,0.02f));
-				mapObject.Draw(lightingShader);*/
+            /*if(map[i][i].resource!=-1)
+                handler.tryDraw(map[i][j].resource)*/
 		}
 	}
 	const auto& unit = state.getUnits();
-	for (int i = 0; i < unit.size(); i++) {
-		if (i != focusedUnitIndex)
-			lightingShader.setVec4("color_mod", 0.7f, 0.7f, 0.7f, 1.0f);
-		int x = unit[i]->getMapX();
-		int y = unit[i]->getMapY();
-		auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
+	for (int i = 0; i < (int)unit.size(); i++) {
+        if (i != focusedUnitIndex)
+            lightingShader.setVec4("color_mod", 0.7f, 0.7f, 0.7f, 1.0f);
+        int x = unit[i]->getMapX();
+        int y = unit[i]->getMapY();
+        auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
+        if(i==focusedUnitIndex)
+            handler.tryDraw("main_circle", lightingShader, transform);
 		handler.tryDraw(unit[i]->getName(), lightingShader, transform);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
-
 	}
+    for(auto&& [x,y]: path.path) {
+        handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
+    }
 
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);

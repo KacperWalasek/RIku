@@ -17,9 +17,12 @@ front::AssetModel::AssetModel(std::string& path, Transform transform, float texS
 }
 
 void front::AssetModel::draw(const Shader &shader, front::Transform t) const {
-    auto pos=t.position+front::rotate(transform.position,t.rotation);
+    /*auto pos=t.position+front::rotate(transform.position,t.rotation);
     auto rot=t.rotation+transform.rotation;
-    auto scale=t.scale*transform.scale;
-    Object object(*model,pos,rot,scale);
+    auto scale=t.scale*transform.scale;*/
+    Object object(*model);
+    object.transform=transform;
+    object.SetParent(t);
+
     object.Draw(shader);
 }
