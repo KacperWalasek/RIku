@@ -36,8 +36,8 @@ front::AssetTexture::AssetTexture(std::string &path, front::Transform transform,
     auto p = std::filesystem::path(path);
     std::string absolute = "../"+p.string();
     std::string parent = "../"+p.parent_path().string();
-    std::string filename = p.filename();
-    auto tmpTexture = Texture("texture_diffuse",  p.filename(),p.parent_path());
+    std::string filename = p.filename().string();
+    auto tmpTexture = Texture("texture_diffuse", filename, p.parent_path().string());
     if(texs.find(absolute)==texs.end()) {
         texs[filename] = tmpTexture;
     }

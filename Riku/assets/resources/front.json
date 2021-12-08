@@ -9,7 +9,7 @@
 		},
 		"scale": {
 			"x": 1.0,
-			"y": 1.0,
+			"y": 1.0
 		},
 		"camera_adaptive": true
 	},
@@ -27,7 +27,7 @@
 		},
 		"scale": {
 			"x": 1.0,
-			"y": 1.0,
+			"y": 1.0
 		}
 	}
 	
@@ -42,7 +42,7 @@
 		},
 		"scale": {
 			"x": 1.0,
-			"y": 1.0,
+			"y": 1.0
 		},
 		"camera_adaptive": true
 	}
@@ -57,7 +57,7 @@
 		},
 		"scale": {
 			"x": 1.0,
-			"y": 1.0,
+			"y": 1.0
 		},
 		"camera_adaptive": true
 	}
@@ -72,7 +72,7 @@
 		},
 		"scale": {
 			"x": 1.0,
-			"y": 1.0,
+			"y": 1.0
 		},
 		"camera_adaptive": true
 	}
