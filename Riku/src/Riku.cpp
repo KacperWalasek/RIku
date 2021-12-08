@@ -7,7 +7,8 @@
 int main() {
 	srand(time(0));
 	GameLogic logic;
-	front::Frontend frontend(logic);
+	front::Config config;
+	front::Frontend frontend(logic, config);
 
 	bool exitProgram = false;
 	while (!exitProgram)

@@ -19,9 +19,9 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 		return;
 	for(const auto& val: value) {
 		std::string modelPath = val.get("path","").asString();
-		if(modelPath=="")
+        std::string iconPath = val.get("icon","").asString();
+		if(modelPath.empty() == iconPath.empty())
 			continue;
-		modelPath = path + modelPath;
 		glm::vec3 pos={0.0f,0.0f,0.0f};
 		if(val.isMember("pos")) {
 			float x = val["pos"].get("x",0.0f).asFloat();
@@ -43,21 +43,30 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 			float z = val["scale"].get("z",1.0f).asFloat();
 			scale = {x,y,z};
 		}
+        //tex scale effective only for models.
 		float texScaleX=1.0f, texScaleY=1.0f;
 		if(val.isMember("tex")) {
 			texScaleX = val["tex"].get("x",1.0f).asFloat();
 			texScaleY = val["tex"].get("y",1.0f).asFloat();
 		}
-		assetModels.emplace_back(modelPath, Transform(pos,rot,scale), texScaleX, texScaleY);
+        //Parameter effective only for icons. Overrides icon rotation
+        bool cameraAdaptive = val["scale"].get("camera_adaptive",false).asBool();
+        if(!modelPath.empty()) {
+            modelPath = path + modelPath;
+		    assetModels.emplace_back(modelPath, Transform(pos,rot,scale), texScaleX, texScaleY);
+        }
+        if(!iconPath.empty()) {
+            iconPath = path + iconPath;
+            assetTextures.emplace_back(iconPath,Transform(pos,rot,scale),cameraAdaptive);
+        }
 	}
 }
 
 void front::Asset::draw(const Shader &shader, Transform transform) const {
 	for(const auto& a: assetModels) {
-		auto pos=transform.position+front::rotate(a.transform.position,transform.rotation);
-		auto rot=transform.rotation+a.transform.rotation;
-		auto scale=transform.scale*a.transform.scale;
-		Object object(*a.model,pos,rot,scale);
-		object.Draw(shader);
+        a.draw(shader, transform);
 	}
+    for(const auto& a: assetTextures) {
+        a.draw(shader, transform);
+    }
 }
