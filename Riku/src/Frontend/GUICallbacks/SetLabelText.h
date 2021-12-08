@@ -5,13 +5,13 @@
 
 namespace CEGUI::Functor {
   
-    class SelectBuildingWithName : public Functor
+    class SetLabelText : public Functor
     {
     private:
         std::string name;
         CEGUI::DefaultWindow* label;
     public:
-        SelectBuildingWithName(std::string name, CEGUI::DefaultWindow* label) : Functor(), name(name), label(label) {}
+        SetLabelText(std::string name, CEGUI::DefaultWindow* label) : Functor(), name(name), label(label) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {

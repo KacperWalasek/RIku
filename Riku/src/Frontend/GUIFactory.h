@@ -22,6 +22,7 @@ namespace CEGUI {
         CEGUI::GUI* GetMainMenu();
         CEGUI::GUI* GetGameUI();
         CEGUI::GUI* GetBuildingUI();
+        CEGUI::GUI* GetRecruitingUI();
         CEGUI::GUI* GetPlayerChangedUI();
 
     private:

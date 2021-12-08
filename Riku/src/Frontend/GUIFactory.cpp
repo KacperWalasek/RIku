@@ -5,11 +5,10 @@
 #include "GUICallbacks/SwitchActiveGUI.h"
 #include "GUICallbacks/EndTurn.h"
 #include "GUICallbacks/ExitApp.h"
-#include "GUICallbacks/ConfirmBuilding.h"
 #include "GUICallbacks/BuildingUIOnKeyPress.h"
 #include "GUICallbacks/GameUIOnKeyPress.h"
 #include "GUICallbacks/MainMenuOnkeyPress.h"
-#include "GUICallbacks/SelectBuildingWithName.h" //to_delete
+#include "GUICallbacks/SetLabelText.h" //to_delete
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
 	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex)
@@ -32,6 +31,8 @@ void CEGUI::GUIFactory::init(GLFWwindow* win){
 	CEGUI::GUI::loadScheme("OgreTray.scheme");
 	CEGUI::GUI::loadScheme("VanillaSkin.scheme");
 	CEGUI::GUI::loadScheme("VanillaCommonDialogs.scheme");
+	CEGUI::GUIUpdate::Init();
+	//CEGUI::GUIUpdate::Init(state, activeGUI, guiDic, focusedUnitIndex);
 	CEGUI::GUIUpdate::LoadIcons(state);
 }
 
@@ -78,9 +79,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	auto onKeyPress = new CEGUI::Functor::MainMenuOnkeyPress(activeGUI,guiDic);
 	auto onExitButton = new CEGUI::Functor::ExitApp(window);
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
-	//callbacks.push_back(onKeyPress);
-	//callbacks.push_back(onExitButton);
-	//callbacks.push_back(onReturnButton);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ExitButton", onExitButton);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
@@ -101,12 +99,12 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 
 	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state,activeGUI,guiDic);
 	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI",activeGUI,guiDic,false);
+	auto onRecruitingButton = new CEGUI::Functor::SwitchActiveGUI("RecruitingUI", activeGUI, guiDic, false);
 	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, activeGUI, guiDic);
-	//callbacks.push_back(onKeyPress);
-	//callbacks.push_back(onBuildingsButton);
-	//callbacks.push_back(onEndTurnButton);
+
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("BuildingsButton", onBuildingsButton);
+	my_gui->setPushButtonCallback("RecruitingButton", onRecruitingButton);
 	my_gui->setPushButtonCallback("EndTurnButton", onEndTurnButton);
 
 	return my_gui;
@@ -122,7 +120,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
 	auto avaible_buildings = state.getAvailableBuildings(0, 0); //TODO differ by unit position
 	CEGUI::PushButton* buildingButton;
-	CEGUI::Functor::SelectBuildingWithName* func;
+	CEGUI::Functor::SetLabelText* func;
 	float y = 0.1f;
 	//std::map<std::string, int> repeats;
 	for (auto b : avaible_buildings)
@@ -130,7 +128,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 		buildingButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
 			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), b));
 		buildingButton->setText(b);
-		func = new CEGUI::Functor::SelectBuildingWithName(b, nameLabel);
+		func = new CEGUI::Functor::SetLabelText(b, nameLabel);
 		//callbacks.push_back(func);
 		my_gui->setPushButtonCallback(b, func);
 		buildingsList->addChild(buildingButton);
@@ -162,6 +160,28 @@ CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
 	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostk¹
 	my_gui->setPushButtonCallback("OkButton", onOkButton);
 	my_gui->setKeyCallback(onKeyPress);
+
+	return my_gui;
+}
+
+CEGUI::GUI* CEGUI::GUIFactory::GetRecruitingUI() {
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuRecruitingUI.layout");
+
+	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
+	
+	//CEGUI::GUIUpdate::CreateUnitOptions(my_gui, "UnitsList", state, focusedUnitIndex);
+
+	//auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress(activeGUI, guiDic, nameLabel, state, focusedUnitIndex);
+	auto onConfirmButton = new CEGUI::Functor::BuildBuildingFromLabel(nameLabel, state, focusedUnitIndex);
+	auto onCloseButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
+
+	//my_gui->setKeyCallback(onKeyPress);
+	my_gui->setPushButtonCallback("RecruitButton", onConfirmButton);
+	my_gui->setPushButtonCallback("RecruitButton", onCloseButton);
+	auto frameWindow = static_cast<CEGUI::FrameWindow*>(my_gui->getWidgetByName("RecruitingWindow"));
+	frameWindow->getCloseButton()->subscribeEvent(CEGUI::PushButton::EventClicked, onCloseButton);
 
 	return my_gui;
 }
