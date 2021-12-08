@@ -13,12 +13,17 @@ front::Object front::AssetTexture::object;
 void createMesh(std::unique_ptr<Model>& model, front::Object& object) {
     model = std::make_unique<Model>();
     Vertex v[4];
-    v[0].Position = {-0.5,0.0,0.5};
-    v[1].Position = {0.5,0.0,0.5};
-    v[2].Position = {-0.5,0.0,-0.5};
-    v[3].Position = {0.5,0.0,-0.5};
+    v[0].Position = {-0.5,0.0,-0.5};
+    v[1].Position = {-0.5,0.0,0.5};
+    v[2].Position = {0.5,0.0,-0.5};
+    v[3].Position = {0.5,0.0,0.5};
+    v[0].TexCoords = {0.0,0.0};
+    v[1].TexCoords = {0.0,1.0};
+    v[2].TexCoords = {1.0,0.0};
+    v[3].TexCoords = {1.0,1.0};
+
     std::vector<Vertex> vertices(v,v+4);
-    std::vector indices = {0u,1u,2u,0u,2u,3u};
+    std::vector indices = {0u,1u,2u,1u,2u,3u};
     std::vector<Texture> textures;
     model->meshes.emplace_back(vertices, indices, textures);
     object.SetModel(*model);
