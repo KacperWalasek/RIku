@@ -49,6 +49,8 @@ Path LogicUtils::getShortestPath(
     {
         vertex current = *(openSet.rbegin());
         if (current.x == toX && current.y == toY) {
+            if (gScore[current] > 10000)
+                break;
             return { reconstructPath(cameFrom, current), gScore[current]};
         }
         openSet.erase(std::find_if(openSet.begin(), openSet.end(), [current](const auto& elem) {
