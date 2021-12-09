@@ -89,6 +89,11 @@ bool CEGUI::GUI::on_mouse_pos(float x, float y) {
     return m_context->injectMousePosition(x, y);
 }
 
+bool CEGUI::GUI::on_scroll(float delta)
+{
+    return m_context->injectMouseWheelChange(delta);
+}
+
 bool CEGUI::GUI::on_mouse_click(int button, int action) {
     CEGUI::MouseButton guiButton = CEGUI::MouseButton::NoButton;
     switch (button)
@@ -138,6 +143,7 @@ void CEGUI::GUI::loadIcon(const CEGUI::String& name, const CEGUI::String& path)
 
 CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name /*= ""*/) {
     CEGUI::Window* newWindow = CEGUI::WindowManager::getSingleton().createWindow(type, name);
+    newWindow->setMouseInputPropagationEnabled(true);
     m_root->addChild(newWindow);
     setWidgetDestRect(newWindow, destRectPerc, destRectPix);
     return newWindow;

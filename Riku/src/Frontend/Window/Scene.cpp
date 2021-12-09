@@ -25,7 +25,7 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
-	CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex);
+	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex);
 	draw();
 	CEGUI::GUI::drawMultiple(guiDic);
 }
@@ -48,10 +48,12 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("GameUI", fac.GetGameUI()));
 	guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
 	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
+	guiDic.insert(std::pair("OptionsMenu", fac.GetOptionsMenu()));
 	guiDic.insert(std::pair("RecruitingUI", fac.GetRecruitingUI()));
 	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));
-	activeGUI = guiDic["GameUI"];
+	activeGUI = guiDic["MainMenu"];
 	activeGUI->show();
+	CEGUI::GUIUpdate::UpdateUIButtons(guiDic);
 }
 
 void front::Scene::draw()

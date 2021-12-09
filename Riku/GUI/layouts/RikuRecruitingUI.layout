@@ -42,13 +42,18 @@
                 <Property name="Text" value="Name: " />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="WindowsLook/Label" name="NameLabel" >
+            <Window type="WindowsLook/Label" name="FrontNameLabel" >
                 <Property name="Area" value="{{0,75},{0,45},{0,203},{0,77}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="OgreTray/Button" name="RecruitButton" >
                 <Property name="Area" value="{{0,4},{1,-36},{0,100},{1,-4}}" />
                 <Property name="Text" value="Confirm" />
+            </Window>
+            <Window type="WindowsLook/Label" name="NameLabel" >
+                <Property name="Area" value="{{0,230},{0,5},{0,358},{0,37}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
             </Window>
         </Window>
     </Window>

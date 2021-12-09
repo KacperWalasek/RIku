@@ -18,6 +18,7 @@
             <Window type="OgreTray/ScrollablePane" name="UnitsList" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="AutoRenderingSurface" value="true" />
+                <Property name="DistributeCapturedInputs" value="true" />
                 <AutoWindow namePath="__auto_container__" >
                     <Property name="MouseInputPropagationEnabled" value="true" />
                 </AutoWindow>
@@ -55,6 +56,7 @@
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="ForceHorzScrollbar" value="true" />
                 <Property name="AutoRenderingSurface" value="true" />
+                <Property name="DistributeCapturedInputs" value="true" />
                 <AutoWindow namePath="__auto_container__" >
                     <Property name="MouseInputPropagationEnabled" value="true" />
                 </AutoWindow>
@@ -80,7 +82,7 @@
         </Window>
         <Window type="WindowsLook/Button" name="EndTurnButton" >
             <Property name="Area" value="{{0.8,0},{0.3,64},{1,0},{0.3,96}}" />
-            <Property name="Text" value="End Turn" />
+            <Property name="Text" value="End turn" />
             <Property name="TooltipText" value="Open building menu" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>
@@ -93,6 +95,7 @@
         <Window type="WindowsLook/Button" name="RecruitingButton" >
             <Property name="Area" value="{{0.8,0},{0.3,32},{1,0},{0.3,64}}" />
             <Property name="Text" value="Recruit units" />
+            <Property name="Disabled" value="true" />
             <Property name="TooltipText" value="Open Units menu" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>

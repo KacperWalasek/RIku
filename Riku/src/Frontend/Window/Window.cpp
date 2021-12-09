@@ -81,7 +81,7 @@ void front::Window::setCallbacks()
 
 	glfwSetScrollCallback(window, [](GLFWwindow* window, double xoffset, double yoffset) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		ScrollCallback(scene->movingCameraTransform, scene->config)(window, xoffset, yoffset);
+		ScrollCallback(scene->movingCameraTransform, scene->config, scene->activeGUI)(window, xoffset, yoffset);
 		});
 
 	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int width, int height) {

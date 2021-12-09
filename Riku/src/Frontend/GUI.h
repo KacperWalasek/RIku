@@ -26,6 +26,7 @@ namespace CEGUI {
         bool on_key_press(int key);
         bool on_mouse_pos(float x, float y);
         bool on_mouse_click(int button, int action);
+        bool on_scroll(float delta);
 
         static void loadScheme(const CEGUI::String& schemeFile);
         CEGUI::Window* loadLayout(const CEGUI::String& schemeFile);
