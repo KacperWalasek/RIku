@@ -15,6 +15,7 @@
 #include "../StateUpdate/Move/CreateUnit.h"
 #include "../StateUpdate/Move/CombinedMove.h"
 #include "../StateUpdate/Move/UseResources.h"
+#include "../StateUpdate/Move/CreateUnitAround.h"
 
 namespace logic {
 
@@ -93,11 +94,14 @@ namespace logic {
 		lua->new_usertype<CreateUnit>("CreateUnit",
 			sol::constructors<CreateUnit(std::string,int,int)>()
 			);
+		lua->new_usertype<CreateUnitAround>("CreateUnitAround",
+			sol::constructors<CreateUnitAround(std::string, int, int)>()
+			);
 		lua->new_usertype<UseResources>("UseResources",
 			sol::constructors<UseResources(int, int), UseResources(std::string, int)>()
 			);
 		lua->new_usertype<MoveWrapper>("MoveWrapper",
-			sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
+			sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CreateUnitAround), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
 			);
 		lua->new_usertype<TileDescription>("TileDescription",
 			sol::constructors<TileDescription(int,std::string,std::string,std::string)>()

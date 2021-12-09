@@ -39,8 +39,14 @@ std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index) const
 	auto onOptionChosenFunc = funcs.find("onOptionChosen");
 	if (options.size() > index && onOptionChosenFunc != funcs.end())
 	{
-		MoveWrapper wrapper = onOptionChosenFunc->second(options[index]);
+		MoveWrapper wrapper = onOptionChosenFunc->second(options[index],mapX,mapY);
 		return wrapper.move;
 	}
 	return std::shared_ptr<IMove>();
+}
+
+void GUIDescription::onBeingPlaced(int mapX, int mapY)
+{
+	this->mapX = mapX;
+	this->mapY = mapY;
 }

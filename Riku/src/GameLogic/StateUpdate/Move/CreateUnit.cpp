@@ -22,7 +22,7 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
 
 bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return true;
+    return mapX>=0 && mapY>=0 && mapX<state.map.size() && mapY<state.map[0].size() && !state.map[mapX][mapY].unit;
 }
 
 std::shared_ptr<IMove> CreateUnit::asPointner() const

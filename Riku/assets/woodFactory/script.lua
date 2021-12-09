@@ -25,9 +25,9 @@ tileobject = {
     }
 }
 
-function onOptionChosen(option)
+function onOptionChosen(option,mapX,mapY)
     local wood = option["wood"]:as_int(1)
-    return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(CreateUnit.new("stefan",1,1)),MoveWrapper.new(UseResources.new("wood",wood))))
+    return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(CreateUnitAround.new("stefan",mapX,mapY)),MoveWrapper.new(UseResources.new("wood",wood))))
 end
 
 function onBeingPlaced(hookable) 

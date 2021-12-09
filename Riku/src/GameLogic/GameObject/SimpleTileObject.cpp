@@ -36,6 +36,7 @@ std::shared_ptr<IMove> SimpleTileObject::onTurnBegin()
 
 std::shared_ptr<IMove> SimpleTileObject::onBeingPlaced(int mapX, int mapY)
 {
+	gui.onBeingPlaced(mapX, mapY);
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 

@@ -10,6 +10,7 @@ class GUIDescription
 	const std::map<std::string, sol::function>& funcs;
 	std::string name;
 	std::vector<std::map<std::string, logic::AssetData>> options;
+	int mapX, mapY;
 public:
 	GUIDescription(const std::map<std::string, sol::function>& funcs);
 	GUIDescription(const GUIDescription& description);
@@ -22,5 +23,6 @@ public:
 	std::string getName() const;
 	std::vector<std::string> getOptions() const;
 	std::shared_ptr<IMove> onOptionChosen(int index) const;
+	void onBeingPlaced(int mapX, int mapY);
 };
 
