@@ -2,14 +2,14 @@
 #include "../Responses/StringIntMapResponse.h"
 
 PlayerResourcesRequestHandler::PlayerResourcesRequestHandler(const GameState& gamestate, const LogicAssets& assets)
-    : player(gamestate.players[gamestate.playerOnMove]), assets(assets)
+    : state(gamestate), assets(assets)
 {
     // TODO: zamiast obecnie graj¹cego gracza ostatni lokalny
 }
 
 std::shared_ptr<Response> PlayerResourcesRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
-    const auto& quantities = player.getResourceQuantities();
+    const auto& quantities = state.players[state.playerOnMove].getResourceQuantities();
     std::map<std::string, int> resourceMap;
     std::transform(quantities.begin(), quantities.end(), 
         assets.playerResources.begin(),

@@ -5,7 +5,7 @@
 class PlayerUnitsRequestHandler :
     public IRequestHandler
 {
-    const Player& player;
+    const GameState& state;
 public:
     PlayerUnitsRequestHandler(const GameState& gameState);
     virtual std::shared_ptr<Response> handleRequest(std::shared_ptr<Request> request) const override;
