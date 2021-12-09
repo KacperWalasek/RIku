@@ -26,11 +26,13 @@ namespace CEGUI {
         bool on_key_press(int key);
         bool on_mouse_pos(float x, float y);
         bool on_mouse_click(int button, int action);
+        bool on_scroll(float delta);
 
         static void loadScheme(const CEGUI::String& schemeFile);
         CEGUI::Window* loadLayout(const CEGUI::String& schemeFile);
         static void loadIcon(const CEGUI::String& name, const CEGUI::String& path);
         void setFont(const CEGUI::String& fontFile);
+        bool setFontFromLang();
         CEGUI::Window* createWidget(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name = "");
         CEGUI::Window* createWidget(const CEGUI::String& type, const CEGUI::String& name = "");
         static void setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destRectPerc, const glm::vec4& destRectPix);

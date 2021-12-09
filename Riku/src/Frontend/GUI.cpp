@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include "Lang.h"
 #define RESPATH "../GUI"
 //#include "../src/Riku.cpp"
 CEGUI::OpenGL3Renderer* CEGUI::GUI::m_renderer = nullptr;
@@ -17,6 +18,7 @@ void CEGUI::GUI::init() {
     m_root->activate();
     m_root->setMousePassThroughEnabled(true);
     m_context->setRootWindow(m_root);
+    setFontFromLang();
 }
 
 void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
@@ -89,6 +91,11 @@ bool CEGUI::GUI::on_mouse_pos(float x, float y) {
     return m_context->injectMousePosition(x, y);
 }
 
+bool CEGUI::GUI::on_scroll(float delta)
+{
+    return m_context->injectMouseWheelChange(delta);
+}
+
 bool CEGUI::GUI::on_mouse_click(int button, int action) {
     CEGUI::MouseButton guiButton = CEGUI::MouseButton::NoButton;
     switch (button)
@@ -138,6 +145,7 @@ void CEGUI::GUI::loadIcon(const CEGUI::String& name, const CEGUI::String& path)
 
 CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name /*= ""*/) {
     CEGUI::Window* newWindow = CEGUI::WindowManager::getSingleton().createWindow(type, name);
+    newWindow->setMouseInputPropagationEnabled(true);
     m_root->addChild(newWindow);
     setWidgetDestRect(newWindow, destRectPerc, destRectPix);
     return newWindow;
@@ -161,6 +169,17 @@ void CEGUI::GUI::setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destR
 void CEGUI::GUI::setFont(const CEGUI::String& fontFile) {
     CEGUI::FontManager::getSingleton().createFromFile(fontFile + ".font");
     m_context->setDefaultFont(fontFile);
+}
+
+bool CEGUI::GUI::setFontFromLang() {
+    auto font = front::Lang::get("font");
+    if (font == "font")
+    {
+        setFont("DejaVuSans-10");
+        return false;
+    }
+    setFont(font);
+    return true;
 }
 
 CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey)

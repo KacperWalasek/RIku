@@ -5,6 +5,7 @@
 #include "../FrontendState.h"
 #include "Functor.h"
 #include "SwitchActiveGUI.h"
+#include "BuildBuildingFromLabel.h"
 
 namespace CEGUI::Functor {
 

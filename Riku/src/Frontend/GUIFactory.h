@@ -18,10 +18,11 @@ namespace CEGUI {
         GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
             std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex);
         void init(GLFWwindow* win);
-        CEGUI::GUI* GetDemoWindow();
         CEGUI::GUI* GetMainMenu();
+        CEGUI::GUI* GetOptionsMenu();
         CEGUI::GUI* GetGameUI();
         CEGUI::GUI* GetBuildingUI();
+        CEGUI::GUI* GetRecruitingUI();
         CEGUI::GUI* GetPlayerChangedUI();
 
     private:

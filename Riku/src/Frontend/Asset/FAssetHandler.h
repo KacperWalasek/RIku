@@ -11,11 +11,13 @@ namespace front {
 	class AssetHandler {
 		std::map<std::string, Asset> assets;
 		const logic::AssetHandler& handler;
+        void loadFile(const std::string& path);
 	public:
-		AssetHandler(const logic::AssetHandler& assetHandler);
+		explicit AssetHandler(const logic::AssetHandler& assetHandler);
 		void loadFiles();
-		const Asset& getAsset(const std::string& key) const;
+		const Asset& getAsset(const std::string& parentPath) const;
 		bool tryDraw(const std::string& key, const Shader &shader, Transform transform) const;
+        const std::map<std::string, Asset>& getMap() const;
 	};
 }
 

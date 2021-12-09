@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="WindowsLook/FrameWindow" name="RecruitingWindow" >
+            <Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+            <Property name="Text" value="Recruiting menu" />
+            <Property name="RollUpEnabled" value="false" />
+            <Window type="OgreTray/ScrollablePane" name="UnitsList" >
+                <Property name="Area" value="{{0,0},{0,90},{1,0},{1,-40}}" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+            <Window type="WindowsLook/Label" name="Label" >
+                <Property name="Area" value="{{0,-7},{0,3},{0,171},{0,35}}" />
+                <Property name="Text" value="Chosen Unit info" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Label" name="Label2" >
+                <Property name="Area" value="{{0,-4},{0,45},{0,73},{0,77}}" />
+                <Property name="Text" value="Name: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Label" name="FrontNameLabel" >
+                <Property name="Area" value="{{0,75},{0,45},{0,203},{0,77}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="OgreTray/Button" name="RecruitButton" >
+                <Property name="Area" value="{{0,4},{1,-36},{0,100},{1,-4}}" />
+                <Property name="Text" value="Confirm" />
+            </Window>
+            <Window type="WindowsLook/Label" name="NameLabel" >
+                <Property name="Area" value="{{0,230},{0,5},{0,358},{0,37}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

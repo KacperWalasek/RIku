@@ -44,6 +44,7 @@ bool front::Window::update()
 void front::Window::initWindow()
 {
 	config.load();
+	Lang::loadLanguage(scene.state.getAssetHandler(), config.language);
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
 	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
@@ -70,6 +71,7 @@ void front::Window::initWindow()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_BLEND);
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 }
@@ -80,7 +82,7 @@ void front::Window::setCallbacks()
 
 	glfwSetScrollCallback(window, [](GLFWwindow* window, double xoffset, double yoffset) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		ScrollCallback(scene->movingCameraTransform, scene->config)(window, xoffset, yoffset);
+		ScrollCallback(scene->movingCameraTransform, scene->config, scene->activeGUI)(window, xoffset, yoffset);
 		});
 
 	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int width, int height) {

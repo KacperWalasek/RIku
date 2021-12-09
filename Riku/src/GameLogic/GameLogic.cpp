@@ -67,6 +67,8 @@ GameLogic::GameLogic(std::string assetPath) : stateUpdate(this->gameState, this-
 	stateUpdate.handleMove(unitMove);
 	unitMove = std::make_shared<CreateUnit>(0, "stefan", 11, 10);
 	stateUpdate.handleMove(unitMove);
+	unitMove = std::make_shared<CreateUnit>(1, "stefan", 14, 14);
+	stateUpdate.handleMove(unitMove);
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const
