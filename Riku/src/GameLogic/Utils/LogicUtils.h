@@ -36,8 +36,8 @@ struct vertex
 
 class LogicUtils
 {
-	static int h(vertex from, vertex to);
-    static int d(const GameState& state, vertex vert);
+	static double h(vertex from, vertex to);
+    static double d(const GameState& state, vertex vert);
     static std::vector<std::pair<int, int>> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current);
 public:
 	static Path getShortestPath(

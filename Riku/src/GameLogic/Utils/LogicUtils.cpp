@@ -3,13 +3,13 @@
 #include <list>
 
 //heurystyka
-int LogicUtils::h(vertex from, vertex to)
+double LogicUtils::h(vertex from, vertex to)
 {
     return sqrt(pow((to.x - from.x),2) + pow((to.y - from.y), 2));
 }
 
 //koszt ruchu
-int LogicUtils::d(const GameState& state,vertex vert)
+double LogicUtils::d(const GameState& state,vertex vert)
 {
     if (state.map[vert.x][vert.y].unit)
         return 1000000;
@@ -34,8 +34,8 @@ Path LogicUtils::getShortestPath(
     vertex start(fromX, fromY);
     vertex end(toX, toY);
 
-    std::map<vertex, int> fScore;
-    std::map<vertex, int> gScore;
+    std::map<vertex, double> fScore;
+    std::map<vertex, double> gScore;
 
     auto priority = [&fScore](const vertex& x, const vertex& y) { return fScore[x] > fScore[y]; };
     auto openSet = std::multiset< vertex, decltype(priority)>(priority);
@@ -51,14 +51,14 @@ Path LogicUtils::getShortestPath(
         if (current.x == toX && current.y == toY) {
             if (gScore[current] > 10000)
                 break;
-            return { reconstructPath(cameFrom, current), gScore[current]};
+            return { reconstructPath(cameFrom, current), (int)ceil(gScore[current])};
         }
         openSet.erase(std::find_if(openSet.begin(), openSet.end(), [current](const auto& elem) {
             return elem == current;
             }));
         for (vertex neighbor : current.getNeighbors(state.map.size(),state.map[0].size()))
         {
-            int tentative_gScore = gScore[current] + d(state, neighbor);
+            double tentative_gScore = gScore[current] + d(state, neighbor);
             if (gScore.find(neighbor) == gScore.end() || tentative_gScore < gScore[neighbor])
             {
                 cameFrom.insert_or_assign(neighbor, current);
