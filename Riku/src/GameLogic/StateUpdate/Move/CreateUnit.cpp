@@ -1,4 +1,5 @@
 #include "CreateUnit.h"
+#include "../../Unit/Unit.h"
 
 CreateUnit::CreateUnit(int player, std::string unit, int mapX, int mapY)
     : player(player), name(unit), mapX(mapX), mapY(mapY)

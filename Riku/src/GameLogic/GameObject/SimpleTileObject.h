@@ -5,6 +5,7 @@
 #include "../Hooks/LoadedHookable.h"
 #include <map>
 #include "../GameState.h"
+#include "../Hooks/GUIDescription.h"
 
 class SimpleTileObject : public ITileObject
 {

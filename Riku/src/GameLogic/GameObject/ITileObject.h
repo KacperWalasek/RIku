@@ -6,8 +6,8 @@
 #include "../StateUpdate/Move/IMove.h"
 #include "../Hooks/IHookable.h"
 #include <map>
-#include "../Hooks/GUIDescription.h"
 
+class GUIDescription;
 class ITileObject : public IAsset, public ICostModifier, public IHookable
 {
 public:

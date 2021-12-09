@@ -6,7 +6,7 @@
 
 int main() {
 	srand(time(0));
-	GameLogic logic;
+	GameLogic logic("../assets");
 	front::Frontend frontend(logic);
 
 	bool exitProgram = false;

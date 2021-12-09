@@ -2,9 +2,9 @@
 #include "LogicAssets.h"
 #include "Assets/AssetUtils.h"
 
-void LogicAssets::initialize()
+void LogicAssets::initialize(std::string assetPath)
 {
-	handler.findFiles("../assets");
+	handler.findFiles(assetPath);
 
 	biomes = AssetUtils::readNumericAsset<Biome>("biomes", handler);
 	areas = AssetUtils::readNumericAsset<Area>("areas", handler);

@@ -4,6 +4,7 @@
 #include "../GameLogic/GameLogic.h"
 #include "../GameLogic/Assets/AssetHandler.h"
 #include "../GameLogic/Utils/Path.h"
+#include "../GameLogic/Unit/Unit.h"
 
 class FrontendState
 {
