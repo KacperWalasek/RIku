@@ -1,4 +1,0 @@
-﻿  Tests.cpp
-C:\Users\Kacper Walasek\Documents\GitHub\Riku\Riku\src\GameLogic\LogicAssets.h(11,1): warning C4099: "LogicAssets": nazwa typu najpierw widoczna przy użyciu "class" teraz widoczna przy użyciu "struct"
-C:\Users\Kacper Walasek\Documents\GitHub\Riku\Riku\src\GameLogic\LogicAssets.h(10): message : zobacz deklarację „LogicAssets”
-  Tests.vcxproj -> C:\Users\Kacper Walasek\Documents\GitHub\Riku\Riku\x64\Debug\Tests.exe

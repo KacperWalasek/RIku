@@ -4,6 +4,7 @@ cmake-build-debug
 **/.vs
 packages
 **/Riku/x64
+**/Tests/x64
 *.user
 *.aps
 Riku/.vs/Riku/v16/Browse.VC.db
@@ -13,3 +14,4 @@ Riku/Riku/CEGUI.log
 Riku\Riku\dna.txt
 Riku\Riku\CEGUI.log
 Riku/.idea
+*.tlog
