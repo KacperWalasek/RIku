@@ -11,6 +11,8 @@ int LogicUtils::h(vertex from, vertex to)
 //koszt ruchu
 int LogicUtils::d(const GameState& state,vertex vert)
 {
+    if (state.map[vert.x][vert.y].unit)
+        return 1000000;
     return state.map[vert.x][vert.y].getCost();
 }
 
