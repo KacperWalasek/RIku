@@ -23,7 +23,7 @@ namespace CEGUI::Functor {
                 auto f = CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
                 return f(e);
             }
-            return false;
+            return true;
         };
     };
 }

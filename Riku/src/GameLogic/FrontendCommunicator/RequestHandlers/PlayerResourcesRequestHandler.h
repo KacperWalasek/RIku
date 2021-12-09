@@ -6,7 +6,7 @@
 class PlayerResourcesRequestHandler :
     public IRequestHandler
 {
-    const Player& player;
+    const GameState& state;
     const LogicAssets& assets;
 public:
     PlayerResourcesRequestHandler(const GameState& gamestate, const LogicAssets& assets);

@@ -12,6 +12,7 @@
 #include "Callbacks/MousePositionCallback.h"
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
+#include "../GUIUpdate.h"
 
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
 	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
@@ -24,6 +25,7 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
+	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex);
 	draw();
 	CEGUI::GUI::drawMultiple(guiDic);
 }
@@ -46,9 +48,12 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("GameUI", fac.GetGameUI()));
 	guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
 	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
+	guiDic.insert(std::pair("OptionsMenu", fac.GetOptionsMenu()));
+	guiDic.insert(std::pair("RecruitingUI", fac.GetRecruitingUI()));
 	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));
-	activeGUI = guiDic["GameUI"];
+	activeGUI = guiDic["MainMenu"];
 	activeGUI->show();
+	CEGUI::GUIUpdate::UpdateUIButtons(guiDic);
 }
 
 void front::Scene::draw()

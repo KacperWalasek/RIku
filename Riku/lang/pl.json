@@ -1,5 +1,14 @@
 {
 	"stone_factory": "Kamieniołom",
 	"wood_factory": "Tartak",
-	"window_name": "Riku"
+	"window_name": "Riku",
+	"Warrior": "Wojownik",
+	"Buildings": "Budynki",
+	"Recruit units": "Rekrutuj jednostki",
+	"End turn": "Zakończ turę",
+	"Return to game": "Wróć do gry",
+	"New Game": "Nowa Gra",
+	"Save Game": "Zapisz Grę",
+	"Options": "Ustawienia",
+	"Exit": "Wyjście"
 }

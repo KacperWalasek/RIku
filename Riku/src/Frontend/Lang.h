@@ -19,6 +19,8 @@ namespace front {
 		static bool loadLanguage(const logic::AssetHandler &handler, const std::string &langName);
 		static const std::string& get(const std::string& name);
 		static const char* get(const char* name);
+		static const unsigned char* getUtf(const char* name);
+		static const unsigned char* getUtf(const std::string& name);
 	};
 }
 

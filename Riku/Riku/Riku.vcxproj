@@ -171,6 +171,7 @@
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
     <ClCompile Include="..\src\Frontend\GUI.cpp" />
     <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />
+    <ClCompile Include="..\src\Frontend\GUIUpdate.cpp" />
     <ClCompile Include="..\src\Frontend\JsonUtil.cpp" />
     <ClCompile Include="..\src\Frontend\Lang.cpp" />
     <ClCompile Include="..\src\Frontend\Mesh.cpp" />
@@ -249,15 +250,17 @@
     <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\FocusUnitWithIndex.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\Functor.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\GameUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\SelectBuildingWithName.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h" />
