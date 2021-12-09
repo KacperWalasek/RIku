@@ -15,7 +15,7 @@ namespace CEGUI::Functor {
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            label->setText(name);
+            label->setText((uint8*)name.c_str());
             return true;
         };
     };

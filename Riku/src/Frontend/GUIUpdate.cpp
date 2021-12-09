@@ -82,31 +82,31 @@ void CEGUI::GUIUpdate::UpdateUIButtons(std::map<std::string, CEGUI::GUI*> guiDic
     CEGUI::PushButton* button;
 
     button = static_cast<CEGUI::PushButton*>(guiDic["GameUI"]->getWidgetByName("BuildingsButton"));
-    button->setText(front::Lang::get("Buildings"));
+    button->setText(front::Lang::getUtf("Buildings"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["GameUI"]->getWidgetByName("RecruitingButton"));
-    button->setText(front::Lang::get("Recruit units"));
+    button->setText(front::Lang::getUtf("Recruit units"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["GameUI"]->getWidgetByName("EndTurnButton"));
-    button->setText(front::Lang::get("End turn"));
+    button->setText(front::Lang::getUtf("End turn"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("ReturnButton"));
-    button->setText(front::Lang::get("Return to game"));
+    button->setText(front::Lang::getUtf("Return to game"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("NewGameButton"));
-    button->setText(front::Lang::get("New Game"));
+    button->setText(front::Lang::getUtf("New Game"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("SaveButton"));
-    button->setText(front::Lang::get("Save Game"));
+    button->setText(front::Lang::getUtf("Save Game"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("LoadButton"));
-    button->setText(front::Lang::get("Load Game"));
+    button->setText(front::Lang::getUtf("Load Game"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("OptionsButton"));
-    button->setText(front::Lang::get("Options"));
+    button->setText(front::Lang::getUtf("Options"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("ExitButton"));
-    button->setText(front::Lang::get("Exit"));
+    button->setText(front::Lang::getUtf("Exit"));
 }
 
 void CEGUI::GUIUpdate::UpdatePlayerChangedWindow(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
@@ -132,7 +132,7 @@ void CEGUI::GUIUpdate::CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& 
             resourceElem = my_gui->createWidget("WindowsLook/Static", glm::vec4(x, 0.05f, 0.25f, 0.8f), glm::vec4(0.0f), res.first);
             icon = my_gui->createWidget("WindowsLook/Label", glm::vec4(0.05f, 0.1f, 0.6f, 0.8f), glm::vec4(0.0f), res.first + "/label");
             val = my_gui->createWidget("WindowsLook/Label", glm::vec4(0.65f, 0.1f, 0.35f, 0.8f), glm::vec4(0.0f), res.first + "/value");
-            icon->setText(front::Lang::get(res.first) + ": ");
+            icon->setText(front::Lang::getUtf(res.first));
             x += 0.3;
         }
         else
@@ -222,7 +222,7 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
             unitButton->destroy();
             unitButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
                 glm::vec4(0.05f, 0.1f, 0.8f, 0.8f), glm::vec4(0.0f), name + "/button"));
-            unitButton->setText(name);
+            unitButton->setText(front::Lang::getUtf(unitName));
         }
         else
         {
@@ -294,7 +294,7 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
         }
         unitOptionButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
             glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), option));
-        unitOptionButton->setText(front::Lang::get(option));
+        unitOptionButton->setText(front::Lang::getUtf(option));
         func = new CEGUI::Functor::SetLabelText(option, nameLabel);
         my_gui->setPushButtonCallback(option, func);
         func = new CEGUI::Functor::SetLabelText(front::Lang::get(option), frontNameLabel);

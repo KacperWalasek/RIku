@@ -32,6 +32,7 @@ namespace CEGUI {
         CEGUI::Window* loadLayout(const CEGUI::String& schemeFile);
         static void loadIcon(const CEGUI::String& name, const CEGUI::String& path);
         void setFont(const CEGUI::String& fontFile);
+        bool setFontFromLang();
         CEGUI::Window* createWidget(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name = "");
         CEGUI::Window* createWidget(const CEGUI::String& type, const CEGUI::String& name = "");
         static void setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destRectPerc, const glm::vec4& destRectPix);

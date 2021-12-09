@@ -47,3 +47,10 @@ const char *front::Lang::get(const char *name) {
 	return name;
 }
 
+const unsigned char* front::Lang::getUtf(const char* name) {
+	return (unsigned char*)get(name);
+}
+
+const unsigned char* front::Lang::getUtf(const std::string& name) {
+	return getUtf(name.c_str());
+}

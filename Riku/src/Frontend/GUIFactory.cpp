@@ -38,42 +38,11 @@ void CEGUI::GUIFactory::init(GLFWwindow* win){
 	CEGUI::GUIUpdate::LoadIcons(state);
 }
 
-CEGUI::GUI* CEGUI::GUIFactory::GetDemoWindow() {
-	
-	CEGUI::GUI* my_gui = new CEGUI::GUI();
-	my_gui->init();	
-	//my_gui->loadLayout("test.layout");
-
-
-	my_gui->setFont("DejaVuSans-10");
-	my_gui->loadLayout("application_templates.layout");
-
-	auto OnExitButtonClicked1 = new CEGUI::Functor::ExitApp(window);
-	//std::function<bool(const CEGUI::EventArgs&)>* OnExitButtonClicked2 = new std::function<bool(const CEGUI::EventArgs&)>([=](const CEGUI::EventArgs& e)
-	//{
-	//	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(my_gui->getWidgetByName("Button"));
-	//	testButton->setText("u sick ");
-	//	//glfwSetWindowShouldClose(window, true);
-	//	front::focusedUnit = 3;
-	//	return true;
-	//});
-
-	//callbacks.push_back(OnExitButtonClicked1);
-	my_gui->setPushButtonCallback("Button", OnExitButtonClicked1);
-
-
-	//my_gui->setMouseCursor("TaharezLook/MouseArrow");
-	//my_gui->showMouseCursor();
-
-	return my_gui;
-}
-
 CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 
 	CEGUI::GUI* my_gui = new CEGUI::GUI();
 	my_gui->init();
 	my_gui->loadLayout("RikuMainMenu.layout");
-	my_gui->setFont("DejaVuSans-10");
 	
 	//auto img = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("StaticImage"));
 	//img->setProperty("Image", "Riku/Background");
@@ -95,7 +64,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetOptionsMenu() {
 	CEGUI::GUI* my_gui = new CEGUI::GUI();
 	my_gui->init();
 	my_gui->loadLayout("RikuOptionsMenu.layout");
-	my_gui->setFont("DejaVuSans-10");
 
 	auto onKeyPress = new CEGUI::Functor::Functor();
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
@@ -110,7 +78,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	CEGUI::GUI* my_gui = new CEGUI::GUI();
 	my_gui->init();
 	my_gui->loadLayout("RikuGameUI.layout");
-	//my_gui->setFont("DejaVuSans-10");
 
 	CEGUI::GUIUpdate::CreateUnits(my_gui, "UnitsList", state, focusedUnitIndex);
 	CEGUI::GUIUpdate::CreateResources(my_gui, "ResourcesList", state);
@@ -146,7 +113,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	{
 		buildingButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
 			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), b));
-		buildingButton->setText(front::Lang::get(b));
+		buildingButton->setText(front::Lang::getUtf(b));
 		func = new CEGUI::Functor::SetLabelText(b, nameLabel);
 		my_gui->setPushButtonCallback(b, func);
 		func = new CEGUI::Functor::SetLabelText(front::Lang::get(b), frontNameLabel);
@@ -174,7 +141,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
 	CEGUI::GUI* my_gui = new CEGUI::GUI();
 	my_gui->init();
 	my_gui->loadLayout("RikuYourTurn.layout");
-	my_gui->setFont("DejaVuSans-10");
 
 	auto onOkButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
 	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostk¹
@@ -191,8 +157,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetRecruitingUI() {
 
 	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
 	
-	//CEGUI::GUIUpdate::CreateUnitOptions(my_gui, "UnitsList", state, focusedUnitIndex);
-
 	auto onKeyPress = new CEGUI::Functor::RecruitingUIOnKeyPress(activeGUI, guiDic, nameLabel, state, focusedUnitIndex);
 	auto onConfirmButton = new CEGUI::Functor::RecruitUnit(nameLabel, state, focusedUnitIndex);
 	auto onCloseButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);

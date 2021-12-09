@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include "Lang.h"
 #define RESPATH "../GUI"
 //#include "../src/Riku.cpp"
 CEGUI::OpenGL3Renderer* CEGUI::GUI::m_renderer = nullptr;
@@ -17,6 +18,7 @@ void CEGUI::GUI::init() {
     m_root->activate();
     m_root->setMousePassThroughEnabled(true);
     m_context->setRootWindow(m_root);
+    setFontFromLang();
 }
 
 void CEGUI::GUI::setResourceDirectory(const CEGUI::String& resourceDirectory) {
@@ -167,6 +169,17 @@ void CEGUI::GUI::setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destR
 void CEGUI::GUI::setFont(const CEGUI::String& fontFile) {
     CEGUI::FontManager::getSingleton().createFromFile(fontFile + ".font");
     m_context->setDefaultFont(fontFile);
+}
+
+bool CEGUI::GUI::setFontFromLang() {
+    auto font = front::Lang::get("font");
+    if (font == "font")
+    {
+        setFont("DejaVuSans-10");
+        return false;
+    }
+    setFont(font);
+    return true;
 }
 
 CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey)
