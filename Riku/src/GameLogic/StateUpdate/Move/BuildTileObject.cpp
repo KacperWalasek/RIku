@@ -12,7 +12,7 @@ std::shared_ptr<ITileObject> BuildTileObject::createObject(const LogicAssets& as
     GUIDescription gui(asset.getFunctions());
     if (asset.hasData("gui"))
         gui = GUIDescription(asset.getByKey("gui").asMap(), asset.getFunctions());
-    std::shared_ptr<ITileObject> object = std::make_shared<SimpleTileObject>(tileObject, asset.getFunctions(), gui);
+    std::shared_ptr<ITileObject> object = std::make_shared<SimpleTileObject>(tileObject, player, asset.getFunctions(), gui);
     for (auto& behavior : asset.getByKey("behavior").asMap())
     {
         std::string type = behavior.first;

@@ -10,11 +10,13 @@ class SimpleTileObject : public ITileObject
 {
 	LoadedHookable loadedHookable;
  	std::string name;
+	int player;
 public:
 	GUIDescription gui;
-	SimpleTileObject(std::string name, const std::map<std::string, sol::function>& hooks, GUIDescription gui);
+	SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui);
 
 	virtual std::string getName() const override;
+	virtual int getOwner() const override;
 	virtual double getModifiedCost(double cost) const override;
 
 	virtual std::shared_ptr<IMove> onDestroy(bool byOwner) override;
