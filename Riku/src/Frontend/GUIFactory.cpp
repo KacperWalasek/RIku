@@ -79,7 +79,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	my_gui->init();
 	my_gui->loadLayout("RikuGameUI.layout");
 
-	CEGUI::GUIUpdate::CreateUnits(my_gui, "UnitsList", state, focusedUnitIndex);
+	//CEGUI::GUIUpdate::CreateUnits(my_gui, "UnitsList", state, focusedUnitIndex);
 	CEGUI::GUIUpdate::CreateResources(my_gui, "ResourcesList", state);
 
 	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state,activeGUI,guiDic);

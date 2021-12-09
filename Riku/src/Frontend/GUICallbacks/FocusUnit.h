@@ -3,7 +3,7 @@
 #include <CEGUI/CEGUI.h>
 #include "Functor.h"
 #include "../FrontendState.h"
-
+#include "../Transform.h"
 namespace CEGUI::Functor {       
 
     class FocusUnit : public Functor
@@ -15,9 +15,10 @@ namespace CEGUI::Functor {
         int& focusedUnitIndex;
         std::shared_ptr<std::string> activeUnitElem;
         FrontendState& state;
+        front::Transform& movingCameraTransform;
     public:
-        FocusUnit(int unitNr, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::shared_ptr<std::string> activeUnitElem, FrontendState& state)
-            : Functor(), unitNr(unitNr), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), unitName(name), activeUnitElem(activeUnitElem), state(state) {}
+        FocusUnit(int unitNr, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::shared_ptr<std::string> activeUnitElem, FrontendState& state, front::Transform& movingCameraTransform)
+            : Functor(), unitNr(unitNr), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), unitName(name), activeUnitElem(activeUnitElem), state(state), movingCameraTransform(movingCameraTransform) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
@@ -38,6 +39,8 @@ namespace CEGUI::Functor {
                         CEGUI::Window* me = unitsList->getChildRecursive(myName);
                         me->setProperty("BackgroundEnabled", "true");
                         *activeUnitElem = myName;
+                        auto pos = movingCameraTransform.position;
+                        movingCameraTransform.position = glm::vec3(u.get()->getMapX(), pos.z, u.get()->getMapY());
                     }
                 }
                 i++;
