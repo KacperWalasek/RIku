@@ -17,9 +17,9 @@ namespace front {
 		void operator()(GLFWwindow* window, double xoffset, double yoffset) {
 			if (activeGUI->on_scroll(yoffset)) return;
 			if ((movingCameraTransform.position.y > config.minZoomHeight || yoffset < 0.0f) && (movingCameraTransform.position.y < config.maxZoomHeight || yoffset>0.0f))
-				movingCameraTransform.position -= glm::rotateX(glm::vec3(0.f, yoffset * .5f, 0.f), (float)M_PI_4 - movingCameraTransform.rotation.x * .25f);
+				movingCameraTransform.position -= rotate({0.f, yoffset * .5f, 0.f}, {movingCameraTransform.rotation.x-(float)M_PI_2,movingCameraTransform.rotation.y,.0f});
 			else
-				movingCameraTransform.position.y = std::min(40.0f, std::max(3.0f, movingCameraTransform.position.y));
+				movingCameraTransform.position.y = std::min(config.maxZoomHeight, std::max(config.minZoomHeight, movingCameraTransform.position.y));
 		}
 	};
 }

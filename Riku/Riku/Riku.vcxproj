@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp" />
+    <ClCompile Include="..\src\Frontend\Asset\AssetTexture.cpp" />
     <ClCompile Include="..\src\Frontend\Asset\FAsset.cpp" />
     <ClCompile Include="..\src\Frontend\Asset\FAssetHandler.cpp" />
     <ClCompile Include="..\src\Frontend\Config.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="..\src\Frontend\Shader.cpp" />
     <ClCompile Include="..\src\Frontend\stb_image.cpp" />
     <ClCompile Include="..\src\Frontend\Texture.cpp" />
+    <ClCompile Include="..\src\Frontend\Transform.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Light.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Scene.cpp" />
@@ -241,6 +243,7 @@
   <ItemGroup>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h" />
+    <ClInclude Include="..\src\Frontend\Asset\AssetTexture.h" />
     <ClInclude Include="..\src\Frontend\Asset\FAsset.h" />
     <ClInclude Include="..\src\Frontend\Asset\FAssetHandler.h" />
     <ClInclude Include="..\src\Frontend\Config.h" />
@@ -270,6 +273,7 @@
     <ClInclude Include="..\src\Frontend\Shader.h" />
     <ClInclude Include="..\src\Frontend\stb_image.h" />
     <ClInclude Include="..\src\Frontend\Texture.h" />
+    <ClInclude Include="..\src\Frontend\Transform.h" />
     <ClInclude Include="..\src\Frontend\Window\Callbacks\FramebufferSizeCallback.h" />
     <ClInclude Include="..\src\Frontend\Window\Callbacks\KeyCallback.h" />
     <ClInclude Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.h" />

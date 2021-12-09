@@ -12,9 +12,9 @@ namespace front {
 		FrontendState state;
 		AssetHandler assetHandler;
 		Window window;
-		Config config;
+		Config& config;
 	public:
-		Frontend(GameLogic& logic);
+		Frontend(GameLogic& logic, Config& config);
 		bool update();
 	};
 }

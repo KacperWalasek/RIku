@@ -12,19 +12,24 @@ front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
 }
 
 void front::AssetHandler::loadFiles() {
-	std::cout << "Loading assets for frontend\n";
+    std::cout << "Loading assets for frontend\n";
+    loadFile("../assets/");
 	for(const auto& node: handler.assetNodes) {
-		std::string path = node.second.getPath()+"/";
-		Json::Value root = getJsonFromFile(path+"front.json",false);
-		path = path.substr(3);
-		for(auto const& id: root.getMemberNames()) {
-			Asset asset(id, path, root[id]);
-			if(!asset.assetModels.empty()) {
-				assets.insert(std::make_pair(id,std::move(asset)));
-			}
-		}
+        const auto& path = node.second.getPath()+"/";
+        loadFile(path);
 	}
 	std::cout << "Assets loaded successfully\n\n";
+}
+
+void front::AssetHandler::loadFile(const std::string& parentPath) {
+    Json::Value root = getJsonFromFile(parentPath+"front.json",false);
+    std::string path2 = parentPath.substr(3);
+    for(auto const& id: root.getMemberNames()) {
+        Asset asset(id, path2, root[id]);
+        if(!asset.assetModels.empty() || !asset.assetTextures.empty()) {
+            assets.insert(std::make_pair(id,std::move(asset)));
+        }
+    }
 }
 
 const front::Asset &front::AssetHandler::getAsset(const std::string& key) const {
@@ -38,4 +43,8 @@ bool front::AssetHandler::tryDraw(const std::string &key, const Shader &shader, 
 	a.draw(shader, transform);
 	return true;
 
+}
+
+const std::map<std::string, front::Asset>& front::AssetHandler::getMap() const {
+    return assets;
 }

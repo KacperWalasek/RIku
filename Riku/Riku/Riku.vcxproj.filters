@@ -276,7 +276,10 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="..\src\Frontend\GUIUpdate.cpp">
+    <ClCompile Include="..\src\Frontend\Asset\AssetTexture.cpp">
+      <Filter>Riku\Frontend\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Transform.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
   </ItemGroup>
@@ -308,6 +311,9 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\BuildingUIOnKeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\EndTurn.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -326,7 +332,7 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\MainMenuOnkeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h">
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SelectBuildingWithName.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchActiveGUI.h">
@@ -648,14 +654,11 @@
       <Filter>Riku\GameLogic\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    <ClInclude Include="..\src\Frontend\Asset\AssetTexture.h">
+      <Filter>Riku\Frontend\Asset</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    <ClInclude Include="..\src\Frontend\Transform.h">
+      <Filter>Riku\Frontend</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
