@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES 
 #include "Scene.h"
 #include <iostream>
-#include "../stb_image.h"
+#include "stb_image.h"
 #include <cmath>
 #ifdef _WIN32
 	#undef max
