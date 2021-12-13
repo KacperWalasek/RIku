@@ -18,7 +18,7 @@ namespace front {
 			: state(state), focusedUnitIndex(focusedUnitIndex), activeGUI(activeGUI), config(config), movingCameraTransform(movingCameraTransform)
 		{}
 
-		void operator()(GLFWwindow* window, int key, int scancode, int action, int mods)
+		void operator()(GLFWwindow*, int key, [[maybe_unused]]int scancode, int action, [[maybe_unused]]int mods)
 		{
 			if (action == GLFW_RELEASE)
 				;
@@ -28,7 +28,7 @@ namespace front {
 				auto& map = state.getMap();
 				const auto& units = state.getUnits();
 				const Unit* unit = nullptr;
-				if (focusedUnitIndex >= 0 && focusedUnitIndex < units.size())
+				if (focusedUnitIndex >= 0 && focusedUnitIndex < (int)units.size())
 					unit = units[focusedUnitIndex].get();
 
 				std::optional<std::pair<int, int> > unitPos;
@@ -46,7 +46,7 @@ namespace front {
 					state.moveUnit(unitPos->first, unitPos->second, unitPos->first, unitPos->second - 1);
 					break;
 				case GLFW_KEY_S:
-					if (!unit || unitPos->second >= map[0].size() - 1)
+					if (!unit || unitPos->second >= (int)map[0].size() - 1)
 						break;
 					state.moveUnit(unitPos->first, unitPos->second, unitPos->first, unitPos->second + 1);
 					break;
@@ -56,12 +56,18 @@ namespace front {
 					state.moveUnit(unitPos->first, unitPos->second, unitPos->first - 1, unitPos->second);
 					break;
 				case GLFW_KEY_D:
-					if (!unit || unitPos->first >= map.size() - 1)
+					if (!unit || unitPos->first >= (int)map.size() - 1)
 						break;
 					state.moveUnit(unitPos->first, unitPos->second, unitPos->first + 1, unitPos->second);
 					break; 
 				case GLFW_KEY_T:
-					config.angle += 4.0f;
+					config.angle += 2.0f;
+					if (config.angle < 0.0f)
+						config.angle = 0.0f;
+					if (config.angle > 90.0f)
+						config.angle = 90.0f;
+					movingCameraTransform.rotation.x = glm::radians(config.angle);
+					break;
 				case GLFW_KEY_Y:
 					config.angle -= 2.0f;
 					if (config.angle < 0.0f)

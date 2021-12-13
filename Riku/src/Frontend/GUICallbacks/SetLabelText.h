@@ -13,7 +13,7 @@ namespace CEGUI::Functor {
     public:
         SetLabelText(std::string name, CEGUI::DefaultWindow* label) : Functor(), name(name), label(label) {}
 
-        bool operator()(const CEGUI::EventArgs& e)
+        bool operator()([[maybe_unused]]const CEGUI::EventArgs& e)
         {
             label->setText((uint8*)name.c_str());
             return true;

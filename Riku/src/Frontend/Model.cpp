@@ -14,9 +14,9 @@ Model::Model(std::string const &path, float x_tex_scale, float y_tex_scale, bool
 		return;
 	loadModel(path,x_tex_scale, y_tex_scale);
 }
-void Model::Draw(const Shader &shader, int index) const
+void Model::Draw(const Shader &shader, [[maybe_unused]]int index) const
 {
-	for(unsigned int i = 0; i < meshes.size(); i++)
+	for(unsigned int i = 0; i < (int)meshes.size(); i++)
 		meshes[i].Draw(shader);
 }
 void Model::loadModel(std::string const &path, float x_tex_scale, float y_tex_scale)

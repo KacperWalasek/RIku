@@ -10,7 +10,7 @@ bool UseResourceOnBuild::canBeBuilt(const GameState & state, int mapX, int mapY)
 	return state.players[state.playerOnMove].getResourceQuantity(resource)>=quantity && TileObjectDecorator::canBeBuilt(state,mapX,mapY);
 }
 
-std::shared_ptr<IMove> UseResourceOnBuild::onBeingPlaced(int mapX, int mapY)
+std::shared_ptr<IMove> UseResourceOnBuild::onBeingPlaced([[maybe_unused]]int mapX, [[maybe_unused]]int mapY)
 {
 	return std::make_shared<UseResources>(resource,quantity);
 }

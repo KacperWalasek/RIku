@@ -16,10 +16,10 @@ namespace CEGUI::Functor {
         BuildBuildingFromLabel(CEGUI::DefaultWindow* label, FrontendState& state, int& focusedUnitIndex) 
             : Functor(), label(label), state(state), focusedUnitIndex(focusedUnitIndex) {}
 
-        bool operator()(const CEGUI::EventArgs& e)
+        bool operator()([[maybe_unused]]const CEGUI::EventArgs& e)
         {
             auto units = state.getUnits();
-            if (focusedUnitIndex >= 0 && focusedUnitIndex < units.size())
+            if (focusedUnitIndex >= 0 && focusedUnitIndex < (int)units.size())
             {
                 auto unit = units[focusedUnitIndex].get();
                 state.build(label->getText().c_str(), unit->getMapX(), unit->getMapY());

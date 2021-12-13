@@ -49,13 +49,13 @@ namespace logic {
 	}
 	AssetData& AssetData::operator[] (size_t i) {
 		auto& vec = asVector();
-		if (i >= 0 || i < vec.size())
+		if (/*i >= 0 || */i < vec.size())
 			return vec[i];
 		throw std::out_of_range("Out of range");
 	}
 	const AssetData& AssetData::operator[] (size_t i) const {
 		auto& vec = asVector();
-		if (i >= 0 || i < vec.size())
+		if (/*i >= 0 || */i < vec.size())
 			return vec[i];
 		throw std::out_of_range("Out of range");
 	}

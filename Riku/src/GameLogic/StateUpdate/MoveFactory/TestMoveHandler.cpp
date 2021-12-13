@@ -1,6 +1,6 @@
 #include "TestMoveHandler.h"
 
-std::shared_ptr<IMove> TestMoveHandler::handleDescription(const IMoveDescription& description)
+std::shared_ptr<IMove> TestMoveHandler::handleDescription(const IMoveDescription&)
 {
 	return std::make_shared<ExtractResources>(0,0,10,0,0);
 }

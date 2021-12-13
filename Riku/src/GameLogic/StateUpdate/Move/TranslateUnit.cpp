@@ -9,7 +9,7 @@ TranslateUnit::TranslateUnit(int fromX, int fromY, int toX, int toY)
 {
 }
 
-std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const LogicAssets& assets) const
+std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const LogicAssets&) const
 {
     auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY);
     auto unit = state.map[fromX][fromY].unit;
@@ -19,7 +19,7 @@ std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const 
         (Patch)UnitPatch(unit,-path.cost));
 }
 
-bool TranslateUnit::isDoable(const GameState& state, const LogicAssets& assets) const
+bool TranslateUnit::isDoable(const GameState& state, const LogicAssets&) const
 {
     //TODO: zoptymalizowac, zeby nie liczyc dwa razy patha. (Liczenie patha w MoveDescription?)
     auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY);

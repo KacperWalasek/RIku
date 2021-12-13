@@ -1,13 +1,13 @@
 #include "TestMove.h"
 #include <iostream>
 
-std::shared_ptr<Patch> TestMove::createPatch(const GameState& state, const LogicAssets& assets) const
+std::shared_ptr<Patch> TestMove::createPatch(const GameState&, const LogicAssets&) const
 {
     std::cout << "\t test move" << std::endl;
     return std::make_shared<Patch>(PlayerPatch(0));
 }
 
-bool TestMove::isDoable(const GameState& state, const LogicAssets& assets) const
+bool TestMove::isDoable(const GameState&, const LogicAssets&) const
 {
     return true;
 }

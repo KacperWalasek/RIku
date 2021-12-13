@@ -15,7 +15,7 @@ namespace CEGUI::Functor {
         CEGUI::GUI*& activeGUI;
     public:
         EndTurn(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic)
-            : Functor(), state(state), activeGUI(activeGUI), guiDic(guiDic) {}
+            : Functor(), state(state), guiDic(guiDic), activeGUI(activeGUI) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {

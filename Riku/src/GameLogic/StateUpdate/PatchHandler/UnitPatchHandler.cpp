@@ -1,6 +1,6 @@
 #include "UnitPatchHandler.h"
 
-std::shared_ptr<IMove> UnitPatchHandler::handlePatch(GameState& state, const Patch& patch) const
+std::shared_ptr<IMove> UnitPatchHandler::handlePatch(GameState&, const Patch& patch) const
 {
 	for (auto unitPatch : patch.unitPatches)
 	{

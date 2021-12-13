@@ -17,7 +17,7 @@ std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const Log
     return std::make_shared<Patch>(Patch(nextPlayer) + *patch);
 }
 
-bool FinishTurn::isDoable(const GameState& state, const LogicAssets& assets) const
+bool FinishTurn::isDoable(const GameState&, const LogicAssets&) const
 {
     return true;
 }

@@ -19,5 +19,5 @@ std::vector<std::vector<Tile>> MapGenerator::getMap(const LogicAssets& assets)
 				return tileRow;
 			}
 		);
-	return std::move(tiles);
+	return tiles; //removed pessimizing move
 }

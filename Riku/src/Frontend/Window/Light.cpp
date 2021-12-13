@@ -104,7 +104,7 @@ void front::Light::apply(Shader& shader, float dayPart)
 	shader.setVec3("dirLight.specular", 0.9f * dayPart, 0.9f * dayPart, 0.9f * dayPart);
 
 	// point lights
-	for (int i = 0; i < pointLightPositions.size(); i++) {
+	for (int i = 0; i < (int)pointLightPositions.size(); i++) {
 		shader.setVec3("pointLights[" + std::to_string(i) + "].position", pointLightPositions[i]);
 		shader.setVec3("pointLights[" + std::to_string(i) + "].ambient", 0.0f, 0.0f, 0.0f);
 		shader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", 0.8f * (1.0f - dayPart), 0.8f * (1.0f - dayPart), 0.8f * (1.0f - dayPart));

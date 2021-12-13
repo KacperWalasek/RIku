@@ -26,7 +26,7 @@ BuildTileObject::BuildTileObject(int player, std::pair<int, int> tile, std::stri
     : player(player), tile(tile), tileObject(tileObject)
 {}
 
-std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state, const LogicAssets& assets) const
+std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState&, const LogicAssets& assets) const
 {
     std::shared_ptr<ITileObject> object = createObject(assets);
     return std::make_shared<Patch>(TilePatch(tile,object) + (Patch)RegisterHookablePatch(object));

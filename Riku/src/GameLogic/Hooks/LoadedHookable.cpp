@@ -39,7 +39,7 @@ std::shared_ptr<IMove> LoadedHookable::onBeingPlaced(IHookable& hookable, int ma
     return wrapper.move;
 }
 
-bool LoadedHookable::canBeBuilt(IHookable& hookable, const GameState& state, int mapX, int mapY)
+bool LoadedHookable::canBeBuilt(IHookable&, const GameState& state, int mapX, int mapY)
 {
     auto func = functions.find("canBeBuilt");
     if (func == functions.end())

@@ -16,5 +16,5 @@ bool ChoseGuiOptionMoveHandler::canHandle(const IMoveDescription& description) c
         return false;
     const ChoseGuiOptionMoveDescription& desc = (const ChoseGuiOptionMoveDescription&)description;
     auto object = state.map[desc.getMapX()][desc.getMapY()].object;
-    return object && object->getGuiDescription().getOptions().size() > desc.getIndex();
+    return object && (int)object->getGuiDescription().getOptions().size() > desc.getIndex();
 }

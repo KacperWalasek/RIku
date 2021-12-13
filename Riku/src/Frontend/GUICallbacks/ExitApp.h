@@ -13,7 +13,7 @@ namespace CEGUI::Functor {
     public:
         ExitApp(GLFWwindow* window) : Functor(), window(window) {}
 
-        bool operator()(const CEGUI::EventArgs& e) override
+        bool operator()([[maybe_unused]]const CEGUI::EventArgs& e) override
         {
             glfwSetWindowShouldClose(window, true);
             return true;

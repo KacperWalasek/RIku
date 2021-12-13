@@ -1,7 +1,7 @@
 #include "FinishGameMoveHandler.h"
 #include "../Move/FinishTurn.h"
 
-std::shared_ptr<IMove> FinishGameMoveHandler::handleDescription(const IMoveDescription& description)
+std::shared_ptr<IMove> FinishGameMoveHandler::handleDescription(const IMoveDescription&)
 {
     return std::make_shared<FinishTurn>();
 }

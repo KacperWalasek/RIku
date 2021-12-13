@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 
 #include "Lang.h"
 #include "GUIUpdate.h"
@@ -156,7 +156,7 @@ void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
     {
         try
         {
-            CEGUI::GUI::loadIcon(res.first, res.first + ".png"); //TODO wczytywanie ró¿nych formatów
+            CEGUI::GUI::loadIcon(res.first, res.first + ".png"); //TODO wczytywanie rï¿½nych formatï¿½w
             printf("Successfully loaded icon for: %s\n", res.first.c_str());
         }
         catch (...) {}
@@ -166,7 +166,7 @@ void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
     {
         try
         {
-            CEGUI::GUI::loadIcon(u.get()->getName(), u.get()->getName() + ".png"); //TODO wczytywanie ró¿nych formatów
+            CEGUI::GUI::loadIcon(u.get()->getName(), u.get()->getName() + ".png"); //TODO wczytywanie rï¿½nych formatï¿½w
             printf("Successfully loaded icon for: %s\n", u.get()->getName().c_str());
         }
         catch (...) {}
@@ -177,7 +177,7 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
 
     auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(unitsListName));
     auto player_units = state.getUnits();
-    if (lastUnits.size() == player_units.size()) return; // na razie zak³adam, ze jednostka nie moze po prostu zmieniæ sie w inn¹ jednostkê
+    if (lastUnits.size() == player_units.size()) return; // na razie zakï¿½adam, ze jednostka nie moze po prostu zmieniï¿½ sie w innï¿½ jednostkï¿½
     std::map<std::string, int> repeats;
     float y = 0.05f;
     int i = 0;
@@ -256,7 +256,7 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
 void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)
 {
     auto units = state.getUnits();
-    if (focusedUnitIndex < 0 || focusedUnitIndex >= units.size()) return;
+    if (focusedUnitIndex < 0 || focusedUnitIndex >= (int)units.size()) return;
     auto unit = units[focusedUnitIndex].get();
     auto avaible_options = state.getGuiOptions(unit->getMapX(), unit->getMapY());
 

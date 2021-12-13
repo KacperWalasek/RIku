@@ -12,12 +12,12 @@ int UseResources::getResourceFromString(const LogicAssets& assets) const
 }
 
 UseResources::UseResources(std::string resource, int quantity)
-    :resourceAsString(resource), quantity(quantity), asString(true), resource(0)
+    :asString(true), resource(0), quantity(quantity), resourceAsString(std::move(resource))
 {
 }
 
 UseResources::UseResources(int resource, int quantity)
-    :resource(resource), quantity(quantity), asString(false)
+    :asString(false), resource(resource), quantity(quantity)
 {}
 
 std::shared_ptr<Patch> UseResources::createPatch(const GameState& state, const LogicAssets& assets) const

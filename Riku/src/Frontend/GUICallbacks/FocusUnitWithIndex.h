@@ -15,7 +15,7 @@ namespace CEGUI::Functor {
         std::shared_ptr<std::string> activeUnitElem;
     public:
         FocusUnitWithIndex(int idx, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::shared_ptr<std::string> activeUnitElem)
-            : Functor(), idx(idx), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), myName(name), activeUnitElem(activeUnitElem) {}
+            : Functor(), idx(idx), myName(std::move(name)), unitsList(unitsList), focusedUnitIndex(focusedUnitIndex), activeUnitElem(std::move(activeUnitElem)) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {

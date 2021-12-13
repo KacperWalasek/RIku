@@ -6,7 +6,7 @@ GUIDescription::GUIDescription(const std::map<std::string, sol::function>& funcs
 {}
 
 GUIDescription::GUIDescription(const GUIDescription & description)
-	: name(description.name), funcs(description.funcs), options(description.options)
+	: funcs(description.funcs), name(description.name), options(description.options)
 {}
 
 GUIDescription::GUIDescription(const std::map<std::string,logic::AssetData>& gui, const std::map<std::string, sol::function>& funcs)
@@ -37,7 +37,7 @@ std::vector<std::string> GUIDescription::getOptions() const
 std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index) const
 {
 	auto onOptionChosenFunc = funcs.find("onOptionChosen");
-	if (options.size() > index && onOptionChosenFunc != funcs.end())
+	if ((int)options.size() > index && onOptionChosenFunc != funcs.end())
 	{
 		MoveWrapper wrapper = onOptionChosenFunc->second(options[index]);
 		return wrapper.move;

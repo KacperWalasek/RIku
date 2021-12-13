@@ -14,11 +14,11 @@
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
 	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex)
-	:logic(logic), state(state), activeGUI(activeGUI), guiDic(guiDic), focusedUnitIndex(focusedUnitIndex)
+	:focusedUnitIndex(focusedUnitIndex), logic(logic), state(state), activeGUI(activeGUI), guiDic(guiDic)
 {}
 
 void CEGUI::GUIFactory::init(GLFWwindow* win){
-    // init przyjmuje zmnienne, których mo¿emy potrzebowaæ dla funkcji callback
+    // init przyjmuje zmnienne, ktï¿½rych moï¿½emy potrzebowaï¿½ dla funkcji callback
     window = win;
 	auto v1 = CEGUI::GUI();
 	v1.init();
@@ -143,7 +143,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
 	my_gui->loadLayout("RikuYourTurn.layout");
 
 	auto onOkButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
-	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostk¹
+	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostkï¿½
 	my_gui->setPushButtonCallback("OkButton", onOkButton);
 	my_gui->setKeyCallback(onKeyPress);
 

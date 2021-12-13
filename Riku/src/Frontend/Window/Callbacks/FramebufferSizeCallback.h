@@ -11,7 +11,7 @@ namespace front {
 	public:
 		FramebufferSizeCallback(float& aspect) : aspect(aspect) {}
 
-		void operator()(GLFWwindow* window, int width, int height)
+		void operator()(GLFWwindow*, int width, int height)
 		{
 			glViewport(0, 0, width, height);
 			aspect = (float)width / height;

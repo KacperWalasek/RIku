@@ -1,6 +1,5 @@
 #pragma once
 
-#include <CEGUI/CEGUI.h>
 #include "GUI.h"
 #include "GUICallbacks/Functor.h"
 #include "FrontendState.h"

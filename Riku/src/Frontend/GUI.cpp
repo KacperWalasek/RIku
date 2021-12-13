@@ -173,7 +173,7 @@ void CEGUI::GUI::setFont(const CEGUI::String& fontFile) {
 
 bool CEGUI::GUI::setFontFromLang() {
     auto font = front::Lang::get("font");
-    if (font == "font")
+    if (font == std::string("font"))
     {
         setFont("DejaVuSans-10");
         return false;

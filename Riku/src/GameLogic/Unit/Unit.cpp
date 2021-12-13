@@ -2,7 +2,7 @@
 
 
 Unit::Unit(std::string type, std::string name, int player, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
-	: type(type), name(name), player(player), loadedHookable(hooks), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints)
+	: type(std::move(type)), name(std::move(name)), loadedHookable(hooks), player(player), movementPoints(baseMovementPoints), baseMovementPoints(baseMovementPoints)
 {}
 
 void Unit::useMovementPoints(int points)

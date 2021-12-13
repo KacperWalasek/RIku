@@ -8,7 +8,7 @@ namespace CEGUI::Functor {
     {
     public:     
         Functor() {}
-        virtual bool operator()(const CEGUI::EventArgs& e) { return true; }
+        virtual bool operator()(const CEGUI::EventArgs&) { return true; }
         
     };
 }

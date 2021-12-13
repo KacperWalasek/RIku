@@ -20,7 +20,7 @@ void Texture::init(const std::string& type, const std::string& path, const std::
 	std::string path_tmp=path;
 	glGenTextures(1, &ID);
 		dir_tmp = std::filesystem::current_path().parent_path().string() + "/" + dir;
-		for(int i=0;i<path_tmp.size();i++)
+		for(int i=0;i<(int)path_tmp.size();i++)
 		{
 			if(path_tmp[i] == '\\')
 				path_tmp[i]='/';

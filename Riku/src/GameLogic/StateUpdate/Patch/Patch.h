@@ -67,7 +67,7 @@ public:
 		}
 		if (p2.playerOnMove != -1)
 			p1.playerOnMove = p2.playerOnMove;
-		return std::move(p1);
+		return p1; //removed retundant move
 	}
 };
 

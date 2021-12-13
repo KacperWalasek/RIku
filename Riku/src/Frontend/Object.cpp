@@ -29,6 +29,6 @@ void front::Object::Draw(const Shader &shader, int index) const{
 	model->Draw(shader, index);
 }
 
-front::Object::Object(const Model& model, glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): transform(pos, rot, sc), model(&model){}
+front::Object::Object(const Model& model, glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): model(&model), transform(pos, rot, sc) {}
 
-front::Object::Object(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): transform(pos, rot, sc), model(nullptr) {}
+front::Object::Object(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc): model(nullptr), transform(pos, rot, sc) {}

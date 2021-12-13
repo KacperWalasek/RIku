@@ -11,7 +11,7 @@ namespace front {
 	public:
 		MousePositionCallback(CEGUI::GUI* activeGUI) : activeGUI(activeGUI) {}
 		
-		void operator()(GLFWwindow* window, double xpos, double ypos)
+		void operator()(GLFWwindow*, double xpos, double ypos)
 		{
 			activeGUI->on_mouse_pos(xpos, ypos);
 		}

@@ -20,7 +20,7 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
     return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr) + (Patch)RegisterHookablePatch(unitPtr));
 }
 
-bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets) const
+bool CreateUnit::isDoable(const GameState&, const LogicAssets&) const
 {
     return true;
 }

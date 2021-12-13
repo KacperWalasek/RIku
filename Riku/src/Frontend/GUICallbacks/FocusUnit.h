@@ -19,7 +19,7 @@ namespace CEGUI::Functor {
         FocusUnit(int unitNr, int& focusedUnitIndex, CEGUI::Window* unitsList, std::string name, std::shared_ptr<std::string> activeUnitElem, FrontendState& state)
             : Functor(), unitNr(unitNr), focusedUnitIndex(focusedUnitIndex), unitsList(unitsList), unitName(name), activeUnitElem(activeUnitElem), state(state) {}
 
-        bool operator()(const CEGUI::EventArgs& e)
+        bool operator()([[maybe_unused]]const CEGUI::EventArgs& e)
         {
             auto units = state.getUnits();
             int i = 0, num = 0;

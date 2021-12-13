@@ -3,7 +3,7 @@
 struct Path
 {
 	Path(std::vector<std::pair<int, int>> path, int cost)
-		: cost(cost), path(path) {}
+		: path(path), cost(cost) {}
 	std::vector<std::pair<int, int>> path;
 	int cost;
 };
