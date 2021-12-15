@@ -36,11 +36,11 @@ const front::Asset &front::AssetHandler::getAsset(const std::string& key) const 
 	return assets.at(key);
 }
 
-bool front::AssetHandler::tryDraw(const std::string &key, const Shader &shader, Transform transform) const {
+bool front::AssetHandler::tryDraw(const std::string &key, const Shader &shader, Transform transform, glm::vec4 color) const {
 	if(assets.find(key)==assets.end())
 		return false;
 	const auto& a = assets.at(key);
-	a.draw(shader, transform);
+	a.draw(shader, transform, color);
 	return true;
 
 }

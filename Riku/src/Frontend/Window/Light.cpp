@@ -95,7 +95,7 @@ void front::Light::init()
 	glEnableVertexAttribArray(0);
 }
 
-void front::Light::apply(Shader& shader, float dayPart)
+void front::Light::apply(Shader& shader, float dayPart) const
 {
 	// directional light
 	shader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);

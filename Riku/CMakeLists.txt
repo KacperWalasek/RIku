@@ -17,6 +17,7 @@ add_executable(Riku
 		src/Frontend/Asset/FAsset.cpp
 		src/Frontend/Asset/AssetTexture.cpp
 		src/Frontend/Asset/FAssetHandler.cpp
+		src/Frontend/DrawManager/ObjectDrawManager.cpp
 		src/Frontend/Frontend.cpp
 		src/Frontend/FrontendState.cpp
 		src/Frontend/Mesh.cpp
@@ -24,10 +25,12 @@ add_executable(Riku
 		src/Frontend/Texture.cpp
 		src/Frontend/JsonUtil.cpp
 		src/Frontend/Object.cpp
+		src/Frontend/GUIUpdate.cpp
 		src/Frontend/GUIFactory.cpp
 		src/Frontend/Shader.cpp
 		src/Frontend/Lang.cpp
 		src/Frontend/stb_image.cpp
+		src/Frontend/Transform.cpp
 		src/Frontend/Config.cpp
 		src/Frontend/Model.cpp
 		src/GameLogic/StateUpdate/MoveFactory/BuildMoveHandler.cpp
@@ -85,8 +88,7 @@ add_executable(Riku
 		src/GameLogic/FrontendCommunicator/Communicator.cpp
 		src/GameLogic/GameLogic.cpp
 		src/GameLogic/LogicAssets.cpp
-		src/Riku.cpp
-        src/Frontend/Transform.cpp)
+		src/Riku.cpp)
 
 target_link_libraries(Riku dl)
 target_link_libraries(Riku Xi)

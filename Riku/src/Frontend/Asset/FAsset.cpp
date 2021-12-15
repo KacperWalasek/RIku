@@ -62,11 +62,13 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 	}
 }
 
-void front::Asset::draw(const Shader &shader, Transform transform) const {
+void front::Asset::draw(const Shader &shader, Transform transform, glm::vec4 color) const {
 	for(const auto& a: assetModels) {
-        a.draw(shader, transform);
+        a.addToDrawManager(shader, transform,color);
+        //a.draw(shader, transform);
 	}
     for(const auto& a: assetTextures) {
         a.draw(shader, transform);
     }
+    glActiveTexture(GL_TEXTURE0);
 }

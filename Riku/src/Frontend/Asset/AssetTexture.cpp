@@ -44,7 +44,7 @@ front::AssetTexture::AssetTexture(std::string &path, front::Transform transform,
     texture = &texs[filename];
 }
 
-void front::AssetTexture::draw(const Shader &shader, front::Transform t) const {
+void front::AssetTexture::draw(const Shader &shader, front::Transform t, glm::vec4 color) const {
     if(!model)
         return;
     if(model->meshes[0].textures.empty())

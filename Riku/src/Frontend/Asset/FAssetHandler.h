@@ -16,7 +16,7 @@ namespace front {
 		explicit AssetHandler(const logic::AssetHandler& assetHandler);
 		void loadFiles();
 		const Asset& getAsset(const std::string& parentPath) const;
-		bool tryDraw(const std::string& key, const Shader &shader, Transform transform) const;
+		bool tryDraw(const std::string& key, const Shader &shader, Transform transform, glm::vec4 color={1.0,1.0,1.0,1.0}) const;
         const std::map<std::string, Asset>& getMap() const;
 	};
 }

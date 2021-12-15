@@ -16,7 +16,7 @@ namespace front {
 		Light();
 		~Light();
 		void init();
-		void apply(Shader& shader, float dayPart);
+		void apply(Shader& shader, float dayPart) const;
 		void drawCubes(glm::mat4 projection, glm::mat4 view, float fogDensity, glm::vec3 cameraPosition);
 	};
 }

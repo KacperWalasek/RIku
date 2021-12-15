@@ -9,9 +9,9 @@ function onCreateMap()
     local areas = {"wet","dry"}
     local h = 5.0
     math.randomseed(os.time())  
-    for i=1,25 do
+    for i=1,100 do
         arr[i]={}
-        for j=1,25 do
+        for j=1,100 do
             arr[i][j] = TileDescription.new(1,biomes[math.random(3)],grounds[math.random(3)],areas[math.random(2)])
         end
     end

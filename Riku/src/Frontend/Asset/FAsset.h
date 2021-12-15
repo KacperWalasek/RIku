@@ -26,7 +26,8 @@ namespace front {
     public:
 		[[nodiscard]] const std::string& getName() const {return name;}
 		Asset(std::string name, const std::string& path, const Json::Value& value);
-		void draw(const Shader& shader, Transform transform) const override;
+        void draw(const Shader& shader, Transform transform, glm::vec4 color) const override;
+		void draw(const Shader& shader, Transform transform) const override {draw(shader, transform, {1.0,1.0,1.0,1.0});};
 	};
 }
 

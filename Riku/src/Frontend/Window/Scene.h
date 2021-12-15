@@ -25,7 +25,7 @@ namespace front {
 
 		Transform movingCameraTransform;
 
-		Shader lightingShader;
+		Shader lightingShader, massShader;
 
 		float fogDensity = 0.01f;
 		int focusedUnitIndex = 0;
@@ -48,6 +48,7 @@ namespace front {
 		void draw();
 
 		friend class Window;
+        friend class ObjectDrawManager;
 	};
 }
 

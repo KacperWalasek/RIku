@@ -4,6 +4,8 @@
 
 #include "../Model.h"
 #include "AssetModel.h"
+#include "../DrawManager/ObjectDrawManager.h"
+#include "../Shader.h"
 #include <filesystem>
 
 std::map<std::string, Model> front::AssetModel::models = {};
@@ -16,13 +18,17 @@ front::AssetModel::AssetModel(std::string& path, Transform transform, float texS
 	model = &models[absolute];
 }
 
-void front::AssetModel::draw(const Shader &shader, front::Transform t) const {
-    /*auto pos=t.position+front::rotate(transform.position,t.rotation);
-    auto rot=t.rotation+transform.rotation;
-    auto scale=t.scale*transform.scale;*/
+void front::AssetModel::draw(const Shader &shader, front::Transform t, glm::vec4 color) const {
     Object object(*model);
     object.transform=transform;
     object.SetParent(t);
 
     object.Draw(shader);
+}
+
+void front::AssetModel::addToDrawManager(const Shader &shader, front::Transform t, glm::vec4 color) const {
+    Object object(*model);
+    object.transform=transform;
+    object.SetParent(t);
+    ObjectDrawManager::add(object);
 }

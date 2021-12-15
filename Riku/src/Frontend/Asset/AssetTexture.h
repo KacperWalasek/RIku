@@ -22,7 +22,8 @@ namespace front {
         Transform transform;
         bool isCameraAdaptive;
         AssetTexture(std::string &path, Transform transform, bool isCameraAdaptive);
-        void draw(const Shader& shader, Transform t) const override;
+        void draw(const Shader& shader, Transform t, glm::vec4 color) const override;
+        void draw(const Shader& shader, Transform t) const override {draw(shader, t, {1.0,1.0,1.0,1.0});};
 
     };
 }

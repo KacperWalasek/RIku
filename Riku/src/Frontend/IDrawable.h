@@ -9,6 +9,7 @@
 
 namespace front {
     class IDrawable {
+        virtual void draw(const Shader& shader, Transform transform, glm::vec4 color) const=0;
         virtual void draw(const Shader& shader, Transform transform) const=0;
     };
 }
