@@ -72,6 +72,12 @@
     <Filter Include="Riku\MiniGame\MoveFactory">
       <UniqueIdentifier>{eff107a9-7110-4654-97ab-583132265f07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Riku\MiniGame\Unit">
+      <UniqueIdentifier>{d60e89b9-3df9-476b-b985-e3884e7347d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Hookable">
+      <UniqueIdentifier>{e18c81e9-5799-4349-b8d5-bce94145b4fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -318,7 +324,27 @@
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp">
       <Filter>Riku\MiniGame\StateUpdate</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp">
+      <Filter>Riku\MiniGame\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MiniGameAssets.cpp">
+      <Filter>Riku\MiniGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp">
+      <Filter>Riku\MiniGame\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Assets\LogicAssetInitializer.cpp">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp">
+      <Filter>Riku\MiniGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -727,7 +753,35 @@
     <ClInclude Include="..\src\MiniGame\MiniGameAssets.h">
       <Filter>Riku\MiniGame</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
-    <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h">
+      <Filter>Riku\MiniGame\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h">
+      <Filter>Riku\MiniGame\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h">
+      <Filter>Riku\MiniGame\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Hooks\MiniMoveWrapper.h">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Hooks\MiniLoadedHookable.h">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\IAssetInitializer.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\LogicAssetInitializer.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MiniGameAssetInitializer.h">
+      <Filter>Riku\MiniGame</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

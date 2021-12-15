@@ -10,13 +10,17 @@
 
 class MiniGame
 {
+	inline static MiniGameAssets assets;
+
 	Communicator communicator;
 	MiniStateUpdate stateUpdate;
 	MiniGameState state;
-	MiniGameAssets assets;
 	MiniMoveFactory factory;
 public:
+	static MiniGameAssets& getAssets();
+
 	MiniGame(GameState& gameState, int player, int enemy, bool begins);
+
 	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;
 	template<typename T>
 	std::shared_ptr<T> getInfo(std::shared_ptr<Request> request) const

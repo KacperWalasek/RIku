@@ -188,6 +188,7 @@
     <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\Assets\LogicAssetInitializer.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp" />
@@ -238,11 +239,16 @@
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
     <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp" />
+    <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGame.cpp" />
+    <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp" />
+    <ClCompile Include="..\src\MiniGame\MiniGameAssets.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameState.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
+    <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +297,8 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetData.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
+    <ClInclude Include="..\src\GameLogic\Assets\IAssetInitializer.h" />
+    <ClInclude Include="..\src\GameLogic\Assets\LogicAssetInitializer.h" />
     <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
@@ -374,16 +382,22 @@
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
+    <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h" />
+    <ClInclude Include="..\src\MiniGame\Hooks\MiniLoadedHookable.h" />
+    <ClInclude Include="..\src\MiniGame\Hooks\MiniMoveWrapper.h" />
     <ClInclude Include="..\src\MiniGame\MiniGame.h" />
+    <ClInclude Include="..\src\MiniGame\MiniGameAssetInitializer.h" />
     <ClInclude Include="..\src\MiniGame\MiniGameAssets.h" />
     <ClInclude Include="..\src\MiniGame\MiniGameState.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPatch.h" />
     <ClInclude Include="..\src\MiniGame\Tile\MiniTile.h" />
+    <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

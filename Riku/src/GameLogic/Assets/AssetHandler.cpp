@@ -4,8 +4,8 @@
 
 namespace logic{
 
-	void AssetHandler::passFile(const std::string& path, const std::string& fileName) {
-		Asset newAsset(path, fileName);
+	void AssetHandler::passFile(const std::string& path, const std::string& fileName, std::shared_ptr<IAssetInitializer> initializer) {
+		Asset newAsset(path, fileName, initializer);
 		std::string assetName = newAsset.name;
 		std::string assetParent = newAsset.parent_name;
 		assetNodes[newAsset.name] = std::move(newAsset);
@@ -46,14 +46,14 @@ namespace logic{
 		hash = sha256(hashed);
 	}
 
-	void AssetHandler::findFiles(const std::string& path) {
+	void AssetHandler::findFiles(const std::string& path, std::shared_ptr<IAssetInitializer> initializer) {
 		for (const auto& entry : std::filesystem::directory_iterator(path)) {
 			if (entry.is_directory()) {
 				//it is asset
 				std::string path2 = entry.path().string() + "/script.lua";
 				if (std::filesystem::exists(path2)) {
 					std::cout << "Loading asset " << std::filesystem::relative(entry.path(), path) << "\n";
-					passFile(entry.path().string(), "script.lua");
+					passFile(entry.path().string(), "script.lua", initializer);
 				}
 				else
 					std::cerr << entry.path() << " is not a valid asset\n";

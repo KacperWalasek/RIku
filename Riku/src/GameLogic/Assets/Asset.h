@@ -11,7 +11,7 @@
 #include <string>
 #include "sol/sol.hpp"
 #include "AssetData.h"
-
+#include "IAssetInitializer.h"
 namespace logic {
 	class Asset {
 		std::shared_ptr<sol::state> lua;
@@ -26,11 +26,11 @@ namespace logic {
 		std::map<std::string, sol::function> functions;
 		friend class AssetHandler;
 	public:
-		Asset(const std::string& path, const std::string& fileName) { load(path, fileName);}
+		Asset(const std::string& path, const std::string& fileName,	std::shared_ptr<IAssetInitializer> initializer) { load(path, fileName, initializer);}
 		Asset(const Asset& asset);
 		Asset()=default;
 		Asset& operator=(Asset&& other) noexcept;
-		void load(const std::string& path, const std::string& fileName);
+		void load(const std::string& path, const std::string& fileName, std::shared_ptr<IAssetInitializer> initializer);
 		[[nodiscard]] const std::string& getName() const {return name;}
 		[[nodiscard]] const std::string& getType() const {return type;}
 		[[nodiscard]] const std::string& getPath() const {return path;}

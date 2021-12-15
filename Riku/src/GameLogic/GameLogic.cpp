@@ -25,6 +25,7 @@
 #include "FrontendCommunicator/RequestHandlers/TileObjectGuiRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
 #include "FrontendCommunicator/Responses/MapResponse.h"
+#include "../MiniGame/MiniGame.h"
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -69,6 +70,8 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 	stateUpdate.handleMove(unitMove);
 	unitMove = std::make_shared<CreateUnit>(1, "stefan", 14, 14);
 	stateUpdate.handleMove(unitMove);
+
+	MiniGame game(gameState,0,1,true);
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const

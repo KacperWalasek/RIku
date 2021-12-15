@@ -8,13 +8,6 @@
 #include <filesystem>
 #include <fstream>
 #include <hash-library/sha256.h>
-#include "../StateUpdate/Move/TestMove.h"
-#include "../Hooks/MoveWrapper.h"
-#include "../Tile/TileDescription.h"
-#include "RandomWrapper.h"
-#include "../StateUpdate/Move/CreateUnit.h"
-#include "../StateUpdate/Move/CombinedMove.h"
-#include "../StateUpdate/Move/UseResources.h"
 
 namespace logic {
 
@@ -71,7 +64,7 @@ namespace logic {
 		return data;
 	}
 
-	void Asset::load(const std::string& path, const std::string& fileName) {
+	void Asset::load(const std::string& path, const std::string& fileName,	std::shared_ptr<IAssetInitializer> initializer) {
 		lua = std::make_shared<sol::state>();
 		this->path = path;
 		//load file and calculate hash
@@ -82,36 +75,8 @@ namespace logic {
 		file.close();
 		//init lua
 		lua->open_libraries(sol::lib::base, sol::lib::string, sol::lib::io, sol::lib::math, sol::lib::os);
+		initializer->initAsset(lua);
 
-		lua->new_usertype<logic::AssetData>("AssetData",
-			sol::constructors<logic::AssetData(const logic::AssetData&)>(),
-			"as_int", &logic::AssetData::asInt
-			);
-		lua->new_usertype<TestMove>("TestMove",
-			sol::constructors<TestMove()>()
-			);
-		lua->new_usertype<CreateUnit>("CreateUnit",
-			sol::constructors<CreateUnit(std::string,int,int)>()
-			);
-		lua->new_usertype<UseResources>("UseResources",
-			sol::constructors<UseResources(int, int), UseResources(std::string, int)>()
-			);
-		lua->new_usertype<MoveWrapper>("MoveWrapper",
-			sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
-			);
-		lua->new_usertype<TileDescription>("TileDescription",
-			sol::constructors<TileDescription(int,std::string,std::string,std::string)>()
-			);
-		lua->new_usertype<CombinedMove>("CombinedMove",
-			sol::constructors<CombinedMove(MoveWrapper,MoveWrapper)>()
-			);
-		
-		/*
-		Na razie ten kod zostawiam, bo mo�e go b�d� u�ywa�
-		auto factories = sol::factories([]() { return std::make_shared<TestMove>(); });
-		lua->new_usertype< TestMove>("TestMove",
-			sol::meta_function::construct, factories,
-			sol::call_constructor, factories);*/
 		auto load_result = lua->load(fileContent);
 		if (!load_result.valid()) 
 		{

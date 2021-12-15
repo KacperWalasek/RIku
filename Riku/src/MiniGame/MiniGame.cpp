@@ -1,8 +1,15 @@
 #include "MiniGame.h"
 
+MiniGameAssets& MiniGame::getAssets()
+{
+	return assets;
+}
+
 MiniGame::MiniGame(GameState& gameState, int player, int enemy, bool begins)
 	: state(gameState, player, enemy, begins), stateUpdate(state, assets)
-{}
+{
+	std::cout << "MiniGame created"<<std::endl;
+}
 
 void MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
 {
