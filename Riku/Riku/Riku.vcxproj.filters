@@ -78,6 +78,9 @@
     <Filter Include="Riku\MiniGame\Hookable">
       <UniqueIdentifier>{e18c81e9-5799-4349-b8d5-bce94145b4fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Riku\MiniGame\Player">
+      <UniqueIdentifier>{92bfd45b-a1eb-42e3-802f-100ef87527e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -782,6 +785,18 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\MiniGameAssetInitializer.h">
       <Filter>Riku\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPlayerPatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniTilePatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniRegistredHookablePatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h">
+      <Filter>Riku\MiniGame\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

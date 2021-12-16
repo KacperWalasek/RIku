@@ -391,11 +391,15 @@
     <ClInclude Include="..\src\MiniGame\MiniGameState.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
+    <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPatch.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPlayerPatch.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniRegistredHookablePatch.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniTilePatch.h" />
     <ClInclude Include="..\src\MiniGame\Tile\MiniTile.h" />
     <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h" />
   </ItemGroup>

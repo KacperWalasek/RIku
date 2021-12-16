@@ -6,22 +6,22 @@ MiniUnit::MiniUnit(std::string name, int player, int baseMovementPoints, const s
 
 std::shared_ptr<IMiniMove> MiniUnit::onDestroy(bool byOwner)
 {
-    return std::shared_ptr<IMiniMove>();
+    return loadedHookable.onDestroy(*this,byOwner);
 }
 
 std::shared_ptr<IMiniMove> MiniUnit::onTurnEnd()
 {
-    return std::shared_ptr<IMiniMove>();
+    return loadedHookable.onTurnEnd(*this);
 }
 
 std::shared_ptr<IMiniMove> MiniUnit::onTurnBegin()
 {
-    return std::shared_ptr<IMiniMove>();
+    return loadedHookable.onTurnBegin(*this);
 }
 
 std::shared_ptr<IMiniMove> MiniUnit::onBeingPlaced(int mapX, int mapY)
 {
-    return std::shared_ptr<IMiniMove>();
+    return loadedHookable.onBeingPlaced(*this,mapX,mapY);
 }
 
 std::string MiniUnit::getName() const
