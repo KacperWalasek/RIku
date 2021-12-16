@@ -398,7 +398,7 @@
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPatch.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPlayerPatch.h" />
-    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniRegistredHookablePatch.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniRegisterHookablePatch.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniTilePatch.h" />
     <ClInclude Include="..\src\MiniGame\Tile\MiniTile.h" />
     <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h" />
