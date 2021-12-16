@@ -2,6 +2,7 @@
 #include "Tile/MiniTile.h"
 #include "../GameLogic/GameState.h"
 #include "Player/MiniGamePlayer.h"
+#include "Hooks/IMiniHookable.h"
 
 class MiniGameState
 {
@@ -11,6 +12,7 @@ public:
 	std::vector<std::vector<MiniTile>> map;
 	MiniGamePlayer player;
 	MiniGamePlayer enemy;
+	std::set<std::shared_ptr<IMiniHookable>> registredHookables;
 
 	bool isOnMove;
 };

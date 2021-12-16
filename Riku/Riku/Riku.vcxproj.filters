@@ -798,5 +798,23 @@
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniRegisterHookablePatch.h">
       <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\RegisterHookableMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\PlayerMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\TileMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\UnitMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniUnitPatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

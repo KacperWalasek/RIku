@@ -4,7 +4,7 @@
 void MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> patch)
 {
 	for (auto handler : patchHandlers)
-		handleMove(handler->handlePatch(state, *patch));
+		handler->handlePatch(state, *patch);
 }
 
 void MiniStateUpdate::setHandlers(std::vector<std::shared_ptr<IMiniPatchHandler>> patchHandlers)

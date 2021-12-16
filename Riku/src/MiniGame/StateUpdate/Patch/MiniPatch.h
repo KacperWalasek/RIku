@@ -1,10 +1,11 @@
 #pragma once
-#include "MiniPlayerPatch.h"
-#include <map>
-#include "MiniTilePatch.h"
 #include <memory>
+#include <map>
 #include "../../Hooks/IMiniHookable.h"
+#include "MiniPlayerPatch.h"
+#include "MiniTilePatch.h"
 #include "MiniRegisterHookablePatch.h"
+#include "MiniUnitPatch.h"
 
 class MiniPatch
 {
@@ -26,6 +27,7 @@ public:
 
 	std::map<std::pair<int, int>, MiniTilePatch> tilePatches;
 	std::map<std::shared_ptr<IMiniHookable>, MiniRegisterHookablePatch> registerHookablePatches;
+	std::map<std::shared_ptr<MiniUnit>, MiniUnitPatch> unitPatches;
 
 	MiniPlayerPatch playerPatch;
 	MiniPlayerPatch enemyPatch;
@@ -51,6 +53,14 @@ public:
 				registerPatch1->second += registerPatch2.second;
 			else
 				p1.registerHookablePatches.insert({ registerPatch2 });
+		}
+		for (auto unitPatch2 : p2.unitPatches)
+		{
+			auto unitPatch1 = p1.unitPatches.find(unitPatch2.first);
+			if (unitPatch1 != p1.unitPatches.end())
+				unitPatch1->second += unitPatch2.second;
+			else
+				p1.unitPatches.insert({ unitPatch2 });
 		}
 		if (p2.isOnMove != -1)
 			p1.isOnMove = p2.isOnMove;

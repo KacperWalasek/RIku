@@ -1,4 +1,9 @@
 #include "MiniGame.h"
+#include "StateUpdate/PatchHandler/IsOnMoveMiniPatchHandler.h"
+#include "StateUpdate/PatchHandler/PlayerMiniPatchHandler.h"
+#include "StateUpdate/PatchHandler/RegisterHookableMiniPatchHandler.h"
+#include "StateUpdate/PatchHandler/TileMiniPatchHandler.h"
+#include "StateUpdate/PatchHandler/UnitMiniPatchHandler.h"
 
 MiniGameAssets& MiniGame::getAssets()
 {
@@ -8,6 +13,14 @@ MiniGameAssets& MiniGame::getAssets()
 MiniGame::MiniGame(GameState& gameState, int player, int enemy, bool begins)
 	: state(gameState, player, enemy, begins), stateUpdate(state, assets)
 {
+	stateUpdate.setHandlers({
+		std::make_shared<IsOnMoveMiniPatchHandler>(),
+		std::make_shared<PlayerMiniPatchHandler>(),
+		std::make_shared<RegisterHookableMiniPatchHandler>(),
+		std::make_shared<TileMiniPatchHandler>(),
+		std::make_shared<UnitMiniPatchHandler>()
+		});
+	
 	std::cout << "MiniGame created"<<std::endl;
 }
 

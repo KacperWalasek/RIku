@@ -8,11 +8,11 @@ class MiniUnit :
 {
     std::string name;
     MiniLoadedHookable loadedHookable;
-    int mapX = 0, mapY = 0;
     int player;
 public:
     MiniUnit(std::string name, int player, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
 
+    int mapX = 0, mapY = 0;
     int movementPoints;
     int baseMovementPoints;
    
