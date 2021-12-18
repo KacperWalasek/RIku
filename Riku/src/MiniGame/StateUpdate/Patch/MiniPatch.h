@@ -20,6 +20,9 @@ public:
 	MiniPatch(MiniTilePatch tilePatch) {
 		tilePatches.insert({ tilePatch.tile, tilePatch });
 	}
+	MiniPatch(MiniUnitPatch unitPatch) {
+		unitPatches.insert({ unitPatch.unit, unitPatch});
+	}
 	MiniPatch(MiniRegisterHookablePatch registerHookablePatch) {
 		registerHookablePatches.insert({ registerHookablePatch.hookable, registerHookablePatch });
 	}

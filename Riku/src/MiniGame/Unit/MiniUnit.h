@@ -8,9 +8,9 @@ class MiniUnit :
 {
     std::string name;
     MiniLoadedHookable loadedHookable;
-    int player;
+    bool enemy;
 public:
-    MiniUnit(std::string name, int player, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
+    MiniUnit(std::string name, bool enemy, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
 
     int mapX = 0, mapY = 0;
     int movementPoints;
@@ -25,6 +25,6 @@ public:
 
     int getMapX() const;
     int getMapY() const;
-    int getPlayer() const;
+    bool isEnemy() const;
 };
 

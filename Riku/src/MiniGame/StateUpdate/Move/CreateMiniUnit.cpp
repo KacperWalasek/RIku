@@ -1,21 +1,36 @@
 #include "CreateMiniUnit.h"
+#include "../../MiniGameAssets.h"
+#include "../../MiniGameState.h"
+#include "../../Unit/MiniUnit.h"
+#include "../Patch/MiniPatch.h"
 
-CreateMiniUnit::CreateMiniUnit(std::string name, int mapX, int mapY, int player)
-    : name(name), mapX(mapX), mapY(mapY), player(player)
+CreateMiniUnit::CreateMiniUnit(std::string name, int mapX, int mapY, bool enemy)
+    : name(name), mapX(mapX), mapY(mapY), enemy(enemy)
 {
 }
 
 std::shared_ptr<MiniPatch> CreateMiniUnit::createPatch(const MiniGameState& state, const MiniGameAssets& assets) const
 {
-    return std::shared_ptr<MiniPatch>();
+    auto it = assets.units.find(name);
+    if (it == assets.units.end())
+        return nullptr;
+    const logic::Asset& asset = it->second;
+    int mp = asset.getByKey("movement_points").asNumber();
+    auto& funcs = asset.getFunctions();
+    auto unitPtr = std::make_shared<MiniUnit>(name, enemy, mp, funcs);
+    return std::make_shared<MiniPatch>(
+        MiniPatch(MiniPlayerPatch(unitPtr), enemy ) +
+        (MiniPatch)MiniTilePatch({ mapX,mapY }, unitPtr) +
+        (MiniPatch)MiniRegisterHookablePatch(unitPtr) +
+        (MiniPatch)MiniUnitPatch(unitPtr, mapX, mapY));
 }
 
 bool CreateMiniUnit::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const
 {
-    return false;
+    return assets.units.find(name) != assets.units.end() && !state.map[mapX][mapY].unit;
 }
 
 std::shared_ptr<IMiniMove> CreateMiniUnit::asPointner() const
 {
-    return std::shared_ptr<IMiniMove>();
+    return std::make_shared<CreateMiniUnit>(name, mapX, mapY, enemy);
 }

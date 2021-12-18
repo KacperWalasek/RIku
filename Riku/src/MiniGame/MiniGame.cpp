@@ -4,6 +4,7 @@
 #include "StateUpdate/PatchHandler/RegisterHookableMiniPatchHandler.h"
 #include "StateUpdate/PatchHandler/TileMiniPatchHandler.h"
 #include "StateUpdate/PatchHandler/UnitMiniPatchHandler.h"
+#include "StateUpdate/Move/CreateMiniUnit.h"
 
 MiniGameAssets& MiniGame::getAssets()
 {
@@ -22,6 +23,19 @@ MiniGame::MiniGame(GameState& gameState, int player, int enemy, bool begins)
 		});
 	
 	std::cout << "MiniGame created"<<std::endl;
+
+	for (int i = 0; i < 20; i++)
+	{
+		state.map.emplace_back();
+		for (int j = 0; j < 20; j++)
+			state.map[i].emplace_back();
+	}
+
+	auto createUnit = std::make_shared<CreateMiniUnit>("maciek_syn_stefana", 1, 2, false);
+	auto createUnit1 = std::make_shared<CreateMiniUnit>("julka_ciocia_stefana", 2, 2, true);
+	stateUpdate.handleMove(createUnit);
+	stateUpdate.handleMove(createUnit1);
+	std::cout << state.map[1][2].unit->getName()<<std::endl;
 }
 
 void MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
