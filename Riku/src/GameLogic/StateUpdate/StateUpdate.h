@@ -1,6 +1,5 @@
 //Kacper Walasek
 #pragma once
-#include "../GameState.h"
 #include "Move/IMove.h"
 #include "./Patch/Patch.h"
 #include "./PatchHandler/IPatchHandler.h"

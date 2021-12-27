@@ -348,6 +348,15 @@
     <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp">
       <Filter>Riku\MiniGame</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Attack.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -815,6 +824,27 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniUnitPatch.h">
       <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MiniGamePatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Attack.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\MiniGamePatch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AttackMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BoolResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

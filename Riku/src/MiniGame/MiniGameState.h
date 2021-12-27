@@ -1,14 +1,12 @@
 #pragma once
 #include "Tile/MiniTile.h"
-#include "../GameLogic/GameState.h"
 #include "Player/MiniGamePlayer.h"
 #include "Hooks/IMiniHookable.h"
-
+#include <set>
 class MiniGameState
 {
 public:
-	MiniGameState(GameState& gameState, int player, int enemy, bool begins);
-	GameState& gameState;
+	MiniGameState(int player, int enemy, bool begins);
 	std::vector<std::vector<MiniTile>> map;
 	MiniGamePlayer player;
 	MiniGamePlayer enemy;

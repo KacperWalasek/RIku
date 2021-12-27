@@ -1,11 +1,8 @@
 #pragma once
 #include "../GameLogic/FrontendCommunicator/Communicator.h"
-#include "../GameLogic/StateUpdate/StateUpdate.h"
-#include "../GameLogic/StateUpdate/MoveDescriptions/IMoveDescription.h"
 #include "MiniGameState.h"
 #include "MiniGameAssets.h"
 #include "StateUpdate/MiniStateUpdate.h"
-#include "../GameLogic/StateUpdate/MoveFactory/MoveFactory.h"
 #include "MoveFactory/MiniMoveFactory.h"
 
 class MiniGame
@@ -19,7 +16,7 @@ class MiniGame
 public:
 	static MiniGameAssets& getAssets();
 
-	MiniGame(GameState& gameState, int player, int enemy, bool begins);
+	MiniGame(int player, int enemy, bool begins);
 
 	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;
 	template<typename T>

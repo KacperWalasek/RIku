@@ -1,5 +1,6 @@
 #pragma once
 #include "IPatchHandler.h"
+#include "../../GameState.h"
 
 class TilePatchHandler : public IPatchHandler
 {

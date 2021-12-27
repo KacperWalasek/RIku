@@ -1,5 +1,7 @@
 #pragma once
 #include "IPatchHandler.h"
+#include "../../GameState.h"
+
 class RegisterHookablePatchHandler :
     public IPatchHandler
 {

@@ -2,6 +2,7 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/TranslateUnitMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/BuildMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
 
 #include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/MapResponse.h"
@@ -10,10 +11,10 @@
 #include "../GameLogic/FrontendCommunicator/Responses/UnitListResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/IntResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/PathResponse.h"
-
+#include "../GameLogic/FrontendCommunicator/Responses/BoolResponse.h"
 #include "../GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 #include "../GameLogic/FrontendCommunicator/Requests/TilePairRequest.h"
-#include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -61,9 +62,19 @@ std::vector<std::string> FrontendState::getGuiOptions(int mapX, int mapY)
 	return {};
 }
 
+bool FrontendState::isInMiniGame()
+{
+	return logic.getInfo<BoolResponse>("is_in_minigame")->get();
+}
+
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<BuildMoveDescription>(name, mapX, mapY));
+}
+
+void FrontendState::attack(int fromX, int fromY, int toX, int toY)
+{
+	logic.makeMove(std::make_shared<AttackMoveDescription>(fromX, fromY, toX, toY));
 }
 
 void FrontendState::moveUnit(int fromX, int fromY, int toX, int toY)

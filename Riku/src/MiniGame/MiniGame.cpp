@@ -11,8 +11,8 @@ MiniGameAssets& MiniGame::getAssets()
 	return assets;
 }
 
-MiniGame::MiniGame(GameState& gameState, int player, int enemy, bool begins)
-	: state(gameState, player, enemy, begins), stateUpdate(state, assets)
+MiniGame::MiniGame( int player, int enemy, bool begins)
+	: state(player, enemy, begins), stateUpdate(state, assets)
 {
 	stateUpdate.setHandlers({
 		std::make_shared<IsOnMoveMiniPatchHandler>(),

@@ -2,6 +2,7 @@
 #include "IHookable.h"
 #include "../Assets/Asset.h"
 #include "../GameState.h"
+
 class LoadedHookable
 {
     const std::map<std::string, sol::function>& functions;

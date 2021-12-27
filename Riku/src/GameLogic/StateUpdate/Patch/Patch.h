@@ -5,6 +5,7 @@
 #include "TilePatch.h"
 #include "RegisterHookablePatch.h"
 #include "UnitPatch.h"
+#include "MiniGamePatch.h"
 
 class Patch
 {
@@ -22,6 +23,9 @@ public:
 	Patch(RegisterHookablePatch registerHookablePatch) {
 		registerHookablePatches.insert({ registerHookablePatch.hookable, registerHookablePatch });
 	}
+	Patch(MiniGamePatch miniGamePatch) {
+		miniGamePatches.emplace(miniGamePatch.player, miniGamePatch);
+	}
 	Patch(int playerOnMove) : playerOnMove(playerOnMove) {}
 
 
@@ -29,10 +33,12 @@ public:
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
 	std::map<std::shared_ptr<IHookable>, RegisterHookablePatch> registerHookablePatches;
 	std::map<std::shared_ptr<Unit>, UnitPatch> unitPatches;
+	std::map<int, MiniGamePatch> miniGamePatches;
 	int playerOnMove = -1;
 
 	friend Patch operator+(Patch p1, const Patch& p2)
 	{
+		// TODO upiekszyc to jakosc. Przeniesc fora do oddzielnej funkcji i wywolywac ja 5 razy czy cos
 		for (auto plPatch2 : p2.playerPatches)
 		{
 			auto plPatch1 = p1.playerPatches.find(plPatch2.first);
@@ -64,6 +70,14 @@ public:
 				unitPatch1->second += unitPatch2.second;
 			else
 				p1.unitPatches.insert({ unitPatch2 });
+		}
+		for (auto miniGamePatch2 : p2.miniGamePatches)
+		{
+			auto miniGamePatch1 = p1.miniGamePatches.find(miniGamePatch2.first);
+			if (miniGamePatch1 != p1.miniGamePatches.end())
+				miniGamePatch1->second += miniGamePatch2.second;
+			else
+				p1.miniGamePatches.insert({ miniGamePatch2 });
 		}
 		if (p2.playerOnMove != -1)
 			p1.playerOnMove = p2.playerOnMove;
