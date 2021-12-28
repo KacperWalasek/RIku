@@ -41,6 +41,7 @@ namespace front {
 		friend class MouseClickCallback;
 
 		void init(GLFWwindow* window);
+		void drawTile(const std::vector<std::vector<Tile>> &map, int x, int y);
 	public:
 		Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect);
 		~Scene();

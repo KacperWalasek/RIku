@@ -22,6 +22,7 @@ namespace front {
 		std::string name;
 		std::vector<AssetModel> assetModels;
         std::vector<AssetTexture> assetTextures;
+
 		friend class AssetHandler;
     public:
 		[[nodiscard]] const std::string& getName() const {return name;}

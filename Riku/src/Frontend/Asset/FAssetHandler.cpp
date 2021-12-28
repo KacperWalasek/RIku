@@ -48,3 +48,19 @@ bool front::AssetHandler::tryDraw(const std::string &key, const Shader &shader, 
 const std::map<std::string, front::Asset>& front::AssetHandler::getMap() const {
     return assets;
 }
+
+bool front::AssetHandler::drawGround(const std::string &key, const std::string &modelKey, const Shader &shader,
+                                     front::Transform transform) const {
+	//assumes that asset with key modelKey has exactly one model
+	if(assets.find(key)==assets.end() || assets.find(modelKey)==assets.end())
+		return false;
+	AssetModel tmpAsset;
+	tmpAsset.model = assets.at(modelKey).assetModels[0].model;
+	const AssetModel& ground = assets.at(key).assetModels[0];
+	tmpAsset.diffuse=ground.diffuse;
+	tmpAsset.specular=ground.specular;
+	tmpAsset.normal=ground.normal;
+	tmpAsset.draw(shader, transform);
+	assets.at(modelKey).draw(shader,transform);
+	return true;
+}

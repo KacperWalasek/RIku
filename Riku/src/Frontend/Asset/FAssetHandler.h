@@ -18,6 +18,7 @@ namespace front {
 		const Asset& getAsset(const std::string& parentPath) const;
 		bool tryDraw(const std::string& key, const Shader &shader, Transform transform) const;
         const std::map<std::string, Asset>& getMap() const;
+		bool drawGround(const std::string& key, const std::string& modelKey, const Shader &shader, Transform transform) const;
 	};
 }
 

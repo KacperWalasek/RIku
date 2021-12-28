@@ -7,14 +7,17 @@
 #include <string>
 #include <map>
 #include "../IDrawable.h"
+#include "../Texture.h"
 
 namespace front {
 	class AssetModel: IDrawable {
 	private:
 		static std::map<std::string, Model> models;
-        Model* model;
 	public:
+		Model* model;
+		std::optional<Texture> specular, diffuse, normal;
 		Transform transform;
+		AssetModel()=default;
 		AssetModel(std::string& path, Transform transform, float texScaleX=1.0f, float texScaleY=1.0f);
         void draw(const Shader& shader, Transform transform) const override;
 	};

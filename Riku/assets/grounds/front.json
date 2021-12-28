@@ -1,74 +1,25 @@
 {
 "grass": [
 	{
-		"path": "grass.obj",
-		"pos": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"rot": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"scale": {
-			"x": 1.0,
-			"y": 1.0,
-			"z": 1.0
-		},
-		"tex": {
-			"x": 1.0,
-			"y": 1.0
-		}
+		"ground": null,
+		"diffuse": "grass.png",
+		"specular": "grass.png",
+		"normal": "grass_norm.png"
 	}
 ],
 "sand": [
 	{
-		"path": "sand.obj",
-		"pos": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"rot": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"scale": {
-			"x": 1.0,
-			"y": 1.0,
-			"z": 1.0
-		},
-		"tex": {
-			"x": 1.0,
-			"y": 1.0
-		}
+		"ground": null,
+		"diffuse": "sand.jpg",
+		"specular": "sand.jpg"
 	}
 ],
 "stone": [
 	{
-		"path": "stone.obj",
-		"pos": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"rot": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"scale": {
-			"x": 1.0,
-			"y": 1.0,
-			"z": 1.0
-		},
-		"tex": {
-			"x": 1.0,
-			"y": 1.0
-		}
+		"ground": null,
+		"diffuse": "stone.jpg",
+		"specular": "stone.jpg",
+		"normal": "stone_norm.jpg"
 	}
 ]
 }
