@@ -84,16 +84,28 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const
 {
+	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
+	if (minigameIt != gameState.minigames.end())
+		return minigameIt->second->getInfo(request);
+
 	return communicator.handleRequest(request);
 }
 
 void GameLogic::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
 {
-	stateUpdate.handleMove(factory.createMove(*moveDescription));
+	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
+	if (minigameIt != gameState.minigames.end())
+		minigameIt->second->makeMove(moveDescription);
+	else
+		stateUpdate.handleMove(factory.createMove(*moveDescription));
 }
 
 bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const
 {
+	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
+	if (minigameIt != gameState.minigames.end())
+		return minigameIt->second->isMoveLegal(moveDescription);
+
 	std::shared_ptr<IMove> move = factory.createMove(*moveDescription);
 	if (!move)
 		return false;

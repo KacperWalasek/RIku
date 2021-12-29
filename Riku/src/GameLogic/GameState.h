@@ -14,7 +14,7 @@ public:
 	std::vector<std::vector<Tile>> map;
 	std::set<std::shared_ptr<IHookable>> registredHookables;
 	//TODO: make an interface for MiniGame to make it more extencible
-	std::map<int,MiniGame> minigames;
+	std::map<int,std::shared_ptr<MiniGame>> minigames;
 
 	int playerOnMove = 0;
 };

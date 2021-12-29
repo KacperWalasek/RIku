@@ -14,6 +14,8 @@
 #include "../GameLogic/FrontendCommunicator/Responses/BoolResponse.h"
 #include "../GameLogic/FrontendCommunicator/Requests/TileRequest.h"
 #include "../GameLogic/FrontendCommunicator/Requests/TilePairRequest.h"
+#include "../MiniGame/Communicator/Responses/MiniMapResponse.h"
+
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
@@ -23,6 +25,11 @@ FrontendState::FrontendState(GameLogic& logic)
 const std::vector<std::vector<Tile>>& FrontendState::getMap()
 {
 	return logic.getInfo<MapResponse>("map")->getMap();
+}
+
+const std::vector<std::vector<MiniTile>>& FrontendState::getMiniMap()
+{
+	return logic.getInfo<MiniMapResponse>("mini_map")->get();
 }
 
 std::map<std::string, int> FrontendState::getResources()

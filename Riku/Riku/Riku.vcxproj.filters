@@ -69,9 +69,6 @@
     <Filter Include="Riku\MiniGame\StateUpdate\Patch">
       <UniqueIdentifier>{c65c01ab-ba88-4311-aa17-3cea043178a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Riku\MiniGame\MoveFactory">
-      <UniqueIdentifier>{eff107a9-7110-4654-97ab-583132265f07}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Riku\MiniGame\Unit">
       <UniqueIdentifier>{d60e89b9-3df9-476b-b985-e3884e7347d9}</UniqueIdentifier>
     </Filter>
@@ -80,6 +77,27 @@
     </Filter>
     <Filter Include="Riku\MiniGame\Player">
       <UniqueIdentifier>{92bfd45b-a1eb-42e3-802f-100ef87527e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\MoveFactory">
+      <UniqueIdentifier>{eff107a9-7110-4654-97ab-583132265f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Utils">
+      <UniqueIdentifier>{fafc3087-31e7-4b58-8e94-a2a018a4c90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator">
+      <UniqueIdentifier>{f78344db-0a4b-4f73-b7e5-7b11786be377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator\Requests">
+      <UniqueIdentifier>{6bbbdc71-5482-4acc-89a2-8ae4cb3b9994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator\Responses">
+      <UniqueIdentifier>{33894ad4-e7af-4fec-84fb-b70fcbb4576a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator\RequestHandlers">
+      <UniqueIdentifier>{aa7f5e29-d39c-46da-a0e9-59cee19d7004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\MoveDescription">
+      <UniqueIdentifier>{2b775407-4ac9-46ae-8d85-aef03f990563}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -328,7 +346,7 @@
       <Filter>Riku\MiniGame\StateUpdate</Filter>
     </ClCompile>
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp">
-      <Filter>Riku\MiniGame\MoveFactory</Filter>
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\MiniGame\MiniGameAssets.cpp">
       <Filter>Riku\MiniGame</Filter>
@@ -356,6 +374,24 @@
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Utils\ShortestPathEvaluator.cpp">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Utils\MiniGameUtils.cpp">
+      <Filter>Riku\MiniGame\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -766,10 +802,10 @@
       <Filter>Riku\MiniGame</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h">
-      <Filter>Riku\MiniGame\MoveFactory</Filter>
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h">
-      <Filter>Riku\MiniGame\MoveFactory</Filter>
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h">
       <Filter>Riku\MiniGame\Unit</Filter>
@@ -845,6 +881,27 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Utils\MiniGameUtils.h">
+      <Filter>Riku\MiniGame\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h">
+      <Filter>Riku\MiniGame\Communicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

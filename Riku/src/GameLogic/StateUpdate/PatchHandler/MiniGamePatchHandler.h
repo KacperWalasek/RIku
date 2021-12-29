@@ -16,7 +16,7 @@ public:
 				state.minigames.erase(p.first);
 			else
 			{
-				MiniGame minigame(p.first, p.second.enemy, p.second.isBegining);
+				auto minigame = std::make_shared<MiniGame>(p.first, p.second.enemy, p.second.isBegining);
 				state.minigames.emplace(p.first, minigame);
 			}
 		}

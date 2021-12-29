@@ -4,7 +4,13 @@
 #include "StateUpdate/PatchHandler/RegisterHookableMiniPatchHandler.h"
 #include "StateUpdate/PatchHandler/TileMiniPatchHandler.h"
 #include "StateUpdate/PatchHandler/UnitMiniPatchHandler.h"
+
+#include "Communicator/RequestHandlers/MiniMapRequestHandler.h"
+
+#include "MoveFactory/TranslateMiniUnitMoveHandler.h"
+
 #include "StateUpdate/Move/CreateMiniUnit.h"
+#include "Communicator/RequestHandlers/MiniShortestPathRequestHandler.h"
 
 MiniGameAssets& MiniGame::getAssets()
 {
@@ -22,7 +28,16 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 		std::make_shared<UnitMiniPatchHandler>()
 		});
 	
-	std::cout << "MiniGame created"<<std::endl;
+	communicator.setHandlers({
+		std::make_shared<MiniMapRequestHandler>(state),
+		std::make_shared<MiniShortestPathRequestHandler>(state)
+		});
+
+	factory.setHandlers({
+		std::make_shared<TranslateMiniUnitMoveHandler>()
+		});
+
+	std::cout << "MiniGame created" << std::endl;
 
 	for (int i = 0; i < 20; i++)
 	{

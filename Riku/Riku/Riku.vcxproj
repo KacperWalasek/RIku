@@ -242,16 +242,22 @@
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
     <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp" />
+    <ClCompile Include="..\src\GameLogic\Utils\ShortestPathEvaluator.cpp" />
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGame.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameAssets.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameState.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
     <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
+    <ClCompile Include="..\src\MiniGame\Utils\MiniGameUtils.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +398,10 @@
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
+    <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\MiniLoadedHookable.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\MiniMoveWrapper.h" />
@@ -401,10 +411,12 @@
     <ClInclude Include="..\src\MiniGame\MiniGameState.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\PlayerMiniPatchHandler.h" />
@@ -418,6 +430,7 @@
     <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniUnitPatch.h" />
     <ClInclude Include="..\src\MiniGame\Tile\MiniTile.h" />
     <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h" />
+    <ClInclude Include="..\src\MiniGame\Utils\MiniGameUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
