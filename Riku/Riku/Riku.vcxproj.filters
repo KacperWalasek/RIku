@@ -393,6 +393,12 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -902,6 +908,12 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

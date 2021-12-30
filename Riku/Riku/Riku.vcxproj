@@ -250,10 +250,12 @@
     <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameAssets.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameState.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
     <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
@@ -409,6 +411,7 @@
     <ClInclude Include="..\src\MiniGame\MiniGameAssetInitializer.h" />
     <ClInclude Include="..\src\MiniGame\MiniGameAssets.h" />
     <ClInclude Include="..\src\MiniGame\MiniGameState.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h" />
@@ -416,6 +419,7 @@
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h" />
