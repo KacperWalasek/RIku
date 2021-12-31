@@ -5,6 +5,7 @@
 #include "FAssetHandler.h"
 #include "../FrontendState.h"
 #include "../JsonUtil.h"
+#include "../FrustumCulling.h"
 
 front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
 	: handler(assetHandler)
@@ -36,10 +37,13 @@ const front::Asset &front::AssetHandler::getAsset(const std::string& key) const 
 	return assets.at(key);
 }
 
-bool front::AssetHandler::tryDraw(const std::string &key, const Shader &shader, Transform transform) const {
+bool front::AssetHandler::tryDraw(const std::string &key, const Shader &shader, const Transform& transform, const Frustum& frustum) const {
 	if(assets.find(key)==assets.end())
 		return false;
 	const auto& a = assets.at(key);
+	float r = a.frustumRadius * std::max({transform.scale.x,transform.scale.y,transform.scale.z});
+	if(!frustum.isSphereOn(rotate(a.frustumCenter, transform.rotation), r, transform))
+		return true;
 	a.draw(shader, transform);
 	return true;
 

@@ -1,7 +1,8 @@
 #define _USE_MATH_DEFINES 
 #include "Scene.h"
 #include <iostream>
-#include "../stb_image.h"
+#include <iomanip>
+#include <stb_image/stb_image.h>
 #include <cmath>
 #ifdef _WIN32
 	#undef max
@@ -13,6 +14,7 @@
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
 #include "../GUIUpdate.h"
+#include "../FrustumCulling.h"
 
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
 	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
@@ -69,8 +71,9 @@ void front::Scene::draw()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	//
-	glm::mat4 projection = glm::perspective(glm::radians(config.fov), aspect, 0.1f, 100.0f);
-	glm::mat4 view = movingCameraTransform.calculateViewMatrix();
+	projection = glm::perspective(glm::radians(config.fov), aspect, 0.1f, 100.0f);
+	view = movingCameraTransform.calculateViewMatrix();
+	Frustum frustum(movingCameraTransform, aspect, config.fov, 0.1f, 100.0f);
 	//shader initialization
 	lightingShader.use();
 	lightingShader.setMat4("projection", projection);
@@ -86,6 +89,7 @@ void front::Scene::draw()
 	//Setting lights
 	light.apply(lightingShader, dayPart);
 
+
 	// render the loaded models
 	//draw tiles
 	const auto& map = state.getMap();
@@ -99,11 +103,11 @@ void front::Scene::draw()
 				lightingShader.setVec4("color_mod", 0.8f, 0.75f, 0.75f, 1.0f);
 			auto transform = front::Transform(glm::vec3((float)i, (float)map[i][j].height * 0.5f, (float)j));
 			if (map[i][j].area.getName() == "wet")
-				handler.tryDraw("wet", lightingShader, transform);
-			handler.tryDraw(map[i][j].ground.getName(), lightingShader, transform);
-            handler.tryDraw(map[i][j].biome.getName(), lightingShader, transform);
+				handler.tryDraw("wet", lightingShader, transform, frustum);
+			handler.tryDraw(map[i][j].ground.getName(), lightingShader, transform, frustum);
+            handler.tryDraw(map[i][j].biome.getName(), lightingShader, transform, frustum);
 			if (map[i][j].object) 
-				handler.tryDraw(map[i][j].object->getName(), lightingShader, transform);
+				handler.tryDraw(map[i][j].object->getName(), lightingShader, transform, frustum);
             /*if(map[i][i].resource!=-1)
                 handler.tryDraw(map[i][j].resource)*/
 		}
@@ -116,12 +120,12 @@ void front::Scene::draw()
         int y = unit[i]->getMapY();
         auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
         if(i==focusedUnitIndex)
-            handler.tryDraw("main_circle", lightingShader, transform);
-		handler.tryDraw(unit[i]->getName(), lightingShader, transform);
+            handler.tryDraw("main_circle", lightingShader, transform, frustum);
+		handler.tryDraw(unit[i]->getName(), lightingShader, transform, frustum);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 	}
     for(auto&& [x,y]: path.path) {
-        handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
+        handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)), frustum);
     }
 
 	//return to default value

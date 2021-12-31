@@ -24,8 +24,7 @@ void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int a
 	glfwGetCursorPos(window, &x, &y);
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         //scene->clickPos
-		auto clickPos = front::getMapClickPosition(window, (float) x, (float) y, scene->movingCameraTransform,
-		                                             scene->config.fov, scene->aspect, 0.5f);
+		auto clickPos = front::getMapClickPosition(window, *scene, (float) x, (float) y, 0.5f);
         int px = int(std::round(clickPos.x));
         int py = int(std::round(clickPos.y));
         auto units = scene->state.getUnits();
