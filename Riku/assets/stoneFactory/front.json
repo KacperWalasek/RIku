@@ -1,7 +1,7 @@
 {
 "stefan": [
 	{
-		"path": "model/sara.blend",
+		"path": "../woodFactory/farmhouse_obj.obj",
 		"pos": {
 			"x": 0.0,
 			"y": 0.0,

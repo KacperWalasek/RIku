@@ -33,5 +33,15 @@
 	{
 		"path": "front-essentials/slope.obj"
 	}
+],
+"_corner+": [
+	{
+		"path": "front-essentials/corner+.obj"
+	}
+],
+"_corner-": [
+	{
+		"path": "front-essentials/corner-.obj"
+	}
 ]
 }

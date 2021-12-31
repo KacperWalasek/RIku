@@ -37,7 +37,7 @@ void front::Scene::init(GLFWwindow* window)
 
 	//set camera transform
 	const auto& map = state.getMap();
-	movingCameraTransform = Transform(glm::vec3(map.size() * 0.5f, 10.0f, map.size() * 0.5f), glm::vec3(glm::radians(config.angle), glm::radians(180.0f), 0.0f));
+	movingCameraTransform = Transform(glm::vec3((float)map.size() * 0.5f, 10.0f, (float)map.size() * 0.5f), glm::vec3(glm::radians(config.angle), glm::radians(180.0f), 0.0f));
 
 	// shader configuration
 	lightingShader.use();
@@ -172,33 +172,54 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 			dhy = map[x][y+dyt].height - map[x][y].height;
 			dhz = map[x+dxt][y+dyt].height - map[x][y].height;
 		}
+		if(i%2==1)
+			std::swap(dhx,dhy);
 		uint8_t caseUint=0x0; //____yyxx (bits)
 		if(std::abs(dhx)>=2)
 			caseUint=0x1;
 		else
-			caseUint=1+(dhx*dx);
+			caseUint=1+dx*dhx;
 		if(std::abs(dhy)>=2)
 			caseUint+=0x4;
 		else
 			caseUint+=0x4*(1+dhy*dy);
 		Transform sideTransform;
 		switch(caseUint) {
-			case 1:
+			case 0:
 				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f+0.125f,
 				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, 90.0f * i - 90.0f, 0.0f), scale);
+				handler.drawGround(map[x][y].ground.getName(), "_corner+",lightingShader, sideTransform);
+				break;
+			case 1:
+				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f-0.125f,
+				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, -90.0f * i + 90.0f, 0.0f), scale);
+				handler.drawGround(map[x][y].ground.getName(), "_slope",lightingShader, sideTransform);
+				break;
+			case 4:
+				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f-0.125f,
+				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, -90.0f * i+180.0f, 0.0f), scale);
 				handler.drawGround(map[x][y].ground.getName(), "_slope",lightingShader, sideTransform);
 				break;
 			case 5:
 				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f,
-				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, 90.0f * i, 0.0f), scale);
+				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
 				handler.drawGround(map[x][y].ground.getName(), "_flat",lightingShader, sideTransform);
 				break;
-			case 9:
-				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f-0.125f,
-				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, 90.0f * i + 90.0f, 0.0f), scale);
+			case 6:
+				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f+0.125f,
+				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
 				handler.drawGround(map[x][y].ground.getName(), "_slope",lightingShader, sideTransform);
 				break;
-
+			case 9:
+				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f+0.125f,
+				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, -90.0f * i - 90.0f, 0.0f), scale);
+				handler.drawGround(map[x][y].ground.getName(), "_slope",lightingShader, sideTransform);
+				break;
+			case 10:
+				sideTransform = Transform(glm::vec3((float) x + (float) dx / 3.f, (float) map[x][y].height * 0.5f-0.125f,
+				                                    (float) y + (float) dy / 3.f), glm::vec3(0.0f, -90.0f * i - 90.0f, 0.0f), scale);
+				handler.drawGround(map[x][y].ground.getName(), "_corner-",lightingShader, sideTransform);
+				break;
 		}
 	}
 
