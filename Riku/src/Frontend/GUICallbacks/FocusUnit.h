@@ -40,7 +40,8 @@ namespace CEGUI::Functor {
                         me->setProperty("BackgroundEnabled", "true");
                         *activeUnitElem = myName;
                         auto pos = movingCameraTransform.position;
-                        movingCameraTransform.position = glm::vec3(u.get()->getMapX(), pos.z, u.get()->getMapY());
+                        movingCameraTransform.position = glm::vec3(u.get()->getMapX(), pos.y, u.get()->getMapY());
+                        movingCameraTransform.position += front::rotate({0.0f, 0.0f, -2.0f }, { 0.0f, movingCameraTransform.rotation.y, 0.0f });
                     }
                 }
                 i++;
