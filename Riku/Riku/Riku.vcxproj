@@ -257,11 +257,13 @@
     <ClCompile Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\FinishMiniTurnMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
     <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
@@ -427,6 +429,7 @@
     <ClInclude Include="..\src\MiniGame\MoveFactory\FinishMiniTurnMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
@@ -434,6 +437,7 @@
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h" />

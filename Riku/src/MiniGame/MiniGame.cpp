@@ -14,6 +14,7 @@
 #include "MoveFactory/TranslateMiniUnitMoveHandler.h"
 #include "MoveFactory/AttackMiniMoveHandler.h"
 #include "MoveFactory/FinishMiniTurnMoveHandler.h"
+#include "MoveFactory/ResignMiniMoveHandler.h"
 
 #include "StateUpdate/Move/CreateMiniUnit.h"
 
@@ -44,7 +45,8 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 	factory.setHandlers({
 		std::make_shared<TranslateMiniUnitMoveHandler>(),
 		std::make_shared<AttackMiniMoveHandler>(state),
-		std::make_shared<FinishMiniTurnMoveHandler>()
+		std::make_shared<FinishMiniTurnMoveHandler>(),
+		std::make_shared<ResignMiniMoveHandler>()
 		});
 
 	std::cout << "MiniGame created" << std::endl;

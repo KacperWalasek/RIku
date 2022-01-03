@@ -415,6 +415,8 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -956,5 +958,7 @@
       <Filter>Riku\MiniGame\Communicator\Responses</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h" />
   </ItemGroup>
 </Project>

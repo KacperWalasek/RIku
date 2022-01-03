@@ -104,3 +104,8 @@ void FrontendState::choseGuiOption(int mapX, int mapY, int index)
 {
 	logic.makeMove(std::make_shared<ChoseGuiOptionMoveDescription>(mapX, mapY, index));
 }
+
+void FrontendState::resign()
+{
+	logic.makeMove(std::make_shared<SimpleMoveDescription>("resign"));
+}

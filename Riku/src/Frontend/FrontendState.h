@@ -29,5 +29,6 @@ public:
 	void moveUnit(int fromX, int fromY, int toX, int toY);
 	void finishTurn();
 	void choseGuiOption(int mapX, int mapY, int index);
+	void resign();
 };
 
