@@ -3,6 +3,11 @@
 
 std::shared_ptr<MiniPatch> FinishMiniTurn::createPatch(const MiniGameState& state, const MiniGameAssets& assets) const
 {
+	if (state.enemy.units.size() == 0)
+		return std::make_shared<MiniPatch>(state.player.logicIndex, true);
+	if (state.player.units.size() == 0)
+		return std::make_shared<MiniPatch>(state.enemy.logicIndex, true);
+
 	return std::make_shared<MiniPatch>(state.enemy.logicIndex);
 }
 

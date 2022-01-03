@@ -4,6 +4,7 @@
 #include "StateUpdate/PatchHandler/RegisterHookableMiniPatchHandler.h"
 #include "StateUpdate/PatchHandler/TileMiniPatchHandler.h"
 #include "StateUpdate/PatchHandler/UnitMiniPatchHandler.h"
+#include "StateUpdate/PatchHandler/WinnerMiniPatchHandler.h"
 
 #include "Communicator/RequestHandlers/MiniMapRequestHandler.h"
 #include "Communicator/RequestHandlers/MiniShortestPathRequestHandler.h"
@@ -28,7 +29,8 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 		std::make_shared<PlayerMiniPatchHandler>(),
 		std::make_shared<RegisterHookableMiniPatchHandler>(),
 		std::make_shared<TileMiniPatchHandler>(),
-		std::make_shared<UnitMiniPatchHandler>()
+		std::make_shared<UnitMiniPatchHandler>(),
+		std::make_shared<WinnerMiniPatchHandler>()
 		});
 	
 	communicator.setHandlers({
