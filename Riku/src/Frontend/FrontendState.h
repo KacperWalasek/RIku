@@ -4,7 +4,8 @@
 #include "../GameLogic/GameLogic.h"
 #include "../GameLogic/Assets/AssetHandler.h"
 #include "../GameLogic/Utils/Path.h"
-
+// TODO: somehow get rid of this include
+#include "../MiniGame/Tile/MiniTile.h"
 class FrontendState
 {
 	GameLogic& logic;

@@ -1,6 +1,6 @@
 #include "IsInMiniGameRequestHandler.h"
 #include "../Responses/BoolResponse.h"
-
+#include "../../IMiniGame.h"
 IsInMiniGameRequestHandler::IsInMiniGameRequestHandler(const GameState& state)
     : state(state) {}
 

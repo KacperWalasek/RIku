@@ -13,6 +13,7 @@ class GameLogic
 	StateUpdate stateUpdate;
 	Communicator communicator;
 	MoveFactory factory;
+	std::shared_ptr<IMiniGame> getActiveMiniGame() const;
 public:
 	GameLogic();
 	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;

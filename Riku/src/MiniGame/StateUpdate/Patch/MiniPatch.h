@@ -26,7 +26,7 @@ public:
 	MiniPatch(MiniRegisterHookablePatch registerHookablePatch) {
 		registerHookablePatches.insert({ registerHookablePatch.hookable, registerHookablePatch });
 	}
-	MiniPatch(bool isOnMove) : isOnMove(isOnMove ? 0 : 1) {}
+	MiniPatch(int playerOnMove) : playerOnMove(playerOnMove) {}
 
 	std::map<std::pair<int, int>, MiniTilePatch> tilePatches;
 	std::map<std::shared_ptr<IMiniHookable>, MiniRegisterHookablePatch> registerHookablePatches;
@@ -35,7 +35,7 @@ public:
 	MiniPlayerPatch playerPatch;
 	MiniPlayerPatch enemyPatch;
 
-	int isOnMove = -1; // 0 - true; no_zero - false
+	int playerOnMove = -1; 
 
 	friend MiniPatch operator+(MiniPatch p1, const MiniPatch& p2)
 	{
@@ -65,8 +65,8 @@ public:
 			else
 				p1.unitPatches.insert({ unitPatch2 });
 		}
-		if (p2.isOnMove != -1)
-			p1.isOnMove = p2.isOnMove;
+		if (p2.playerOnMove != -1)
+			p1.playerOnMove = p2.playerOnMove;
 		return std::move(p1);
 	}
 };

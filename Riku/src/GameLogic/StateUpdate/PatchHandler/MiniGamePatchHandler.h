@@ -1,6 +1,5 @@
 #pragma once
 #include "IPatchHandler.h"
-// TODO change this after changing MiniGame to interface if possible
 #include "../../../MiniGame/MiniGame.h"
 #include "../../GameState.h"
 class MiniGamePatchHandler :
@@ -16,8 +15,17 @@ public:
 				state.minigames.erase(p.first);
 			else
 			{
-				auto minigame = std::make_shared<MiniGame>(p.first, p.second.enemy, p.second.isBegining);
-				state.minigames.emplace(p.first, minigame);
+				auto minigameIt = state.minigames.find(p.first);
+				if (minigameIt == state.minigames.end())
+				{
+					auto minigame = std::make_shared<MiniGame>(p.first, p.second.enemy, p.second.isBegining);
+					state.minigames.emplace(p.first, minigame);
+					minigameIt = state.minigames.find(p.first);
+				}
+				if(p.second.miniPatch)
+					minigameIt->second->applyMiniPatch(p.second.miniPatch);
+				if (p.second.resetCummulatedPatch)
+					minigameIt->second->resetCummulatedPatch();
 			}
 		}
 		return nullptr;

@@ -1,7 +1,7 @@
 #include "MiniUnit.h"
 
-MiniUnit::MiniUnit(std::string name, bool enemy, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
-    :name(name), enemy(enemy), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints), loadedHookable(hooks)
+MiniUnit::MiniUnit(std::string name, int owner, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
+    :name(name), owner(owner), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints), loadedHookable(hooks)
 {}
 
 std::shared_ptr<IMiniMove> MiniUnit::onDestroy(bool byOwner)
@@ -40,7 +40,7 @@ int MiniUnit::getMapY() const
     return mapY;
 }
 
-bool MiniUnit::isEnemy() const
+int MiniUnit::getOwner() const
 {
-    return enemy;
+    return owner;
 }

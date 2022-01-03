@@ -4,7 +4,7 @@ class UnitMiniPatchHandler :
     public IMiniPatchHandler
 {
 public:
-	virtual void handlePatch(MiniGameState& state, const MiniPatch& patch) const override
+	virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
 	{
 		for (auto unitPatch : patch.unitPatches)
 		{
@@ -21,6 +21,8 @@ public:
 			if (unitPatch.second.mapY != -1)
 				unit->mapY = unitPatch.second.mapY;
 		}
+
+		return nullptr;
 	}
 };
 

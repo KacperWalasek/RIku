@@ -3,7 +3,7 @@
 class RegisterHookableMiniPatchHandler :
     public IMiniPatchHandler
 {
-    virtual void handlePatch(MiniGameState& state, const MiniPatch& patch) const override
+    virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
     {
 		for (auto p : patch.registerHookablePatches)
 		{
@@ -12,6 +12,8 @@ class RegisterHookableMiniPatchHandler :
 			else
 				state.registredHookables.erase(p.first);
 		}
+
+		return nullptr;
     }
 };
 

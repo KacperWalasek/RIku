@@ -29,9 +29,11 @@
 #include "FrontendCommunicator/RequestHandlers/IsInMiniGameRequestHandler.h"
 
 #include "FrontendCommunicator/Responses/MapResponse.h"
-#include "../MiniGame/MiniGame.h"
+#include "IMiniGame.h"
 #include "StateUpdate/Move/Attack.h"
 #include "StateUpdate/Move/CreateUnit.h"
+#include "FrontendCommunicator/Responses/IntResponse.h"
+
 
 GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 {
@@ -84,30 +86,47 @@ GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const
 {
-	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
-	if (minigameIt != gameState.minigames.end())
-		return minigameIt->second->getInfo(request);
+	auto minigame = getActiveMiniGame();
+	if (minigame)
+	{
+		auto response = minigame->getInfo(request);
+		if (response->getStatus())
+			return response;
+	}
 
 	return communicator.handleRequest(request);
 }
 
 void GameLogic::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
 {
-	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
-	if (minigameIt != gameState.minigames.end())
-		minigameIt->second->makeMove(moveDescription);
+	auto minigame = getActiveMiniGame();
+	if (minigame)
+		stateUpdate.handleMove(minigame->makeMove(moveDescription));
 	else
 		stateUpdate.handleMove(factory.createMove(*moveDescription));
 }
 
 bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const
 {
-	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
-	if (minigameIt != gameState.minigames.end())
-		return minigameIt->second->isMoveLegal(moveDescription);
+	auto minigame = getActiveMiniGame();
+	if (minigame)
+		return minigame->isMoveLegal(moveDescription);
 
 	std::shared_ptr<IMove> move = factory.createMove(*moveDescription);
 	if (!move)
 		return false;
 	return move->isDoable(gameState, assets);
+}
+
+std::shared_ptr<IMiniGame> GameLogic::getActiveMiniGame() const
+{
+	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
+	if (minigameIt != gameState.minigames.end())
+	{
+		int playerOnMiniMove = std::static_pointer_cast<IntResponse>(
+			minigameIt->second->getInfo(std::make_shared<Request>("player_on_move"))
+			)->get();
+		return gameState.minigames.find(playerOnMiniMove)->second;
+	}
+	return nullptr;
 }

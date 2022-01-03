@@ -399,6 +399,18 @@
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp">
       <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\EndMiniGameTurn.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\FinishMiniTurnMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -914,6 +926,21 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h">
       <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\EndMiniGameTurn.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\IMiniGame.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\FinishMiniTurnMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,9 +7,11 @@
 
 #include "Communicator/RequestHandlers/MiniMapRequestHandler.h"
 #include "Communicator/RequestHandlers/MiniShortestPathRequestHandler.h"
+#include "Communicator/RequestHandlers/PlayerOnMoveMiniRequestHandler.h"
 
 #include "MoveFactory/TranslateMiniUnitMoveHandler.h"
 #include "MoveFactory/AttackMiniMoveHandler.h"
+#include "MoveFactory/FinishMiniTurnMoveHandler.h"
 
 #include "StateUpdate/Move/CreateMiniUnit.h"
 
@@ -31,12 +33,14 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 	
 	communicator.setHandlers({
 		std::make_shared<MiniMapRequestHandler>(state),
-		std::make_shared<MiniShortestPathRequestHandler>(state)
+		std::make_shared<MiniShortestPathRequestHandler>(state),
+		std::make_shared<PlayerOnMoveMiniRequestHandler>(state)
 		});
 
 	factory.setHandlers({
 		std::make_shared<TranslateMiniUnitMoveHandler>(),
-		std::make_shared<AttackMiniMoveHandler>(state)
+		std::make_shared<AttackMiniMoveHandler>(state),
+		std::make_shared<FinishMiniTurnMoveHandler>()
 		});
 
 	std::cout << "MiniGame created" << std::endl;
@@ -55,9 +59,9 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 	std::cout << state.map[1][2].unit->getName()<<std::endl;
 }
 
-void MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
+std::shared_ptr<IMove> MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
 {
-	stateUpdate.handleMove(factory.createMove(*moveDescription));
+	return stateUpdate.handleMove(factory.createMove(*moveDescription));
 }
 
 bool MiniGame::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const
@@ -66,6 +70,21 @@ bool MiniGame::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) co
 	if (!move)
 		return false;
 	return move->isDoable(state, assets);
+}
+
+void MiniGame::applyMiniPatch(std::shared_ptr<MiniPatch> patch)
+{
+	stateUpdate.handlePatch(patch);
+}
+
+std::shared_ptr<MiniPatch> MiniGame::getCummulatedPatch() const
+{
+	return stateUpdate.getCummulatedPatch();
+}
+
+void MiniGame::resetCummulatedPatch()
+{
+	stateUpdate.resetCummulatedPatch();
 }
 
 std::shared_ptr<Response> MiniGame::getInfo(std::shared_ptr<Request> request) const

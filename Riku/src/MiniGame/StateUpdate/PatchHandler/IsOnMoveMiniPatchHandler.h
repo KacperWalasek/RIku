@@ -1,13 +1,19 @@
 #pragma once
 #include "IMiniPatchHandler.h"
+#include "../../../GameLogic/StateUpdate/Move/EndMiniGameTurn.h"
+
 class IsOnMoveMiniPatchHandler :
     public IMiniPatchHandler
 {
 public:
-    virtual void handlePatch(MiniGameState& state, const MiniPatch& patch) const override
+    virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
 	{
-		if (patch.isOnMove != -1)
-			state.isOnMove = (bool)patch.isOnMove;
+		if (patch.playerOnMove != -1)
+		{
+			state.playerOnMove = patch.playerOnMove;
+			return std::make_shared<EndMiniGameTurn>(state.player.logicIndex, state.enemy.logicIndex);
+		}
+		return nullptr;
 	}
 };
 

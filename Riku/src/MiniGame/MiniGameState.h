@@ -12,6 +12,6 @@ public:
 	MiniGamePlayer enemy;
 	std::set<std::shared_ptr<IMiniHookable>> registredHookables;
 
-	bool isOnMove;
+	int playerOnMove;
 };
 

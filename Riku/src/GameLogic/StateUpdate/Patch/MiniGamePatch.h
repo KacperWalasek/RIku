@@ -6,11 +6,17 @@
 class MiniGamePatch
 {
 public:
-	MiniGamePatch(int player, int enemy, bool isBegining) : player(player), enemy(enemy), isBegining(isBegining), remove(false) {}
-	MiniGamePatch(int player) : player(player), enemy(-1), isBegining(), remove(true) {}
+	MiniGamePatch(int player, int enemy, bool isBegining) 
+		: player(player), enemy(enemy), isBegining(isBegining), remove(false), resetCummulatedPatch(false) {}
+	MiniGamePatch(int player, bool resetCummulatedPatch, bool remove) 
+		: player(player), resetCummulatedPatch(resetCummulatedPatch), enemy(-1), isBegining(), remove(remove) {}
+	MiniGamePatch(int player, std::shared_ptr<MiniPatch> patch) 
+		: player(player), enemy(-1), miniPatch(patch), isBegining(), remove(false), resetCummulatedPatch(false){}
 	int player, enemy;
 	bool isBegining;
 	bool remove;
+	bool resetCummulatedPatch;
+	std::shared_ptr<MiniPatch> miniPatch;
 
 	MiniGamePatch& operator+=(const MiniGamePatch& patch)
 	{
@@ -21,6 +27,8 @@ public:
 			remove = patch.remove;
 			enemy = patch.enemy;
 			isBegining = patch.isBegining;
+			miniPatch = patch.miniPatch;
+			resetCummulatedPatch = patch.resetCummulatedPatch;
 		}
 		return *this;
 	}

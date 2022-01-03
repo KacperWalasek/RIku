@@ -5,7 +5,7 @@ class TileMiniPatchHandler :
     public IMiniPatchHandler
 {
 public:
-	virtual void handlePatch(MiniGameState& state, const MiniPatch& patch) const override
+	virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
 	{
 		for (auto& tilePatch : patch.tilePatches)
 		{
@@ -15,6 +15,7 @@ public:
 			if (tilePatch.second.unit)
 				tile.unit = tilePatch.second.unit;
 		}
+		return nullptr;
 	}
 };
 

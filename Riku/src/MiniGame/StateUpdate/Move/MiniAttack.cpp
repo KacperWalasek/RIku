@@ -18,7 +18,7 @@ bool MiniAttack::isDoable(const MiniGameState& state, const MiniGameAssets& asse
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
     auto distance = abs(unit->getMapX() - attackedTile.first) + abs(unit->getMapY() - attackedTile.second);
 
-    return attacedUnit && attacedUnit->isEnemy() && distance == 1;
+    return attacedUnit && attacedUnit->getOwner() == state.enemy.logicIndex && distance == 1;
 }
 
 std::shared_ptr<IMiniMove> MiniAttack::asPointner() const
