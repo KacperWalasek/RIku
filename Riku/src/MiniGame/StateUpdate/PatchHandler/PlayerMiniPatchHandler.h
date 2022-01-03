@@ -6,11 +6,27 @@ class PlayerMiniPatchHandler :
 public:
     virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
     {
+        auto& playerUnits = state.player.units;
+        auto& enemyUnits = state.enemy.units;
         for (std::shared_ptr<MiniUnit> unit : patch.playerPatch.addedUnits)
-            state.player.units.push_back(unit);
+            playerUnits.push_back(unit);
 
         for (std::shared_ptr<MiniUnit> unit : patch.enemyPatch.addedUnits)
-            state.enemy.units.push_back(unit);
+            enemyUnits.push_back(unit);
+
+        for (std::shared_ptr<MiniUnit> unit : patch.playerPatch.removedUnits)
+        {
+            auto unitIt = std::find(playerUnits.begin(), playerUnits.end(), unit);
+            if (unitIt != playerUnits.end())
+                playerUnits.erase(unitIt);
+        }
+
+        for (std::shared_ptr<MiniUnit> unit : patch.enemyPatch.removedUnits)
+        {
+            auto unitIt = std::find(enemyUnits.begin(), enemyUnits.end(), unit);
+            if (unitIt != enemyUnits.end())
+                enemyUnits.erase(unitIt);
+        }
 
         return nullptr;
     }

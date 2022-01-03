@@ -51,12 +51,13 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 		for (int j = 0; j < 20; j++)
 			state.map[i].emplace_back();
 	}
-
-	auto createUnit = std::make_shared<CreateMiniUnit>("maciek_syn_stefana", 1, 2, false);
-	auto createUnit1 = std::make_shared<CreateMiniUnit>("julka_ciocia_stefana", 2, 2, true);
-	stateUpdate.handleMove(createUnit);
-	stateUpdate.handleMove(createUnit1);
-	std::cout << state.map[1][2].unit->getName()<<std::endl;
+	if (begins) {
+		auto createUnit = std::make_shared<CreateMiniUnit>("maciek_syn_stefana", 1, 2, false);
+		auto createUnit1 = std::make_shared<CreateMiniUnit>("julka_ciocia_stefana", 2, 2, true);
+		stateUpdate.handleMove(createUnit);
+		stateUpdate.handleMove(createUnit1);
+		std::cout << state.map[1][2].unit->getName() << std::endl;
+	}
 }
 
 std::shared_ptr<IMove> MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
@@ -74,6 +75,9 @@ bool MiniGame::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) co
 
 void MiniGame::applyMiniPatch(std::shared_ptr<MiniPatch> patch)
 {
+	auto enemyPatch = patch->enemyPatch;
+	patch->enemyPatch = patch->playerPatch;
+	patch->playerPatch = enemyPatch;
 	stateUpdate.handlePatch(patch);
 }
 

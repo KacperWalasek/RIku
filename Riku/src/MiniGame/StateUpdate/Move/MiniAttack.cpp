@@ -10,7 +10,7 @@ std::shared_ptr<MiniPatch> MiniAttack::createPatch(const MiniGameState& state, c
 {
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
 
-    return std::make_shared<MiniPatch>(MiniTilePatch(attackedTile,true));
+    return std::make_shared<MiniPatch>(MiniTilePatch(attackedTile,true) + MiniPatch(MiniPlayerPatch(attacedUnit, false),true));
 }
 
 bool MiniAttack::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const

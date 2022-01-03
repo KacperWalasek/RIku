@@ -14,7 +14,7 @@ front::Frontend::Frontend(GameLogic& logic, Config& config)
 	auto m = state.getMiniMap();
 	state.moveUnit(1, 2, 3, 3);
 	m = state.getMiniMap();
-	//state.attack(3, 3, 2, 2);
+	state.attack(3, 3, 2, 2);
 	m = state.getMiniMap();
 	state.finishTurn();
 	x = state.isInMiniGame();
