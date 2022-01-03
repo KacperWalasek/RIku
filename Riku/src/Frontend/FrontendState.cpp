@@ -17,6 +17,7 @@
 #include "../MiniGame/Communicator/Responses/MiniMapResponse.h"
 
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
+#include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -45,6 +46,11 @@ std::vector<std::string> FrontendState::getAvailableBuildings(int mapX, int mapY
 std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()
 {
 	return logic.getInfo<UnitListResponse>("player_units")->getUnits();
+}
+
+std::vector<std::shared_ptr<const MiniUnit>> FrontendState::getMiniUnits()
+{
+	return logic.getInfo<MiniUnitListResponse>("mini_player_units")->get();
 }
 
 const logic::AssetHandler& FrontendState::getAssetHandler()

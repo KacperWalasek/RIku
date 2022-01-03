@@ -414,6 +414,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -951,5 +952,9 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h">
+      <Filter>Riku\MiniGame\Communicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
   </ItemGroup>
 </Project>

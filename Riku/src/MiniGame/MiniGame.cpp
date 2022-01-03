@@ -9,6 +9,7 @@
 #include "Communicator/RequestHandlers/MiniMapRequestHandler.h"
 #include "Communicator/RequestHandlers/MiniShortestPathRequestHandler.h"
 #include "Communicator/RequestHandlers/PlayerOnMoveMiniRequestHandler.h"
+#include "Communicator/RequestHandlers/MiniPlayerUnitsRequestHandler.h"
 
 #include "MoveFactory/TranslateMiniUnitMoveHandler.h"
 #include "MoveFactory/AttackMiniMoveHandler.h"
@@ -36,7 +37,8 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 	communicator.setHandlers({
 		std::make_shared<MiniMapRequestHandler>(state),
 		std::make_shared<MiniShortestPathRequestHandler>(state),
-		std::make_shared<PlayerOnMoveMiniRequestHandler>(state)
+		std::make_shared<PlayerOnMoveMiniRequestHandler>(state),
+		std::make_shared<MiniPlayerUnitsRequestHandler>(state)
 		});
 
 	factory.setHandlers({

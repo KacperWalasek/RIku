@@ -246,6 +246,7 @@
     <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp" />
     <ClCompile Include="..\src\GameLogic\Utils\ShortestPathEvaluator.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp" />
@@ -410,9 +411,11 @@
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
     <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\MiniLoadedHookable.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\MiniMoveWrapper.h" />

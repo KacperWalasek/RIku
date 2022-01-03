@@ -17,6 +17,7 @@ public:
 	std::map<std::string, int> getResources();
 	std::vector<std::string> getAvailableBuildings(int mapX, int mapY);
 	std::vector<std::shared_ptr<const Unit>> getUnits();
+	std::vector<std::shared_ptr<const MiniUnit>> getMiniUnits();
 	const logic::AssetHandler& getAssetHandler();
 	int getPlayerOnMove();
 	Path getShortestPath(int fromX, int fromY, int toX, int toY);
