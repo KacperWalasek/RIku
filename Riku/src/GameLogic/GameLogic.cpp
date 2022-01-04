@@ -122,6 +122,11 @@ bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) c
 	return move->isDoable(gameState, assets);
 }
 
+void GameLogic::update()
+{
+	// TODO:webModule check and handle recivedMessages
+}
+
 std::shared_ptr<IMiniGame> GameLogic::getActiveMiniGame() const
 {
 	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);

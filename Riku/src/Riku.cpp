@@ -13,6 +13,7 @@ int main() {
 	bool exitProgram = false;
 	while (!exitProgram)
 	{
+		logic.update();
 		exitProgram = frontend.update();
 	}
 	return 0;

@@ -29,5 +29,7 @@ public:
 	}
 	void makeMove(std::shared_ptr<IMoveDescription> moveDescription);
 	bool isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const;
+
+	void update();
 };
 
