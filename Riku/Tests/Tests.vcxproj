@@ -185,6 +185,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
@@ -266,6 +267,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />

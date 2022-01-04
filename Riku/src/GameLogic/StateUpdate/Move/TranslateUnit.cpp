@@ -24,7 +24,7 @@ bool TranslateUnit::isDoable(const GameState& state, const LogicAssets& assets) 
     auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY);
     const auto& unit = state.map[fromX][fromY].unit;
     std::cout << path.cost << ", " << state.map[fromX][fromY].unit->movementPoints << std::endl;
-    return unit && unit->movementPoints >= path.cost && state.playerOnMove == unit->getPlayer();
+    return unit && unit->movementPoints >= path.cost && state.playerOnMove == unit->getOwner();
 }
 
 std::shared_ptr<IMove> TranslateUnit::asPointner() const

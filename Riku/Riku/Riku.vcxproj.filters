@@ -56,6 +56,9 @@
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
       <Filter>Riku\Frontend\Asset</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Frontend\Asset\AssetTexture.cpp">
+      <Filter>Riku\Frontend\Asset</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Frontend\Asset\FAsset.cpp">
       <Filter>Riku\Frontend\Asset</Filter>
     </ClCompile>
@@ -75,6 +78,9 @@
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\GUIFactory.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\GUIUpdate.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\JsonUtil.cpp">
@@ -99,6 +105,9 @@
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\Texture.cpp">
+      <Filter>Riku\Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frontend\Transform.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp">
@@ -276,9 +285,15 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
+      <Filter>Riku\Frontend\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Asset\AssetTexture.h">
       <Filter>Riku\Frontend\Asset</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Asset\FAsset.h">
@@ -305,6 +320,15 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\BuildingUIOnKeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\EndTurn.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ExitApp.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -324,6 +348,15 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\MainMenuOnkeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SelectBuildingWithName.h">
@@ -360,6 +393,9 @@
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Texture.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\Transform.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Window\Callbacks\FramebufferSizeCallback.h">
@@ -648,6 +684,9 @@
       <Filter>Riku\GameLogic\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

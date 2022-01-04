@@ -2,11 +2,16 @@
 
 #include "SimpleTileObject.h"
 
-SimpleTileObject::SimpleTileObject(std::string name, const std::map<std::string, sol::function>& hooks, GUIDescription gui) : loadedHookable(hooks), name(name), gui(gui) {}
+SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui) : loadedHookable(hooks), name(name), player(player), gui(gui) {}
 
 std::string SimpleTileObject::getName() const
 {
 	return name;
+}
+
+int SimpleTileObject::getOwner() const
+{
+	return player;
 }
 
 double SimpleTileObject::getModifiedCost(double cost) const
@@ -31,6 +36,7 @@ std::shared_ptr<IMove> SimpleTileObject::onTurnBegin()
 
 std::shared_ptr<IMove> SimpleTileObject::onBeingPlaced(int mapX, int mapY)
 {
+	gui.onBeingPlaced(mapX, mapY);
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 

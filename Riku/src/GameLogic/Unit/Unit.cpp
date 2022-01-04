@@ -59,7 +59,7 @@ int Unit::getMapY() const
 	return mapY;
 }
 
-int Unit::getPlayer() const
+int Unit::getOwner() const
 {
 	return player;
 }

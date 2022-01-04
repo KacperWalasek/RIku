@@ -206,6 +206,9 @@
     <ClCompile Include="..\src\Frontend\FrontendState.cpp">
       <Filter>Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h">
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Frontend\FrontendState.h">
       <Filter>Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

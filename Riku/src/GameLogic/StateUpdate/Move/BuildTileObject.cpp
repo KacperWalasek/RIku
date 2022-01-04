@@ -12,7 +12,7 @@ std::shared_ptr<ITileObject> BuildTileObject::createObject(const LogicAssets& as
     GUIDescription gui(asset.getFunctions());
     if (asset.hasData("gui"))
         gui = GUIDescription(asset.getByKey("gui").asMap(), asset.getFunctions());
-    std::shared_ptr<ITileObject> object = std::make_shared<SimpleTileObject>(tileObject, asset.getFunctions(), gui);
+    std::shared_ptr<ITileObject> object = std::make_shared<SimpleTileObject>(tileObject, player, asset.getFunctions(), gui);
     for (auto& behavior : asset.getByKey("behavior").asMap())
     {
         std::string type = behavior.first;
@@ -35,7 +35,7 @@ std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state, cons
 bool BuildTileObject::isDoable(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<ITileObject> object = createObject(assets);
-    return assets.tileObjects.find(tileObject) != assets.tileObjects.end() && object->canBeBuilt(state,tile.first,tile.second);
+    return !state.map[tile.first][tile.second].object && assets.tileObjects.find(tileObject) != assets.tileObjects.end() && object->canBeBuilt(state,tile.first,tile.second);
 }
 
 std::shared_ptr<IMove> BuildTileObject::asPointner() const
