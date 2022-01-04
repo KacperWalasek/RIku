@@ -22,6 +22,7 @@ public:
 	MOCK_METHOD(bool, canBeBuilt, ((const GameState&), int, int), (override));
 	MOCK_METHOD((const GUIDescription&), getGuiDescription, (), (override));
 	MOCK_METHOD((std::shared_ptr<IMove>), onOptionChosen, (int), (override));
+	MOCK_METHOD(int, getOwner, (), (const, override));
 };
 
 class MockHookable : public IHookable
@@ -32,4 +33,5 @@ public:
 	MOCK_METHOD((std::shared_ptr<IMove>), onTurnBegin, (), (override));
 	MOCK_METHOD((std::shared_ptr<IMove>), onBeingPlaced, (int, int), (override));
 	MOCK_METHOD(bool, canBeBuilt, ((const GameState&), int, int), (override));
+	MOCK_METHOD(int, getOwner, (), (const, override));
 };
