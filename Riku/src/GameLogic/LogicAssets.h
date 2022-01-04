@@ -17,6 +17,6 @@ struct LogicAssets
 	std::map<std::string, logic::Asset> tileObjects;
 	std::map<std::string, logic::Asset> units;
 	logic::Asset mapGenerator;
-	//TODO inicjalizacja z pliku
-	void initialize();
+
+	void initialize(std::string assetPath);
 };

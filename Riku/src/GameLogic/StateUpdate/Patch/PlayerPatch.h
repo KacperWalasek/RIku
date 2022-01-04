@@ -1,8 +1,8 @@
 //Kacper Walasek
 #pragma once
 #include <map>
-#include "../../Unit/Unit.h"
 
+class Unit;
 class PlayerPatch
 {
 public: 

@@ -6,7 +6,7 @@
 
 int main() {
 	srand(time(0));
-	GameLogic logic;
+	GameLogic logic("../assets");
 	front::Config config;
 	front::Frontend frontend(logic, config);
 

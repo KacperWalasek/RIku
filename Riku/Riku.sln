@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Riku", "Riku\Riku.vcxproj", "{FB36C611-A921-4110-A452-05AB76A1FA19}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{4C488261-EDB3-432E-BD18-A7B765D90539}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{FB36C611-A921-4110-A452-05AB76A1FA19}.Release|x64.Build.0 = Release|x64
 		{FB36C611-A921-4110-A452-05AB76A1FA19}.Release|x86.ActiveCfg = Release|Win32
 		{FB36C611-A921-4110-A452-05AB76A1FA19}.Release|x86.Build.0 = Release|Win32
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Debug|x64.ActiveCfg = Debug|x64
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Debug|x64.Build.0 = Debug|x64
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Debug|x86.ActiveCfg = Debug|Win32
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Debug|x86.Build.0 = Debug|Win32
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Release|x64.ActiveCfg = Release|x64
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Release|x64.Build.0 = Release|x64
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Release|x86.ActiveCfg = Release|Win32
+		{4C488261-EDB3-432E-BD18-A7B765D90539}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 #include "TilePatchHandler.h"
 #include "../Move/CombinedMove.h"
+#include "../../Unit/Unit.h"
 
 std::shared_ptr<IMove> TilePatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {	

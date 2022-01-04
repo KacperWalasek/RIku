@@ -1,5 +1,6 @@
 #include "FinishTurn.h"
 #include "CombinedMove.h"
+#include "../../Unit/Unit.h"
 
 std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const LogicAssets& assets) const
 {
