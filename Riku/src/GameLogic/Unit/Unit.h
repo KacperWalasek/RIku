@@ -35,5 +35,5 @@ public:
 	int getMapX() const;
 	int getMapY() const;
 
-	int getPlayer() const;
+	int getOwner() const;
 };

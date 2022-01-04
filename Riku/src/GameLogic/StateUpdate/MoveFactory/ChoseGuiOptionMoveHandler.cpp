@@ -1,5 +1,6 @@
 #include "ChoseGuiOptionMoveHandler.h"
 #include "../MoveDescriptions/ChoseGuiOptionMoveDescription.h"
+#include "../../Hooks/GUIDescription.h"
 ChoseGuiOptionMoveHandler::ChoseGuiOptionMoveHandler(const GameState& state)
     : state(state)
 {}

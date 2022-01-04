@@ -35,9 +35,9 @@
 #include "FrontendCommunicator/Responses/IntResponse.h"
 
 
-GameLogic::GameLogic() : stateUpdate(this->gameState, this->assets)
+GameLogic::GameLogic(std::string assetPath) : stateUpdate(this->gameState, this->assets)
 {
-	assets.initialize();
+	assets.initialize(assetPath);
 
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };

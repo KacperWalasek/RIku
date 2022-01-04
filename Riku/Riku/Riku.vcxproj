@@ -224,6 +224,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\EndMiniGameTurn.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
@@ -379,6 +380,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\EndMiniGameTurn.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
@@ -454,6 +456,9 @@
     <ClInclude Include="..\src\MiniGame\Tile\MiniTile.h" />
     <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\Utils\MiniGameUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

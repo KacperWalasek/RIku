@@ -15,6 +15,8 @@ public:
 	// wywo³ywane gdy zostanie postawiony na polu
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) = 0;
 
+	virtual int getOwner() const = 0;
+
 	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) = 0;
 };
 

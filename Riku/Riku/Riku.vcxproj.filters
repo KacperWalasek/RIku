@@ -417,6 +417,9 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -458,6 +461,15 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\EndTurn.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ExitApp.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnitWithIndex.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -477,6 +489,9 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SelectBuildingWithName.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchActiveGUI.h">
@@ -960,5 +975,11 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

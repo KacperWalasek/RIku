@@ -29,4 +29,6 @@ public:
     virtual const GUIDescription& getGuiDescription() override { return next->getGuiDescription(); };
 
     virtual std::shared_ptr<IMove> onOptionChosen(int index) override { return next->onOptionChosen(index); };
+
+    virtual int getOwner() const override { return next->getOwner(); };
 };

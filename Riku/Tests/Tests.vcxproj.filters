@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{cb2c75c9-748b-4a64-a0df-4e86f4b4fccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic" />
+    <Filter Include="GameLogic\Assets" />
+    <Filter Include="GameLogic\FrontendCommunicator" />
+    <Filter Include="GameLogic\FrontendCommunicator\RequestHandlers" />
+    <Filter Include="GameLogic\FrontendCommunicator\Requests" />
+    <Filter Include="GameLogic\FrontendCommunicator\Responses" />
+    <Filter Include="GameLogic\GameObject" />
+    <Filter Include="GameLogic\Hooks" />
+    <Filter Include="GameLogic\Player" />
+    <Filter Include="GameLogic\StateUpdate" />
+    <Filter Include="GameLogic\StateUpdate\Move" />
+    <Filter Include="GameLogic\StateUpdate\MoveDescriptions" />
+    <Filter Include="GameLogic\StateUpdate\MoveFactory" />
+    <Filter Include="GameLogic\StateUpdate\Patch" />
+    <Filter Include="GameLogic\StateUpdate\PatchHandler" />
+    <Filter Include="GameLogic\Tile" />
+    <Filter Include="GameLogic\Tile\TileCost" />
+    <Filter Include="GameLogic\Unit" />
+    <Filter Include="GameLogic\Utils" />
+    <Filter Include="Tests\UnitTests">
+      <UniqueIdentifier>{6785c292-670b-4b9c-9d3e-ed581cd98ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\TestsOfExternalInterfaces">
+      <UniqueIdentifier>{1d49f17d-58cf-4fb5-a46a-aa885dffbba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frontend">
+      <UniqueIdentifier>{7a4f8711-010f-4330-873d-18fa512bf513}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp">
+      <Filter>GameLogic\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp">
+      <Filter>GameLogic\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp">
+      <Filter>GameLogic\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp">
+      <Filter>GameLogic\FrontendCommunicator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.cpp">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.cpp">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameLogic.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\RequireResources.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Hooks\GUIDescription.cpp">
+      <Filter>GameLogic\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp">
+      <Filter>GameLogic\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\LogicAssets.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Player\Player.cpp">
+      <Filter>GameLogic\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\UseResources.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.cpp">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.cpp">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.cpp">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.cpp">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp">
+      <Filter>GameLogic\StateUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\MapGenerator.cpp">
+      <Filter>GameLogic\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\Tile.cpp">
+      <Filter>GameLogic\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Area.cpp">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Biome.cpp">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp">
+      <Filter>GameLogic\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp">
+      <Filter>GameLogic\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp">
+      <Filter>GameLogic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
+    <ClCompile Include="Tests.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendState.cpp">
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\GameLogic\Assets\Asset.h">
+      <Filter>GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\AssetData.h">
+      <Filter>GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h">
+      <Filter>GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
+      <Filter>GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
+      <Filter>GameLogic\FrontendCommunicator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.h">
+      <Filter>GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h">
+      <Filter>GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TilePairRequest.h">
+      <Filter>GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h">
+      <Filter>GameLogic\FrontendCommunicator\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h">
+      <Filter>GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameLogic.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\ITileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameObject\UseResourceOnBuild.h">
+      <Filter>GameLogic\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\GameState.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\GUIDescription.h">
+      <Filter>GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\IHookable.h">
+      <Filter>GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\LoadedHookable.h">
+      <Filter>GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Hooks\MoveWrapper.h">
+      <Filter>GameLogic\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\IAsset.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\LogicAssets.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Player\Player.h">
+      <Filter>GameLogic\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Resource.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\UseResources.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\BuildMoveDescription.h">
+      <Filter>GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\ChoseGuiOptionMoveDescription.h">
+      <Filter>GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\IMoveDescription.h">
+      <Filter>GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\SimpleMoveDescription.h">
+      <Filter>GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\TranslateUnitMoveDescription.h">
+      <Filter>GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h">
+      <Filter>GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\UnitPatch.h">
+      <Filter>GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h">
+      <Filter>GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\StateUpdate.h">
+      <Filter>GameLogic\StateUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\MapGenerator.h">
+      <Filter>GameLogic\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\Tile.h">
+      <Filter>GameLogic\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Area.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Biome.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\Ground.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h">
+      <Filter>GameLogic\Tile\TileCost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h">
+      <Filter>GameLogic\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Unit\Hero.h">
+      <Filter>GameLogic\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Unit\Unit.h">
+      <Filter>GameLogic\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h">
+      <Filter>GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\Path.h">
+      <Filter>GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="Mocks.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="PatchesTests.h">
+      <Filter>Tests\UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="PatchHandlerTests.h">
+      <Filter>Tests\UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTests.h">
+      <Filter>Tests\UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="TileTest.h">
+      <Filter>Tests\UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaAssetsTests.h">
+      <Filter>Tests\UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicAssetTests.h">
+      <Filter>Tests\TestsOfExternalInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontendLogicIntegration.h">
+      <Filter>Tests\TestsOfExternalInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\FrontendState.h">
+      <Filter>Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
+      <Filter>GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

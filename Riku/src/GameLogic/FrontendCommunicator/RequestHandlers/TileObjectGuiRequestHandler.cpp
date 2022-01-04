@@ -1,6 +1,7 @@
 #include "TileObjectGuiRequestHandler.h"
 #include "../Requests/TileRequest.h"
 #include "../Responses/StringListResponse.h"
+#include "../../Hooks/GUIDescription.h"
 
 TileObjectGuiRequestHandler::TileObjectGuiRequestHandler(const GameState& state)
     : state(state)
