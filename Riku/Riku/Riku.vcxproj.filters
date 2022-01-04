@@ -414,11 +414,17 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
-    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp" />
-    <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -461,9 +467,6 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\EndTurn.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -489,9 +492,6 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\SelectBuildingWithName.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchActiveGUI.h">
@@ -972,11 +972,17 @@
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h">
       <Filter>Riku\MiniGame\Communicator\Responses</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
-    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h" />
-    <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 //Kacper Walasek
 #pragma once
 #include <map>
+#include <memory>
 
 class Unit;
 class PlayerPatch

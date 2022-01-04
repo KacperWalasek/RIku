@@ -16,6 +16,8 @@ int CostEvaluator::h(vertex from, vertex to)
 //koszt ruchu
 int CostEvaluator::d(vertex vert)
 {
+    if (map[vert.x][vert.y].unit)
+        return 1000000;
     return map[vert.x][vert.y].getCost();
 }
 
