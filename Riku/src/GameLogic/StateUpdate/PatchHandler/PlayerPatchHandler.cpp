@@ -1,7 +1,7 @@
 //Kacper Walasek
 #include "PlayerPatchHandler.h"
 
-std::shared_ptr<IMove> PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
+std::shared_ptr<IAction> PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
 	for (auto p : patch.playerPatches)
 	{

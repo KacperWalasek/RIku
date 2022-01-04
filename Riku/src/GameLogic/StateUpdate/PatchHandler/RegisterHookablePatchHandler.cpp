@@ -1,6 +1,6 @@
 #include "RegisterHookablePatchHandler.h"
 
-std::shared_ptr<IMove> RegisterHookablePatchHandler::handlePatch(GameState& state, const Patch& patch) const
+std::shared_ptr<IAction> RegisterHookablePatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
 	for (auto p : patch.registerHookablePatches)
 	{

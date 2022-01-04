@@ -2,9 +2,8 @@
 #include "../Move/CombinedMove.h"
 #include "../../Unit/Unit.h"
 
-std::shared_ptr<IMove> TilePatchHandler::handlePatch(GameState& state, const Patch& patch) const
+std::shared_ptr<IAction> TilePatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {	
-	std::shared_ptr<IMove> move = nullptr;
 	for (auto& tilePatch : patch.tilePatches)
 	{
 		Tile& tile = state.map[tilePatch.first.first][tilePatch.first.second];
@@ -17,5 +16,5 @@ std::shared_ptr<IMove> TilePatchHandler::handlePatch(GameState& state, const Pat
 		if (tilePatch.second.unit)
 			tile.unit = tilePatch.second.unit;
 	}
-	return move;
+	return nullptr;
 }

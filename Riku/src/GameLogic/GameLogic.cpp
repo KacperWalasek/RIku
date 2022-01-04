@@ -99,11 +99,15 @@ std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) c
 
 void GameLogic::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
 {
+	std::shared_ptr<IAction> action;
 	auto minigame = getActiveMiniGame();
 	if (minigame)
-		stateUpdate.handleMove(minigame->makeMove(moveDescription));
+		action = stateUpdate.handleMove(minigame->makeMove(moveDescription));
 	else
-		stateUpdate.handleMove(factory.createMove(*moveDescription));
+		action = stateUpdate.handleMove(factory.createMove(*moveDescription));
+
+	if (action)
+		action->takeAction(gameState, assets, stateUpdate, communicator, factory);
 }
 
 bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const

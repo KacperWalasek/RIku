@@ -99,6 +99,9 @@
     <Filter Include="Riku\MiniGame\StateUpdate\MoveDescription">
       <UniqueIdentifier>{2b775407-4ac9-46ae-8d85-aef03f990563}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Riku\GameLogic\Actions">
+      <UniqueIdentifier>{1b206673-2b13-4b0a-a3db-1dbe8643c60b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -983,6 +986,15 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h">
       <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\IAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\TestAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

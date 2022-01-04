@@ -313,6 +313,9 @@
     <ClInclude Include="..\src\Frontend\Window\Light.h" />
     <ClInclude Include="..\src\Frontend\Window\Scene.h" />
     <ClInclude Include="..\src\Frontend\Window\Window.h" />
+    <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h" />
+    <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
+    <ClInclude Include="..\src\GameLogic\Actions\TestAction.h" />
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetData.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h" />
