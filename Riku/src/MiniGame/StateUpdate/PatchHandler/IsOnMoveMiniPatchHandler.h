@@ -2,18 +2,21 @@
 #include "IMiniPatchHandler.h"
 #include "../../../GameLogic/StateUpdate/Move/EndMiniGameTurn.h"
 
-class IsOnMoveMiniPatchHandler :
-    public IMiniPatchHandler
+namespace minigame
 {
-public:
-    virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
+	class IsOnMoveMiniPatchHandler :
+		public IMiniPatchHandler
 	{
-		if (patch.playerOnMove != -1)
+	public:
+		virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
 		{
-			state.playerOnMove = patch.playerOnMove;
-			return std::make_shared<EndMiniGameTurn>(state.player.logicIndex, state.enemy.logicIndex);
+			if (patch.playerOnMove != -1)
+			{
+				state.playerOnMove = patch.playerOnMove;
+				return std::make_shared<EndMiniGameTurn>(state.player.logicIndex, state.enemy.logicIndex);
+			}
+			return nullptr;
 		}
-		return nullptr;
-	}
-};
+	};
 
+}

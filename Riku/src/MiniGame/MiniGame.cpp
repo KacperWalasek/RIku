@@ -18,12 +18,12 @@
 
 #include "StateUpdate/Move/CreateMiniUnit.h"
 
-MiniGameAssets& MiniGame::getAssets()
+minigame::MiniGameAssets& minigame::MiniGame::getAssets()
 {
 	return assets;
 }
 
-MiniGame::MiniGame( int player, int enemy, bool begins)
+minigame::MiniGame::MiniGame( int player, int enemy, bool begins)
 	: state(player, enemy, begins), stateUpdate(state, assets)
 {
 	stateUpdate.setHandlers({
@@ -66,12 +66,12 @@ MiniGame::MiniGame( int player, int enemy, bool begins)
 	}
 }
 
-std::shared_ptr<IMove> MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
+std::shared_ptr<IMove> minigame::MiniGame::makeMove(std::shared_ptr<IMoveDescription> moveDescription)
 {
 	return stateUpdate.handleMove(factory.createMove(*moveDescription));
 }
 
-bool MiniGame::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const
+bool minigame::MiniGame::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const
 {
 	std::shared_ptr<IMiniMove> move = factory.createMove(*moveDescription);
 	if (!move)
@@ -79,7 +79,7 @@ bool MiniGame::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) co
 	return move->isDoable(state, assets);
 }
 
-void MiniGame::applyMiniPatch(std::shared_ptr<MiniPatch> patch)
+void minigame::MiniGame::applyMiniPatch(std::shared_ptr<MiniPatch> patch)
 {
 	auto enemyPatch = patch->enemyPatch;
 	patch->enemyPatch = patch->playerPatch;
@@ -87,17 +87,17 @@ void MiniGame::applyMiniPatch(std::shared_ptr<MiniPatch> patch)
 	stateUpdate.handlePatch(patch);
 }
 
-std::shared_ptr<MiniPatch> MiniGame::getCummulatedPatch() const
+std::shared_ptr<minigame::MiniPatch> minigame::MiniGame::getCummulatedPatch() const
 {
 	return stateUpdate.getCummulatedPatch();
 }
 
-void MiniGame::resetCummulatedPatch()
+void minigame::MiniGame::resetCummulatedPatch()
 {
 	stateUpdate.resetCummulatedPatch();
 }
 
-std::shared_ptr<Response> MiniGame::getInfo(std::shared_ptr<Request> request) const
+std::shared_ptr<Response> minigame::MiniGame::getInfo(std::shared_ptr<Request> request) const
 {
 	return communicator.handleRequest(request);
 }

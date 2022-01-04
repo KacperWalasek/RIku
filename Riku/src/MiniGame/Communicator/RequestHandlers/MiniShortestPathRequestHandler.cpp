@@ -3,10 +3,10 @@
 #include "../../../GameLogic/FrontendCommunicator/Responses/PathResponse.h"
 #include "../../Utils/MiniGameUtils.h"
 
-MiniShortestPathRequestHandler::MiniShortestPathRequestHandler(const MiniGameState& state)
+minigame::MiniShortestPathRequestHandler::MiniShortestPathRequestHandler(const MiniGameState& state)
     : state(state) {}
 
-std::shared_ptr<Response> MiniShortestPathRequestHandler::handleRequest(std::shared_ptr<Request> request) const
+std::shared_ptr<Response> minigame::MiniShortestPathRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
     std::shared_ptr<TilePairRequest> tileRequest = std::static_pointer_cast<TilePairRequest>(request);
     return std::make_shared<PathResponse>(request,MiniGameUtils::getShortestPath(
@@ -18,7 +18,7 @@ std::shared_ptr<Response> MiniShortestPathRequestHandler::handleRequest(std::sha
     ));
 }
 
-bool MiniShortestPathRequestHandler::canHandle(const Request& request) const
+bool minigame::MiniShortestPathRequestHandler::canHandle(const Request& request) const
 {
     return request.getKey() == "shortest_path";
 }

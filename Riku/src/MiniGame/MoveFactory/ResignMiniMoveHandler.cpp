@@ -1,12 +1,12 @@
 #include "ResignMiniMoveHandler.h"
 #include "../StateUpdate/Move/MiniResign.h"
 
-std::shared_ptr<IMiniMove> ResignMiniMoveHandler::handleDescription(const IMoveDescription& description)
+std::shared_ptr<minigame::IMiniMove> minigame::ResignMiniMoveHandler::handleDescription(const IMoveDescription& description)
 {
     return std::make_shared<MiniResign>();
 }
 
-bool ResignMiniMoveHandler::canHandle(const IMoveDescription& description) const
+bool minigame::ResignMiniMoveHandler::canHandle(const IMoveDescription& description) const
 {
     return description.getMoveType() == "resign";
 }

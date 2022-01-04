@@ -1,21 +1,23 @@
 #pragma once
 #include "IMiniPatchHandler.h"
 
-class TileMiniPatchHandler :
-    public IMiniPatchHandler
+namespace minigame
 {
-public:
-	virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
+	class TileMiniPatchHandler :
+		public IMiniPatchHandler
 	{
-		for (auto& tilePatch : patch.tilePatches)
+	public:
+		virtual std::shared_ptr<IMove> handlePatch(MiniGameState& state, const MiniPatch& patch) const override
 		{
-			MiniTile& tile = state.map[tilePatch.first.first][tilePatch.first.second];
-			if (tilePatch.second.removeUnit)
-				tile.unit = nullptr;
-			if (tilePatch.second.unit)
-				tile.unit = tilePatch.second.unit;
+			for (auto& tilePatch : patch.tilePatches)
+			{
+				MiniTile& tile = state.map[tilePatch.first.first][tilePatch.first.second];
+				if (tilePatch.second.removeUnit)
+					tile.unit = nullptr;
+				if (tilePatch.second.unit)
+					tile.unit = tilePatch.second.unit;
+			}
+			return nullptr;
 		}
-		return nullptr;
-	}
-};
-
+	};
+}

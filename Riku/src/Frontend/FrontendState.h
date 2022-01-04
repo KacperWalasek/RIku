@@ -13,11 +13,11 @@ public:
 	FrontendState(GameLogic& logic);
 
 	const std::vector<std::vector<Tile>>& getMap();
-	const std::vector<std::vector<MiniTile>>& getMiniMap();
+	const std::vector<std::vector<minigame::MiniTile>>& getMiniMap();
 	std::map<std::string, int> getResources();
 	std::vector<std::string> getAvailableBuildings(int mapX, int mapY);
 	std::vector<std::shared_ptr<const Unit>> getUnits();
-	std::vector<std::shared_ptr<const MiniUnit>> getMiniUnits();
+	std::vector<std::shared_ptr<const minigame::MiniUnit>> getMiniUnits();
 	const logic::AssetHandler& getAssetHandler();
 	int getPlayerOnMove();
 	Path getShortestPath(int fromX, int fromY, int toX, int toY);

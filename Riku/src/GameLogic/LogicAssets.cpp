@@ -7,7 +7,7 @@
 void LogicAssets::initialize()
 {
 	handler.findFiles("../assets", std::make_shared<LogicAssetInitializer>());
-	MiniGame::getAssets().initialize();
+	minigame::MiniGame::getAssets().initialize();
 
 	biomes = AssetUtils::readNumericAsset<Biome>("biomes", handler);
 	areas = AssetUtils::readNumericAsset<Area>("areas", handler);

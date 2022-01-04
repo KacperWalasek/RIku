@@ -1,7 +1,7 @@
 #include "MiniStateUpdate.h"
 #include "Move/IMiniMove.h"
 
-std::shared_ptr<IMove> MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> patch)
+std::shared_ptr<IMove> minigame::MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> patch)
 {
 	// TODO Zrobic +=
 	cummulatedPatch = cummulatedPatch? std::make_shared<MiniPatch>(*cummulatedPatch + (MiniPatch)(*patch)) : patch;
@@ -15,16 +15,16 @@ std::shared_ptr<IMove> MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> p
 	return combinedMove;
 }
 
-void MiniStateUpdate::setHandlers(std::vector<std::shared_ptr<IMiniPatchHandler>> patchHandlers)
+void minigame::MiniStateUpdate::setHandlers(std::vector<std::shared_ptr<IMiniPatchHandler>> patchHandlers)
 {
 	this->patchHandlers = patchHandlers;
 }
 
-MiniStateUpdate::MiniStateUpdate(MiniGameState& state, const MiniGameAssets& assets)
+minigame::MiniStateUpdate::MiniStateUpdate(MiniGameState& state, const MiniGameAssets& assets)
 	: state(state), assets(assets)
 {}
 
-std::shared_ptr<IMove> MiniStateUpdate::handleMove(const std::shared_ptr<IMiniMove> move)
+std::shared_ptr<IMove> minigame::MiniStateUpdate::handleMove(const std::shared_ptr<IMiniMove> move)
 {
 	std::shared_ptr<IMove> combinedMove;
 	if (move && move->isDoable(state, assets))
@@ -36,12 +36,12 @@ std::shared_ptr<IMove> MiniStateUpdate::handleMove(const std::shared_ptr<IMiniMo
 	return combinedMove;
 }
 
-std::shared_ptr<MiniPatch> MiniStateUpdate::getCummulatedPatch() const
+std::shared_ptr<minigame::MiniPatch> minigame::MiniStateUpdate::getCummulatedPatch() const
 {
 	return cummulatedPatch;
 }
 
-void MiniStateUpdate::resetCummulatedPatch()
+void minigame::MiniStateUpdate::resetCummulatedPatch()
 {
 	cummulatedPatch = {};
 }

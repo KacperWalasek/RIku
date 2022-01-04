@@ -3,16 +3,19 @@
 #include "../../../GameLogic/FrontendCommunicator/Responses/Response.h"
 #include "../../Tile/MiniTile.h"
 
-class MiniMapResponse :
-    public Response
+namespace minigame
 {
-    const std::vector<std::vector<MiniTile>>& map;
-public:
-    MiniMapResponse(std::shared_ptr<Request> request, const std::vector<std::vector<MiniTile>>& map) 
-        : Response(request, true), map(map) {}
-    const std::vector<std::vector<MiniTile>>& get() 
+    class MiniMapResponse :
+        public Response
     {
-        return map;
+        const std::vector<std::vector<MiniTile>>& map;
+    public:
+        MiniMapResponse(std::shared_ptr<Request> request, const std::vector<std::vector<MiniTile>>& map)
+            : Response(request, true), map(map) {}
+        const std::vector<std::vector<MiniTile>>& get()
+        {
+            return map;
+        };
     };
-};
+}
 

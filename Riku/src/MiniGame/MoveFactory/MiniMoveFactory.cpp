@@ -1,6 +1,6 @@
 #include "MiniMoveFactory.h"
 
-std::shared_ptr<IMiniMove> MiniMoveFactory::createMove(const IMoveDescription& description) const
+std::shared_ptr<minigame::IMiniMove> minigame::MiniMoveFactory::createMove(const IMoveDescription& description) const
 {
 	for (std::shared_ptr<IMiniMoveDescriptionHandler> handler : handlers)
 	{
@@ -10,7 +10,7 @@ std::shared_ptr<IMiniMove> MiniMoveFactory::createMove(const IMoveDescription& d
 	return nullptr;
 }
 
-void MiniMoveFactory::setHandlers(std::vector<std::shared_ptr<IMiniMoveDescriptionHandler>>&& handlers)
+void minigame::MiniMoveFactory::setHandlers(std::vector<std::shared_ptr<IMiniMoveDescriptionHandler>>&& handlers)
 {
 	this->handlers = std::move(handlers);
 }

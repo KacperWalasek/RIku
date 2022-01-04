@@ -1,46 +1,46 @@
 #include "MiniUnit.h"
 
-MiniUnit::MiniUnit(std::string name, int owner, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
+minigame::MiniUnit::MiniUnit(std::string name, int owner, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
     :name(name), owner(owner), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints), loadedHookable(hooks)
 {}
 
-std::shared_ptr<IMiniMove> MiniUnit::onDestroy(bool byOwner)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniUnit::onDestroy(bool byOwner)
 {
     return loadedHookable.onDestroy(*this,byOwner);
 }
 
-std::shared_ptr<IMiniMove> MiniUnit::onTurnEnd()
+std::shared_ptr<minigame::IMiniMove> minigame::MiniUnit::onTurnEnd()
 {
     return loadedHookable.onTurnEnd(*this);
 }
 
-std::shared_ptr<IMiniMove> MiniUnit::onTurnBegin()
+std::shared_ptr<minigame::IMiniMove> minigame::MiniUnit::onTurnBegin()
 {
     return loadedHookable.onTurnBegin(*this);
 }
 
-std::shared_ptr<IMiniMove> MiniUnit::onBeingPlaced(int mapX, int mapY)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniUnit::onBeingPlaced(int mapX, int mapY)
 {
 
     return loadedHookable.onBeingPlaced(*this,mapX,mapY);
 }
 
-std::string MiniUnit::getName() const
+std::string minigame::MiniUnit::getName() const
 {
     return name;
 }
 
-int MiniUnit::getMapX() const
+int minigame::MiniUnit::getMapX() const
 {
     return mapX;
 }
 
-int MiniUnit::getMapY() const
+int minigame::MiniUnit::getMapY() const
 {
     return mapY;
 }
 
-int MiniUnit::getOwner() const
+int minigame::MiniUnit::getOwner() const
 {
     return owner;
 }

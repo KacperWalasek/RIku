@@ -2,12 +2,14 @@
 #include <memory>
 #include "../StateUpdate/Move/IMiniMove.h"
 
-class MiniMoveWrapper
+namespace minigame
 {
-public:
-	std::shared_ptr<IMiniMove> move;
-	MiniMoveWrapper(IMiniMove& m) {
-		move = m.asPointner();
-	}
-};
-
+	class MiniMoveWrapper
+	{
+	public:
+		std::shared_ptr<IMiniMove> move;
+		MiniMoveWrapper(IMiniMove& m) {
+			move = m.asPointner();
+		}
+	};
+}

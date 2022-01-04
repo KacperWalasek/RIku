@@ -1,13 +1,15 @@
 #pragma once
 #include "../GameLogic/Assets/AssetHandler.h"
 
-class MiniGameAssets
+namespace minigame
 {
-	logic::AssetHandler handler;
-public:
-	MiniGameAssets();
-	std::map<std::string, logic::Asset> units;
+	class MiniGameAssets
+	{
+		logic::AssetHandler handler;
+	public:
+		MiniGameAssets();
+		std::map<std::string, logic::Asset> units;
 
-	void initialize();
-};
-
+		void initialize();
+	};
+}

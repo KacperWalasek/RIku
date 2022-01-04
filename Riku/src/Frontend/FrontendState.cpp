@@ -28,9 +28,9 @@ const std::vector<std::vector<Tile>>& FrontendState::getMap()
 	return logic.getInfo<MapResponse>("map")->getMap();
 }
 
-const std::vector<std::vector<MiniTile>>& FrontendState::getMiniMap()
+const std::vector<std::vector<minigame::MiniTile>>& FrontendState::getMiniMap()
 {
-	return logic.getInfo<MiniMapResponse>("mini_map")->get();
+	return logic.getInfo<minigame::MiniMapResponse>("mini_map")->get();
 }
 
 std::map<std::string, int> FrontendState::getResources()
@@ -48,9 +48,9 @@ std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()
 	return logic.getInfo<UnitListResponse>("player_units")->getUnits();
 }
 
-std::vector<std::shared_ptr<const MiniUnit>> FrontendState::getMiniUnits()
+std::vector<std::shared_ptr<const minigame::MiniUnit>> FrontendState::getMiniUnits()
 {
-	return logic.getInfo<MiniUnitListResponse>("mini_player_units")->get();
+	return logic.getInfo<minigame::MiniUnitListResponse>("mini_player_units")->get();
 }
 
 const logic::AssetHandler& FrontendState::getAssetHandler()

@@ -2,10 +2,10 @@
 #include "../GameLogic/Assets/AssetUtils.h"
 #include "MiniGameAssetInitializer.h"
 
-MiniGameAssets::MiniGameAssets()
+minigame::MiniGameAssets::MiniGameAssets()
 {}
 
-void MiniGameAssets::initialize()
+void minigame::MiniGameAssets::initialize()
 {
 	handler.findFiles("../mini_assets", std::make_shared<MiniGameAssetInitializer>());
 

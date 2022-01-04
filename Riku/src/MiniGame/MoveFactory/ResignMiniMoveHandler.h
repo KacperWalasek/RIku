@@ -1,12 +1,15 @@
 #pragma once
 #include "IMiniMoveDescriptionHandler.h"
-class ResignMiniMoveHandler :
-    public IMiniMoveDescriptionHandler
+
+namespace minigame
 {
-public:
-    virtual std::shared_ptr<IMiniMove> handleDescription(const IMoveDescription& description) override;
+    class ResignMiniMoveHandler :
+        public IMiniMoveDescriptionHandler
+    {
+    public:
+        virtual std::shared_ptr<IMiniMove> handleDescription(const IMoveDescription& description) override;
 
-    virtual bool canHandle(const IMoveDescription& description) const override;
+        virtual bool canHandle(const IMoveDescription& description) const override;
 
-};
-
+    };
+}

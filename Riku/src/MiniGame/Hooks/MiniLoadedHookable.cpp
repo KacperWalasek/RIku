@@ -2,7 +2,7 @@
 #include "MiniMoveWrapper.h"
 
 
-std::shared_ptr<IMiniMove> MiniLoadedHookable::callFuncWithNoArgs(IMiniHookable& hookable, std::string name)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniLoadedHookable::callFuncWithNoArgs(IMiniHookable& hookable, std::string name)
 {
     auto func = functions.find(name);
     if (func == functions.end())
@@ -10,7 +10,7 @@ std::shared_ptr<IMiniMove> MiniLoadedHookable::callFuncWithNoArgs(IMiniHookable&
     MiniMoveWrapper wrapper = func->second(hookable);
     return wrapper.move;
 }
-std::shared_ptr<IMiniMove> MiniLoadedHookable::onDestroy(IMiniHookable& hookable, bool byOwner)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniLoadedHookable::onDestroy(IMiniHookable& hookable, bool byOwner)
 {
     auto func = functions.find("onDestroy");
     if (func == functions.end())
@@ -19,17 +19,17 @@ std::shared_ptr<IMiniMove> MiniLoadedHookable::onDestroy(IMiniHookable& hookable
     return wrapper.move;
 }
 
-std::shared_ptr<IMiniMove> MiniLoadedHookable::onTurnEnd(IMiniHookable& hookable)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniLoadedHookable::onTurnEnd(IMiniHookable& hookable)
 {
     return callFuncWithNoArgs(hookable, "onTurnEnd");
 }
 
-std::shared_ptr<IMiniMove> MiniLoadedHookable::onTurnBegin(IMiniHookable& hookable)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniLoadedHookable::onTurnBegin(IMiniHookable& hookable)
 {
     return callFuncWithNoArgs(hookable, "onTurnBegin");
 }
 
-std::shared_ptr<IMiniMove> MiniLoadedHookable::onBeingPlaced(IMiniHookable& hookable, int mapX, int mapY)
+std::shared_ptr<minigame::IMiniMove> minigame::MiniLoadedHookable::onBeingPlaced(IMiniHookable& hookable, int mapX, int mapY)
 {
     auto func = functions.find("onBeingPlaced");
     if (func == functions.end())
