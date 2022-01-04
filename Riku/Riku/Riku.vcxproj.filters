@@ -1002,6 +1002,9 @@
     <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h">
       <Filter>Riku\GameLogic\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
