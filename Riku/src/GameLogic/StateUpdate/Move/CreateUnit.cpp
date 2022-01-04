@@ -18,7 +18,9 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
     int mp = asset.getByKey("movement_points").asNumber();
     auto& funcs = asset.getFunctions();
     auto unitPtr = std::make_shared<Unit>(asset.getType(), name, player, mp, funcs);
-    return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr) + (Patch)RegisterHookablePatch(unitPtr));
+    auto hookMove = unitPtr->onBeingPlaced(mapX, mapY);
+    auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
+    return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr) + (Patch)RegisterHookablePatch(unitPtr) + hookPatch);
 }
 
 bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets) const

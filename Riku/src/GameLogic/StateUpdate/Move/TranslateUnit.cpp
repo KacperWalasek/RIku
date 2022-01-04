@@ -12,10 +12,13 @@ std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const 
 {
     auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY);
     auto unit = state.map[fromX][fromY].unit;
+    auto hookMove = unit->onBeingPlaced(toX, toY);
+    auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
     return std::make_shared<Patch>(
         TilePatch({ toX, toY }, unit) + 
         (Patch)TilePatch({ fromX,fromY },false,true) + 
-        (Patch)UnitPatch(unit,-path.cost));
+        (Patch)UnitPatch(unit,-path.cost) +
+        hookPatch);
 }
 
 bool TranslateUnit::isDoable(const GameState& state, const LogicAssets& assets) const

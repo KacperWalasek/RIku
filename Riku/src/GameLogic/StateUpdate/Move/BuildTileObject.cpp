@@ -29,7 +29,9 @@ BuildTileObject::BuildTileObject(int player, std::pair<int, int> tile, std::stri
 std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<ITileObject> object = createObject(assets);
-    return std::make_shared<Patch>(TilePatch(tile,object) + (Patch)RegisterHookablePatch(object));
+    auto hookMove = object->onBeingPlaced(tile.first, tile.second);
+    auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
+    return std::make_shared<Patch>(TilePatch(tile,object) + (Patch)RegisterHookablePatch(object) + hookPatch);
 }
 
 bool BuildTileObject::isDoable(const GameState& state, const LogicAssets& assets) const

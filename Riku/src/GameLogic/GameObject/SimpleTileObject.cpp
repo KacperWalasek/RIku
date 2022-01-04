@@ -1,6 +1,7 @@
 // Kacper Walasek
 
 #include "SimpleTileObject.h"
+#include "../StateUpdate/Move/CombinedMove.h"
 
 SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui) : loadedHookable(hooks), name(name), player(player), gui(gui) {}
 
@@ -36,7 +37,6 @@ std::shared_ptr<IMove> SimpleTileObject::onTurnBegin()
 
 std::shared_ptr<IMove> SimpleTileObject::onBeingPlaced(int mapX, int mapY)
 {
-	gui.onBeingPlaced(mapX, mapY);
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 
@@ -50,7 +50,7 @@ const GUIDescription& SimpleTileObject::getGuiDescription()
 	return gui;
 }
 
-std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index)
+std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index, int mapX, int mapY)
 {
-	return gui.onOptionChosen(index);
+	return gui.onOptionChosen(index, mapX, mapY);
 }

@@ -34,7 +34,7 @@ std::vector<std::string> GUIDescription::getOptions() const
 	return descs;
 }
 
-std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index) const
+std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index, int mapX, int mapY) const
 {
 	auto onOptionChosenFunc = funcs.find("onOptionChosen");
 	if (options.size() > index && onOptionChosenFunc != funcs.end())
@@ -45,8 +45,3 @@ std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index) const
 	return std::shared_ptr<IMove>();
 }
 
-void GUIDescription::onBeingPlaced(int mapX, int mapY)
-{
-	this->mapX = mapX;
-	this->mapY = mapY;
-}

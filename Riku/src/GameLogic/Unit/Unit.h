@@ -8,11 +8,11 @@ class Unit : public IHookable, public IAsset
 	std::string type;
 	std::string name;
 	LoadedHookable loadedHookable;
-	int mapX = 0, mapY = 0;
 	int player;
 public:
 	Unit(std::string type, std::string name, int player, int baseMovementPoints, const std::map<std::string, sol::function>& hooks);
-	// te pola s� publiczne, �eby hooki mog�y je zmienia�
+
+	int mapX = 0, mapY = 0;
 	int movementPoints;
 	int baseMovementPoints;
 
