@@ -2,8 +2,8 @@
 #include <map>
 #include <memory>
 #include "../../GameObject/ITileObject.h"
-#include "../../Unit/Unit.h"
 
+class Unit;
 class TilePatch
 {
 public:

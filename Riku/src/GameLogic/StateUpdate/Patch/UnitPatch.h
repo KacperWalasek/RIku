@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "../../Unit/Unit.h"
 
+class Unit;
 class UnitPatch
 {
 public:

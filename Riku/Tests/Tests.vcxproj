@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fb36c611-a921-4110-a452-05ab76a1fa19}</ProjectGuid>
-    <RootNamespace>Riku</RootNamespace>
+    <ProjectGuid>{4c488261-edb3-432e-bd18-a7b765d90539}</ProjectGuid>
+    <RootNamespace>Tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,15 +88,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\binaries\glew\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,17 +104,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\binaries\glew\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,16 +120,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\cegui-0-8-7\include;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/sdl /w34996 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\binaries\glew\lib\Release\x64;..\binaries\cegui-0-8-7\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,45 +136,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\cegui-0-8-7\include;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/sdl /w34996 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\binaries\glew\lib\Release\x64;..\binaries\cegui-0-8-7\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp" />
-    <ClCompile Include="..\src\Frontend\Asset\AssetTexture.cpp" />
-    <ClCompile Include="..\src\Frontend\Asset\FAsset.cpp" />
-    <ClCompile Include="..\src\Frontend\Asset\FAssetHandler.cpp" />
-    <ClCompile Include="..\src\Frontend\Config.cpp" />
-    <ClCompile Include="..\src\Frontend\Frontend.cpp" />
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
-    <ClCompile Include="..\src\Frontend\GUI.cpp" />
-    <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />
-    <ClCompile Include="..\src\Frontend\GUIUpdate.cpp" />
-    <ClCompile Include="..\src\Frontend\JsonUtil.cpp" />
-    <ClCompile Include="..\src\Frontend\Lang.cpp" />
-    <ClCompile Include="..\src\Frontend\Mesh.cpp" />
-    <ClCompile Include="..\src\Frontend\Model.cpp" />
-    <ClCompile Include="..\src\Frontend\Object.cpp" />
-    <ClCompile Include="..\src\Frontend\Shader.cpp" />
-    <ClCompile Include="..\src\Frontend\stb_image.cpp" />
-    <ClCompile Include="..\src\Frontend\Texture.cpp" />
-    <ClCompile Include="..\src\Frontend\Transform.cpp" />
-    <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp" />
-    <ClCompile Include="..\src\Frontend\Window\Light.cpp" />
-    <ClCompile Include="..\src\Frontend\Window\Scene.cpp" />
-    <ClCompile Include="..\src\Frontend\Window\Window.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp" />
@@ -200,10 +164,13 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.cpp" />
     <ClCompile Include="..\src\GameLogic\GameLogic.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\RequireResources.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\GUIDescription.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp" />
@@ -215,11 +182,9 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
-    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp" />
-    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.cpp" />
-    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
@@ -239,55 +204,15 @@
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
     <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp" />
-    <ClCompile Include="..\src\Riku.cpp" />
+    <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
-    <ClInclude Include="..\src\Frontend\Asset\AssetModel.h" />
-    <ClInclude Include="..\src\Frontend\Asset\AssetTexture.h" />
-    <ClInclude Include="..\src\Frontend\Asset\FAsset.h" />
-    <ClInclude Include="..\src\Frontend\Asset\FAssetHandler.h" />
-    <ClInclude Include="..\src\Frontend\Config.h" />
-    <ClInclude Include="..\src\Frontend\Frontend.h" />
-    <ClInclude Include="..\src\Frontend\GUI.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\FocusUnitWithIndex.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\Functor.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\GameUIOnKeyPress.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildingUIOnKeyPress.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
-    <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
-    <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h" />
-    <ClInclude Include="..\src\Frontend\GUIUpdate.h" />
-    <ClInclude Include="..\src\Frontend\JsonUtil.h" />
-    <ClInclude Include="..\src\Frontend\Lang.h" />
-    <ClInclude Include="..\src\Frontend\Mesh.h" />
-    <ClInclude Include="..\src\Frontend\Model.h" />
-    <ClInclude Include="..\src\Frontend\Object.h" />
-    <ClInclude Include="..\src\Frontend\Shader.h" />
-    <ClInclude Include="..\src\Frontend\stb_image.h" />
-    <ClInclude Include="..\src\Frontend\Texture.h" />
-    <ClInclude Include="..\src\Frontend\Transform.h" />
-    <ClInclude Include="..\src\Frontend\Window\Callbacks\FramebufferSizeCallback.h" />
-    <ClInclude Include="..\src\Frontend\Window\Callbacks\KeyCallback.h" />
-    <ClInclude Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.h" />
-    <ClInclude Include="..\src\Frontend\Window\Callbacks\MousePositionCallback.h" />
-    <ClInclude Include="..\src\Frontend\Window\Callbacks\ScrollCallback.h" />
-    <ClInclude Include="..\src\Frontend\Window\Light.h" />
-    <ClInclude Include="..\src\Frontend\Window\Scene.h" />
-    <ClInclude Include="..\src\Frontend\Window\Window.h" />
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetData.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetHandler.h" />
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
-    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
@@ -303,19 +228,19 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h" />
-    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h" />
-    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h" />
     <ClInclude Include="..\src\GameLogic\GameLogic.h" />
-    <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h" />
-    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\ITileObject.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\UseResourceOnBuild.h" />
     <ClInclude Include="..\src\GameLogic\GameState.h" />
     <ClInclude Include="..\src\GameLogic\Hooks\GUIDescription.h" />
@@ -338,10 +263,9 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h" />
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnit.h" />
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
@@ -371,26 +295,29 @@
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
+    <ClInclude Include="FrontendLogicIntegration.h" />
+    <ClInclude Include="LogicAssetTests.h" />
+    <ClInclude Include="LuaAssetsTests.h" />
+    <ClInclude Include="Mocks.h" />
+    <ClInclude Include="PatchesTests.h" />
+    <ClInclude Include="PatchHandlerTests.h" />
+    <ClInclude Include="PlayerTests.h" />
+    <ClInclude Include="TileTest.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets" Condition="Exists('..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets')" />
-    <Import Project="..\packages\jsoncpp-vc140-static-32_64.1.8.0\build\native\jsoncpp-vc140-static-32_64.targets" Condition="Exists('..\packages\jsoncpp-vc140-static-32_64.1.8.0\build\native\jsoncpp-vc140-static-32_64.targets')" />
-    <Import Project="..\packages\glm.0.9.9.800\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.9.800\build\native\glm.targets')" />
+    <Import Project="..\packages\gmock.1.11.0\build\native\gmock.targets" Condition="Exists('..\packages\gmock.1.11.0\build\native\gmock.targets')" />
     <Import Project="..\packages\lua.5.4.3\build\native\Lua.targets" Condition="Exists('..\packages\lua.5.4.3\build\native\Lua.targets')" />
-    <Import Project="..\packages\glfw.3.3.4\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.3.4\build\native\glfw.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets'))" />
-    <Error Condition="!Exists('..\packages\jsoncpp-vc140-static-32_64.1.8.0\build\native\jsoncpp-vc140-static-32_64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\jsoncpp-vc140-static-32_64.1.8.0\build\native\jsoncpp-vc140-static-32_64.targets'))" />
-    <Error Condition="!Exists('..\packages\glm.0.9.9.800\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.9.800\build\native\glm.targets'))" />
+    <Error Condition="!Exists('..\packages\gmock.1.11.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gmock.1.11.0\build\native\gmock.targets'))" />
     <Error Condition="!Exists('..\packages\lua.5.4.3\build\native\Lua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\lua.5.4.3\build\native\Lua.targets'))" />
-    <Error Condition="!Exists('..\packages\glfw.3.3.4\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.3.4\build\native\glfw.targets'))" />
   </Target>
 </Project>

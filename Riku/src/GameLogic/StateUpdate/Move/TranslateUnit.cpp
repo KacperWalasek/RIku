@@ -6,8 +6,7 @@
 
 TranslateUnit::TranslateUnit(int fromX, int fromY, int toX, int toY)
     : fromX(fromX), fromY(fromY), toX(toX), toY(toY)
-{
-}
+{}
 
 std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const LogicAssets& assets) const
 {

@@ -329,6 +329,15 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\EndTurn.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ExitApp.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnitWithIndex.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -348,6 +357,9 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SelectBuildingWithName.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchActiveGUI.h">
@@ -675,5 +687,8 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
