@@ -5,6 +5,9 @@
 
 std::shared_ptr<IAction> StateUpdate::handlePatch(std::shared_ptr<Patch> patch)
 {
+	if (patch)
+		cummulatedPatch = cummulatedPatch ? std::make_shared<Patch>(*cummulatedPatch + *patch) : patch;
+
 	std::shared_ptr<IAction> action;
 	if (!patch)
 		return nullptr;
@@ -29,4 +32,14 @@ std::shared_ptr<IAction> StateUpdate::handleMove(const std::shared_ptr<IMove> mo
 {
 	if (move && move->isDoable(state, assets))
 		return handlePatch(move->createPatch(state, assets));
+}
+
+std::shared_ptr<Patch> StateUpdate::getCummulatedPatch() const
+{
+	return cummulatedPatch;
+}
+
+void StateUpdate::resetCummulatedPatch()
+{
+	cummulatedPatch = std::make_shared<Patch>();
 }

@@ -22,8 +22,12 @@ public:
 					state.minigames.emplace(p.first, minigame);
 					minigameIt = state.minigames.find(p.first);
 				}
-				if(p.second.miniPatch)
+				if (p.second.miniPatch)
+				{
+					// TODO:webModule if enemy on same pc
 					minigameIt->second->applyMiniPatch(p.second.miniPatch);
+					// else return SendMiniPatch
+				}
 				if (p.second.resetCummulatedPatch)
 					minigameIt->second->resetCummulatedPatch();
 			}
