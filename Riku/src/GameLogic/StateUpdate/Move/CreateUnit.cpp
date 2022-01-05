@@ -1,5 +1,6 @@
 #include "CreateUnit.h"
 #include "../../Unit/Unit.h"
+#include "../../Assets/AssetUtils.h"
 
 CreateUnit::CreateUnit(int player, std::string unit, int mapX, int mapY)
     : player(player), name(unit), mapX(mapX), mapY(mapY)
@@ -16,8 +17,9 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
         return nullptr;
     const logic::Asset& asset = it->second;
     int mp = asset.getByKey("movement_points").asNumber();
+    std::vector<std::string> miniunits = AssetUtils::readStringArray<std::string>("miniunits", asset);
     auto& funcs = asset.getFunctions();
-    auto unitPtr = std::make_shared<Unit>(asset.getType(), name, player, mp, funcs);
+    auto unitPtr = std::make_shared<Unit>(asset.getType(), name, player, mp, miniunits, funcs);
     auto hookMove = unitPtr->onBeingPlaced(mapX, mapY);
     auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
     return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr) + (Patch)RegisterHookablePatch(unitPtr) + hookPatch);

@@ -18,7 +18,7 @@ public:
 				auto minigameIt = state.minigames.find(p.first);
 				if (minigameIt == state.minigames.end())
 				{
-					auto minigame = std::make_shared<minigame::MiniGame>(p.first, p.second.enemy, p.second.isBegining);
+					auto minigame = std::make_shared<minigame::MiniGame>(*(p.second.playerUnit), *(p.second.enemyUnit), p.second.isBegining);
 					state.minigames.emplace(p.first, minigame);
 					minigameIt = state.minigames.find(p.first);
 				}

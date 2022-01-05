@@ -154,7 +154,7 @@ TEST(TilePatchHandler, RemoveObject)
 TEST(UnitPatchHandler, AddMovementPoints)
 {
 	GameState state;
-	auto unit = std::make_shared<Unit>("", "", 0, 100, hooks);
+	auto unit = std::make_shared<Unit>("", "", 0, 100, std::vector<std::string>(), hooks);
 	UnitPatchHandler handler;
 	Patch patch = UnitPatch(unit, 1);
 	int mp = unit->movementPoints;
@@ -165,7 +165,7 @@ TEST(UnitPatchHandler, AddMovementPoints)
 TEST(UnitPatchHandler, RemoveMovementPoints)
 {
 	GameState state;
-	auto unit = std::make_shared<Unit>("", "", 0, 100, hooks);
+	auto unit = std::make_shared<Unit>("", "", 0, 100, std::vector<std::string>(), hooks);
 	UnitPatchHandler handler;
 	Patch patch = UnitPatch(unit, -1);
 	int mp = unit->movementPoints;
@@ -176,7 +176,7 @@ TEST(UnitPatchHandler, RemoveMovementPoints)
 TEST(UnitPatchHandler, TryAddMoreThanPossible)
 {
 	GameState state;
-	auto unit = std::make_shared<Unit>("", "", 0, 100, hooks);
+	auto unit = std::make_shared<Unit>("", "", 0, 100, std::vector<std::string>(), hooks);
 	UnitPatchHandler handler;
 	Patch patch = UnitPatch(unit, 3*unit->baseMovementPoints);
 	handler.handlePatch(state, patch);
@@ -186,7 +186,7 @@ TEST(UnitPatchHandler, TryAddMoreThanPossible)
 TEST(UnitPatchHandler, TryRemoveMoreThanPossible)
 {
 	GameState state;
-	auto unit = std::make_shared<Unit>("", "", 0, 100, hooks);
+	auto unit = std::make_shared<Unit>("", "", 0, 100, std::vector<std::string>(), hooks);
 	UnitPatchHandler handler;
 	Patch patch = UnitPatch(unit, -2 * unit->movementPoints);
 	handler.handlePatch(state, patch);

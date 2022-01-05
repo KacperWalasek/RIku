@@ -9,7 +9,7 @@ std::shared_ptr<Patch> Attack::createPatch(const GameState& state, const LogicAs
 {
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
 
-    return std::make_shared<Patch>(MiniGamePatch(player, attacedUnit->getOwner(), true) + (Patch)MiniGamePatch(attacedUnit->getOwner(), player, false));
+    return std::make_shared<Patch>(MiniGamePatch(unit, attacedUnit, true) + (Patch)MiniGamePatch(attacedUnit, unit, false));
 }
 
 bool Attack::isDoable(const GameState& state, const LogicAssets& assets) const

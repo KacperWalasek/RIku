@@ -23,8 +23,8 @@ minigame::MiniGameAssets& minigame::MiniGame::getAssets()
 	return assets;
 }
 
-minigame::MiniGame::MiniGame( int player, int enemy, bool begins)
-	: state(player, enemy, begins), stateUpdate(state, assets)
+minigame::MiniGame::MiniGame(const Unit& player, const Unit& enemy, bool begins)
+	: state(player.getOwner(), enemy.getOwner(), begins), stateUpdate(state, assets)
 {
 	stateUpdate.setHandlers({
 		std::make_shared<IsOnMoveMiniPatchHandler>(),
@@ -49,8 +49,6 @@ minigame::MiniGame::MiniGame( int player, int enemy, bool begins)
 		std::make_shared<ResignMiniMoveHandler>()
 		});
 
-	std::cout << "MiniGame created" << std::endl;
-
 	for (int i = 0; i < 20; i++)
 	{
 		state.map.emplace_back();
@@ -58,11 +56,16 @@ minigame::MiniGame::MiniGame( int player, int enemy, bool begins)
 			state.map[i].emplace_back();
 	}
 	if (begins) {
-		auto createUnit = std::make_shared<CreateMiniUnit>("maciek_syn_stefana", 1, 2, false);
-		auto createUnit1 = std::make_shared<CreateMiniUnit>("julka_ciocia_stefana", 2, 2, true);
-		stateUpdate.handleMove(createUnit);
-		stateUpdate.handleMove(createUnit1);
-		std::cout << state.map[1][2].unit->getName() << std::endl;
+		for (int i = 0; i<player.miniunits.size(); i++)
+		{
+			auto createUnit = std::make_shared<CreateMiniUnit>(player.miniunits[i], floor(i/mapsize), i%mapsize, false);
+			stateUpdate.handleMove(createUnit);
+		}
+		for (int i = 0; i < enemy.miniunits.size(); i++)
+		{
+			auto createUnit = std::make_shared<CreateMiniUnit>(enemy.miniunits[i], mapsize - 1 - floor(i / mapsize), i % mapsize, true);
+			stateUpdate.handleMove(createUnit);
+		}
 	}
 }
 
