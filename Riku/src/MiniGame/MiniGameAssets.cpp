@@ -5,9 +5,9 @@
 minigame::MiniGameAssets::MiniGameAssets()
 {}
 
-void minigame::MiniGameAssets::initialize()
+void minigame::MiniGameAssets::initialize(std::string path)
 {
-	handler.findFiles("../mini_assets", std::make_shared<MiniGameAssetInitializer>());
+	handler.findFiles(path, std::make_shared<MiniGameAssetInitializer>());
 
 	units = AssetUtils::getAllAssetsWithType("minigame_unit", handler);
 }

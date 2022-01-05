@@ -285,9 +285,6 @@
     <ClCompile Include="..\src\GameLogic\Utils\ShortestPathEvaluator.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
-    <ClCompile Include="Tests.cpp">
-      <Filter>Riku</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
@@ -296,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp">
       <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -760,6 +760,9 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\WinnerMiniPatchHandler.h">
       <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontendMiniGameIntegration.h">
+      <Filter>Tests\TestsOfExternalInterfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,6 @@ namespace minigame
 		MiniGameAssets();
 		std::map<std::string, logic::Asset> units;
 
-		void initialize();
+		void initialize(std::string path);
 	};
 }

@@ -58,12 +58,12 @@ minigame::MiniGame::MiniGame(const Unit& player, const Unit& enemy, bool begins)
 	if (begins) {
 		for (int i = 0; i<player.miniunits.size(); i++)
 		{
-			auto createUnit = std::make_shared<CreateMiniUnit>(player.miniunits[i], floor(i/mapsize), i%mapsize, false);
+			auto createUnit = std::make_shared<CreateMiniUnit>(player.miniunits[i], i%mapsize, floor(i / mapsize), false);
 			stateUpdate.handleMove(createUnit);
 		}
 		for (int i = 0; i < enemy.miniunits.size(); i++)
 		{
-			auto createUnit = std::make_shared<CreateMiniUnit>(enemy.miniunits[i], mapsize - 1 - floor(i / mapsize), i % mapsize, true);
+			auto createUnit = std::make_shared<CreateMiniUnit>(enemy.miniunits[i], i % mapsize, mapsize - 1 - (int)floor(i / mapsize), true);
 			stateUpdate.handleMove(createUnit);
 		}
 	}

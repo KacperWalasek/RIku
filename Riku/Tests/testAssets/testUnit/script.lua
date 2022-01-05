@@ -1,5 +1,10 @@
 asset_type="unit"
-name = "unitName"
+name = "stefan"
 unit = {
-    movement_points = 50
+    movement_points = 50,
+    miniunits = {
+        "miniunit2",
+        "miniunit1",
+        "miniunit2"
+    }
 }

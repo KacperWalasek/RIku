@@ -148,7 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
-    <ClCompile Include="..\src\Frontend\FrontendState.cpp" /> <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
+    <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetData.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\AssetHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\LogicAssetInitializer.cpp" />
@@ -381,6 +382,7 @@
     <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\Utils\MiniGameUtils.h" />
     <ClInclude Include="FrontendLogicIntegration.h" />
+    <ClInclude Include="FrontendMiniGameIntegration.h" />
     <ClInclude Include="LogicAssetTests.h" />
     <ClInclude Include="LuaAssetsTests.h" />
     <ClInclude Include="Mocks.h" />

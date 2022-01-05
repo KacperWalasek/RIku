@@ -13,7 +13,8 @@ std::shared_ptr<minigame::MiniPatch> minigame::TranslateMiniUnit::createPatch(co
     return std::make_shared<MiniPatch>(
         MiniTilePatch({ toX, toY }, unit) +
         (MiniPatch)MiniTilePatch({ fromX,fromY }, true) +
-        (MiniPatch)MiniUnitPatch(unit, -path.cost));
+        (MiniPatch)MiniUnitPatch(unit, -path.cost) + 
+        (MiniPatch)MiniUnitPatch(unit, toX, toY));
 }
 
 bool minigame::TranslateMiniUnit::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const

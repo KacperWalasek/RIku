@@ -32,6 +32,7 @@ std::shared_ptr<IAction> StateUpdate::handleMove(const std::shared_ptr<IMove> mo
 {
 	if (move && move->isDoable(state, assets))
 		return handlePatch(move->createPatch(state, assets));
+	return nullptr;
 }
 
 std::shared_ptr<Patch> StateUpdate::getCummulatedPatch() const
