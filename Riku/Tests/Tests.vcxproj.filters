@@ -297,6 +297,9 @@
     <ClCompile Include="Tests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h">
@@ -763,6 +766,25 @@
     </ClInclude>
     <ClInclude Include="FrontendMiniGameIntegration.h">
       <Filter>Tests\TestsOfExternalInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\SendPatchToAll.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\TestAction.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h">
+      <Filter>Riku</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

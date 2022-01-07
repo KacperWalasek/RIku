@@ -1,13 +1,12 @@
 #pragma once
 #include "IMove.h"
-class FinishMiniGame :
+#include "../../Unit/Unit.h"
+class RemoveUnit :
     public IMove
 {
-    int player, enemy;
-    std::shared_ptr<IMove> moveOnWin;
+    int mapX, mapY;
 public:
-    FinishMiniGame(int player, int enemy, std::shared_ptr<IMove> moveOnWin);
-
+    RemoveUnit(int mapX, int mapY);
     virtual std::shared_ptr<Patch> createPatch(const GameState& state, const LogicAssets& assets) const override;
     virtual bool isDoable(const GameState& state, const LogicAssets& assets) const override;
     virtual std::shared_ptr<IMove> asPointner() const override;

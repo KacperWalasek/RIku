@@ -429,6 +429,9 @@
     <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp">
       <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1004,6 +1007,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h">
       <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

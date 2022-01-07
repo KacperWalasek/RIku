@@ -15,6 +15,8 @@ std::shared_ptr<IAction> PlayerPatchHandler::handlePatch(GameState& state, const
 		}
 		for (std::shared_ptr<Unit> unit : p.second.addedUnits)
 			player.addUnit(unit);
+		for (std::shared_ptr<Unit> unit : p.second.removedUnits)
+			player.removeUnit(unit);
 	}
 	return nullptr;
 }

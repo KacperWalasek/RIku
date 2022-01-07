@@ -1,5 +1,5 @@
 #include "MiniGameState.h"
 
-minigame::MiniGameState::MiniGameState( int player, int enemy, bool begins)
-	: player(player), enemy(enemy), playerOnMove(begins ? player : enemy)
+minigame::MiniGameState::MiniGameState(const Unit& player, const Unit& enemy, bool begins)
+	: player(player), enemy(enemy), playerOnMove(begins ? player.getOwner() : enemy.getOwner())
 {}

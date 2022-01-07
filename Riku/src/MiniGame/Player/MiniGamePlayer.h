@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "../../GameLogic/Unit/Unit.h"
 
 namespace minigame
 {
@@ -8,8 +9,9 @@ namespace minigame
 	class MiniGamePlayer
 	{
 	public:
-		MiniGamePlayer(int index) : logicIndex(index) {};
+		MiniGamePlayer(const Unit& logicUnit) : logicIndex(logicUnit.getOwner()), logicUnit(logicUnit) {};
 		int logicIndex;
+		const Unit& logicUnit;
 		std::vector<std::shared_ptr<MiniUnit>> units;
 	};
 

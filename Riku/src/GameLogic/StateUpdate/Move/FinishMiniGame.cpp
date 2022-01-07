@@ -1,15 +1,15 @@
 #include "FinishMiniGame.h"
 #include "../Patch/Patch.h"
 
-FinishMiniGame::FinishMiniGame(int player, int enemy, int winner)
-    : player(player), enemy(enemy), winner(winner)
-{
-}
+FinishMiniGame::FinishMiniGame(int player, int enemy, std::shared_ptr<IMove> moveOnWin)
+    : player(player), enemy(enemy), moveOnWin(moveOnWin) {}
 
 std::shared_ptr<Patch> FinishMiniGame::createPatch(const GameState& state, const LogicAssets& assets) const
 {
-    // TODO make winner actualy win
-    return std::make_shared<Patch>(MiniGamePatch(player,false,true) + (Patch)MiniGamePatch(enemy, false, true));
+    std::shared_ptr<Patch> winningPatch = moveOnWin ? moveOnWin->createPatch(state, assets) : std::make_shared<Patch>();
+    return std::make_shared<Patch>(MiniGamePatch(player,false,true) 
+        + (Patch)MiniGamePatch(enemy, false, true) 
+        + *winningPatch);
 }
 
 bool FinishMiniGame::isDoable(const GameState& state, const LogicAssets& assets) const
@@ -20,5 +20,5 @@ bool FinishMiniGame::isDoable(const GameState& state, const LogicAssets& assets)
 
 std::shared_ptr<IMove> FinishMiniGame::asPointner() const
 {
-    return std::make_shared<FinishMiniGame>(player, enemy, winner);
+    return std::make_shared<FinishMiniGame>(player, enemy, moveOnWin);
 }
