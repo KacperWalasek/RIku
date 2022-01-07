@@ -14,16 +14,24 @@ namespace minigame
 			else
 				removedUnits.push_back(units);
 		}
+		MiniPlayerPatch(std::shared_ptr<MiniUnit> units, std::string usedSkill)
+			: usedSkills({usedSkill})
+		{}
 		std::vector<std::shared_ptr<MiniUnit>> addedUnits;
 		std::vector<std::shared_ptr<MiniUnit>> removedUnits;
+		std::vector<std::string> usedSkills;
+
 		MiniPlayerPatch& operator+=(const MiniPlayerPatch& patch)
 		{
-			auto aUits = patch.addedUnits;
-			if (aUits.size() > 0)
-				addedUnits.insert(addedUnits.end(), aUits.begin(), aUits.end());
-			auto rUnits = patch.removedUnits;
-			if (rUnits.size() > 0)
-				removedUnits.insert(removedUnits.end(), rUnits.begin(), rUnits.end());
+			if (patch.addedUnits.size() > 0)
+				addedUnits.insert(addedUnits.end(), patch.addedUnits.begin(), patch.addedUnits.end());
+
+			if (patch.removedUnits.size() > 0)
+				removedUnits.insert(removedUnits.end(), patch.removedUnits.begin(), patch.removedUnits.end());
+
+			if (patch.usedSkills.size() > 0)
+				usedSkills.insert(usedSkills.end(), patch.usedSkills.begin(), patch.usedSkills.end());
+
 			return *this;
 		}
 	};

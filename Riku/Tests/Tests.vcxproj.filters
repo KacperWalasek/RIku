@@ -300,6 +300,21 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\UseSkill.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h">
@@ -767,7 +782,6 @@
     <ClInclude Include="FrontendMiniGameIntegration.h">
       <Filter>Tests\TestsOfExternalInterfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
       <Filter>Riku</Filter>
     </ClInclude>
@@ -784,6 +798,27 @@
       <Filter>Riku</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\IAction.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\UseSkill.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h">
       <Filter>Riku</Filter>
     </ClInclude>
   </ItemGroup>

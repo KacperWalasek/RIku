@@ -1,5 +1,5 @@
 asset_type="tileobject"
-
+name="test_tile_object"
 tileobject = {
     gui = {
         name = "GuiName",
@@ -21,3 +21,8 @@ tileobject = {
         }
     }
 }
+
+
+function onOptionChosen(option,mapX,mapY)
+    return MoveWrapper.new(AddSkill.new("test_skill",11,10))
+end

@@ -123,3 +123,26 @@ TEST(FrontendLogicIntegration, WinMiniGame)
 	state.finishTurn();
 	ASSERT_FALSE(state.isInMiniGame());
 }
+
+TEST(FrontendLogicIntegration, getSkill)
+{
+	GameLogic logic("testAssets", "testMiniAssets");
+	FrontendState state(logic);
+	state.build("test_tile_object", 11, 10);
+	state.choseGuiOption(11, 10, 0);
+	state.attack(11, 10, 12, 10);
+	ASSERT_TRUE(state.isInMiniGame());
+	ASSERT_EQ(state.getSkills().size(), 1);
+}
+
+TEST(FrontendLogicIntegration, useSkill)
+{
+	GameLogic logic("testAssets", "testMiniAssets");
+	FrontendState state(logic);
+	state.build("test_tile_object", 11, 10);
+	state.choseGuiOption(11, 10, 0);
+	state.attack(11, 10, 12, 10);
+	ASSERT_TRUE(state.isInMiniGame());
+	state.useSkill("test_skill",2,2);
+	ASSERT_FALSE(state.isInMiniGame());
+}

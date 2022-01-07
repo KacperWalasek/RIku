@@ -10,11 +10,13 @@
 #include "Communicator/RequestHandlers/MiniShortestPathRequestHandler.h"
 #include "Communicator/RequestHandlers/PlayerOnMoveMiniRequestHandler.h"
 #include "Communicator/RequestHandlers/MiniPlayerUnitsRequestHandler.h"
+#include "Communicator/RequestHandlers/SkillsRequestHandler.h"
 
 #include "MoveFactory/TranslateMiniUnitMoveHandler.h"
 #include "MoveFactory/AttackMiniMoveHandler.h"
 #include "MoveFactory/FinishMiniTurnMoveHandler.h"
 #include "MoveFactory/ResignMiniMoveHandler.h"
+#include "MoveFactory/UseSkillMiniMoveHandler.h"
 
 #include "StateUpdate/Move/CreateMiniUnit.h"
 
@@ -39,14 +41,16 @@ minigame::MiniGame::MiniGame(const Unit& player, const Unit& enemy, bool begins)
 		std::make_shared<MiniMapRequestHandler>(state),
 		std::make_shared<MiniShortestPathRequestHandler>(state),
 		std::make_shared<PlayerOnMoveMiniRequestHandler>(state),
-		std::make_shared<MiniPlayerUnitsRequestHandler>(state)
+		std::make_shared<MiniPlayerUnitsRequestHandler>(state),
+		std::make_shared<SkillsRequestHandler>(state)
 		});
 
 	factory.setHandlers({
 		std::make_shared<TranslateMiniUnitMoveHandler>(),
 		std::make_shared<AttackMiniMoveHandler>(state),
 		std::make_shared<FinishMiniTurnMoveHandler>(),
-		std::make_shared<ResignMiniMoveHandler>()
+		std::make_shared<ResignMiniMoveHandler>(),
+		std::make_shared<UseSkillMiniMoveHandler>()
 		});
 
 	for (int i = 0; i < 20; i++)

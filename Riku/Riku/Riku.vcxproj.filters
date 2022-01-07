@@ -438,6 +438,15 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\UseSkill.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1022,6 +1031,18 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\UseSkill.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveDescription</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

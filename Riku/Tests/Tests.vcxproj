@@ -182,6 +182,8 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Attack.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
@@ -215,6 +217,7 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGame.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp" />
@@ -225,12 +228,14 @@
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\UseSkill.cpp" />
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
     <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Utils\MiniGameUtils.cpp" />
@@ -307,6 +312,8 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Attack.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
@@ -351,6 +358,7 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h" />
@@ -366,14 +374,17 @@
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\UseSkill.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\PlayerMiniPatchHandler.h" />

@@ -18,6 +18,7 @@
 
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 #include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
+#include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -80,6 +81,11 @@ bool FrontendState::isInMiniGame()
 	return logic.getInfo<BoolResponse>("is_in_minigame")->get();
 }
 
+std::vector<std::string> FrontendState::getSkills()
+{
+	return logic.getInfo<StringListResponse>("skills")->getNames();
+}
+
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<BuildMoveDescription>(name, mapX, mapY));
@@ -108,4 +114,9 @@ void FrontendState::choseGuiOption(int mapX, int mapY, int index)
 void FrontendState::resign()
 {
 	logic.makeMove(std::make_shared<SimpleMoveDescription>("resign"));
+}
+
+void FrontendState::useSkill(std::string name, int mapX, int mapY)
+{
+	logic.makeMove(std::make_shared<minigame::UseSkillMoveDescription>(name, mapX, mapY));
 }

@@ -23,6 +23,7 @@ public:
 	Path getShortestPath(int fromX, int fromY, int toX, int toY);
 	std::vector<std::string> getGuiOptions(int mapX, int mapY);
 	bool isInMiniGame();
+	std::vector<std::string> getSkills();
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);
@@ -30,5 +31,6 @@ public:
 	void finishTurn();
 	void choseGuiOption(int mapX, int mapY, int index);
 	void resign();
+	void useSkill(std::string name, int mapX, int mapY);
 };
 
