@@ -432,6 +432,12 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1009,6 +1015,12 @@
       <Filter>Riku\GameLogic\Actions</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>

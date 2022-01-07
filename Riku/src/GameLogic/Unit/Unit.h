@@ -16,6 +16,7 @@ public:
 	int movementPoints;
 	int baseMovementPoints;
 	std::vector<std::string> miniunits;
+	std::vector<std::string> skills;
 
 	void useMovementPoints(int points);
 	void restoreMovementPoints();

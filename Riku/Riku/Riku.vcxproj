@@ -218,6 +218,8 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Attack.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
@@ -382,6 +384,8 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Attack.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
