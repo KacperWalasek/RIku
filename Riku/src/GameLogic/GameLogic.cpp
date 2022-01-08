@@ -33,12 +33,14 @@
 #include "StateUpdate/Move/Attack.h"
 #include "StateUpdate/Move/CreateUnit.h"
 #include "FrontendCommunicator/Responses/IntResponse.h"
+#include "Utils/LogicUtils.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
 {
 	assets.initialize(assetPath, minigameAssetPath);
-	
+	LogicUtils::initialize(0);
+
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };
   

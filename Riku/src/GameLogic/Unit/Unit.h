@@ -5,6 +5,8 @@
 
 class Unit : public IHookable, public IAsset
 {
+	std::string id;
+
 	std::string type;
 	std::string name;
 	LoadedHookable loadedHookable;
@@ -38,4 +40,6 @@ public:
 	int getMapY() const;
 
 	int getOwner() const;
+
+	virtual std::string getId() const override;
 };

@@ -1,11 +1,12 @@
 #include "UnitPatchHandler.h"
 #include "../../Unit/Unit.h"
+#include "../../Utils/LogicUtils.h"
 
 std::shared_ptr<IAction> UnitPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
 	for (auto unitPatch : patch.unitPatches)
 	{
-		std::shared_ptr<Unit> unit = unitPatch.second.unit;
+		std::shared_ptr<Unit> unit = std::static_pointer_cast<Unit>(LogicUtils::getHookable(unitPatch.second.unit));
 		
 		unit->movementPoints += unitPatch.second.movementPointsChange;
 		if (unit->movementPoints < 0)

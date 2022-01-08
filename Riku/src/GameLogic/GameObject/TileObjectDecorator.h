@@ -30,5 +30,7 @@ public:
 
     virtual std::shared_ptr<IMove> onOptionChosen(int index, int mapX, int mapY) override { return next->onOptionChosen(index, mapX, mapY); };
 
-    virtual int getOwner() const override { return next->getOwner(); };
+    virtual int getOwner() const override { return next->getOwner(); }
+
+    virtual std::string getId() const override { return next->getId(); }
 };

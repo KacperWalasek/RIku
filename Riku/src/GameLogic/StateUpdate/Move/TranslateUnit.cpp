@@ -15,9 +15,9 @@ std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const 
     auto hookMove = unit->onBeingPlaced(toX, toY);
     auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
     return std::make_shared<Patch>(
-        TilePatch({ toX, toY }, unit) + 
+        TilePatch({ toX, toY }, unit->getId()) + 
         (Patch)TilePatch({ fromX,fromY },false,true) + 
-        (Patch)UnitPatch(unit,-path.cost) +
+        (Patch)UnitPatch(unit->getId(),-path.cost) +
         hookPatch);
 }
 

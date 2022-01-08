@@ -5,16 +5,16 @@
 class RegisterHookablePatch
 {
 public:
-	std::shared_ptr<IHookable> hookable;
+	std::string id;
 	bool add;
 
-	RegisterHookablePatch(std::shared_ptr<IHookable> hookable, bool add = true)
-		: hookable(hookable), add(add)
+	RegisterHookablePatch(std::string id, bool add = true)
+		: id(id), add(add)
 	{}
 
 	RegisterHookablePatch& operator+=(const RegisterHookablePatch& patch)
 	{
-		if (hookable != patch.hookable)
+		if (id != patch.id)
 			return *this;
 		add = patch.add;
 		return *this;

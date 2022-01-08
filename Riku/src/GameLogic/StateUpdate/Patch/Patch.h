@@ -21,7 +21,7 @@ public:
 		tilePatches.insert({ tilePatch.tile, tilePatch });
 	}
 	Patch(RegisterHookablePatch registerHookablePatch) {
-		registerHookablePatches.insert({ registerHookablePatch.hookable, registerHookablePatch });
+		registerHookablePatches.insert({ registerHookablePatch.id, registerHookablePatch });
 	}
 	Patch(MiniGamePatch miniGamePatch) {
 		miniGamePatches.emplace(miniGamePatch.player, miniGamePatch);
@@ -31,8 +31,8 @@ public:
 
 	std::map<int,PlayerPatch> playerPatches;
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
-	std::map<std::shared_ptr<IHookable>, RegisterHookablePatch> registerHookablePatches;
-	std::map<std::shared_ptr<Unit>, UnitPatch> unitPatches;
+	std::map<std::string, RegisterHookablePatch> registerHookablePatches;
+	std::map<std::string, UnitPatch> unitPatches;
 	std::map<int, MiniGamePatch> miniGamePatches;
 	int playerOnMove = -1;
 

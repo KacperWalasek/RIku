@@ -5,13 +5,13 @@ class Unit;
 class UnitPatch
 {
 public:
-	UnitPatch(std::shared_ptr<Unit> unit, int movementPointsChange)
+	UnitPatch(std::string unit, int movementPointsChange)
 		: unit(unit), movementPointsChange(movementPointsChange)
 	{}
-	UnitPatch(std::shared_ptr<Unit> unit, int mapX, int mapY)
+	UnitPatch(std::string unit, int mapX, int mapY)
 		: unit(unit), mapX(mapX), mapY(mapY)
 	{}
-	UnitPatch(std::shared_ptr<Unit> unit, std::string name, int type)
+	UnitPatch(std::string unit, std::string name, int type)
 		: unit(unit) 
 	{
 		switch (type)	
@@ -26,7 +26,7 @@ public:
 				break;
 		}
 	}
-	std::shared_ptr<Unit> unit;
+	std::string unit;
 	std::vector<std::string> addedMiniUnits;
 	std::vector<std::string> addedSkills;
 	int movementPointsChange = 0;

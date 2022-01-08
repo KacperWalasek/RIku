@@ -1,5 +1,6 @@
 //Kacper Walasek
 #include "PlayerPatchHandler.h"
+#include "../../Utils/LogicUtils.h"
 
 std::shared_ptr<IAction> PlayerPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
@@ -14,9 +15,12 @@ std::shared_ptr<IAction> PlayerPatchHandler::handlePatch(GameState& state, const
 				player.acceptResources(resourceChange.first, resourceChange.second);
 		}
 		for (std::shared_ptr<Unit> unit : p.second.addedUnits)
+		{
 			player.addUnit(unit);
-		for (std::shared_ptr<Unit> unit : p.second.removedUnits)
-			player.removeUnit(unit);
+			LogicUtils::addHookable(unit);
+		}
+		for (const std::string& unit : p.second.removedUnits)
+			player.removeUnit(std::static_pointer_cast<Unit>(LogicUtils::getHookable(unit)));
 	}
 	return nullptr;
 }

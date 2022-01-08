@@ -9,6 +9,8 @@
 
 class SimpleTileObject : public ITileObject
 {
+	std::string id;
+
 	LoadedHookable loadedHookable;
  	std::string name;
 	int player;
@@ -28,5 +30,7 @@ public:
 
 	virtual const GUIDescription& getGuiDescription() override;
 	virtual std::shared_ptr<IMove> onOptionChosen(int index, int mapX, int mapY) override;
+
+	virtual std::string getId() const override;
 };
 

@@ -1,10 +1,11 @@
 #include "Unit.h"
+#include "../Utils/LogicUtils.h"
 
 
 Unit::Unit(std::string type, std::string name, int player, int baseMovementPoints,
 	const std::vector<std::string>& miniunits, const std::map<std::string, sol::function>& hooks)
 	: type(type), name(name), player(player), loadedHookable(hooks), baseMovementPoints(baseMovementPoints),
-	  movementPoints(baseMovementPoints), miniunits(miniunits), skills()
+	  movementPoints(baseMovementPoints), miniunits(miniunits), skills(), id(LogicUtils::getUniqueId())
 {}
 
 void Unit::useMovementPoints(int points)
@@ -64,4 +65,9 @@ int Unit::getMapY() const
 int Unit::getOwner() const
 {
 	return player;
+}
+
+std::string Unit::getId() const
+{
+	return id;
 }

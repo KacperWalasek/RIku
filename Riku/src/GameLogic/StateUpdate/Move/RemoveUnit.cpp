@@ -10,8 +10,8 @@ std::shared_ptr<Patch> RemoveUnit::createPatch(const GameState& state, const Log
 {
     std::shared_ptr<Unit> unit = state.map[mapX][mapY].unit;
     return std::make_shared<Patch>(TilePatch({mapX,mapY}, false, true) 
-        + (Patch)PlayerPatch(unit->getOwner(),unit, false) 
-        + (Patch)RegisterHookablePatch(unit,false));
+        + (Patch)PlayerPatch(unit->getOwner(),unit->getId()) 
+        + (Patch)RegisterHookablePatch(unit->getId(),false));
 }
 
 bool RemoveUnit::isDoable(const GameState& state, const LogicAssets& assets) const

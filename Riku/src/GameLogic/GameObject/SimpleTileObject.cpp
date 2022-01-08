@@ -2,8 +2,10 @@
 
 #include "SimpleTileObject.h"
 #include "../StateUpdate/Move/CombinedMove.h"
+#include "../Utils/LogicUtils.h"
 
-SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui) : loadedHookable(hooks), name(name), player(player), gui(gui) {}
+SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui) 
+	: loadedHookable(hooks), name(name), player(player), gui(gui), id(LogicUtils::getUniqueId()) {}
 
 std::string SimpleTileObject::getName() const
 {
@@ -53,4 +55,9 @@ const GUIDescription& SimpleTileObject::getGuiDescription()
 std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index, int mapX, int mapY)
 {
 	return gui.onOptionChosen(index, mapX, mapY);
+}
+
+std::string SimpleTileObject::getId() const
+{
+	return id;
 }
