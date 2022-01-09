@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <sol\sol.hpp>
+#include <sol/sol.hpp>
 class IAssetInitializer
 {
 public: 

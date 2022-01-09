@@ -6,6 +6,8 @@
 #include "../GameLogic/Utils/Path.h"
 // TODO: somehow get rid of this include
 #include "../MiniGame/Tile/MiniTile.h"
+#include "../MiniGame/Unit/MiniUnit.h"
+
 class FrontendState
 {
 	GameLogic& logic;

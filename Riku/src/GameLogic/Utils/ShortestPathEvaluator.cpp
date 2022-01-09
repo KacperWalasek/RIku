@@ -1,6 +1,8 @@
 #include "ShortestPathEvaluator.h"
 #include <list>
 #include <set>
+#include <cmath>
+#include <climits>
 
 CostEvaluator::CostEvaluator(const std::vector<std::vector<Tile>>& map)
     : map(map)

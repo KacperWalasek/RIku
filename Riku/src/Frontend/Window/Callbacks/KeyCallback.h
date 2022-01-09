@@ -25,6 +25,29 @@ namespace front {
 			if (action == GLFW_PRESS)
 			{
 				if (activeGUI->on_key_press(key)) return;
+				if(state.isInMiniGame()) {
+					switch (key) {
+						case GLFW_KEY_R:
+							state.resign();
+							break;
+						case GLFW_KEY_ENTER:
+							state.finishTurn();
+							break;
+						case GLFW_KEY_T:
+							config.angle += 4.0f;
+						case GLFW_KEY_Y:
+							config.angle -= 2.0f;
+							if (config.angle < 0.0f)
+								config.angle = 0.0f;
+							if (config.angle > 90.0f)
+								config.angle = 90.0f;
+							movingCameraTransform.rotation.x = glm::radians(config.angle);
+							break;
+						default:
+							break;
+					}
+					return;
+				}
 				auto& map = state.getMap();
 				const auto& units = state.getUnits();
 				const Unit* unit = nullptr;
