@@ -115,10 +115,10 @@ void front::Scene::drawMiniGame() {
 				auto&& color = playerColors[unit->getOwner()];
 				if(unit!=units[focusedUnitIndex].get())
 					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
-				else
+				else {
 					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
-				if(i==focusedUnitIndex)
 					handler.tryDraw("main_circle", lightingShader, transform);
+				}
 				handler.tryDraw(unit->getName(), lightingShader, transform);
 				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 			}
