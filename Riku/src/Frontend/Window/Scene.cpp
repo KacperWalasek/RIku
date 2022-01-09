@@ -120,7 +120,8 @@ void front::Scene::draw()
 		handler.tryDraw(unit[i]->getName(), lightingShader, transform);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 	}
-    for(auto&& [x,y]: path.path) {
+    for(auto& tile: path.path) {
+		auto&& [x, y] = tile.tile;
         handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
     }
 
