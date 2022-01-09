@@ -27,9 +27,10 @@ namespace CEGUI::Functor {
                 int i = 0;
                 for (auto o : options)
                 {
-                    if (o == option)
+                    std::string name = o[0];
+                    if (name == option)
                     {
-                        printf("%s\n", o.c_str());
+                        printf("%s\n", name.c_str());
                         state.choseGuiOption(unit->getMapX(), unit->getMapY(), i); break;
                     }
                     i++;

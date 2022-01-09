@@ -4,6 +4,7 @@ name="wood_factory"
 tileobject = {
     gui = {
         name = "Units",
+        headers = { "name", "wood" },
         options = { 
             {
                 name = "Warrior",
@@ -28,6 +29,12 @@ tileobject = {
 function onOptionChosen(option,mapX,mapY)
     local wood = option["wood"]:as_int(1)
     return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(CreateUnitAround.new("stefan",mapX,mapY)),MoveWrapper.new(UseResources.new("wood",wood))))
+end
+
+function onOptionShow(option)
+    local wood = option["wood"]:as_string("", true)
+    local name = option["name"]:as_string("", false)
+    return name, wood  
 end
 
 function onBeingPlaced(hookable) 

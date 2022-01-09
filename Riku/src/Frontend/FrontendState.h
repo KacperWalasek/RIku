@@ -21,7 +21,8 @@ public:
 	const logic::AssetHandler& getAssetHandler();
 	int getPlayerOnMove();
 	Path getShortestPath(int fromX, int fromY, int toX, int toY);
-	std::vector<std::string> getGuiOptions(int mapX, int mapY);
+	std::vector<std::vector<std::string>> getGuiOptions(int mapX, int mapY);
+	std::vector<std::string> getGuiHeaders(int mapX, int mapY);
 	bool isInMiniGame();
 	std::vector<std::string> getSkills();
 

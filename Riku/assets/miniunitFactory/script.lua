@@ -4,6 +4,7 @@ name="miniunit_factory"
 tileobject = {
     gui = {
         name = "Units",
+        headers = { "name", "wood" },
         options = { 
             {
                 name = "julka_ciocia_stefana",

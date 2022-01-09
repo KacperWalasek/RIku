@@ -4,6 +4,7 @@ name="skill_factory"
 tileobject = {
     gui = {
         name = "Skills",
+        headers = { "name", "wood" },
         options = { 
             {
                 name = "Courage",
