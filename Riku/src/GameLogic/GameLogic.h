@@ -16,7 +16,6 @@ class GameLogic
 	std::shared_ptr<IMiniGame> getActiveMiniGame() const;
 public:
 	GameLogic(std::string assetPath, std::string minigameAssetPath);
-	~GameLogic();
 	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;
 	template<typename T>
 	std::shared_ptr<T> getInfo(std::shared_ptr<Request> request) const

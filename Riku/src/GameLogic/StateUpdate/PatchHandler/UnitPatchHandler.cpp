@@ -6,7 +6,7 @@ std::shared_ptr<IAction> UnitPatchHandler::handlePatch(GameState& state, const P
 {
 	for (auto unitPatch : patch.unitPatches)
 	{
-		std::shared_ptr<Unit> unit = std::static_pointer_cast<Unit>(LogicUtils::getHookable(unitPatch.second.unit));
+		std::shared_ptr<Unit> unit = std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(unitPatch.second.unit));
 		
 		unit->movementPoints += unitPatch.second.movementPointsChange;
 		if (unit->movementPoints < 0)

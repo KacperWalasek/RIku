@@ -7,13 +7,13 @@ namespace minigame
 	class MiniUnitPatch
 	{
 	public:
-		MiniUnitPatch(std::shared_ptr<MiniUnit> unit, int movementPointsChange)
+		MiniUnitPatch(std::string unit, int movementPointsChange)
 			: unit(unit), movementPointsChange(movementPointsChange)
 		{}
-		MiniUnitPatch(std::shared_ptr<MiniUnit> unit, int mapX, int mapY)
+		MiniUnitPatch(std::string unit, int mapX, int mapY)
 			: unit(unit), mapX(mapX), mapY(mapY)
 		{}
-		std::shared_ptr<MiniUnit> unit;
+		std::string unit;
 		int movementPointsChange = 0;
 		int mapX = -1;
 		int mapY = -1;

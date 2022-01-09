@@ -33,7 +33,7 @@ public:
 		auto aUnits = patch.addedUnits;
 		if(aUnits.size()>0)
 			addedUnits.insert(addedUnits.end(), aUnits.begin(), aUnits.end());
-		auto rUnits = patch.addedUnits;
+		auto rUnits = patch.removedUnits;
 		if (rUnits.size() > 0)
 			removedUnits.insert(removedUnits.end(), rUnits.begin(), rUnits.end());
 		for (auto& resourceChange : patch.resourceChanges)

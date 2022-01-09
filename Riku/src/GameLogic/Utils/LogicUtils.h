@@ -17,5 +17,6 @@ public:
 	static void addHookable(std::shared_ptr<IHookable> hookable);
 	static void removeHookable(std::string id);
 	static std::shared_ptr<IHookable> getHookable(std::string id);
+	static void clearHookables();
 };
 

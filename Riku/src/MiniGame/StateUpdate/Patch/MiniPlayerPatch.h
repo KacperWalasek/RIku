@@ -7,18 +7,20 @@ namespace minigame
 	{
 	public:
 		MiniPlayerPatch() {};
-		MiniPlayerPatch(std::shared_ptr<MiniUnit> units, bool add = true)
+		MiniPlayerPatch(std::shared_ptr<MiniUnit> unit)
 		{
-			if (add)
-				addedUnits.push_back(units);
-			else
-				removedUnits.push_back(units);
+				addedUnits.push_back(unit);
 		}
-		MiniPlayerPatch(std::shared_ptr<MiniUnit> units, std::string usedSkill)
-			: usedSkills({usedSkill})
-		{}
+		MiniPlayerPatch(std::string name, bool skill = false)
+		{
+			// TODO: when id will have its own type divide it to 2 constructors
+			if(skill)
+				usedSkills.push_back(name);
+			else
+				removedUnits.push_back(name);
+		}
 		std::vector<std::shared_ptr<MiniUnit>> addedUnits;
-		std::vector<std::shared_ptr<MiniUnit>> removedUnits;
+		std::vector<std::string> removedUnits;
 		std::vector<std::string> usedSkills;
 
 		MiniPlayerPatch& operator+=(const MiniPlayerPatch& patch)

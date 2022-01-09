@@ -23,6 +23,13 @@ public:
 	MOCK_METHOD((const GUIDescription&), getGuiDescription, (), (override));
 	MOCK_METHOD((std::shared_ptr<IMove>), onOptionChosen, (int,int,int), (override));
 	MOCK_METHOD(int, getOwner, (), (const, override));
+	MOCK_METHOD(std::string, getId, (), (const, override));
+
+	void DelegateToFake() {
+		ON_CALL(*this, getId).WillByDefault([this]() {
+			return "id";
+			});
+	}
 };
 
 class MockHookable : public IHookable
@@ -34,4 +41,11 @@ public:
 	MOCK_METHOD((std::shared_ptr<IMove>), onBeingPlaced, (int, int), (override));
 	MOCK_METHOD(bool, canBeBuilt, ((const GameState&), int, int), (override));
 	MOCK_METHOD(int, getOwner, (), (const, override));
+	MOCK_METHOD(std::string, getId, (), (const, override));
+
+	void DelegateToFake() {
+		ON_CALL(*this, getId).WillByDefault([this]() {
+			return "id";
+			});
+	}
 };

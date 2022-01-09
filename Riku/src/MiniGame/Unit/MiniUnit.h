@@ -8,6 +8,8 @@ namespace minigame
     class MiniUnit :
         public IMiniHookable, public IAsset
     {
+        std::string id;
+
         std::string name;
         MiniLoadedHookable loadedHookable;
         int owner;
@@ -28,6 +30,7 @@ namespace minigame
         int getMapX() const;
         int getMapY() const;
         int getOwner() const;
+        virtual std::string getId() const override;
     };
 
 }

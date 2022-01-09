@@ -31,8 +31,8 @@ namespace minigame
 		MiniPatch(int player, bool wins = false) : playerOnMove(wins ? -1 : player), winner(wins ? player : -1) {}
 
 		std::map<std::pair<int, int>, MiniTilePatch> tilePatches;
-		std::map<std::shared_ptr<IMiniHookable>, MiniRegisterHookablePatch> registerHookablePatches;
-		std::map<std::shared_ptr<MiniUnit>, MiniUnitPatch> unitPatches;
+		std::map<std::string, MiniRegisterHookablePatch> registerHookablePatches;
+		std::map<std::string, MiniUnitPatch> unitPatches;
 
 		MiniPlayerPatch playerPatch;
 		MiniPlayerPatch enemyPatch;

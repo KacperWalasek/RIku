@@ -20,7 +20,7 @@ std::shared_ptr<IAction> PlayerPatchHandler::handlePatch(GameState& state, const
 			LogicUtils::addHookable(unit);
 		}
 		for (const std::string& unit : p.second.removedUnits)
-			player.removeUnit(std::static_pointer_cast<Unit>(LogicUtils::getHookable(unit)));
+			player.removeUnit(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(unit)));
 	}
 	return nullptr;
 }

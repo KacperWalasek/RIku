@@ -10,7 +10,7 @@ std::shared_ptr<IAction> TilePatchHandler::handlePatch(GameState& state, const P
 		Tile& tile = state.map[tilePatch.first.first][tilePatch.first.second];
 		if (tilePatch.second.removeObject)
 		{
-			LogicUtils::removeHookable(tilePatch.second.object->getId());
+			LogicUtils::removeHookable(tile.object->getId());
 			tile.object = nullptr;
 		}
 		if (tilePatch.second.object)
@@ -21,7 +21,7 @@ std::shared_ptr<IAction> TilePatchHandler::handlePatch(GameState& state, const P
 		if (tilePatch.second.removeUnit)
 			tile.unit = nullptr;
 		if (tilePatch.second.unit != "")
-			tile.unit = LogicUtils::getHookable(tilePatch.second.unit);
+			tile.unit = std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(tilePatch.second.unit));
 	}
 	return nullptr;
 }

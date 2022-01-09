@@ -39,3 +39,8 @@ std::shared_ptr<IHookable> LogicUtils::getHookable(std::string id)
     return hookables[id];
 }
 
+void LogicUtils::clearHookables()
+{
+    hookables.clear();
+}
+

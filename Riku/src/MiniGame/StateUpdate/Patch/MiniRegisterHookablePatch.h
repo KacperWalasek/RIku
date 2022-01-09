@@ -8,10 +8,10 @@ namespace minigame
 	{
 
 	public:
-		std::shared_ptr<IMiniHookable> hookable;
+		std::string hookable;
 		bool add;
 
-		MiniRegisterHookablePatch(std::shared_ptr<IMiniHookable> hookable, bool add = true)
+		MiniRegisterHookablePatch(std::string hookable, bool add = true)
 			: hookable(hookable), add(add)
 		{}
 

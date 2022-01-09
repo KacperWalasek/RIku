@@ -21,8 +21,8 @@ public:
 				if (minigameIt == state.minigames.end())
 				{
 					auto minigame = std::make_shared<minigame::MiniGame>(
-						*(LogicUtils::getHookable(p.second.playerUnit)), 
-						*(LogicUtils::getHookable(p.second.enemyUnit)), 
+						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.playerUnit))),
+						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.enemyUnit))),
 						p.second.isBegining);
 					state.minigames.emplace(p.first, minigame);
 					minigameIt = state.minigames.find(p.first);
