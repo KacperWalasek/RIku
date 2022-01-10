@@ -109,8 +109,9 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	CEGUI::Functor::SetLabelText* func;
 	float y = 0.1f;
 	//std::map<std::string, int> repeats;
-	for (auto b : avaible_buildings)
+	for (auto building : avaible_buildings)
 	{
+		std::string b = building.first;
 		buildingButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
 			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), b));
 		buildingButton->setText(front::Lang::getUtf(b));

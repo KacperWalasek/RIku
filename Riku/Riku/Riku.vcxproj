@@ -347,6 +347,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BoolResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BuildingInfoResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\GUIResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h" />
@@ -354,6 +355,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h" />
     <ClInclude Include="..\src\GameLogic\GameLogic.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h" />

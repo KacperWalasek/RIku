@@ -20,6 +20,7 @@
 #include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
 #include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
 #include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -40,9 +41,9 @@ std::map<std::string, int> FrontendState::getResources()
 	return logic.getInfo<StringIntMapResponse>("player_resources")->getMap();
 }
 
-std::vector<std::string> FrontendState::getAvailableBuildings(int mapX, int mapY)
+std::map<std::string, std::string> FrontendState::getAvailableBuildings(int mapX, int mapY)
 {
-	return logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("available_buildings", mapX, mapY))->getNames();
+	return logic.getInfo<StringStringMapResponse>(std::make_shared<TileRequest>("available_buildings", mapX, mapY))->get();
 }
 
 std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()

@@ -2,6 +2,7 @@ asset_type="tileobject"
 name="wood_factory"
 
 tileobject = {
+    description = "wood_factory_description",
     gui = {
         name = "Units",
         headers = { "name", "wood" },
