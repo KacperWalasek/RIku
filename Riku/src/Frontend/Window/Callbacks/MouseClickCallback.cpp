@@ -32,19 +32,28 @@ void front::MouseClickCallback::MiniGameLeftClick(int px, int py) {
 	auto units = scene->state.getMiniUnits();
 	if(!scene->path.path.empty()) {
 		auto& unit = units[scene->focusedUnitIndex];
-		auto&& [toX, toY] = scene->path.path[scene->path.path.size() - 1];
+		auto to = scene->path.path[scene->path.path.size() - 1];
+		auto&&[toX, toY] = to;
 		if(unit && unit->getMapX()==px && unit->getMapY()==py) {
 			scene->path.cost=0;
 			scene->path.path.clear();
 		}
 		else if(toX==px && toY==py) {
-			const Tile& targetTile = scene->state.getMap()[toX][toY];
+			const minigame::MiniTile& targetTile = scene->state.getMiniMap()[toX][toY];
 			bool isAttack=false;
 			if(targetTile.unit && targetTile.unit->getOwner()!=units[scene->focusedUnitIndex]->getOwner()) {
 				isAttack=true;
-				scene->path.path.pop_back();
-				scene->path = scene->state.getShortestPath(unit->getMapX(),unit->getMapY(),scene->path.path.back().first, scene->path.path.back().second);
-				scene->state.moveUnit(unit->getMapX(),unit->getMapY(),scene->path.path.back().first, scene->path.path.back().second);
+				if(scene->path.path.size()>1u) {
+					scene->path.path.pop_back();
+					scene->path = scene->state.getShortestPath(unit->getMapX(), unit->getMapY(),
+					                                           scene->path.path.back().first,
+					                                           scene->path.path.back().second);
+					scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().first,
+					                      scene->path.path.back().second);
+				}
+				else {
+					scene->path.path={{unit->getMapX(), unit->getMapY()}};
+				}
 			}
 				//make move
 			else
@@ -96,12 +105,17 @@ void front::MouseClickCallback::GameLeftClick(int px, int py) {
 			bool isAttack = false;
 			if (targetTile.unit && targetTile.unit->getOwner() != units[scene->focusedUnitIndex]->getOwner()) {
 				isAttack = true;
-				scene->path.path.pop_back();
-				scene->path = scene->state.getShortestPath(unit->getMapX(), unit->getMapY(),
-				                                           scene->path.path.back().first,
-				                                           scene->path.path.back().second);
-				scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().first,
-				                      scene->path.path.back().second);
+				if(scene->path.path.size()>1u) {
+					scene->path.path.pop_back();
+					scene->path = scene->state.getShortestPath(unit->getMapX(), unit->getMapY(),
+					                                           scene->path.path.back().first,
+					                                           scene->path.path.back().second);
+					scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().first,
+					                      scene->path.path.back().second);
+				}
+				else {
+					scene->path.path={{unit->getMapX(), unit->getMapY()}};
+				}
 			}
 			else
 				scene->state.moveUnit(unit->getMapX(), unit->getMapY(), toX, toY);
