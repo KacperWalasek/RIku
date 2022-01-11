@@ -88,7 +88,7 @@ add_executable(Riku
 	src/Frontend/Transform.cpp
 	src/Frontend/GUI.cpp
 	src/Frontend/FrustumCulling.cpp
-	src/Riku.cpp)
+	src/Riku.cpp src/Frontend/Util.cpp)
 
 target_link_libraries(Riku dl)
 target_link_libraries(Riku Xi)

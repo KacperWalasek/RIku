@@ -73,7 +73,7 @@ void front::Scene::draw()
 	//
 	projection = glm::perspective(glm::radians(config.fov), aspect, 0.1f, 100.0f);
 	view = movingCameraTransform.calculateViewMatrix();
-	Frustum frustum(movingCameraTransform, aspect, config.fov, 0.1f, 100.0f);
+	frustum = Frustum(movingCameraTransform, aspect, config.fov, 0.1f, 100.0f);
 	//shader initialization
 	lightingShader.use();
 	lightingShader.setMat4("projection", projection);
