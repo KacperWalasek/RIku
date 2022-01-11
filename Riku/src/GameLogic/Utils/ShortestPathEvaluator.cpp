@@ -1,6 +1,8 @@
 #include "ShortestPathEvaluator.h"
 #include <list>
 #include <set>
+#include <cmath>
+#include <climits>
 
 CostEvaluator::CostEvaluator(const std::vector<std::vector<Tile>>& map)
     : map(map)
@@ -10,7 +12,7 @@ CostEvaluator::CostEvaluator(const std::vector<std::vector<Tile>>& map)
 //heurystyka
 int CostEvaluator::h(vertex from, vertex to)
 {
-    return sqrt(pow((to.x - from.x), 2) + pow((to.y - from.y), 2));
+    return sqrt(std::pow((to.x - from.x), 2) + std::pow((to.y - from.y), 2));
 }
 
 //koszt ruchu
@@ -18,7 +20,7 @@ int CostEvaluator::d(vertex vert)
 {
     if (map[vert.x][vert.y].unit)
         return 1000000;
-    return map[vert.x][vert.y].getCost();
+    return (int)map[vert.x][vert.y].getCost();
 }
 
 std::vector<PathTile> ShortestPathEvaluator::reconstructPath(std::map<vertex, vertex> cameFrom, vertex current, const std::map<vertex, int>& gScore, int movementPoints)
