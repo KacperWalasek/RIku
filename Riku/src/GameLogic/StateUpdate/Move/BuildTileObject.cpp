@@ -37,7 +37,8 @@ std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state, cons
 bool BuildTileObject::isDoable(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<ITileObject> object = createObject(assets);
-    return !state.map[tile.first][tile.second].object && assets.tileObjects.find(tileObject) != assets.tileObjects.end() && object->canBeBuilt(state,tile.first,tile.second);
+    auto currentObject = state.map[tile.first][tile.second].object;
+    return (!currentObject || currentObject->getOwner()==-1) && assets.tileObjects.find(tileObject) != assets.tileObjects.end() && object->canBeBuilt(state,tile.first,tile.second);
 }
 
 std::shared_ptr<IMove> BuildTileObject::asPointner() const
