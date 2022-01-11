@@ -15,6 +15,7 @@
 #include "../StateUpdate/Move/CreateUnit.h"
 #include "../StateUpdate/Move/CombinedMove.h"
 #include "../StateUpdate/Move/UseResources.h"
+#include <iostream>
 
 namespace logic {
 

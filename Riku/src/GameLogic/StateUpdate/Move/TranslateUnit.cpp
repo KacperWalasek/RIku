@@ -3,6 +3,7 @@
 #include "../../Unit/Unit.h"
 #include "../../GameState.h"
 #include "../../Utils/LogicUtils.h"
+#include <iostream>
 
 TranslateUnit::TranslateUnit(int fromX, int fromY, int toX, int toY)
     : fromX(fromX), fromY(fromY), toX(toX), toY(toY)

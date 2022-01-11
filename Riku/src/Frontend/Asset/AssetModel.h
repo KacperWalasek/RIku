@@ -8,6 +8,7 @@
 #include <map>
 #include "../IDrawable.h"
 #include "../Texture.h"
+#include <optional>
 
 namespace front {
 	class AssetModel: IDrawable {

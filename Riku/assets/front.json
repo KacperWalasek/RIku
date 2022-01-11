@@ -43,5 +43,10 @@
 	{
 		"path": "front-essentials/corner-.obj"
 	}
+],
+"_double_corner": [
+	{
+		"path": "front-essentials/double_corner.obj"
+	}
 ]
 }
