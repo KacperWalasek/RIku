@@ -42,6 +42,11 @@ std::shared_ptr<IMove> Unit::onBeingPlaced(int mapX, int mapY)
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 
+std::shared_ptr<IMove> Unit::onBeingCreated()
+{
+	return loadedHookable.onBeingCreated(*this);;
+}
+
 bool Unit::canBeBuilt(const GameState& state, int mapX, int mapY)
 {
 	return loadedHookable.canBeBuilt(*this, state, mapX, mapY);;

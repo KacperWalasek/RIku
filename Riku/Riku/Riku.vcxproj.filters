@@ -98,8 +98,8 @@
     <Filter Include="Riku\GameLogic\Actions">
       <UniqueIdentifier>{1b206673-2b13-4b0a-a3db-1dbe8643c60b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Riku\GameLogic\Unit\Tile" />
-    <Filter Include="Riku\GameLogic\Unit\Tile\TileCost" />
+    <Filter Include="Riku\GameLogic\Tile" />
+    <Filter Include="Riku\GameLogic\Tile\TileCost" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -307,19 +307,19 @@
       <Filter>Riku\GameLogic\StateUpdate</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Tile\MapGenerator.cpp">
-      <Filter>Riku\GameLogic\Unit\Tile</Filter>
+      <Filter>Riku\GameLogic\Tile</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Tile\Tile.cpp">
-      <Filter>Riku\GameLogic\Unit\Tile</Filter>
+      <Filter>Riku\GameLogic\Tile</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Area.cpp">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Biome.cpp">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp">
       <Filter>Riku\GameLogic\Unit</Filter>
@@ -802,25 +802,25 @@
       <Filter>Riku\GameLogic\StateUpdate</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\MapGenerator.h">
-      <Filter>Riku\GameLogic\Unit\Tile</Filter>
+      <Filter>Riku\GameLogic\Tile</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\Tile.h">
-      <Filter>Riku\GameLogic\Unit\Tile</Filter>
+      <Filter>Riku\GameLogic\Tile</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\Area.h">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\Biome.h">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\Ground.h">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\TileCost\ICostModifier.h">
-      <Filter>Riku\GameLogic\Unit\Tile\TileCost</Filter>
+      <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h">
-      <Filter>Riku\GameLogic\Unit\Tile</Filter>
+      <Filter>Riku\GameLogic\Tile</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Unit\Hero.h">
       <Filter>Riku\GameLogic\Unit</Filter>

@@ -32,6 +32,8 @@ public:
 
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override;
 
+	virtual std::shared_ptr<IMove> onBeingCreated() override;
+
 	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) override;
 
 	virtual std::string getName() const override;

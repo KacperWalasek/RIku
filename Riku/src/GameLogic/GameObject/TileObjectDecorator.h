@@ -24,6 +24,8 @@ public:
 
     virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override { return next->onBeingPlaced(mapX, mapY); }
 
+    virtual std::shared_ptr<IMove> onBeingCreated() override { return next->onBeingCreated(); }
+
     virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) { return next->canBeBuilt(state, mapX, mapY); }
 
     virtual const GUIDescription& getGuiDescription() override { return next->getGuiDescription(); };

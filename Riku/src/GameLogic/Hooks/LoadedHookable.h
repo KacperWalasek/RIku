@@ -13,6 +13,7 @@ public:
     std::shared_ptr<IMove> onDestroy(IHookable& hookable, bool byOwner);
     std::shared_ptr<IMove> onTurnEnd(IHookable& hookable);
     std::shared_ptr<IMove> onTurnBegin(IHookable& hookable);
+    std::shared_ptr<IMove> onBeingCreated(IHookable& hookable);
     std::shared_ptr<IMove> onBeingPlaced(IHookable& hookable, int mapX, int mapY);
     bool canBeBuilt(IHookable& hookable, const GameState& state, int mapX, int mapY);
 };

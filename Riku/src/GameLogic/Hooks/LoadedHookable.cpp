@@ -30,6 +30,11 @@ std::shared_ptr<IMove> LoadedHookable::onTurnBegin(IHookable& hookable)
     return callFuncWithNoArgs(hookable, "onTurnBegin");
 }
 
+std::shared_ptr<IMove> LoadedHookable::onBeingCreated(IHookable& hookable)
+{
+    return callFuncWithNoArgs(hookable, "onBeingCreated");
+}
+
 std::shared_ptr<IMove> LoadedHookable::onBeingPlaced(IHookable& hookable, int mapX, int mapY)
 {
     auto func = functions.find("onBeingPlaced");
