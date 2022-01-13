@@ -1,4 +1,6 @@
 #pragma once
+#include <cereal/types/string.hpp>
+#include <cereal/types/utility.hpp>
 #include "../../Unit/MiniUnit.h"
 
 namespace minigame
@@ -6,6 +8,7 @@ namespace minigame
 	class MiniTilePatch
 	{
 	public:
+		MiniTilePatch() : tile(0, 0), unit(""), removeUnit(false) {}
 		MiniTilePatch(std::pair<int, int> tile, std::string unit)
 			: tile(tile), unit(unit), removeUnit(false) {};
 		MiniTilePatch(std::pair<int, int> tile, bool removeUnit)
@@ -14,6 +17,12 @@ namespace minigame
 		std::pair<int, int> tile;
 		std::string unit;
 		bool removeUnit;
+
+		template<class Archive>
+		void serialize(Archive& archive)
+		{
+			archive(tile, unit, removeUnit);
+		}
 
 		MiniTilePatch& operator+=(const MiniTilePatch& patch)
 		{
