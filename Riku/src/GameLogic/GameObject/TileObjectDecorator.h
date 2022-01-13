@@ -4,11 +4,15 @@
 #include "ITileObject.h"
 #include <memory>
 #include "../GameState.h"
+#include <cereal/access.hpp>
 
 class TileObjectDecorator :
     public ITileObject
 {
+protected:
     std::shared_ptr<ITileObject> next;
+    TileObjectDecorator() {};
+    friend cereal::access;
 public:
     TileObjectDecorator(std::shared_ptr<ITileObject> next) : next(next) {}
 
@@ -35,4 +39,10 @@ public:
     virtual int getOwner() const override { return next->getOwner(); }
 
     virtual std::string getId() const override { return next->getId(); }
+
+    template<class Archive>
+    void serialize(Archive& archive)
+    {
+        archive(next);
+    }
 };

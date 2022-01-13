@@ -4,8 +4,10 @@
 #include "../StateUpdate/Move/CombinedMove.h"
 #include "../Utils/LogicUtils.h"
 
-SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui) 
-	: loadedHookable(hooks), name(name), player(player), gui(gui), id(LogicUtils::getUniqueId()) {}
+#include <cereal/archives/binary.hpp>
+#include <cereal/types/polymorphic.hpp>
+SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui, std::string id)
+	: loadedHookable(hooks), name(name), player(player), gui(gui), id(id=="" ? LogicUtils::getUniqueId() : id) {}
 
 std::string SimpleTileObject::getName() const
 {
@@ -66,3 +68,7 @@ std::string SimpleTileObject::getId() const
 {
 	return id;
 }
+
+
+CEREAL_REGISTER_TYPE(SimpleTileObject);
+CEREAL_REGISTER_POLYMORPHIC_RELATION(ITileObject, SimpleTileObject)

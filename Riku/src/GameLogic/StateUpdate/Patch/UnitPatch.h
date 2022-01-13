@@ -1,10 +1,13 @@
 #pragma once
 #include <memory>
+#include <cereal/types/memory.hpp>
+#include <cereal/types/string.hpp>
 
 class Unit;
 class UnitPatch
 {
 public:
+	UnitPatch() : unit(""), movementPointsChange(0) {}
 	UnitPatch(std::string unit, int movementPointsChange)
 		: unit(unit), movementPointsChange(movementPointsChange)
 	{}
@@ -32,6 +35,12 @@ public:
 	int movementPointsChange = 0;
 	int mapX = -1;
 	int mapY = -1;
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(unit, addedMiniUnits, addedSkills, movementPointsChange, mapX, mapY);
+	}
 
 	UnitPatch& operator+=(const UnitPatch& patch)
 	{

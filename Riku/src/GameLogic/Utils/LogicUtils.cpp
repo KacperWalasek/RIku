@@ -1,6 +1,7 @@
 #include "LogicUtils.h"
 #include <queue>
 #include <list>
+#include "../StateUpdate/Patch/Patch.h"
 
 unsigned int LogicUtils::currentId = 0;
 int LogicUtils::logicId = 0;
@@ -42,5 +43,31 @@ std::shared_ptr<IHookable> LogicUtils::getHookable(std::string id)
 void LogicUtils::clearHookables()
 {
     hookables.clear();
+}
+
+Patch LogicUtils::createPatchFromState(const GameState& state)
+{
+    Patch patch;
+    for (int i = 0; i < state.players.size(); i++)
+    {
+        const auto& player = state.players[i];
+        for (int j = 0; j < player.getResourceQuantities().size(); j++)
+            patch = patch + PlayerPatch(i, j, player.getResourceQuantity(j));
+        for (auto unit : player.units)
+            patch = patch + PlayerPatch(i, unit);
+    }
+    for (const auto& hookable : state.registredHookables)
+        patch = patch + RegisterHookablePatch(hookable.first);
+    for (int i = 0; i < state.map.size(); i++)
+        for (int j = 0; j < state.map[i].size(); j++)
+        {
+            if (state.map[i][j].unit)
+                patch = patch + TilePatch({ i,j }, state.map[i][j].unit->getId());
+            if (state.map[i][j].object)
+                patch = patch + TilePatch({ i,j }, state.map[i][j].object);
+        }
+    patch = patch + Patch(state.map);
+    patch = patch + Patch(state.playerOnMove);
+    return patch;
 }
 

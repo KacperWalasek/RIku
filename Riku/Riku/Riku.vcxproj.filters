@@ -100,6 +100,9 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Tile" />
     <Filter Include="Riku\GameLogic\Tile\TileCost" />
+    <Filter Include="Riku\GameLogic\RandomBoolshit">
+      <UniqueIdentifier>{5961e9bb-ed18-4714-a1ca-e280810c6f7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -445,6 +448,9 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecorator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1041,6 +1047,15 @@
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Save.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\StringMoveDescription.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PatchSerializers.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\DeserializationData.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -82,6 +82,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -206,6 +226,7 @@
     <ClCompile Include="..\src\GameLogic\GameObject\RequireResources.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecorator.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\GUIDescription.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp" />
@@ -216,6 +237,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp" />
@@ -231,6 +253,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\UseResources.cpp" />
@@ -378,6 +401,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\ChoseGuiOptionMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\IMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\SimpleMoveDescription.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\StringMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\TranslateUnitMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.h" />
@@ -385,6 +409,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h" />
@@ -400,6 +425,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Save.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\UseResources.h" />
@@ -412,6 +438,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\MiniGamePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PatchSerializers.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h" />
@@ -426,6 +453,7 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Hero.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
+    <ClInclude Include="..\src\GameLogic\Utils\DeserializationData.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
     <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />

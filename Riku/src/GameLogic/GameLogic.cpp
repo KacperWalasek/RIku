@@ -34,6 +34,7 @@
 #include "StateUpdate/Move/CreateUnit.h"
 #include "FrontendCommunicator/Responses/IntResponse.h"
 #include "Utils/LogicUtils.h"
+#include "StateUpdate/MoveFactory/SaveMoveHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -53,13 +54,14 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<MiniGamePatchHandler>()
 		});
 
-	factory.setHandlers({ 
+	factory.setHandlers({
 		std::make_shared<TestMoveHandler>(),
 		std::make_shared<BuildMoveHandler>(gameState),
 		std::make_shared<TranslateUnitMoveHandler>(),
 		std::make_shared<FinishGameMoveHandler>(),
 		std::make_shared<ChoseGuiOptionMoveHandler>(gameState),
-		std::make_shared<AttackMoveHandler>(gameState)
+		std::make_shared<AttackMoveHandler>(gameState),
+		std::make_shared<SaveMoveHandler>()
 		});
 
 	communicator.setHandlers({

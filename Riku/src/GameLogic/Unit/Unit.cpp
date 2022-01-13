@@ -3,9 +3,9 @@
 
 
 Unit::Unit(std::string type, std::string name, int player, int baseMovementPoints,
-	const std::vector<std::string>& miniunits, const std::map<std::string, sol::function>& hooks)
+	const std::vector<std::string>& miniunits, const std::map<std::string, sol::function>& hooks, std::string id)
 	: type(type), name(name), player(player), loadedHookable(hooks), baseMovementPoints(baseMovementPoints),
-	  movementPoints(baseMovementPoints), miniunits(miniunits), skills(), id(LogicUtils::getUniqueId())
+	  movementPoints(baseMovementPoints), miniunits(miniunits), skills(), id(id=="" ? LogicUtils::getUniqueId() : id) 
 {}
 
 void Unit::useMovementPoints(int points)
@@ -76,3 +76,4 @@ std::string Unit::getId() const
 {
 	return id;
 }
+

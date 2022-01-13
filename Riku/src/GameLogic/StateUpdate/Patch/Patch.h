@@ -1,11 +1,14 @@
 //Kacper Walasek
 #pragma once
 #include <vector>
+#include <cereal/types/map.hpp>
+#include <cereal/types/string.hpp>
 #include "PlayerPatch.h"
 #include "TilePatch.h"
 #include "RegisterHookablePatch.h"
 #include "UnitPatch.h"
 #include "MiniGamePatch.h"
+#include "../../Tile/TileDescription.h"
 
 class Patch
 {
@@ -26,7 +29,17 @@ public:
 	Patch(MiniGamePatch miniGamePatch) {
 		miniGamePatches.emplace(miniGamePatch.player, miniGamePatch);
 	}
-	Patch(int playerOnMove) : playerOnMove(playerOnMove) {}
+	Patch(int playerOnMove) : playerOnMove(playerOnMove){}
+	Patch(const std::vector<std::vector<Tile>>& map)
+	{
+		for (const std::vector<Tile>& row : map)
+		{
+			std::vector<TileDescription> descRow;
+			for (const Tile& tile : row)
+				descRow.push_back(TileDescription(tile));
+			this->map.push_back(descRow);
+		}
+	}
 
 
 	std::map<int,PlayerPatch> playerPatches;
@@ -34,7 +47,15 @@ public:
 	std::map<std::string, RegisterHookablePatch> registerHookablePatches;
 	std::map<std::string, UnitPatch> unitPatches;
 	std::map<int, MiniGamePatch> miniGamePatches;
+	std::vector<std::vector<TileDescription>>  map;
 	int playerOnMove = -1;
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(playerOnMove, registerHookablePatches, playerPatches,
+			tilePatches, unitPatches, miniGamePatches, map);
+	}
 
 	friend Patch operator+(Patch p1, const Patch& p2)
 	{
@@ -81,6 +102,8 @@ public:
 		}
 		if (p2.playerOnMove != -1)
 			p1.playerOnMove = p2.playerOnMove;
+		if (p2.map.size() != 0)
+			p1.map = p2.map;
 		return std::move(p1);
 	}
 };
