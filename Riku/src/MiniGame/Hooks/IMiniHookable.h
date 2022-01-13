@@ -11,5 +11,7 @@ namespace minigame
 		virtual std::shared_ptr<IMiniMove> onTurnEnd() = 0;
 		virtual std::shared_ptr<IMiniMove> onTurnBegin() = 0;
 		virtual std::shared_ptr<IMiniMove> onBeingPlaced(int mapX, int mapY) = 0;
+
+		virtual int getOwner() const = 0;
 	};
 }

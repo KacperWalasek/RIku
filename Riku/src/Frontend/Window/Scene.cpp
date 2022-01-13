@@ -113,7 +113,7 @@ void front::Scene::drawMiniGame() {
 			if(map[i][j].unit) {
 				const auto* unit = map[i][j].unit.get();
 				auto&& color = playerColors[unit->getOwner()];
-				if(unit!=units[focusedUnitIndex].get())
+				if(focusedUnitIndex == -1 || unit!=units[focusedUnitIndex].get())
 					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
 				else {
 					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
@@ -150,7 +150,7 @@ void front::Scene::drawGame() {
 			if(map[i][j].unit) {
 				const auto* unit = map[i][j].unit.get();
 				auto&& color = playerColors[unit->getOwner()];
-				if(unit!=units[focusedUnitIndex].get())
+				if(focusedUnitIndex == -1 || unit!=units[focusedUnitIndex].get())
 					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
 				else
 					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
