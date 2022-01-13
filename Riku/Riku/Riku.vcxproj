@@ -238,6 +238,7 @@
     <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp" />
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp" />
     <ClCompile Include="..\src\GameLogic\Utils\LogicUtils.cpp" />
+    <ClCompile Include="..\src\Network\WebModule.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -369,6 +370,7 @@
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
+    <ClInclude Include="..\src\Network\WebModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
