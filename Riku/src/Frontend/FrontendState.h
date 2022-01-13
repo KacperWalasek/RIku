@@ -34,5 +34,6 @@ public:
 	void useSkill(std::string name, int mapX, int mapY);
 
 	void save(std::string path);
+	void load(std::string path);
 };
 

@@ -454,6 +454,11 @@
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecorator.cpp">
       <Filter>Riku\GameLogic\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Load.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1066,6 +1071,11 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\StringMoveDescription.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Load.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

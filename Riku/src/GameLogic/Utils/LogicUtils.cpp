@@ -68,6 +68,7 @@ Patch LogicUtils::createPatchFromState(const GameState& state)
         }
     patch = patch + Patch(state.map);
     patch = patch + Patch(state.playerOnMove);
+    patch.playerCount = state.players.size();
     return patch;
 }
 

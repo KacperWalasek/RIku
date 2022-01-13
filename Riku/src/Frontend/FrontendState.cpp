@@ -126,3 +126,8 @@ void FrontendState::save(std::string path)
 {
 	logic.makeMove(std::make_shared<StringMoveDescription>("save", path));
 }
+
+void FrontendState::load(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("load", path));
+}

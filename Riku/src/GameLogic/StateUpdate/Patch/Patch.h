@@ -14,6 +14,7 @@ class Patch
 {
 public:
 	Patch() {};
+	Patch(bool clearGameState) : clearGameState(clearGameState) {};
 	Patch(PlayerPatch playerPatch) {
 		playerPatches.insert({ playerPatch.player, playerPatch });
 	}
@@ -48,17 +49,31 @@ public:
 	std::map<std::string, UnitPatch> unitPatches;
 	std::map<int, MiniGamePatch> miniGamePatches;
 	std::vector<std::vector<TileDescription>>  map;
+	bool clearGameState = false;
 	int playerOnMove = -1;
+	int playerCount = -1;
 
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
 		archive(playerOnMove, registerHookablePatches, playerPatches,
-			tilePatches, unitPatches, miniGamePatches, map);
+			tilePatches, unitPatches, miniGamePatches, map, clearGameState, playerCount);
 	}
 
 	friend Patch operator+(Patch p1, const Patch& p2)
 	{
+		if (p2.clearGameState)
+		{
+			p1.playerOnMove = -1;
+			p1.map.clear();
+			p1.playerPatches = {};
+			p1.tilePatches = {};
+			p1.registerHookablePatches = {};
+			p1.unitPatches = {};
+			p1.miniGamePatches = {};
+			p1.clearGameState = true;
+			p1.playerCount = -1;
+		}
 		// TODO upiekszyc to jakosc. Przeniesc fora do oddzielnej funkcji i wywolywac ja 5 razy czy cos
 		for (auto plPatch2 : p2.playerPatches)
 		{
@@ -104,6 +119,8 @@ public:
 			p1.playerOnMove = p2.playerOnMove;
 		if (p2.map.size() != 0)
 			p1.map = p2.map;
+		if (p2.playerCount > 0)
+			p1.playerCount = p2.playerCount;
 		return std::move(p1);
 	}
 };
