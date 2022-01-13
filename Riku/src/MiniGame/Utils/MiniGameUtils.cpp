@@ -1,7 +1,7 @@
 #include "MiniGameUtils.h"
 #include <cmath>
 
-int minigame::MiniCostEvaluator::h(vertex from, vertex to)
+double minigame::MiniCostEvaluator::h(vertex from, vertex to)
 {
     return (int)sqrt(pow((to.x - from.x), 2) + pow((to.y - from.y), 2));
 }
