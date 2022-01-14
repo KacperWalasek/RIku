@@ -6,11 +6,14 @@ zmq::context_t Network::WebModule::context;
 std::vector<std::vector<zmq::message_t> > Network::WebModule::ReceivedMessages;
 std::future<void> Network::WebModule::listenerThread;
 std::map<int, zmq::socket_t> Network::WebModule::players;
-//std::map<std::string, zmq::socket_t> Network::WebModule::invitedPlayers;
+std::map<int, std::string> Network::WebModule::playersIps;
+std::map<std::string, zmq::socket_t> Network::WebModule::invitedPlayers;
 
-void ListenerThread(zmq::context_t* ctx, std::vector<std::vector<zmq::message_t> >* messeges, std::string ip, std::string port) {
+void ListenerThread(zmq::context_t* ctx, std::vector<std::vector<zmq::message_t> >* messages,
+    std::map<int, zmq::socket_t>* players , std::string ip, std::string port, std::map<int, std::string>* playersIps) {
 
     zmq::socket_t listener(*ctx, zmq::socket_type::pull);
+    //listener.set(zmq::sockopt::ipv6, true);
     try{
         listener.bind("tcp://" + ip + ":" + port);
     }
@@ -20,41 +23,67 @@ void ListenerThread(zmq::context_t* ctx, std::vector<std::vector<zmq::message_t>
 
     std::cout << "Listening on " << last_endpoint << std::endl;
 
-    //subscriber.connect("inproc://#1");
 
     while (true) {
-        // Receive all parts of the message
         std::vector<zmq::message_t> recv_msgs;
         zmq::recv_result_t result =
             zmq::recv_multipart(listener, std::back_inserter(recv_msgs));
         assert(result && "recv failed");
         assert(*result > 0);
 
+        //std::cout << "Received message of type " << *recv_msgs[0].data<MessType>() << std::endl;
         bool saveMess = true;
         switch (*recv_msgs[0].data<MessType>())
         {
-        case Invitation:
-        case InvitationAccepted:
-        case InvitationRejected: break;
+        case JoinAccepted: {
+            int playerId = *(recv_msgs[1].data<int>());           
+            std::string playerIp = *recv_msgs[2].data<std::string>();
+            //printf("%d  %s\n", playerId,playerIp.c_str());
+            players->insert(std::pair<int, zmq::socket_t>(playerId, zmq::socket_t(*ctx, zmq::socket_type::push)));
+            playersIps->insert(std::pair<int, std::string>(playerId, playerIp));
+            zmq::socket_ref pushSock = (*players)[playerId];
+            pushSock.set(zmq::sockopt::linger, 0);
+            pushSock.connect("tcp://" + playerIp + ":" + port);
+            int hostId = 0; // zakladam ze jestem hostem i moje id == 0
+            Network::WebModule::SendById(playerId, MessType::AddPlayer, &hostId, sizeof(hostId), &ip, sizeof(ip));
+            for (auto& kv : *players)
+            {
+                if (kv.first == playerId)
+                    continue;
+                int key = kv.first;
+                std::string val = (*playersIps)[key];
+                Network::WebModule::SendById(kv.first, MessType::AddPlayer, &playerId, sizeof(playerId), &playerIp, sizeof(playerIp));
+                Network::WebModule::SendById(playerId, MessType::AddPlayer, &key, sizeof(key), &val, sizeof(val));
+            }          
+            break;
+        }
         case Join: {
-             std::cout << "as Player " << recv_msgs[1].to_string() << " joined" << std::endl;
-             Network::WebModule::Join("192.168.0.80", 3);
-             break;
+            Network::WebModule::SendByIp(*recv_msgs[2].data<std::string>(), MessType::JoinAccepted, recv_msgs[1].data(), recv_msgs[1].size(), &ip, sizeof(ip));
+            break;
+        }
+        case AddPlayer: {
+            const auto& playerId = *(recv_msgs[1].data<int>());
+            std::string playerIp = *recv_msgs[2].data<std::string>();
+            players->insert(std::pair<int, zmq::socket_t>(playerId, zmq::socket_t(*ctx, zmq::socket_type::push)));
+            playersIps->insert(std::pair<int, std::string>(playerId, playerIp));
+            zmq::socket_ref pushSock = (*players)[playerId];
+            pushSock.set(zmq::sockopt::linger, 0);    
+            pushSock.connect("tcp://" + playerIp + ":" + port);
+            //pushSock.send(zmq::str_buffer("hello me"));
+            break;
         }
         default:
             break;
         }
+        
+        //fast response goes here (probably)
 
         if (saveMess) {
             std::vector<zmq::message_t> mess;
             auto ins = std::back_inserter(mess);
             for (int i = 0; i < *result; i++)
-            {
-                std::cout << recv_msgs[i].to_string() << "  ";
                 *ins++ = std::move(recv_msgs[i]);
-            }
-            std::cout << std::endl;
-            messeges->push_back(std::move(mess));
+            messages->push_back(std::move(mess));
         }    
     }
 }
@@ -64,39 +93,26 @@ void Network::WebModule::Init(std::string ip)
     myIp = ip;
     port = "16669";
     context = zmq::context_t();
-    listenerThread = std::async(std::launch::async, ListenerThread, &context, &ReceivedMessages, myIp, port);   
-   /* pushSock = zmq::socket_t(context, zmq::socket_type::push);
-    pushSock.bind("tcp://127.0.0.1:10669");
-    pushSock.bind(address);
-    const std::string last_endpoint =
-        pushSock.get(zmq::sockopt::last_endpoint);
-    std::cout << "Connecting to "
-        << last_endpoint << std::endl;*/
+    listenerThread = std::async(std::launch::async, ListenerThread, &context, &ReceivedMessages, &players, myIp, port, &playersIps);   
 }
 
 void Network::WebModule::Stop()
 {
-    //invitedPlayers["192.168.0.880"].disconnect("tcp://192.168.0.880:16669");
-    //invitedPlayers["192.168.0.880"].close();
+    for (auto& kv : players)
+        kv.second.close();
+    players.clear();
+    CloseInviteSockets();
+    playersIps.clear();
     context.shutdown();
     context.close();
 }
 
-//void Network::WebModule::Invite(std::string ip)
-//{
-//    invitedPlayers.insert(std::pair<std::string, zmq::socket_t>(ip, zmq::socket_t(context, zmq::socket_type::push)));
-//    zmq::socket_ref pushSock = invitedPlayers[ip];
-//    pushSock.connect("tcp://" + ip + ":16669");
-//
-//    auto type = MessType::Invitation;
-//    std::string myIp = "192.168.0.80";
-//    std::array<zmq::const_buffer, 2> send_msgs = {
-//       zmq::buffer(&type, sizeof(type)),
-//       zmq::buffer(&myIp, sizeof(myIp))
-//    };
-//    auto res = zmq::send_multipart(pushSock, send_msgs);
-//    invitedPlayers[ip].set(zmq::sockopt::linger, 0);
-//}
+void Network::WebModule::CloseInviteSockets()
+{
+    for (auto& kv : invitedPlayers)
+        kv.second.close();
+    invitedPlayers.clear();
+}
 
 void Network::WebModule::Invite(std::string ip)
 {
@@ -110,43 +126,57 @@ void Network::WebModule::AcceptInvitation(std::string ip)
 
 void Network::WebModule::Join(std::string ip, int playerId)
 {
-    players.insert(std::pair(playerId, zmq::socket_t(context, zmq::socket_type::push)));
+    SendByIp(ip, MessType::Join, &playerId, sizeof(playerId), &myIp, sizeof(myIp));
+   /* for (const auto& kv : players)
+    {
+
+    }
+    players.insert(std::pair<int, zmq::socket_t>(playerId, zmq::socket_t(context, zmq::socket_type::push)));
     zmq::socket_ref pushSock = players[playerId];
     pushSock.set(zmq::sockopt::linger, 0);
     pushSock.connect("tcp://" + ip + ":" + port);
 
+    int myId = 0;
+    int Id1 = 1;
     SendById(playerId, MessType::Join, &playerId, sizeof(playerId));
+
+    SendByIp(myIp, AddPlayer, &Id1, sizeof(Id1), &myIp, sizeof(myIp));*/
+    //SendById(playerId, MessType::AddPlayer, &myId, sizeof(myId), &myIp, sizeof(myIp)); //zak³adamy ¿e host ma id = 0
 }
 
-void Network::WebModule::SendByIp(std::string ip, MessType type, void* data, size_t size)
+void Network::WebModule::SendByIp(std::string ip, MessType type, void* data, size_t size, void* data2, size_t size2)
 {
-    zmq::socket_t pushSock = zmq::socket_t(context, zmq::socket_type::push);
-    pushSock.set(zmq::sockopt::linger, 0);
+    if (invitedPlayers.find(ip) == invitedPlayers.end())
+    {
+        invitedPlayers.insert(std::pair<std::string, zmq::socket_t>(ip, zmq::socket_t(context, zmq::socket_type::push)));
+        invitedPlayers[ip].set(zmq::sockopt::linger, 0);
+    }
+
+    zmq::socket_ref pushSock = invitedPlayers[ip];    
     pushSock.connect("tcp://" + ip + ":" + port);
-
-    std::array<zmq::const_buffer, 2> send_msgs = {
-       zmq::buffer(&type, sizeof(type)),
-       zmq::buffer(data, size)
-    };
-    auto res = zmq::send_multipart(pushSock, send_msgs);
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    pushSock.close();
-}
-
-void Network::WebModule::SendById(int playerId, MessType type, void* data = nullptr, size_t size = 0)
-{
-    std::array<zmq::const_buffer, 2> send_msgs = {
+    std::array<zmq::const_buffer, 3> send_msgs = {
        zmq::buffer(&type, sizeof(type)),
        zmq::buffer(data, size),
+       zmq::buffer(data2, size2),
+    };
+    auto res = zmq::send_multipart(pushSock, send_msgs);
+    //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    //pushSock.close();
+}
+
+void Network::WebModule::SendById(int playerId, MessType type, void* data, size_t size, void* data2, size_t size2)
+{
+    std::array<zmq::const_buffer, 3> send_msgs = {
+       zmq::buffer(&type, sizeof(type)),
+       zmq::buffer(data, size),
+       zmq::buffer(data2, size2),
     };
     zmq::send_multipart(players[playerId], send_msgs);
-    //return pushSock.send(zmq::buffer(message), zmq::send_flags::none);
 }
 
 std::vector<zmq::message_t> Network::WebModule::ReceiveMessage()
 {
     std::vector<zmq::message_t> mess;
-
     if (!ReceivedMessages.empty())
     {
         auto ins = std::back_inserter(mess);
@@ -155,4 +185,17 @@ std::vector<zmq::message_t> Network::WebModule::ReceiveMessage()
         ReceivedMessages.erase(ReceivedMessages.begin());
     }
     return std::vector<zmq::message_t>(std::move(mess));
+}
+
+m_message Network::WebModule::ReceiveMessageStruct()
+{
+    std::vector<zmq::message_t> mess;
+    if (!ReceivedMessages.empty())
+    {
+        auto ins = std::back_inserter(mess);
+        for (int i = 0; i < ReceivedMessages[0].size(); i++)
+            *ins++ = std::move(ReceivedMessages[0][i]);
+        ReceivedMessages.erase(ReceivedMessages.begin());
+    }
+    return m_message(std::move(mess));
 }
