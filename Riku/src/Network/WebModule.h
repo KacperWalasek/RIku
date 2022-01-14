@@ -9,9 +9,9 @@ enum MessType {
 	Invitation, // type, ip
 	InvitationAccepted, //type, ip
 	InvitationRejected,
-	Join, // type, id, ip // set own id in logic
-	JoinAccepted, // type, id, ip
-	AddPlayer, // type, id, ip // request to connect with another player 
+	Join, // type, ip, id // set own id in logic
+	JoinAccepted, // type, ip, id
+	AddPlayer, // type, ip, id // request to connect with another player 
 };
 
 struct m_message {
@@ -32,7 +32,7 @@ public:
 		return *messParts[0].data<MessType>();
 	}
 	std::string dataString() {
-		return *messParts[1].data<std::string>();
+		return messParts[1].to_string();
 	}
 };
 
@@ -56,7 +56,9 @@ namespace Network {
 		static void AcceptInvitation(std::string ip);
 		static void Join(std::string ip, int playerId);
 		static void SendById(int playerId, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);
+		static void SendById(int playerId, MessType type, std::string dataString, void* data = nullptr, size_t size = 0);
 		static void SendByIp(std::string ip, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);
+		static void SendByIp(std::string ip, MessType type, std::string dataString, void* data = nullptr, size_t size = 0);
 		static std::vector<zmq::message_t> ReceiveMessage();
 		static m_message ReceiveMessageStruct();
 	};
