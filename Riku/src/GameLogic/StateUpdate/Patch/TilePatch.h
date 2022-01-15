@@ -1,12 +1,16 @@
 #pragma once
 #include <map>
 #include <memory>
+#include <cereal/types/utility.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/types/string.hpp>
 #include "../../GameObject/ITileObject.h"
 
 class Unit;
 class TilePatch
 {
 public:
+	TilePatch() : tile(), unit(""), removeObject(false), removeUnit(false) {}
 	TilePatch(std::pair<int, int> tile, std::shared_ptr<ITileObject> object = nullptr) 
 		: tile(tile), object(object), unit(""), removeObject(false), removeUnit(false) {};
 	TilePatch(std::pair<int, int> tile, std::string unit) 
@@ -18,6 +22,12 @@ public:
 	std::string unit;
 	bool removeObject;
 	bool removeUnit;
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(tile, object, unit, removeObject, removeUnit);
+	}
 
 	TilePatch& operator+=(const TilePatch& patch)
 	{

@@ -15,6 +15,8 @@ public:
 	virtual std::shared_ptr<IMove> onTurnBegin() = 0;
 	// wywolywane gdy zostanie postawiony na polu
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) = 0;
+	
+	virtual std::shared_ptr<IMove> onBeingCreated() = 0;
 
 	virtual int getOwner() const = 0;
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "../../Unit/MiniUnit.h"
-
+#include <cereal/types/string.hpp>
+#include <cereal/types/vector.hpp>
+#include <cereal/types/memory.hpp>
 namespace minigame
 {
 	class MiniPlayerPatch
@@ -22,6 +24,12 @@ namespace minigame
 		std::vector<std::shared_ptr<MiniUnit>> addedUnits;
 		std::vector<std::string> removedUnits;
 		std::vector<std::string> usedSkills;
+
+		template<class Archive>
+		void serialize(Archive& archive)
+		{
+			archive(addedUnits, removedUnits, usedSkills);
+		}
 
 		MiniPlayerPatch& operator+=(const MiniPlayerPatch& patch)
 		{

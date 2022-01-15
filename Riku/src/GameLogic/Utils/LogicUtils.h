@@ -18,5 +18,7 @@ public:
 	static void removeHookable(std::string id);
 	static std::shared_ptr<IHookable> getHookable(std::string id);
 	static void clearHookables();
+
+	static Patch createPatchFromState(const GameState& state);
 };
 

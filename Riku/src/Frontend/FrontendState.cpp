@@ -19,6 +19,7 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 #include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
 #include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/StringMoveDescription.h"
 #include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
 
@@ -129,4 +130,14 @@ void FrontendState::resign()
 void FrontendState::useSkill(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<minigame::UseSkillMoveDescription>(name, mapX, mapY));
+}
+
+void FrontendState::save(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("save", path));
+}
+
+void FrontendState::load(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("load", path));
 }

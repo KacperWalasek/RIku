@@ -33,5 +33,8 @@ public:
 	void choseGuiOption(int mapX, int mapY, int index);
 	void resign();
 	void useSkill(std::string name, int mapX, int mapY);
+
+	void save(std::string path);
+	void load(std::string path);
 };
 
