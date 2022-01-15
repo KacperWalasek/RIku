@@ -50,6 +50,7 @@ namespace Network {
 		static std::map<std::string, zmq::socket_t> invitedPlayers;
 	public:
 		static void Init(std::string ip);
+		static void Init();
 		static void Stop();
 		static void CloseInviteSockets();
 		static void Invite(std::string ip);

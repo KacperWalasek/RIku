@@ -2,7 +2,6 @@
 #include "GameLogic/GameLogic.h"
 #include "Frontend/Frontend.h"
 #include "Network/WebModule.h"
-
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 
 int main() {
@@ -10,6 +9,9 @@ int main() {
 	GameLogic logic("../assets", "../mini_assets");
 	front::Config config;
 	front::Frontend frontend(logic, config);
+	Network::WebModule webmodule;
+	webmodule.Init();
+	//webmodule.Invite();
 
 	bool exitProgram = false;
 	while (!exitProgram)

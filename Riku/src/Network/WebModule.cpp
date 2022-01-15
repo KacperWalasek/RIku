@@ -1,4 +1,5 @@
 #include "WebModule.h"
+#include "NetworkUtils.h"
 #include <mutex>
 
 std::string Network::WebModule::myIp;
@@ -99,6 +100,11 @@ void Network::WebModule::Init(std::string ip)
     port = "16669";
     context = zmq::context_t();
     listenerThread = std::async(std::launch::async, ListenerThread, &context, &ReceivedMessages, &players, myIp, port, &playersIps);   
+}
+
+void Network::WebModule::Init()
+{
+    Init(NetworkUtils::getIpAddress());
 }
 
 void Network::WebModule::Stop()

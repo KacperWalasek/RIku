@@ -304,6 +304,7 @@
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
     <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Utils\MiniGameUtils.cpp" />
+    <ClCompile Include="..\src\Network\NetworkUtils.cpp" />
     <ClCompile Include="..\src\Network\WebModule.cpp" />
     <ClCompile Include="..\src\Riku.cpp" />
   </ItemGroup>
@@ -521,6 +522,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <ClInclude Include="..\src\Network\NetworkUtils.h" />
     <ClInclude Include="..\src\Network\WebModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

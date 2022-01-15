@@ -473,6 +473,7 @@
     <ClCompile Include="..\src\Network\WebModule.cpp">
       <Filter>Riku\Network</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Network\NetworkUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -611,9 +612,6 @@
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
-      <Filter>Riku\GameLogic\Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
@@ -1098,6 +1096,9 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.h" />
+    <ClInclude Include="..\src\Network\NetworkUtils.h">
+      <Filter>Riku\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
