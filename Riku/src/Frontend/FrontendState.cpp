@@ -4,7 +4,6 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
 
-#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringIntMapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringListResponse.h"
@@ -19,6 +18,7 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 #include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
 #include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
+#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -54,9 +54,14 @@ std::vector<std::shared_ptr<const minigame::MiniUnit>> FrontendState::getMiniUni
 	return logic.getInfo<minigame::MiniUnitListResponse>("mini_player_units")->get();
 }
 
-const logic::AssetHandler& FrontendState::getAssetHandler()
+const logic::AssetHandler& FrontendState::getLogicAssetHandler()
 {
-	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getHandler();
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getLogicHandler();
+}
+
+const logic::AssetHandler& FrontendState::getMinigameAssetHandler()
+{
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getMinigameHandler();
 }
 
 int FrontendState::getPlayerOnMove()

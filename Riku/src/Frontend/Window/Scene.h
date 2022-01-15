@@ -41,6 +41,9 @@ namespace front {
 		friend class MouseClickCallback;
 
 		void init(GLFWwindow* window);
+		void drawGame();
+		void drawMiniGame();
+		void drawInit(glm::mat4& projection, glm::mat4& view);
 	public:
 		Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect);
 		~Scene();

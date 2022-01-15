@@ -12,3 +12,8 @@ void minigame::MiniGameAssets::initialize(std::string path)
 	units = AssetUtils::getAllAssetsWithType("minigame_unit", handler);
 	skills = AssetUtils::getAllAssetsWithType("skill", handler);
 }
+
+const logic::AssetHandler& minigame::MiniGameAssets::getHandler()
+{
+	return handler;
+}

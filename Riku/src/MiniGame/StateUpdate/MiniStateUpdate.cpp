@@ -1,10 +1,11 @@
 #include "MiniStateUpdate.h"
 #include "Move/IMiniMove.h"
 
-std::shared_ptr<IMove> minigame::MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> patch)
+std::shared_ptr<IMove> minigame::MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> patch, bool addToCummulatedPatch)
 {
 	// TODO Zrobic +=
-	cummulatedPatch = cummulatedPatch? std::make_shared<MiniPatch>(*cummulatedPatch + (MiniPatch)(*patch)) : patch;
+	if(addToCummulatedPatch)
+		cummulatedPatch = cummulatedPatch ? std::make_shared<MiniPatch>(*cummulatedPatch + (MiniPatch)(*patch)) : patch;
 	std::shared_ptr<IMove> combinedMove;
 	for (auto handler : patchHandlers)
 	{

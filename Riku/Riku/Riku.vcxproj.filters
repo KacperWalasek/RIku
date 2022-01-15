@@ -447,6 +447,7 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1044,6 +1045,7 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

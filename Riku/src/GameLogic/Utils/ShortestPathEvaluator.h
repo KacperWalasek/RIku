@@ -38,7 +38,7 @@ struct vertex
 class ICostEvaluator
 {
 public:
-    virtual int h(vertex from, vertex to) = 0;
+    virtual double h(vertex from, vertex to) = 0;
     virtual int d(vertex vert) = 0;
 };
 
@@ -48,7 +48,7 @@ class CostEvaluator
     const std::vector<std::vector<Tile>>& map;
 public:
     CostEvaluator(const std::vector<std::vector<Tile>>& map);
-    int h(vertex from, vertex to);
+    double h(vertex from, vertex to);
     int d(vertex vert);
 };
 
