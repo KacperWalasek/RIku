@@ -11,7 +11,7 @@ class LogicUtils
 public:
 	static void initialize(int logicId);
 	static Path getShortestPath(
-        const GameState& state, int fromX, int fromY, int toX, int toY);
+        const GameState& state, int fromX, int fromY, int toX, int toY, int movementPoints = 0);
 	static std::string getUniqueId();
 
 	static void addHookable(std::shared_ptr<IHookable> hookable);

@@ -15,13 +15,14 @@ public:
 	const std::vector<std::vector<Tile>>& getMap();
 	const std::vector<std::vector<minigame::MiniTile>>& getMiniMap();
 	std::map<std::string, int> getResources();
-	std::vector<std::string> getAvailableBuildings(int mapX, int mapY);
+	std::map<std::string, std::string> getAvailableBuildings(int mapX, int mapY);
 	std::vector<std::shared_ptr<const Unit>> getUnits();
 	std::vector<std::shared_ptr<const minigame::MiniUnit>> getMiniUnits();
 	const logic::AssetHandler& getAssetHandler();
 	int getPlayerOnMove();
 	Path getShortestPath(int fromX, int fromY, int toX, int toY);
-	std::vector<std::string> getGuiOptions(int mapX, int mapY);
+	std::vector<std::vector<std::string>> getGuiOptions(int mapX, int mapY);
+	std::vector<std::string> getGuiHeaders(int mapX, int mapY);
 	bool isInMiniGame();
 	std::vector<std::string> getSkills();
 

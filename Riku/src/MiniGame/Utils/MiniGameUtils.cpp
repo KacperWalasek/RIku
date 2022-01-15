@@ -11,10 +11,10 @@ int minigame::MiniCostEvaluator::d(vertex vert)
 }
 
 std::map<std::string, std::shared_ptr<minigame::IMiniHookable>> minigame::MiniGameUtils::hookables;
-Path minigame::MiniGameUtils::getShortestPath(const MiniGameState& state, int fromX, int fromY, int toX, int toY)
+Path minigame::MiniGameUtils::getShortestPath(const MiniGameState& state, int fromX, int fromY, int toX, int toY, int movementPoints)
 {
     MiniCostEvaluator evaluator;
-    return ShortestPathEvaluator::getShortestPath(evaluator, state.map.size(), state.map[0].size(), fromX, fromY, toX, toY);
+    return ShortestPathEvaluator::getShortestPath(evaluator, state.map.size(), state.map[0].size(), fromX, fromY, toX, toY, movementPoints);
 }
 
 void minigame::MiniGameUtils::addHookable(std::shared_ptr<IMiniHookable> hookable)

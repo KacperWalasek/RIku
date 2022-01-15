@@ -2,8 +2,10 @@ asset_type="tileobject"
 name="skill_factory"
 
 tileobject = {
+    description = "skill_factory_description",
     gui = {
         name = "Skills",
+        headers = { "name", "wood" },
         options = { 
             {
                 name = "Courage",

@@ -11,7 +11,7 @@ std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitElems;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitOptions;
 std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
-std::vector<std::string> CEGUI::GUIUpdate::lastOptions;
+std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
 
 void CEGUI::GUIUpdate::Init()
 {
@@ -283,8 +283,9 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
     CEGUI::PushButton* unitOptionButton;
     CEGUI::Functor::SetLabelText* func;
     float y = 0.1f;
-    for (auto option : avaible_options)
+    for (auto o : avaible_options)
     {
+        std::string option = o[0];
         if (existingUnitOptions.find(option) != existingUnitOptions.end())
         {
             CEGUI::GUI::setWidgetDestRect(existingUnitOptions[option], glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f));

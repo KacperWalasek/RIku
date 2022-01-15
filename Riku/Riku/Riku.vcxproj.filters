@@ -599,9 +599,6 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h">
-      <Filter>Riku\GameLogic\Assets</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
       <Filter>Riku\GameLogic\FrontendCommunicator</Filter>
     </ClInclude>
@@ -1076,6 +1073,13 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\GUIResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BuildingInfoResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

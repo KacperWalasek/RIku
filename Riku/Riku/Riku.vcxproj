@@ -359,7 +359,6 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
     <ClInclude Include="..\src\GameLogic\Assets\IAssetInitializer.h" />
     <ClInclude Include="..\src\GameLogic\Assets\LogicAssetInitializer.h" />
-    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
@@ -376,12 +375,15 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BoolResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BuildingInfoResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\GUIResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h" />
     <ClInclude Include="..\src\GameLogic\GameLogic.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h" />

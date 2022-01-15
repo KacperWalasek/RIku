@@ -31,7 +31,7 @@ void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int a
         auto units = scene->state.getUnits();
         if(!scene->path.path.empty()) {
             auto& unit = units[scene->focusedUnitIndex];
-            auto&& [toX, toY] = scene->path.path[scene->path.path.size()-1];
+            auto&& [toX, toY] = scene->path.path[scene->path.path.size()-1].tile;
             if(unit && unit->getMapX()==px && unit->getMapY()==py) {
                 scene->path.cost=0;
                 scene->path.path.clear();

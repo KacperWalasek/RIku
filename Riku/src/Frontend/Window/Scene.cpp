@@ -115,13 +115,29 @@ void front::Scene::draw()
         int x = unit[i]->getMapX();
         int y = unit[i]->getMapY();
         auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
-        if(i==focusedUnitIndex)
-            handler.tryDraw("main_circle", lightingShader, transform);
+        if(i==focusedUnitIndex) {
+			if(!path.path.empty()) {
+				auto&& [tx,ty] = path.path.back().tile;
+				auto pathTransform = front::Transform(glm::vec3((float)tx, (float)map[tx][ty].height * 0.5f, (float)ty));
+				if(path.path.back().reachable)
+					handler.tryDraw("main_circle_reach", lightingShader, pathTransform);
+				else
+					handler.tryDraw("main_circle", lightingShader, pathTransform);
+			}
+			else
+		        handler.tryDraw("main_circle", lightingShader, transform);
+        }
 		handler.tryDraw(unit[i]->getName(), lightingShader, transform);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 	}
-    for(auto&& [x,y]: path.path) {
-        handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
+    for(auto& tile: path.path) {
+		if(&tile==&path.path.back())
+			continue;
+		auto&& [x, y] = tile.tile;
+		if(tile.reachable)
+            handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
+	    else
+		    handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
     }
 
 	//return to default value

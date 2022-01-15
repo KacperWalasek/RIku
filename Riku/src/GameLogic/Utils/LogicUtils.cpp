@@ -12,10 +12,10 @@ void LogicUtils::initialize(int logicId)
 }
 
 Path LogicUtils::getShortestPath(
-    const GameState& state, int fromX, int fromY, int toX, int toY)
+    const GameState& state, int fromX, int fromY, int toX, int toY, int movementPoints)
 {
     CostEvaluator evaluator(state.map);
-    return ShortestPathEvaluator::getShortestPath(evaluator, state.map.size(), state.map[0].size(), fromX, fromY, toX, toY);
+    return ShortestPathEvaluator::getShortestPath(evaluator, state.map.size(), state.map[0].size(), fromX, fromY, toX, toY, movementPoints);
 }
 
 std::string LogicUtils::getUniqueId()
