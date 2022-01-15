@@ -42,7 +42,7 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
-	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex);
+	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex, movingCameraTransform);
 	draw();
 	CEGUI::GUI::drawMultiple(guiDic);
 }

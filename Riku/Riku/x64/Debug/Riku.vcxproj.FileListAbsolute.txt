@@ -1,2 +1,3 @@
 C:\Users\fopap\Documents\GitHub\Riku\Riku\x64\Debug\assimp-vc142-mtd.dll
 C:\Users\Kacper Walasek\Documents\GitHub\Riku\Riku\x64\Debug\assimp-vc142-mtd.dll
+C:\Users\fopap\Documents\GitHub\Riku\Riku\Riku\x64\Debug\Riku.vcxproj.CopyComplete

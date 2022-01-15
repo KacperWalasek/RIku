@@ -27,9 +27,9 @@ CEGUI::GUIUpdate::~GUIUpdate()
         delete p.second;
 }
 
-void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic, int& focusedUnitIndex)
+void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic, int& focusedUnitIndex, front::Transform& movingCameraTransform)
 {
-    CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex);
+    CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
     CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
     CEGUI::GUIUpdate::UpdateResources(state, guiDic);
     CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
@@ -172,7 +172,7 @@ void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
         catch (...) {}
     }
 }
-void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex)
+void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform)
 {
 
     auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(unitsListName));
@@ -239,7 +239,7 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
         movementBar->setProperty("FrameEnabled", "false");
 
         //CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, activeUnitElem);
-        CEGUI::Functor::FocusUnit* func = new CEGUI::Functor::FocusUnit(repeats[unitName], focusedUnitIndex, unitsList, unitName, activeUnitElem, state);
+        CEGUI::Functor::FocusUnit* func = new CEGUI::Functor::FocusUnit(repeats[unitName], focusedUnitIndex, unitsList, unitName, activeUnitElem, state, movingCameraTransform);
         my_gui->setPushButtonCallback(name + "/button", func);
         movementBarBG->addChild(movementBar);
         resourceElem->addChild(movementBarBG);

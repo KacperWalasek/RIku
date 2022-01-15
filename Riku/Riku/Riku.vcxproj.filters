@@ -100,6 +100,16 @@
     </Filter>
     <Filter Include="Riku\GameLogic\Tile" />
     <Filter Include="Riku\GameLogic\Tile\TileCost" />
+    <Filter Include="Riku\GameLogic\Tile">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Tile\TileCost">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Unit">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Utils">
+    </Filter>
+    <Filter Include="Riku\Network">
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -460,6 +470,9 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.cpp" />
+    <ClCompile Include="..\src\Network\WebModule.cpp">
+      <Filter>Riku\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -598,6 +611,9 @@
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
@@ -1085,5 +1101,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <ClInclude Include="..\src\Network\WebModule.h">
+      <Filter>Riku\Network</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include <ctime>
 #include "GameLogic/GameLogic.h"
 #include "Frontend/Frontend.h"
+#include "Network/WebModule.h"
 
 //https://learnopengl.com/Getting-started (CC-BY-NC) was used to help writing the code
 
