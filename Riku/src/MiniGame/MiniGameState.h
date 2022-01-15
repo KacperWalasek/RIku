@@ -9,11 +9,11 @@ namespace minigame
 	class MiniGameState
 	{
 	public:
-		MiniGameState(int player, int enemy, bool begins);
+		MiniGameState(const Unit& player, const Unit& enemy, bool begins);
 		std::vector<std::vector<MiniTile>> map;
 		MiniGamePlayer player;
 		MiniGamePlayer enemy;
-		std::set<std::shared_ptr<IMiniHookable>> registredHookables;
+		std::set<std::string> registredHookables;
 
 		int playerOnMove;
 	};

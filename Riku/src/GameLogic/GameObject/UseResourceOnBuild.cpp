@@ -15,4 +15,11 @@ std::shared_ptr<IMove> UseResourceOnBuild::onBeingPlaced(int mapX, int mapY)
 	return std::make_shared<UseResources>(resource,quantity);
 }
 
+#include <cereal/archives/binary.hpp>
+#include <cereal/types/polymorphic.hpp>
+
+CEREAL_REGISTER_TYPE(UseResourceOnBuild);
+CEREAL_REGISTER_POLYMORPHIC_RELATION(ITileObject, UseResourceOnBuild)
+
+
 

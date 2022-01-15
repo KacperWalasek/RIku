@@ -285,9 +285,6 @@
     <ClCompile Include="..\src\GameLogic\Utils\ShortestPathEvaluator.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
-    <ClCompile Include="Tests.cpp">
-      <Filter>Riku</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
@@ -295,6 +292,27 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\UseSkill.cpp">
+      <Filter>Riku</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp">
       <Filter>Riku</Filter>
     </ClCompile>
   </ItemGroup>
@@ -759,6 +777,48 @@
       <Filter>Riku</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\WinnerMiniPatchHandler.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontendMiniGameIntegration.h">
+      <Filter>Tests\TestsOfExternalInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\SendPatchToAll.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\TestAction.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\IAction.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\UseSkill.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.h">
+      <Filter>Riku</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h">
       <Filter>Riku</Filter>
     </ClInclude>
   </ItemGroup>

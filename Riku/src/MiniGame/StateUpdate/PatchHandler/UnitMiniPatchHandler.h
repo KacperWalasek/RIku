@@ -1,5 +1,6 @@
 #pragma once
 #include "IMiniPatchHandler.h"
+#include "../../Utils/MiniGameUtils.h"
 
 namespace minigame
 {
@@ -11,7 +12,7 @@ namespace minigame
 		{
 			for (auto unitPatch : patch.unitPatches)
 			{
-				std::shared_ptr<MiniUnit> unit = unitPatch.second.unit;
+				std::shared_ptr<MiniUnit> unit = std::dynamic_pointer_cast<MiniUnit>(MiniGameUtils::getHookable(unitPatch.second.unit));
 				unit->movementPoints += unitPatch.second.movementPointsChange;
 				if (unit->movementPoints < 0)
 					unit->movementPoints = 0;

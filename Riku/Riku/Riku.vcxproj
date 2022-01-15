@@ -82,6 +82,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -206,6 +226,7 @@
     <ClCompile Include="..\src\GameLogic\GameObject\RequireResources.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecorator.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\GUIDescription.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp" />
@@ -215,9 +236,13 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Attack.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecoratorFactory.cpp" />
@@ -228,9 +253,15 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Load.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\UseResources.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.cpp" />
@@ -250,6 +281,7 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGame.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp" />
@@ -260,12 +292,15 @@
     <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\UseSkill.cpp" />
     <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp" />
     <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\Utils\MiniGameUtils.cpp" />
@@ -325,7 +360,6 @@
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h" />
     <ClInclude Include="..\src\GameLogic\Assets\IAssetInitializer.h" />
     <ClInclude Include="..\src\GameLogic\Assets\LogicAssetInitializer.h" />
-    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
@@ -342,12 +376,15 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\AssetHandlerResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BoolResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BuildingInfoResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\GUIResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\IntResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\PathResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringIntMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringListResponse.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\UnitListResponse.h" />
     <ClInclude Include="..\src\GameLogic\GameLogic.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\RequireResources.h" />
@@ -372,15 +409,20 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\ChoseGuiOptionMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\IMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\SimpleMoveDescription.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\StringMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\TranslateUnitMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Attack.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CombinedMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\BuildTileObject.h" />
@@ -391,11 +433,17 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Load.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Save.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\UseResources.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MiniGamePatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.h" />
@@ -403,6 +451,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\MiniGamePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PatchSerializers.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h" />
@@ -417,6 +466,7 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Hero.h" />
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h" />
+    <ClInclude Include="..\src\GameLogic\Utils\DeserializationData.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
     <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />
@@ -424,6 +474,7 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h" />
@@ -439,14 +490,18 @@
     <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h" />
+    <ClInclude Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.h" />
     <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\UseSkill.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\PlayerMiniPatchHandler.h" />

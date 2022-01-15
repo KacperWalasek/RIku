@@ -2,6 +2,8 @@
 #include "IPatchHandler.h"
 #include "../../../MiniGame/MiniGame.h"
 #include "../../GameState.h"
+#include "../../Utils/LogicUtils.h"
+
 class MiniGamePatchHandler :
     public IPatchHandler
 {
@@ -18,7 +20,10 @@ public:
 				auto minigameIt = state.minigames.find(p.first);
 				if (minigameIt == state.minigames.end())
 				{
-					auto minigame = std::make_shared<minigame::MiniGame>(p.first, p.second.enemy, p.second.isBegining);
+					auto minigame = std::make_shared<minigame::MiniGame>(
+						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.playerUnit))),
+						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.enemyUnit))),
+						p.second.isBegining);
 					state.minigames.emplace(p.first, minigame);
 					minigameIt = state.minigames.find(p.first);
 				}

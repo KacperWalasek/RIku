@@ -1,11 +1,12 @@
 #include "UnitPatchHandler.h"
 #include "../../Unit/Unit.h"
+#include "../../Utils/LogicUtils.h"
 
 std::shared_ptr<IAction> UnitPatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
 	for (auto unitPatch : patch.unitPatches)
 	{
-		std::shared_ptr<Unit> unit = unitPatch.second.unit;
+		std::shared_ptr<Unit> unit = std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(unitPatch.second.unit));
 		
 		unit->movementPoints += unitPatch.second.movementPointsChange;
 		if (unit->movementPoints < 0)
@@ -18,6 +19,13 @@ std::shared_ptr<IAction> UnitPatchHandler::handlePatch(GameState& state, const P
 			unit->mapX = unitPatch.second.mapX;
 		if (unitPatch.second.mapY > -1)
 			unit->mapY = unitPatch.second.mapY;
+
+		auto& units = unitPatch.second.addedMiniUnits;
+		if (units.size() > 0)
+			unit->miniunits.insert(unit->miniunits.end(), units.begin(), units.end());
+		auto& skills = unitPatch.second.addedSkills;
+		if (skills.size() > 0)
+			unit->skills.insert(unit->skills.end(), skills.begin(), skills.end());
 	}
 	return nullptr;
 }

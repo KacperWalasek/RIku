@@ -10,6 +10,7 @@ namespace minigame
 {
 	class MiniGame : public IMiniGame
 	{
+		const int mapsize = 20;
 		inline static MiniGameAssets assets;
 
 		Communicator communicator;
@@ -19,7 +20,7 @@ namespace minigame
 	public:
 		static MiniGameAssets& getAssets();
 
-		MiniGame(int player, int enemy, bool begins);
+		MiniGame(const Unit& player, const Unit& enemy, bool begins);
 
 		std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;
 		std::shared_ptr<IMove> makeMove(std::shared_ptr<IMoveDescription> moveDescription);

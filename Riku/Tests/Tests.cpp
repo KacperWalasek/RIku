@@ -7,6 +7,7 @@
 #include "LuaAssetsTests.h"
 #include "LogicAssetTests.h"
 #include "FrontendLogicIntegration.h"
+#include "FrontendMiniGameIntegration.h"
 
 int main(int argc, char** argv) {
 	testing::InitGoogleTest(&argc, argv);

@@ -3,9 +3,9 @@
 #include "PatchHandler/PlayerPatchHandler.h"
 #include "../Actions/CombinedAction.h"
 
-std::shared_ptr<IAction> StateUpdate::handlePatch(std::shared_ptr<Patch> patch)
+std::shared_ptr<IAction> StateUpdate::handlePatch(std::shared_ptr<Patch> patch, bool addToCummulatedPatch)
 {
-	if (patch)
+	if (patch && addToCummulatedPatch)
 		cummulatedPatch = cummulatedPatch ? std::make_shared<Patch>(*cummulatedPatch + *patch) : patch;
 
 	std::shared_ptr<IAction> action;
@@ -32,6 +32,7 @@ std::shared_ptr<IAction> StateUpdate::handleMove(const std::shared_ptr<IMove> mo
 {
 	if (move && move->isDoable(state, assets))
 		return handlePatch(move->createPatch(state, assets));
+	return nullptr;
 }
 
 std::shared_ptr<Patch> StateUpdate::getCummulatedPatch() const
