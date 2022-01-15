@@ -7,7 +7,7 @@ namespace minigame
 	class MiniCostEvaluator : public ICostEvaluator
 	{
 	public:
-		virtual int h(vertex from, vertex to) override;
+		virtual double h(vertex from, vertex to) override;
 		virtual int d(vertex vert) override;
 	};
 

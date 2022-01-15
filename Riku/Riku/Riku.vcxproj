@@ -294,6 +294,7 @@
     <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.cpp" />
     <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp" />
@@ -493,6 +494,7 @@
     <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h" />
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.h" />
     <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h" />

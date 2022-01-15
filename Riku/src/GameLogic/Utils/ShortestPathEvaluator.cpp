@@ -10,7 +10,7 @@ CostEvaluator::CostEvaluator(const std::vector<std::vector<Tile>>& map)
 
 
 //heurystyka
-int CostEvaluator::h(vertex from, vertex to)
+double CostEvaluator::h(vertex from, vertex to)
 {
     return sqrt(std::pow((to.x - from.x), 2) + std::pow((to.y - from.y), 2));
 }
@@ -20,7 +20,7 @@ int CostEvaluator::d(vertex vert)
 {
     if (map[vert.x][vert.y].unit)
         return 1000000;
-    return (int)map[vert.x][vert.y].getCost();
+    return ceil(map[vert.x][vert.y].getCost());
 }
 
 std::vector<PathTile> ShortestPathEvaluator::reconstructPath(std::map<vertex, vertex> cameFrom, vertex current, const std::map<vertex, int>& gScore, int movementPoints)
@@ -41,7 +41,7 @@ Path ShortestPathEvaluator::getShortestPath(
     vertex start(fromX, fromY);
     vertex end(toX, toY);
 
-    std::map<vertex, int> fScore;
+    std::map<vertex, double> fScore;
     std::map<vertex, int> gScore;
 
     auto priority = [&fScore](const vertex& x, const vertex& y) { return fScore[x] > fScore[y]; };

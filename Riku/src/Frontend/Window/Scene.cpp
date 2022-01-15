@@ -14,6 +14,23 @@
 #include "Callbacks/KeyCallback.h"
 #include "../GUIUpdate.h"
 
+constexpr uint8_t playerColors[][3]={
+		{255,0,0},
+		{0,0,255},
+		{0,255,0},
+		{255,255,255},
+		{0,0,0},
+		{255,255,0},
+		{255,0,255},
+		{0,255,255},
+		{255,127,0},
+		{255,0,127},
+		{127,255,0},
+		{0,255,127},
+		{127,0,255},
+		{0,127,255},
+};
+
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
 	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
 {}
@@ -56,8 +73,7 @@ void front::Scene::init(GLFWwindow* window)
 	CEGUI::GUIUpdate::UpdateUIButtons(guiDic);
 }
 
-void front::Scene::draw()
-{
+void front::Scene::drawInit(glm::mat4& projection, glm::mat4& view) {
 	float dayPart = 0.5f;
 	if (fogDensity >= 0.05f)
 		glClearColor(dayPart * 0.7f, dayPart * 0.7f, dayPart * 0.7f, 1.0f);
@@ -69,8 +85,8 @@ void front::Scene::draw()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	//
-	glm::mat4 projection = glm::perspective(glm::radians(config.fov), aspect, 0.1f, 100.0f);
-	glm::mat4 view = movingCameraTransform.calculateViewMatrix();
+	projection = glm::perspective(glm::radians(config.fov), aspect, 0.1f, 100.0f);
+	view = movingCameraTransform.calculateViewMatrix();
 	//shader initialization
 	lightingShader.use();
 	lightingShader.setMat4("projection", projection);
@@ -85,10 +101,37 @@ void front::Scene::draw()
 
 	//Setting lights
 	light.apply(lightingShader, dayPart);
+}
 
-	// render the loaded models
-	//draw tiles
+void front::Scene::drawMiniGame() {
+	const auto& map = state.getMiniMap();
+	const auto& units = state.getMiniUnits();
+	for(int i=0;i<(int)map.size();i++) {
+		for(int j=0;j<(int)map[i].size();j++) {
+			auto transform = front::Transform(glm::vec3((float)i, 0.0f, (float)j));
+			handler.tryDraw("grass",lightingShader,transform);
+			if(map[i][j].unit) {
+				const auto* unit = map[i][j].unit.get();
+				auto&& color = playerColors[unit->getOwner()];
+				if(focusedUnitIndex == -1 || unit!=units[focusedUnitIndex].get())
+					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
+				else {
+					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
+					handler.tryDraw("main_circle", lightingShader, transform);
+				}
+				handler.tryDraw(unit->getName(), lightingShader, transform);
+				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+			}
+		}
+	}
+	for(auto&& [x,y]: path.path) {
+		handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, .0f, (float)y)));
+	}
+}
+
+void front::Scene::drawGame() {
 	const auto& map = state.getMap();
+	const auto& units = state.getUnits();
 	for (int i = 0; i < (int)map.size(); i++)
 	{
 		for (int j = 0; j < (int)map[i].size(); j++)
@@ -101,11 +144,25 @@ void front::Scene::draw()
 			if (map[i][j].area.getName() == "wet")
 				handler.tryDraw("wet", lightingShader, transform);
 			handler.tryDraw(map[i][j].ground.getName(), lightingShader, transform);
-            handler.tryDraw(map[i][j].biome.getName(), lightingShader, transform);
-			if (map[i][j].object) 
+			handler.tryDraw(map[i][j].biome.getName(), lightingShader, transform);
+			if (map[i][j].object)
 				handler.tryDraw(map[i][j].object->getName(), lightingShader, transform);
-            /*if(map[i][i].resource!=-1)
-                handler.tryDraw(map[i][j].resource)*/
+			if(map[i][j].unit) {
+				const auto* unit = map[i][j].unit.get();
+				auto&& color = playerColors[unit->getOwner()];
+				if(focusedUnitIndex == -1 || unit!=units[focusedUnitIndex].get())
+					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
+				else
+					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
+
+				auto transform = front::Transform(glm::vec3((float)i, (float)map[i][j].height * 0.5f, (float)j));
+				if(i==focusedUnitIndex)
+					handler.tryDraw("main_circle", lightingShader, transform);
+				handler.tryDraw(unit->getName(), lightingShader, transform);
+				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+			}
+			/*if(map[i][i].resource!=-1)
+				handler.tryDraw(map[i][j].resource)*/
 		}
 	}
 	const auto& unit = state.getUnits();
@@ -142,6 +199,18 @@ void front::Scene::draw()
 
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+void front::Scene::draw()
+{
+	glm::mat4 projection, view;
+	drawInit(projection, view);
+	// render the loaded models
+	//draw tiles
+	if(state.isInMiniGame())
+		drawMiniGame();
+	else
+		drawGame();
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 

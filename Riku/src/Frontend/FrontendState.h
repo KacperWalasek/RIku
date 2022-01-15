@@ -6,6 +6,8 @@
 #include "../GameLogic/Utils/Path.h"
 // TODO: somehow get rid of this include
 #include "../MiniGame/Tile/MiniTile.h"
+#include "../MiniGame/Unit/MiniUnit.h"
+
 class FrontendState
 {
 	GameLogic& logic;
@@ -18,7 +20,8 @@ public:
 	std::map<std::string, std::string> getAvailableBuildings(int mapX, int mapY);
 	std::vector<std::shared_ptr<const Unit>> getUnits();
 	std::vector<std::shared_ptr<const minigame::MiniUnit>> getMiniUnits();
-	const logic::AssetHandler& getAssetHandler();
+	const logic::AssetHandler& getLogicAssetHandler();
+	const logic::AssetHandler& getMinigameAssetHandler();
 	int getPlayerOnMove();
 	Path getShortestPath(int fromX, int fromY, int toX, int toY);
 	std::vector<std::vector<std::string>> getGuiOptions(int mapX, int mapY);

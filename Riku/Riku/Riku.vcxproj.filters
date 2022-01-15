@@ -459,6 +459,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1080,6 +1081,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
