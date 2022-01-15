@@ -13,6 +13,7 @@ It is not required to install libraries in the project directory. vcpkg will fin
 ```
 git clone https://github.com/Microsoft/vcpkg.git
 .\vcpkg\bootstrap-vcpkg.bat
+cd vcpkg
 vcpkg install cppzmq:x64-windows
 vcpkg install zeromq:x64-windows
 vcpkg install cereal:x64-windows
