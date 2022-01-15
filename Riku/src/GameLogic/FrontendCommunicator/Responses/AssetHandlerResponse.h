@@ -4,10 +4,12 @@
 class AssetHandlerResponse :
     public Response
 { 
-    const logic::AssetHandler& handler;
+    const logic::AssetHandler& logicHandler;
+    const logic::AssetHandler& minigameHandler;
 public:
-    AssetHandlerResponse(std::shared_ptr<Request> request, const logic::AssetHandler& handler)
-        : Response(request, true), handler(handler) {}
-    const logic::AssetHandler& getHandler() { return handler; }
+    AssetHandlerResponse(std::shared_ptr<Request> request, const logic::AssetHandler& logicHandler, const logic::AssetHandler& minigameHandler)
+        : Response(request, true), logicHandler(logicHandler), minigameHandler(minigameHandler) {}
+    const logic::AssetHandler& getLogicHandler() { return logicHandler; }
+    const logic::AssetHandler& getMinigameHandler() { return minigameHandler; }
 };
 

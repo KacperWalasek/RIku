@@ -15,7 +15,7 @@ namespace minigame
 				else
 					state.registredHookables.erase(p.first);
 			}
-
+			
 			return nullptr;
 		}
 	};

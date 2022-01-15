@@ -38,7 +38,7 @@ struct vertex
 class ICostEvaluator
 {
 public:
-    virtual int h(vertex from, vertex to) = 0;
+    virtual double h(vertex from, vertex to) = 0;
     virtual int d(vertex vert) = 0;
 };
 
@@ -48,15 +48,15 @@ class CostEvaluator
     const std::vector<std::vector<Tile>>& map;
 public:
     CostEvaluator(const std::vector<std::vector<Tile>>& map);
-    int h(vertex from, vertex to);
+    double h(vertex from, vertex to);
     int d(vertex vert);
 };
 
 class ShortestPathEvaluator
 {
-    static std::vector<std::pair<int, int>> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current);
+    static std::vector<PathTile> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current, const std::map<vertex, int>& gScore, int movementPoints);
 public:
     static Path getShortestPath(
-        ICostEvaluator& evaluator, int maxX, int maxY, int fromX, int fromY, int toX, int toY);
+        ICostEvaluator& evaluator, int maxX, int maxY, int fromX, int fromY, int toX, int toY, int movementPoints);
 };
 

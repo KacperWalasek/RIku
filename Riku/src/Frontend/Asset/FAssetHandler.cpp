@@ -6,8 +6,8 @@
 #include "../FrontendState.h"
 #include "../JsonUtil.h"
 
-front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler)
-	: handler(assetHandler)
+front::AssetHandler::AssetHandler(const logic::AssetHandler& assetHandler, const logic::AssetHandler& miniHandler)
+	: handler(assetHandler), miniHandler(miniHandler)
 {
 }
 
@@ -18,11 +18,17 @@ void front::AssetHandler::loadFiles() {
         const auto& path = node.second.getPath()+"/";
         loadFile(path);
 	}
+	for(const auto& node: miniHandler.assetNodes) {
+		const auto& path = node.second.getPath()+"/";
+		loadFile(path);
+	}
 	std::cout << "Assets loaded successfully\n\n";
 }
 
 void front::AssetHandler::loadFile(const std::string& parentPath) {
     Json::Value root = getJsonFromFile(parentPath+"front.json",false);
+	if(root.isNull())
+		return;
     std::string path2 = parentPath.substr(3);
     for(auto const& id: root.getMemberNames()) {
         Asset asset(id, path2, root[id]);

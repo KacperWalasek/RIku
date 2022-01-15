@@ -15,7 +15,7 @@ class GameLogic
 	MoveFactory factory;
 	std::shared_ptr<IMiniGame> getActiveMiniGame() const;
 public:
-	GameLogic(std::string assetPath);
+	GameLogic(std::string assetPath, std::string minigameAssetPath);
 	std::shared_ptr<Response> getInfo(std::shared_ptr<Request> request) const;
 	template<typename T>
 	std::shared_ptr<T> getInfo(std::shared_ptr<Request> request) const
@@ -29,5 +29,7 @@ public:
 	}
 	void makeMove(std::shared_ptr<IMoveDescription> moveDescription);
 	bool isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) const;
+
+	void update();
 };
 

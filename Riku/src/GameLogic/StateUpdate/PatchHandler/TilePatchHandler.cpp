@@ -1,32 +1,27 @@
 #include "TilePatchHandler.h"
 #include "../Move/CombinedMove.h"
 #include "../../Unit/Unit.h"
+#include "../../Utils/LogicUtils.h"
 
-std::shared_ptr<IMove> TilePatchHandler::handlePatch(GameState& state, const Patch& patch) const
+std::shared_ptr<IAction> TilePatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {	
-	std::shared_ptr<IMove> move = nullptr;
 	for (auto& tilePatch : patch.tilePatches)
 	{
 		Tile& tile = state.map[tilePatch.first.first][tilePatch.first.second];
 		if (tilePatch.second.removeObject)
+		{
+			LogicUtils::removeHookable(tile.object->getId());
 			tile.object = nullptr;
+		}
 		if (tilePatch.second.object)
 		{
 			tile.object = tilePatch.second.object;
-			auto hookMove = tilePatch.second.object->onBeingPlaced(tilePatch.first.first, tilePatch.first.second);
-			move = std::make_shared<CombinedMove>(move, hookMove);
+			LogicUtils::addHookable(tilePatch.second.object);
 		}
 		if (tilePatch.second.removeUnit)
 			tile.unit = nullptr;
-		if (tilePatch.second.unit)
-		{
-			tile.unit = tilePatch.second.unit;
-			// TODO: Prawdopodobnie trzeba aktualizacje pozycji przeniesc do UnitPatcha, 
-			//	ale i tak onBeingPlaced powinno byc wywolywane gdzies indziej. 
-			// Ze wzgledu ze to sa troche wieksze zmiany, na razie to zostawiam.
-			auto hookMove = tilePatch.second.unit->onBeingPlaced(tilePatch.first.first, tilePatch.first.second);
-			move = std::make_shared<CombinedMove>(move, hookMove);
-		}
+		if (tilePatch.second.unit != "")
+			tile.unit = std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(tilePatch.second.unit));
 	}
-	return move;
+	return nullptr;
 }

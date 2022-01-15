@@ -1,6 +1,9 @@
 #pragma once
 #include <memory>
 #include <map>
+#include <cereal/types/map.hpp>
+#include <cereal/types/string.hpp>
+#include <cereal/types/utility.hpp>
 #include "../../Hooks/IMiniHookable.h"
 #include "MiniPlayerPatch.h"
 #include "MiniTilePatch.h"
@@ -31,14 +34,21 @@ namespace minigame
 		MiniPatch(int player, bool wins = false) : playerOnMove(wins ? -1 : player), winner(wins ? player : -1) {}
 
 		std::map<std::pair<int, int>, MiniTilePatch> tilePatches;
-		std::map<std::shared_ptr<IMiniHookable>, MiniRegisterHookablePatch> registerHookablePatches;
-		std::map<std::shared_ptr<MiniUnit>, MiniUnitPatch> unitPatches;
+		std::map<std::string, MiniRegisterHookablePatch> registerHookablePatches;
+		std::map<std::string, MiniUnitPatch> unitPatches;
 
 		MiniPlayerPatch playerPatch;
 		MiniPlayerPatch enemyPatch;
 
 		int winner = -1;
 		int playerOnMove = -1;
+
+		template<class Archive>
+		void serialize(Archive& archive)
+		{
+			archive(playerOnMove, winner, playerPatch, enemyPatch, 
+				tilePatches, registerHookablePatches, unitPatches);
+		}
 
 		friend MiniPatch operator+(MiniPatch p1, const MiniPatch& p2)
 		{

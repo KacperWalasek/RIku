@@ -6,13 +6,14 @@
 
 int main() {
 	srand(time(0));
-	GameLogic logic("../assets");
+	GameLogic logic("../assets", "../mini_assets");
 	front::Config config;
 	front::Frontend frontend(logic, config);
 
 	bool exitProgram = false;
 	while (!exitProgram)
 	{
+		logic.update();
 		exitProgram = frontend.update();
 	}
 	return 0;

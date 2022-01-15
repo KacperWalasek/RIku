@@ -1,29 +1,47 @@
 #pragma once
 #include "../../Unit/MiniUnit.h"
-
+#include <cereal/types/string.hpp>
+#include <cereal/types/vector.hpp>
+#include <cereal/types/memory.hpp>
 namespace minigame
 {
 	class MiniPlayerPatch
 	{
 	public:
 		MiniPlayerPatch() {};
-		MiniPlayerPatch(std::shared_ptr<MiniUnit> units, bool add = true)
+		MiniPlayerPatch(std::shared_ptr<MiniUnit> unit)
 		{
-			if (add)
-				addedUnits.push_back(units);
+				addedUnits.push_back(unit);
+		}
+		MiniPlayerPatch(std::string name, bool skill = false)
+		{
+			// TODO: when id will have its own type divide it to 2 constructors
+			if(skill)
+				usedSkills.push_back(name);
 			else
-				removedUnits.push_back(units);
+				removedUnits.push_back(name);
 		}
 		std::vector<std::shared_ptr<MiniUnit>> addedUnits;
-		std::vector<std::shared_ptr<MiniUnit>> removedUnits;
+		std::vector<std::string> removedUnits;
+		std::vector<std::string> usedSkills;
+
+		template<class Archive>
+		void serialize(Archive& archive)
+		{
+			archive(addedUnits, removedUnits, usedSkills);
+		}
+
 		MiniPlayerPatch& operator+=(const MiniPlayerPatch& patch)
 		{
-			auto aUits = patch.addedUnits;
-			if (aUits.size() > 0)
-				addedUnits.insert(addedUnits.end(), aUits.begin(), aUits.end());
-			auto rUnits = patch.removedUnits;
-			if (rUnits.size() > 0)
-				removedUnits.insert(removedUnits.end(), rUnits.begin(), rUnits.end());
+			if (patch.addedUnits.size() > 0)
+				addedUnits.insert(addedUnits.end(), patch.addedUnits.begin(), patch.addedUnits.end());
+
+			if (patch.removedUnits.size() > 0)
+				removedUnits.insert(removedUnits.end(), patch.removedUnits.begin(), patch.removedUnits.end());
+
+			if (patch.usedSkills.size() > 0)
+				usedSkills.insert(usedSkills.end(), patch.usedSkills.begin(), patch.usedSkills.end());
+
 			return *this;
 		}
 	};

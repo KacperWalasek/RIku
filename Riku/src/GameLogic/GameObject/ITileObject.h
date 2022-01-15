@@ -12,5 +12,5 @@ class ITileObject : public IAsset, public ICostModifier, public IHookable
 {
 public:
 	virtual const GUIDescription& getGuiDescription() = 0;
-	virtual std::shared_ptr<IMove> onOptionChosen(int index) = 0;
+	virtual std::shared_ptr<IMove> onOptionChosen(int index, int mapX, int mapY) = 0;
 };

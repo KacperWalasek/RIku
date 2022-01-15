@@ -4,10 +4,10 @@
 #include "Assets/LogicAssetInitializer.h"
 #include "../MiniGame/MiniGame.h"
 
-void LogicAssets::initialize(std::string assetPath)
+void LogicAssets::initialize(std::string assetPath, std::string miniGameAssetPath)
 {
 	handler.findFiles(assetPath, std::make_shared<LogicAssetInitializer>());
-	minigame::MiniGame::getAssets().initialize();
+	minigame::MiniGame::getAssets().initialize(miniGameAssetPath);
 
 	biomes = AssetUtils::readNumericAsset<Biome>("biomes", handler);
 	areas = AssetUtils::readNumericAsset<Area>("areas", handler);

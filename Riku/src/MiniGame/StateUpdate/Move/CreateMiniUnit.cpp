@@ -20,9 +20,9 @@ std::shared_ptr<minigame::MiniPatch> minigame::CreateMiniUnit::createPatch(const
     auto unitPtr = std::make_shared<MiniUnit>(name, enemy, mp, funcs);
     return std::make_shared<MiniPatch>(
         MiniPatch(MiniPlayerPatch(unitPtr), enemy ) +
-        (MiniPatch)MiniTilePatch({ mapX,mapY }, unitPtr) +
-        (MiniPatch)MiniRegisterHookablePatch(unitPtr) +
-        (MiniPatch)MiniUnitPatch(unitPtr, mapX, mapY));
+        (MiniPatch)MiniTilePatch({ mapX,mapY }, unitPtr->getId()) +
+        (MiniPatch)MiniRegisterHookablePatch(unitPtr->getId()) +
+        (MiniPatch)MiniUnitPatch(unitPtr->getId(), mapX, mapY));
 }
 
 bool minigame::CreateMiniUnit::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const

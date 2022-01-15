@@ -2,11 +2,13 @@
 #include "IPatchHandler.h"
 #include "../../../MiniGame/MiniGame.h"
 #include "../../GameState.h"
+#include "../../Utils/LogicUtils.h"
+
 class MiniGamePatchHandler :
     public IPatchHandler
 {
 public:
-    virtual std::shared_ptr<IMove> handlePatch(GameState& state, const Patch& patch) const override 
+    virtual std::shared_ptr<IAction> handlePatch(GameState& state, const Patch& patch) const override
     {
 		for (auto p : patch.miniGamePatches)
 		{
@@ -18,12 +20,19 @@ public:
 				auto minigameIt = state.minigames.find(p.first);
 				if (minigameIt == state.minigames.end())
 				{
-					auto minigame = std::make_shared<minigame::MiniGame>(p.first, p.second.enemy, p.second.isBegining);
+					auto minigame = std::make_shared<minigame::MiniGame>(
+						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.playerUnit))),
+						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.enemyUnit))),
+						p.second.isBegining);
 					state.minigames.emplace(p.first, minigame);
 					minigameIt = state.minigames.find(p.first);
 				}
-				if(p.second.miniPatch)
+				if (p.second.miniPatch)
+				{
+					// TODO:webModule if enemy on same pc
 					minigameIt->second->applyMiniPatch(p.second.miniPatch);
+					// else return SendMiniPatch
+				}
 				if (p.second.resetCummulatedPatch)
 					minigameIt->second->resetCummulatedPatch();
 			}

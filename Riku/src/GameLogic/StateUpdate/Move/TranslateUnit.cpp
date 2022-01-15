@@ -10,21 +10,28 @@ TranslateUnit::TranslateUnit(int fromX, int fromY, int toX, int toY)
 
 std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const LogicAssets& assets) const
 {
-    auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY);
     auto unit = state.map[fromX][fromY].unit;
+    int mp = unit ? unit->movementPoints : 0;
+    auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY, mp);
+    path.path.erase(path.path.begin() + path.reachableTilesNumber, path.path.end());
+
+    auto&& [newToX, newToY] = path.path.rbegin()->tile;
+    auto hookMove = unit->onBeingPlaced(newToX, newToY);
+    auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
     return std::make_shared<Patch>(
-        TilePatch({ toX, toY }, unit) + 
+        TilePatch({ newToX, newToY }, unit->getId()) +
         (Patch)TilePatch({ fromX,fromY },false,true) + 
-        (Patch)UnitPatch(unit,-path.cost));
+        (Patch)UnitPatch(unit->getId(),-path.cost) +
+        hookPatch);
 }
 
 bool TranslateUnit::isDoable(const GameState& state, const LogicAssets& assets) const
 {
     //TODO: zoptymalizowac, zeby nie liczyc dwa razy patha. (Liczenie patha w MoveDescription?)
-    auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY);
-    const auto& unit = state.map[fromX][fromY].unit;
-    std::cout << path.cost << ", " << state.map[fromX][fromY].unit->movementPoints << std::endl;
-    return unit && unit->movementPoints >= path.cost && state.playerOnMove == unit->getOwner();
+    auto unit = state.map[fromX][fromY].unit;
+    int mp = unit ? unit->movementPoints : 0;
+    auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY, mp);
+    return unit && path.reachableTilesNumber > 1 && state.playerOnMove == unit->getOwner();
 }
 
 std::shared_ptr<IMove> TranslateUnit::asPointner() const

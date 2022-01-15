@@ -14,7 +14,7 @@ namespace minigame
 		std::vector<std::shared_ptr<IMiniPatchHandler>> patchHandlers;
 		std::shared_ptr<MiniPatch> cummulatedPatch;
 	public:
-		std::shared_ptr<IMove> handlePatch(std::shared_ptr<MiniPatch> patch);
+		std::shared_ptr<IMove> handlePatch(std::shared_ptr<MiniPatch> patch, bool addToCummulatedPatch = true);
 		void setHandlers(std::vector<std::shared_ptr<IMiniPatchHandler>> patchHandlers);
 		MiniStateUpdate(MiniGameState& state, const MiniGameAssets& assets);
 		std::shared_ptr<IMove> handleMove(const std::shared_ptr<IMiniMove> move);

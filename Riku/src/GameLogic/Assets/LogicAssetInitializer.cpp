@@ -6,12 +6,15 @@
 #include "../Hooks/MoveWrapper.h"
 #include "../Tile/TileDescription.h"
 #include "../StateUpdate/Move/CombinedMove.h"
+#include "../StateUpdate/Move/AddMiniUnit.h"
+#include "../StateUpdate/Move/AddSkill.h"
 
 void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 {
 	lua->new_usertype<logic::AssetData>("AssetData",
 		sol::constructors<logic::AssetData(const logic::AssetData&)>(),
-		"as_int", &logic::AssetData::asInt
+		"as_int", &logic::AssetData::asInt,
+		"as_string", &logic::AssetData::asString
 		);
 	lua->new_usertype<TestMove>("TestMove",
 		sol::constructors<TestMove()>()
@@ -22,8 +25,20 @@ void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 	lua->new_usertype<UseResources>("UseResources",
 		sol::constructors<UseResources(int, int), UseResources(std::string, int)>()
 		);
+	lua->new_usertype<AddMiniUnit>("AddMiniUnit",
+		sol::constructors<AddMiniUnit(std::string, int, int)>()
+		);
+	lua->new_usertype<AddSkill>("AddSkill",
+		sol::constructors<AddSkill(std::string, int, int)>()
+		);
 	lua->new_usertype<MoveWrapper>("MoveWrapper",
-		sol::constructors<MoveWrapper(TestMove), MoveWrapper(CreateUnit), MoveWrapper(CombinedMove), MoveWrapper(UseResources)>()
+		sol::constructors<
+			MoveWrapper(TestMove), 
+			MoveWrapper(CreateUnit), 
+			MoveWrapper(CombinedMove), 
+			MoveWrapper(UseResources), 
+			MoveWrapper(AddSkill), 
+			MoveWrapper(AddMiniUnit)>()
 		);
 	lua->new_usertype<TileDescription>("TileDescription",
 		sol::constructors<TileDescription(int, std::string, std::string, std::string)>()

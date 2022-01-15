@@ -4,7 +4,6 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
 
-#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringIntMapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringListResponse.h"
@@ -18,6 +17,11 @@
 
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 #include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
+#include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/StringMoveDescription.h"
+#include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -38,9 +42,9 @@ std::map<std::string, int> FrontendState::getResources()
 	return logic.getInfo<StringIntMapResponse>("player_resources")->getMap();
 }
 
-std::vector<std::string> FrontendState::getAvailableBuildings(int mapX, int mapY)
+std::map<std::string, std::string> FrontendState::getAvailableBuildings(int mapX, int mapY)
 {
-	return logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("available_buildings", mapX, mapY))->getNames();
+	return logic.getInfo<StringStringMapResponse>(std::make_shared<TileRequest>("available_buildings", mapX, mapY))->get();
 }
 
 std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()
@@ -53,9 +57,14 @@ std::vector<std::shared_ptr<const minigame::MiniUnit>> FrontendState::getMiniUni
 	return logic.getInfo<minigame::MiniUnitListResponse>("mini_player_units")->get();
 }
 
-const logic::AssetHandler& FrontendState::getAssetHandler()
+const logic::AssetHandler& FrontendState::getLogicAssetHandler()
 {
-	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getHandler();
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getLogicHandler();
+}
+
+const logic::AssetHandler& FrontendState::getMinigameAssetHandler()
+{
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getMinigameHandler();
 }
 
 int FrontendState::getPlayerOnMove()
@@ -67,17 +76,30 @@ Path FrontendState::getShortestPath(int fromX, int fromY, int toX, int toY)
 {
 	return logic.getInfo<PathResponse>(std::make_shared<TilePairRequest>("shortest_path", fromX, fromY, toX, toY))->get();
 }
-std::vector<std::string> FrontendState::getGuiOptions(int mapX, int mapY)
+std::vector<std::vector<std::string>> FrontendState::getGuiOptions(int mapX, int mapY)
 {
-	auto response = logic.getInfo<StringListResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY));
+	auto response = logic.getInfo<GUIResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY));
 	if (response->getStatus())
-		return response->getNames();
+		return response->getOption();
+	return {};
+}
+
+std::vector<std::string> FrontendState::getGuiHeaders(int mapX, int mapY)
+{
+	auto response = logic.getInfo<GUIResponse>(std::make_shared<TileRequest>("tile_object_gui", mapX, mapY));
+	if (response->getStatus())
+		return response->getHeaders();
 	return {};
 }
 
 bool FrontendState::isInMiniGame()
 {
 	return logic.getInfo<BoolResponse>("is_in_minigame")->get();
+}
+
+std::vector<std::string> FrontendState::getSkills()
+{
+	return logic.getInfo<StringListResponse>("skills")->getNames();
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)
@@ -108,4 +130,19 @@ void FrontendState::choseGuiOption(int mapX, int mapY, int index)
 void FrontendState::resign()
 {
 	logic.makeMove(std::make_shared<SimpleMoveDescription>("resign"));
+}
+
+void FrontendState::useSkill(std::string name, int mapX, int mapY)
+{
+	logic.makeMove(std::make_shared<minigame::UseSkillMoveDescription>(name, mapX, mapY));
+}
+
+void FrontendState::save(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("save", path));
+}
+
+void FrontendState::load(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("load", path));
 }
