@@ -6,7 +6,9 @@ MapGenerator::MapGenerator(logic::Asset asset)
 
 std::vector<std::vector<Tile>> MapGenerator::getMap(const LogicAssets& assets)
 {
+	std::cout << "began generation\n";
 	auto tileDescriptions = assets.mapGenerator.getFunction("onCreateMap")().get<std::vector<std::vector<TileDescription>>>();
+	std::cout << "finished generation\n";
 	std::vector<std::vector<Tile>> tiles;
 	std::transform(tileDescriptions.begin(), tileDescriptions.end(),
 			std::back_insert_iterator(tiles),
