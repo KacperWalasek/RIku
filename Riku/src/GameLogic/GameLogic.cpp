@@ -33,16 +33,26 @@
 #include "StateUpdate/Move/Attack.h"
 #include "StateUpdate/Move/CreateUnit.h"
 #include "FrontendCommunicator/Responses/IntResponse.h"
+#include "Utils/LogicUtils.h"
+#include "StateUpdate/MoveFactory/SaveMoveHandler.h"
+#include "StateUpdate/MoveFactory/LoadMoveHandler.h"
+#include "StateUpdate/PatchHandler/ClearPatchHandler.h"
+#include "StateUpdate/PatchHandler/MapPatchHandler.h"
+#include "StateUpdate/PatchHandler/PlayerCountPatchHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
 {
 	assets.initialize(assetPath, minigameAssetPath);
-	
+	LogicUtils::initialize(0);
+
 	gameState.map = { 6, std::vector<Tile>() };
 	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };
   
 	stateUpdate.setHandlers({ 
+		std::make_shared<ClearPatchHandler>(),
+		std::make_shared<MapPatchHandler>(assets),
+		std::make_shared<PlayerCountPatchHandler>(assets),
 		std::make_shared<PlayerPatchHandler>(),
 		std::make_shared<TilePatchHandler>(),
 		std::make_shared<RegisterHookablePatchHandler>(),
@@ -51,13 +61,15 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<MiniGamePatchHandler>()
 		});
 
-	factory.setHandlers({ 
+	factory.setHandlers({
 		std::make_shared<TestMoveHandler>(),
 		std::make_shared<BuildMoveHandler>(gameState),
 		std::make_shared<TranslateUnitMoveHandler>(),
 		std::make_shared<FinishGameMoveHandler>(),
 		std::make_shared<ChoseGuiOptionMoveHandler>(gameState),
-		std::make_shared<AttackMoveHandler>(gameState)
+		std::make_shared<AttackMoveHandler>(gameState),
+		std::make_shared<SaveMoveHandler>(),
+		std::make_shared<LoadMoveHandler>()
 		});
 
 	communicator.setHandlers({

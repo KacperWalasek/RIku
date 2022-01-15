@@ -9,6 +9,7 @@ class GUIDescription
 {
 	const std::map<std::string, sol::function>& funcs;
 	std::string name;
+	std::vector<std::string> headers;
 	std::vector<std::map<std::string, logic::AssetData>> options;
 public:
 	GUIDescription(const std::map<std::string, sol::function>& funcs);
@@ -20,7 +21,8 @@ public:
 	}
 	GUIDescription(const std::map<std::string, logic::AssetData>& asset, const std::map<std::string, sol::function>& funcs);
 	std::string getName() const;
-	std::vector<std::string> getOptions() const;
+	std::vector<std::vector<std::string>> getOptions() const;
+	std::vector<std::string> getHeaders() const;
 	std::shared_ptr<IMove> onOptionChosen(int index, int mapX, int mapY) const;
 };
 

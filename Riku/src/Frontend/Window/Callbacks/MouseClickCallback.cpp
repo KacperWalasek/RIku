@@ -159,8 +159,8 @@ void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int a
         //scene->clickPos
 		auto clickPos = front::getMapClickPosition(window, (float) x, (float) y, scene->movingCameraTransform,
 		                                             scene->config.fov, scene->aspect, 0.5f);
-        int px = int(std::round(clickPos.x));
-        int py = int(std::round(clickPos.y));
+    int px = int(std::round(clickPos.x));
+    int py = int(std::round(clickPos.y));
 		if(scene->state.isInMiniGame())
 			MiniGameLeftClick(px,py);
 		else

@@ -12,8 +12,7 @@ class GameState
 public:
 	std::vector<Player> players;
 	std::vector<std::vector<Tile>> map;
-	std::set<std::shared_ptr<IHookable>> registredHookables;
-	//TODO: make an interface for MiniGame to make it more extencible
+	std::map<std::string, std::shared_ptr<IHookable>> registredHookables;
 	std::map<int,std::shared_ptr<IMiniGame>> minigames;
 
 	int playerOnMove = 0;

@@ -54,9 +54,9 @@ public:
 
 class ShortestPathEvaluator
 {
-    static std::vector<std::pair<int, int>> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current);
+    static std::vector<PathTile> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current, const std::map<vertex, int>& gScore, int movementPoints);
 public:
     static Path getShortestPath(
-        ICostEvaluator& evaluator, int maxX, int maxY, int fromX, int fromY, int toX, int toY);
+        ICostEvaluator& evaluator, int maxX, int maxY, int fromX, int fromY, int toX, int toY, int movementPoints);
 };
 

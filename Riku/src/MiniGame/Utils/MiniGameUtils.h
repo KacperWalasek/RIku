@@ -13,9 +13,15 @@ namespace minigame
 
 	class MiniGameUtils
 	{
+		static std::map<std::string, std::shared_ptr<IMiniHookable>> hookables;
 	public:
 		static Path getShortestPath(
-			const MiniGameState& state, int fromX, int fromY, int toX, int toY);
+			const MiniGameState& state, int fromX, int fromY, int toX, int toY, int movementPoints = 0);
+
+		static void addHookable(std::shared_ptr<IMiniHookable> hookable);
+		static void removeHookable(std::string id);
+		static std::shared_ptr<IMiniHookable> getHookable(std::string id);
+		static void clearHookables();
 	};
 
 }

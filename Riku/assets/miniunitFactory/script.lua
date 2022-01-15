@@ -2,8 +2,10 @@ asset_type="tileobject"
 name="miniunit_factory"
 
 tileobject = {
+    description = "miniunit_factory_description",
     gui = {
         name = "Units",
+        headers = { "name", "wood" },
         options = { 
             {
                 name = "julka_ciocia_stefana",

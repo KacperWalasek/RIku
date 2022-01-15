@@ -2,8 +2,12 @@
 
 #include "SimpleTileObject.h"
 #include "../StateUpdate/Move/CombinedMove.h"
+#include "../Utils/LogicUtils.h"
 
-SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui) : loadedHookable(hooks), name(name), player(player), gui(gui) {}
+#include <cereal/archives/binary.hpp>
+#include <cereal/types/polymorphic.hpp>
+SimpleTileObject::SimpleTileObject(std::string name, int player, const std::map<std::string, sol::function>& hooks, GUIDescription gui, std::string id)
+	: loadedHookable(hooks), name(name), player(player), gui(gui), id(id=="" ? LogicUtils::getUniqueId() : id) {}
 
 std::string SimpleTileObject::getName() const
 {
@@ -40,6 +44,11 @@ std::shared_ptr<IMove> SimpleTileObject::onBeingPlaced(int mapX, int mapY)
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 
+std::shared_ptr<IMove> SimpleTileObject::onBeingCreated()
+{
+	return loadedHookable.onBeingCreated(*this);
+}
+
 bool SimpleTileObject::canBeBuilt(const GameState& state, int mapX, int mapY)
 {
 	return loadedHookable.canBeBuilt(*this, state, mapX, mapY);
@@ -54,3 +63,12 @@ std::shared_ptr<IMove> SimpleTileObject::onOptionChosen(int index, int mapX, int
 {
 	return gui.onOptionChosen(index, mapX, mapY);
 }
+
+std::string SimpleTileObject::getId() const
+{
+	return id;
+}
+
+
+CEREAL_REGISTER_TYPE(SimpleTileObject);
+CEREAL_REGISTER_POLYMORPHIC_RELATION(ITileObject, SimpleTileObject)

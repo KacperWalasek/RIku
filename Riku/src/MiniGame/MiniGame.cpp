@@ -29,8 +29,8 @@ minigame::MiniGame::MiniGame(const Unit& player, const Unit& enemy, bool begins)
 	: state(player, enemy, begins), stateUpdate(state, assets)
 {
 	stateUpdate.setHandlers({
-		std::make_shared<IsOnMoveMiniPatchHandler>(),
 		std::make_shared<PlayerMiniPatchHandler>(),
+		std::make_shared<IsOnMoveMiniPatchHandler>(),
 		std::make_shared<RegisterHookableMiniPatchHandler>(),
 		std::make_shared<TileMiniPatchHandler>(),
 		std::make_shared<UnitMiniPatchHandler>(),

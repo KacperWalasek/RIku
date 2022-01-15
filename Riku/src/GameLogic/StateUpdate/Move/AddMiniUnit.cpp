@@ -8,7 +8,7 @@ AddMiniUnit::AddMiniUnit(std::string name, int mapX, int mapY)
 
 std::shared_ptr<Patch> AddMiniUnit::createPatch(const GameState& state, const LogicAssets& assets) const
 {
-    return std::make_shared<Patch>(UnitPatch(state.map[mapX][mapY].unit,name,0));
+    return std::make_shared<Patch>(UnitPatch(state.map[mapX][mapY].unit->getId(),name,0));
 }
 
 bool AddMiniUnit::isDoable(const GameState& state, const LogicAssets& assets) const

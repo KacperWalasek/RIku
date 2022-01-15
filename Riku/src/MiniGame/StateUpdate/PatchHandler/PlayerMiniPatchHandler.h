@@ -1,5 +1,6 @@
 #pragma once
 #include "IMiniPatchHandler.h"
+#include "../../Utils/MiniGameUtils.h"
 
 namespace minigame
 {
@@ -10,11 +11,14 @@ namespace minigame
         {
             auto& units = player.units;
             for (std::shared_ptr<MiniUnit> unit : patch.addedUnits)
-                units.push_back(unit);
-
-            for (std::shared_ptr<MiniUnit> unit : patch.removedUnits)
             {
-                auto unitIt = std::find(units.begin(), units.end(), unit);
+                MiniGameUtils::addHookable(unit);
+                units.push_back(unit);
+            }
+
+            for (const std::string& removedUnit : patch.removedUnits)
+            {
+                auto unitIt = std::find_if(units.begin(), units.end(), [&](std::shared_ptr<MiniUnit> unit ) { return unit->getId() == removedUnit; });
                 if (unitIt != units.end())
                     units.erase(unitIt);
             }
@@ -31,7 +35,7 @@ namespace minigame
         {
             handlePatchForPlayer(state.player, patch.playerPatch);
             handlePatchForPlayer(state.enemy, patch.enemyPatch);
-
+            
             return nullptr;
         }
     };
