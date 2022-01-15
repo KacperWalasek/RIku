@@ -24,7 +24,13 @@ namespace logic {
 		else if (areNumbersConverted && getType() == AssetDataType::boolean)
 			return std::to_string(std::get<bool>(data));
 		else if (areNumbersConverted && getType() == AssetDataType::number)
-			return std::to_string(std::get<double>(data));
+		{
+			double nr = std::get<double>(data);
+			if (floor(nr) == nr)
+				return std::to_string((int)nr);
+			else
+				return std::to_string(nr);
+		}
 		return defaultValue;
 	}
 	std::vector<AssetData>& AssetData::asVector() {

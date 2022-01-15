@@ -12,7 +12,7 @@ namespace CEGUI {
         static std::map<std::string, CEGUI::Window*> existingUnitOptions;
         static std::shared_ptr<std::string> activeUnitElem;
         static std::vector<std::shared_ptr<const Unit>> lastUnits;
-        static std::vector<std::string> lastOptions;
+        static std::vector<std::vector<std::string>> lastOptions;
     public:
         ~GUIUpdate();
         static void Init();
