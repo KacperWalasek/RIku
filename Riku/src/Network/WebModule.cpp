@@ -37,9 +37,15 @@ void ListenerThread(zmq::context_t* ctx, std::vector<std::vector<zmq::message_t>
         //std::cout << "Received message of type " << *recv_msgs[0].data<MessType>() << std::endl;
         //std::cout << "  " << recv_msgs[1].str() << std::endl;
         bool saveMess = true;
-        switch (*recv_msgs[0].data<MessType>())
+        switch (*recv_msgs[0].data<Network::MessType>())
         {
-        case JoinAccepted: {
+        case Network::JoinAccepted: {
+
+            // TODO: we cant trust someone who send JoinAccept just like that. 
+            // Logic should first check if Join was send (Maybe it is protected somehow and I dont see it). 
+            // Same about other requests here
+            // Those answers should be added as FastResponses probably
+
             int playerId = *(recv_msgs[2].data<int>());           
             std::string playerIp = recv_msgs[1].to_string();
             //printf("%d  %s\n", playerId,playerIp.c_str());
@@ -49,23 +55,23 @@ void ListenerThread(zmq::context_t* ctx, std::vector<std::vector<zmq::message_t>
             pushSock.set(zmq::sockopt::linger, 0);
             pushSock.connect("tcp://" + playerIp + ":" + port);
             int hostId = 0; // zakladam ze jestem hostem i moje id == 0
-            Network::WebModule::SendById(playerId, MessType::AddPlayer, ip, &hostId, sizeof(hostId));
+            Network::WebModule::SendById(playerId, Network::MessType::AddPlayer, ip, &hostId, sizeof(hostId));
             for (auto& kv : *players)
             {
                 if (kv.first == playerId)
                     continue;
                 int key = kv.first;
                 std::string val = (*playersIps)[key];
-                Network::WebModule::SendById(kv.first, MessType::AddPlayer, playerIp, &playerId, sizeof(playerId));
-                Network::WebModule::SendById(playerId, MessType::AddPlayer, val, &key, sizeof(key));
+                Network::WebModule::SendById(kv.first, Network::MessType::AddPlayer, playerIp, &playerId, sizeof(playerId));
+                Network::WebModule::SendById(playerId, Network::MessType::AddPlayer, val, &key, sizeof(key));
             }          
             break;
         }
-        case Join: {
-            Network::WebModule::SendByIp(recv_msgs[1].to_string(), MessType::JoinAccepted, ip, recv_msgs[2].data(), recv_msgs[2].size());
+        case Network::Join: {
+            Network::WebModule::SendByIp(recv_msgs[1].to_string(), Network::MessType::JoinAccepted, ip, recv_msgs[2].data(), recv_msgs[2].size());
             break;
         }
-        case AddPlayer: {
+        case Network::AddPlayer: {
             int playerId = *(recv_msgs[2].data<int>());
             std::string playerIp = recv_msgs[1].to_string();
             players->insert(std::pair<int, zmq::socket_t>(playerId, zmq::socket_t(*ctx, zmq::socket_type::push)));
@@ -125,9 +131,9 @@ void Network::WebModule::CloseInviteSockets()
     invitedPlayers.clear();
 }
 
-void Network::WebModule::Invite(std::string ip)
+void Network::WebModule::Invite(std::string ip, std::string name)
 {
-    SendByIp(ip, Invitation, myIp);
+    SendByIp(ip, Invitation, myIp, &name, sizeof(name));
 }
 
 void Network::WebModule::AcceptInvitation(std::string ip)
@@ -228,7 +234,7 @@ std::vector<zmq::message_t> Network::WebModule::ReceiveMessage()
     return std::vector<zmq::message_t>(std::move(mess));
 }
 
-m_message Network::WebModule::ReceiveMessageStruct()
+Network::m_message Network::WebModule::ReceiveMessageStruct()
 {
     std::vector<zmq::message_t> mess;
     if (!ReceivedMessages.empty())

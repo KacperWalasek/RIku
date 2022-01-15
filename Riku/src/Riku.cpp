@@ -6,20 +6,22 @@
 
 int main() {
 	srand(time(0));
-	GameLogic logic("../assets", "../mini_assets");
-	front::Config config;
-	front::Frontend frontend(logic, config);
 	Network::WebModule::Init();
 	//webmodule.Invite();
+	/*
 	bool inGame = false;
 	bool isHost = true;
 	std::string enemyIp = "192.168.0.14";
 	std::vector<std::string> invidedIps;
+	std::cout << "I start josting" << std::endl;
+
 	if(isHost)
 		Network::WebModule::Invite(enemyIp);
 	while (!inGame)
 	{
 		m_message message = Network::WebModule::ReceiveMessageStruct();
+		if (message.empty())
+			continue;
 		switch (message.type())
 		{
 		case MessType::Invitation:
@@ -34,7 +36,10 @@ int main() {
 			break;
 		}
 		
-	}
+	}*/
+	GameLogic logic("../assets", "../mini_assets");
+	front::Config config;
+	front::Frontend frontend(logic, config);
 	bool exitProgram = false;
 	while (!exitProgram)
 	{

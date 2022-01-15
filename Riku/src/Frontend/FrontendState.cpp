@@ -22,6 +22,7 @@
 #include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -102,6 +103,16 @@ std::vector<std::string> FrontendState::getSkills()
 	return logic.getInfo<StringListResponse>("skills")->getNames();
 }
 
+std::map<std::string, std::string> FrontendState::getInvitations()
+{
+	return logic.getInfo<StringStringMapResponse>("invitations")->get();
+}
+
+std::map<std::string, Invitation> FrontendState::getInvitedPlayers()
+{
+	return logic.getInfo<InvitationResponse>("invited_players")->get();
+}
+
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<BuildMoveDescription>(name, mapX, mapY));
@@ -145,4 +156,19 @@ void FrontendState::save(std::string path)
 void FrontendState::load(std::string path)
 {
 	logic.makeMove(std::make_shared<StringMoveDescription>("load", path));
+}
+
+void FrontendState::invite(std::string ip)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("invite", ip));
+}
+
+void FrontendState::acceptInvitation(std::string ip)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("accept_invitation", ip));
+}
+
+void FrontendState::setName(std::string name)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("set_name", name));
 }

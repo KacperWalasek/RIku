@@ -3,6 +3,7 @@
 #include <list>
 #include "../StateUpdate/Patch/Patch.h"
 
+unsigned int LogicUtils::currentPlayerId = 0;
 unsigned int LogicUtils::currentId = 0;
 int LogicUtils::logicId = 0;
 std::map<std::string, std::shared_ptr<IHookable>> LogicUtils::hookables;
@@ -23,6 +24,12 @@ std::string LogicUtils::getUniqueId()
     std::string id = std::to_string(logicId) + "_" + std::to_string(currentId);
     currentId++;
     return id;
+}
+
+int LogicUtils::getAvailablePlayerId()
+{
+    currentPlayerId++;
+    return currentPlayerId;
 }
 
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)

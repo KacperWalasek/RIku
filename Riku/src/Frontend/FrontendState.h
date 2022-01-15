@@ -28,6 +28,8 @@ public:
 	std::vector<std::string> getGuiHeaders(int mapX, int mapY);
 	bool isInMiniGame();
 	std::vector<std::string> getSkills();
+	std::map<std::string, std::string> getInvitations();
+	std::map<std::string, Invitation> getInvitedPlayers();
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);
@@ -39,5 +41,8 @@ public:
 
 	void save(std::string path);
 	void load(std::string path);
+	void invite(std::string ip);
+	void acceptInvitation(std::string ip);
+	void setName(std::string name);
 };
 

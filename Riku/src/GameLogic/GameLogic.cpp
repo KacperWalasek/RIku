@@ -10,6 +10,8 @@
 #include "StateUpdate/MoveFactory/ChoseGuiOptionMoveHandler.h"
 #include "StateUpdate/MoveFactory/FinishGameMoveHandler.h"
 #include "StateUpdate/MoveFactory/AttackMoveHandler.h"
+#include "StateUpdate/MoveFactory/InviteMoveHandler.h"
+#include "StateUpdate/MoveFactory/AcceptInvitationMoveHandler.h"
 
 #include "StateUpdate/PatchHandler/PlayerOnMovePatchHandler.h"
 #include "StateUpdate/PatchHandler/PlayerPatchHandler.h"
@@ -27,6 +29,8 @@
 #include "FrontendCommunicator/RequestHandlers/TileObjectGuiRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/MapRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/IsInMiniGameRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/InvitedPlayersRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/InvitationsRequestHandler.h"
 
 #include "FrontendCommunicator/Responses/MapResponse.h"
 #include "IMiniGame.h"
@@ -39,6 +43,9 @@
 #include "StateUpdate/PatchHandler/ClearPatchHandler.h"
 #include "StateUpdate/PatchHandler/MapPatchHandler.h"
 #include "StateUpdate/PatchHandler/PlayerCountPatchHandler.h"
+#include "../Network/WebModule.h"
+#include "Utils/Invitation.h"
+#include "StateUpdate/MoveFactory/SetNameMoveHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -69,7 +76,10 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<ChoseGuiOptionMoveHandler>(gameState),
 		std::make_shared<AttackMoveHandler>(gameState),
 		std::make_shared<SaveMoveHandler>(),
-		std::make_shared<LoadMoveHandler>()
+		std::make_shared<LoadMoveHandler>(),
+		std::make_shared<InviteMoveHandler>(gameState),
+		std::make_shared<AcceptInvitationMoveHandler>(),
+		std::make_shared<SetNameMoveHandler>(gameState)
 		});
 
 	communicator.setHandlers({
@@ -81,9 +91,11 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<PlayerOnMoveRequestHandler>(gameState),
 		std::make_shared<ShortestPathRequestHandler>(gameState),
 		std::make_shared<TileObjectGuiRequestHandler>(gameState),
-		std::make_shared<IsInMiniGameRequestHandler>(gameState)
+		std::make_shared<IsInMiniGameRequestHandler>(gameState),
+		std::make_shared<InvitedPlayersRequestHandler>(gameState),
+		std::make_shared<InvitationsRequestHandler>(gameState)
 		});
-	
+
 	MapGenerator generator(assets.mapGenerator);
 	gameState.map = generator.getMap(assets);
 
@@ -137,6 +149,31 @@ bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) c
 void GameLogic::update()
 {
 	// TODO:webModule check and handle recivedMessages
+	Network::m_message message = Network::WebModule::ReceiveMessageStruct();
+	bool isHost = true;
+	while (!message.empty())
+	{
+		switch (message.type())
+		{
+		case Network::MessType::Invitation:
+			if (gameState.recivedInvitations.find(message.dataString()) == gameState.recivedInvitations.end())
+				break;
+			gameState.recivedInvitations.emplace(message.dataString(), message[2].to_string());
+			break;
+		case Network::MessType::InvitationAccepted:
+			{
+				auto invitationIt = gameState.invitedPlayers.find(message.dataString());
+				if (invitationIt == gameState.invitedPlayers.end())
+					break;
+				invitationIt->second.state = InvitationState::Accepted;
+				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId());
+			}
+			break;
+		default:
+			break;
+		}
+		message = Network::WebModule::ReceiveMessageStruct();
+	}
 }
 
 std::shared_ptr<IMiniGame> GameLogic::getActiveMiniGame() const

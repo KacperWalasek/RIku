@@ -4,6 +4,7 @@
 #include <future>
 #include <map>
 
+namespace Network {
 enum MessType {
 	Patch, // type, patch?
 	Invitation, // type, ip
@@ -36,7 +37,6 @@ public:
 	}
 };
 
-namespace Network {
 	class WebModule
 	{
 	private:
@@ -53,7 +53,7 @@ namespace Network {
 		static void Init();
 		static void Stop();
 		static void CloseInviteSockets();
-		static void Invite(std::string ip);
+		static void Invite(std::string ip, std::string name);
 		static void AcceptInvitation(std::string ip);
 		static void Join(std::string ip, int playerId);
 		static void SendById(int playerId, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);

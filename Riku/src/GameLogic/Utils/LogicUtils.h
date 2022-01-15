@@ -6,6 +6,7 @@
 class LogicUtils
 {
 	static unsigned int currentId;
+	static unsigned int currentPlayerId;
 	static int logicId;
 	static std::map<std::string, std::shared_ptr<IHookable>> hookables;
 public:
@@ -13,6 +14,7 @@ public:
 	static Path getShortestPath(
         const GameState& state, int fromX, int fromY, int toX, int toY, int movementPoints = 0);
 	static std::string getUniqueId();
+	static int getAvailablePlayerId();
 
 	static void addHookable(std::shared_ptr<IHookable> hookable);
 	static void removeHookable(std::string id);
