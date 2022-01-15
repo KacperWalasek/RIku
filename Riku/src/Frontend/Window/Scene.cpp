@@ -121,6 +121,7 @@ void front::Scene::draw()
 }
 
 void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, int y) {
+
 	if(x==clickPos.first && y==clickPos.second)
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 	else
@@ -231,8 +232,46 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 				handler.drawGround(map[x][y].ground.getName(), "_corner-",lightingShader, sideTransform);
 				break;
 		}
-	}
 
+	}
+	//draw clifs
+	for (int i = 0; i < 4; i++) {
+		int dx = i % 2 == 0 ? 0 : 2 - i;
+		int dy = i % 2 == 0 ? i - 1 : 0;
+		int dh;
+		if ((x + dx < 0 || x + dx >= (int)map.size()) || y + dy < 0 || y + dy >= (int)map[0].size())
+			dh = 0;
+		else
+			dh = map[x + dx][y + dy].height - map[x][y].height;
+		
+		if (dh < -1)
+		{
+			int side = i < 2 ? 1 : -1;
+			for (int j = dh+1; j < 1; j++)
+			{
+				for (int k = -1; k < 2; k++)
+				{
+					int zX = x - k * abs(dy);
+					int zY = y + k * abs(dx);
+					float yScale = 1 / 2.f;
+					float yTransition = 0.25f;
+					if (j == 0 && zX >= 0 && zY >= 0 && zX < map.size() && zY < map[0].size()
+						&& map[zX][zY].height - map[x][y].height == -1)
+					{
+						yScale = 1 / 4.f;
+						yTransition = 0.375f;
+					}
+					Transform clifTransform = Transform(glm::vec3(
+						(float)x + 0.5f * side * (i % 2) + (i%2 - 1)*k/3.f, 
+						(float)map[x][y].height * 0.5f + 0.5f * j - yTransition, 
+						(float)y + (i % 2 - 1) * side * 0.5 + (i % 2) * k/3.f) ,
+						glm::vec3(90.0f, 0.0f, 90.0f * i), glm::vec3(1 / 3.f, yScale, 1 / 3.f));
+					handler.drawGround(map[x][y].ground.getName(), "_cliff", lightingShader, clifTransform);
+				}
+			}
+		}
+		
+	}
 	//draw object
 	auto objectTransform = front::Transform({(float)x, (float)map[x][y].height * 0.5f, (float)y});
 	handler.tryDraw(map[x][y].biome.getName(), lightingShader, objectTransform);

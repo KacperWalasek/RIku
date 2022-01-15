@@ -48,5 +48,10 @@
 	{
 		"path": "front-essentials/double_corner.obj"
 	}
+],
+"_cliff": [
+	{
+		"path": "front-essentials/cliff.obj"
+	}
 ]
 }
