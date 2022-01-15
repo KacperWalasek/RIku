@@ -14,14 +14,27 @@
 
 
 front::Asset::Asset(std::string name, const std::string& path, const Json::Value& value): name(std::move(name)) {
+	frustumRadius=0.5f;
+	frustumCenter={0.0f,0.0f,0.0f};
 	//getting asset path
 	if(!value.isArray())
 		return;
 	for(const auto& val: value) {
 		std::string modelPath = val.get("path","").asString();
         std::string iconPath = val.get("icon","").asString();
-		if(modelPath.empty() == iconPath.empty())
+		if(modelPath.empty() == iconPath.empty()) {
+			//check if is frustum info. Should be unique
+			if(val.isMember("frustum")) {
+				frustumRadius = val.get("frustum_radius", 0.5f).asFloat();
+				if(val.isMember("frustum_center")) {
+					float x = val["frustum_center"].get("x",0.0f).asFloat();
+					float y = val["frustum_center"].get("y",0.0f).asFloat();
+					float z = val["frustum_center"].get("z",0.0f).asFloat();
+					frustumCenter = {x,y,z};
+				}
+			}
 			continue;
+		}
 		glm::vec3 pos={0.0f,0.0f,0.0f};
 		if(val.isMember("pos")) {
 			float x = val["pos"].get("x",0.0f).asFloat();
