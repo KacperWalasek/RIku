@@ -1,6 +1,7 @@
 #include "FinishMiniTurn.h"
 #include "../Patch/MiniPatch.h"
 #include "CombinedMiniMove.h"
+#include "../../Utils/MiniGameUtils.h"
 
 std::shared_ptr<minigame::MiniPatch> minigame::FinishMiniTurn::createPatch(const MiniGameState& state, const MiniGameAssets& assets) const
 {
@@ -10,13 +11,16 @@ std::shared_ptr<minigame::MiniPatch> minigame::FinishMiniTurn::createPatch(const
 		return std::make_shared<MiniPatch>(state.enemy.logicIndex, true);
 
 	std::shared_ptr<IMiniMove> move = nullptr;
-	for (auto h : state.registredHookables)
+	for (std::string id : state.registredHookables)
+	{
+		auto h = MiniGameUtils::getHookable(id);
 		if (h->getOwner() == state.player.logicIndex)
 			move = move ? std::make_shared<CombinedMiniMove>(move, h->onTurnEnd()) : h->onTurnEnd();
+	}
 	std::shared_ptr<MiniPatch> patch = move ? move->createPatch(state, assets) : std::make_shared<MiniPatch>();
 	for (auto unit : state.player.units)
 	{
-		patch = std::make_shared<MiniPatch>(*patch + MiniUnitPatch(unit, unit->baseMovementPoints));
+		patch = std::make_shared<MiniPatch>(*patch + MiniUnitPatch(unit->getId(), unit->baseMovementPoints));
 	}
 	return std::make_shared<MiniPatch>(*patch + MiniPatch(state.enemy.logicIndex));
 }

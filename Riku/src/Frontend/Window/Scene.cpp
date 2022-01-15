@@ -124,9 +124,18 @@ void front::Scene::drawMiniGame() {
 			}
 		}
 	}
-	for(auto&& [x,y]: path.path) {
-		handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, .0f, (float)y)));
+	for (auto& tile : path.path) {
+		if (&tile == &path.path.back())
+			continue;
+		auto&& [x, y] = tile.tile;
+		if (tile.reachable)
+			handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)));
+		else
+			handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)));
 	}
+
+	//return to default value
+	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 void front::Scene::drawGame() {

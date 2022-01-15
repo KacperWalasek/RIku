@@ -30,63 +30,62 @@ int findMiniUnit(const std::vector<std::shared_ptr<const minigame::MiniUnit> >& 
 }
 void front::MouseClickCallback::MiniGameLeftClick(int px, int py) {
 	auto units = scene->state.getMiniUnits();
-	if(!scene->path.path.empty()) {
+	if (!scene->path.path.empty()) {
 		auto& unit = units[scene->focusedUnitIndex];
 		auto to = scene->path.path[scene->path.path.size() - 1];
-		auto&&[toX, toY] = to;
-		if(unit && unit->getMapX()==px && unit->getMapY()==py) {
-			scene->path.cost=0;
+		auto&& [toX, toY] = to.tile;
+		if (unit && unit->getMapX() == px && unit->getMapY() == py) {
+			scene->path.cost = 0;
 			scene->path.path.clear();
 		}
-		else if(toX==px && toY==py) {
+		else if (toX == px && toY == py) {
 			const minigame::MiniTile& targetTile = scene->state.getMiniMap()[toX][toY];
-			bool isAttack=false;
-			if(targetTile.unit && targetTile.unit->getOwner()!=units[scene->focusedUnitIndex]->getOwner()) {
-				isAttack=true;
-				if(scene->path.path.size()>1u) {
+			bool isAttack = false;
+			if (targetTile.unit && targetTile.unit->getOwner() != units[scene->focusedUnitIndex]->getOwner()) {
+				isAttack = true;
+				if (scene->path.path.size() > 1u) {
 					scene->path.path.pop_back();
 					scene->path = scene->state.getShortestPath(unit->getMapX(), unit->getMapY(),
-					                                           scene->path.path.back().first,
-					                                           scene->path.path.back().second);
-					scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().first,
-					                      scene->path.path.back().second);
+						scene->path.path.back().tile.first,
+						scene->path.path.back().tile.second);
+					scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().tile.first,
+						scene->path.path.back().tile.second);
 				}
 				else {
-					scene->path.path={{unit->getMapX(), unit->getMapY()}};
+					scene->path.path = { PathTile({unit->getMapX(), unit->getMapY()},0,true) };
 				}
 			}
-				//make move
 			else
-				scene->state.moveUnit(unit->getMapX(),unit->getMapY(),toX, toY);
-			scene->path.cost=0;
+				scene->state.moveUnit(unit->getMapX(), unit->getMapY(), toX, toY);
+			scene->path.cost = 0;
 			auto back = scene->path.path.back();
 			scene->path.path.clear();
-			if(isAttack) {
-				scene->state.attack(back.first, back.second, toX, toY);
-				scene->focusedUnitIndex=-1;
+			if (isAttack) {
+				scene->state.attack(back.tile.first, back.tile.second, toX, toY);
+				scene->focusedUnitIndex = -1;
 			}
 		}
 		else {
 			//change unit
 			int clickedUnit = findMiniUnit(units, px, py);
-			if(clickedUnit!=-1) {
+			if (clickedUnit != -1) {
 				scene->focusedUnitIndex = clickedUnit;
-				scene->path.cost=0;
+				scene->path.cost = 0;
 				scene->path.path.clear();
 			}
 		}
 	}
-	scene->path.cost=0;
+	scene->path.cost = 0;
 	scene->path.path.clear();
-	if(scene->focusedUnitIndex>-1) {
+	if (scene->focusedUnitIndex > -1) {
 		auto& unit = units[scene->focusedUnitIndex];
-		scene->path = scene->state.getShortestPath(unit->getMapX(),unit->getMapY(),px,py);
+		scene->path = scene->state.getShortestPath(unit->getMapX(), unit->getMapY(), px, py);
 	}
 	else {
-		scene->clickPos = {-1, -1};
+		scene->clickPos = { -1, -1 };
 		scene->focusedUnitIndex = findMiniUnit(units, px, py);
 		if (scene->focusedUnitIndex == -1)
-			scene->clickPos = {px, py};
+			scene->clickPos = { px, py };
 	}
 }
 
@@ -95,7 +94,7 @@ void front::MouseClickCallback::GameLeftClick(int px, int py) {
 	if (!scene->path.path.empty()) {
 		auto &unit = units[scene->focusedUnitIndex];
 		auto to = scene->path.path[scene->path.path.size() - 1];
-		auto&&[toX, toY] = to;
+		auto&&[toX, toY] = to.tile;
 		if (unit && unit->getMapX() == px && unit->getMapY() == py) {
 			scene->path.cost = 0;
 			scene->path.path.clear();
@@ -108,13 +107,13 @@ void front::MouseClickCallback::GameLeftClick(int px, int py) {
 				if(scene->path.path.size()>1u) {
 					scene->path.path.pop_back();
 					scene->path = scene->state.getShortestPath(unit->getMapX(), unit->getMapY(),
-					                                           scene->path.path.back().first,
-					                                           scene->path.path.back().second);
-					scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().first,
-					                      scene->path.path.back().second);
+					                                           scene->path.path.back().tile.first,
+					                                           scene->path.path.back().tile.second);
+					scene->state.moveUnit(unit->getMapX(), unit->getMapY(), scene->path.path.back().tile.first,
+					                      scene->path.path.back().tile.second);
 				}
 				else {
-					scene->path.path={{unit->getMapX(), unit->getMapY()}};
+					scene->path.path={PathTile({unit->getMapX(), unit->getMapY()},0,true)};
 				}
 			}
 			else
@@ -123,7 +122,7 @@ void front::MouseClickCallback::GameLeftClick(int px, int py) {
 			auto back = scene->path.path.back();
 			scene->path.path.clear();
 			if (isAttack) {
-				scene->state.attack(back.first, back.second, toX, toY);
+				scene->state.attack(back.tile.first, back.tile.second, toX, toY);
 				scene->focusedUnitIndex = -1;
 			}
 		}
