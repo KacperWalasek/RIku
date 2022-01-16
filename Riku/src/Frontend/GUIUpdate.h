@@ -14,6 +14,7 @@ namespace CEGUI {
         static std::shared_ptr<std::string> activeUnitElem;
         static std::vector<std::shared_ptr<const Unit>> lastUnits;
         static std::vector<std::vector<std::string>> lastOptions;
+        static std::map<std::string,std::string> lastBuildings;
     public:
         ~GUIUpdate();
         static void Init();
@@ -26,5 +27,6 @@ namespace CEGUI {
         static void LoadIcons(FrontendState& state);
         static void CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform);
         static void CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic);
+        static void CreateBuildingOptions(FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic);
     };
 }

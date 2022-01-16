@@ -68,7 +68,7 @@ public:
 		auto it = data.assets.units.find(name);
 		if (it == data.assets.units.end())
 			throw;
-		auto hooks = it->second.getFunctions();
+		const auto& hooks = it->second.getFunctions();
 		construct(type, name, player, baseMovementPoints, miniunits, hooks, id);
 		construct->movementPoints = movementPoints;
 		construct->mapX = mapX;

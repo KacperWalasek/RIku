@@ -170,7 +170,7 @@ void GameLogic::update()
 			break;
 		case Network::MessType::Join:
 		{
-			gameState.hotSeatPlayers = { *message[1].data<int>() };
+			gameState.hotSeatPlayers = { *message[2].data<int>() };
 		}
 		break;
 		case Network::MessType::Patch:
@@ -179,9 +179,11 @@ void GameLogic::update()
 			DeserializationData data(assets, minigame::MiniGame::getAssets());
 			cereal::UserDataAdapter<DeserializationData, cereal::BinaryInputArchive> iarchive(data, ss);
 
-			Patch patch;
+			std::shared_ptr<Patch> patch;
 			iarchive(patch);
-			stateUpdate.handlePatch(std::make_shared<Patch>(patch), false);
+			stateUpdate.handlePatch(patch, false);
+			if (!gameState.isInGame)
+				gameState.isInGame = true;
 		}
 		break;
 		default:

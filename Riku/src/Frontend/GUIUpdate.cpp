@@ -12,6 +12,7 @@ std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitOptions;
 std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
+std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
 
 void CEGUI::GUIUpdate::Init()
 {
@@ -33,6 +34,7 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CE
     {
         CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
         CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
+        CEGUI::GUIUpdate::CreateBuildingOptions(state, focusedUnitIndex, guiDic);
         CEGUI::GUIUpdate::UpdateResources(state, guiDic);
         CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
     }
@@ -310,4 +312,44 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
         y += 0.3;
     }
     lastOptions = avaible_options;
+}
+
+void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)
+{
+    auto units = state.getUnits();
+    if (focusedUnitIndex < 0 || focusedUnitIndex >= units.size())
+        return;
+    auto unit = units[focusedUnitIndex];
+    std::map<std::string, std::string> buildings = state.getAvailableBuildings(unit->getMapX(), unit->getMapY());
+
+    if (buildings == lastBuildings)
+        return;
+
+    CEGUI::GUI* gui = guiDic["BuildingUI"];
+    auto buildingList = static_cast<CEGUI::ScrollablePane*>(gui->getWidgetByName("BuildingsList"));
+    auto nameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("NameLabel"));
+    auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("FrontNameLabel"));
+
+    for (const auto& bulding : lastBuildings)
+    {
+        auto item = buildingList->getChildElementRecursive(bulding.first);
+        buildingList->removeChild(item);
+        delete item;
+    }
+    float y = 0.1f;
+    for (const auto& building : buildings)
+    {
+        auto buildingOptionButton = static_cast<CEGUI::PushButton*>(gui->createWidget("WindowsLook/Button",
+            glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), building.first));
+        buildingOptionButton->setText(front::Lang::getUtf(building.first));
+        auto callback1 = new CEGUI::Functor::SetLabelText(building.first, nameLabel);
+        gui->setPushButtonCallback(building.first, callback1);
+        auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
+        gui->setPushButtonCallback(building.first, callback2);
+        buildingList->addChild(buildingOptionButton);
+        y += 0.3f;
+    }
+    lastBuildings = buildings;
+
+
 }

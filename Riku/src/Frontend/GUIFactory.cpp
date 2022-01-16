@@ -104,24 +104,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	auto buildingsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("BuildingsList"));
 	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
 	auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("FrontNameLabel"));
-	auto avaible_buildings = state.getAvailableBuildings(0, 0); //TODO differ by unit position
-	CEGUI::PushButton* buildingButton;
-	CEGUI::Functor::SetLabelText* func;
-	float y = 0.1f;
-	//std::map<std::string, int> repeats;
-	for (auto building : avaible_buildings)
-	{
-		std::string b = building.first;
-		buildingButton = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
-			glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), b));
-		buildingButton->setText(front::Lang::getUtf(b));
-		func = new CEGUI::Functor::SetLabelText(b, nameLabel);
-		my_gui->setPushButtonCallback(b, func);
-		func = new CEGUI::Functor::SetLabelText(front::Lang::get(b), frontNameLabel);
-		my_gui->setPushButtonCallback(b, func);
-		buildingsList->addChild(buildingButton);
-		y += 0.3;
-	}
+	
 
 	auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress(activeGUI, guiDic, nameLabel, state, focusedUnitIndex);
 	//auto onConfirmButton = new CEGUI::Functor::ConfirmBuilding(nameLabel, state, focusedUnitIndex, activeGUI, guiDic);
