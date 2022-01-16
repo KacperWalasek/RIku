@@ -29,10 +29,13 @@ CEGUI::GUIUpdate::~GUIUpdate()
 
 void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic, int& focusedUnitIndex, front::Transform& movingCameraTransform)
 {
-    CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
-    CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
-    CEGUI::GUIUpdate::UpdateResources(state, guiDic);
-    CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
+    if (state.isInGame())
+    {
+        CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
+        CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
+        CEGUI::GUIUpdate::UpdateResources(state, guiDic);
+        CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
+    }
 }
 
 void CEGUI::GUIUpdate::UpdateMovementBars(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
@@ -151,6 +154,7 @@ void CEGUI::GUIUpdate::CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& 
 }
 void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
 {
+
     auto resources = state.getResources();
     for (auto res : resources)
     {
@@ -161,13 +165,13 @@ void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
         }
         catch (...) {}
     }
-    auto units = state.getUnits();
-    for (auto u : units)
+    auto units = state.getUnitNames();
+    for (const std::string& u : units)
     {
         try
         {
-            CEGUI::GUI::loadIcon(u.get()->getName(), u.get()->getName() + ".png"); //TODO wczytywanie ró¿nych formatów
-            printf("Successfully loaded icon for: %s\n", u.get()->getName().c_str());
+            CEGUI::GUI::loadIcon(u, u + ".png"); //TODO wczytywanie ró¿nych formatów
+            printf("Successfully loaded icon for: %s\n", u.c_str());
         }
         catch (...) {}
     }

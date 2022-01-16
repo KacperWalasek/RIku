@@ -15,21 +15,23 @@ GenerateMap::GenerateMap(int playerCount)
 std::shared_ptr<Patch> GenerateMap::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     auto map = assets.mapGenerator.getFunction("onCreateMap")().get<std::vector<std::vector<TileDescription>>>();
-    Patch combined = Patch();
+    std::shared_ptr<IMove> combined = nullptr;;
     for(int i = 0; i< map.size(); i++)
         for (int j = 0; j < map[i].size(); j++)
-        {
-            BuildTileObject build(-1, { i,j },map[i][j].tileObject);
-            combined = combined + *(build.createPatch(state, assets));
-        }
+            if(map[i][j].tileObject != "")
+            {
+                std::shared_ptr<IMove> build = std::make_shared<BuildTileObject>(-1, std::make_pair( i,j ),map[i][j].tileObject);
+                combined = combined ? std::make_shared<CombinedMove>(combined, build) : build;
+            }
     for (int i = 0; i < playerCount; i++)
     {
         // TODO: when players will be map change player index
-        auto create = CreateUnit(i, "stefan", 0, i);
-        combined = combined + *(create.createPatch(state, assets));
+        std::shared_ptr<IMove> create = std::make_shared<CreateUnit>(i, "stefan", 0, i);
+        combined = combined ? std::make_shared<CombinedMove>(combined, create) : create;
     }
-    combined.playerCount = playerCount;
-    return std::make_shared<Patch>(Patch(map) + combined + Patch(0));
+    Patch patch = Patch(map) + Patch(combined) + Patch(0);
+    patch.playerCount = playerCount;
+    return std::make_shared<Patch>(patch);
 }
 
 bool GenerateMap::isDoable(const GameState& state, const LogicAssets& assets) const

@@ -212,8 +212,10 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Communicator.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitedPlayersRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitationsRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp" />
@@ -267,6 +269,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\UseResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\DelayedMovePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.cpp" />
@@ -358,6 +361,7 @@
     <ClInclude Include="..\src\Frontend\Window\Scene.h" />
     <ClInclude Include="..\src\Frontend\Window\Window.h" />
     <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h" />
+    <ClInclude Include="..\src\GameLogic\Actions\DelayedMoveAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h" />
     <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h" />
@@ -372,9 +376,11 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitedPlayersRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitationsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h" />
@@ -457,6 +463,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TranslateUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\UseResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\DelayedMovePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\IPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MiniGamePatchHandler.h" />

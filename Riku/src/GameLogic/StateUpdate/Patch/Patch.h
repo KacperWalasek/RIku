@@ -10,6 +10,7 @@
 #include "MiniGamePatch.h"
 #include "../../Tile/TileDescription.h"
 
+
 class Patch
 {
 public:
@@ -30,7 +31,7 @@ public:
 	Patch(MiniGamePatch miniGamePatch) {
 		miniGamePatches.emplace(miniGamePatch.player, miniGamePatch);
 	}
-	Patch(int playerOnMove) : playerOnMove(playerOnMove){}
+	Patch(int playerOnMove) : playerOnMove(playerOnMove) {}
 	Patch(const std::vector<std::vector<Tile>>& map)
 	{
 		for (const std::vector<Tile>& row : map)
@@ -44,6 +45,8 @@ public:
 	Patch(std::vector<std::vector<TileDescription>> map)
 		: map(map) {}
 
+	Patch(std::shared_ptr<IMove> delayedMove)
+		: delayedMove(delayedMove) {}
 
 	std::map<int,PlayerPatch> playerPatches;
 	std::map<std::pair<int,int>, TilePatch> tilePatches;
@@ -54,6 +57,8 @@ public:
 	bool clearGameState = false;
 	int playerOnMove = -1;
 	int playerCount = -1;
+
+	std::shared_ptr<IMove> delayedMove;
 
 	template<class Archive>
 	void serialize(Archive& archive)
@@ -75,6 +80,7 @@ public:
 			p1.miniGamePatches = {};
 			p1.clearGameState = true;
 			p1.playerCount = -1;
+			p1.delayedMove = nullptr;
 		}
 		// TODO upiekszyc to jakosc. Przeniesc fora do oddzielnej funkcji i wywolywac ja 5 razy czy cos
 		for (auto plPatch2 : p2.playerPatches)
@@ -123,6 +129,8 @@ public:
 			p1.map = p2.map;
 		if (p2.playerCount > 0)
 			p1.playerCount = p2.playerCount;
+		if (p2.delayedMove)
+			p1.delayedMove = p2.delayedMove;
 		return std::move(p1);
 	}
 };

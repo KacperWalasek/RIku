@@ -48,6 +48,11 @@ std::map<std::string, std::string> FrontendState::getAvailableBuildings(int mapX
 	return logic.getInfo<StringStringMapResponse>(std::make_shared<TileRequest>("available_buildings", mapX, mapY))->get();
 }
 
+std::vector<std::string> FrontendState::getUnitNames()
+{
+	return logic.getInfo<StringListResponse>("unit_names")->getNames();
+}
+
 std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()
 {
 	return logic.getInfo<UnitListResponse>("player_units")->getUnits();
@@ -111,6 +116,11 @@ std::map<std::string, std::string> FrontendState::getInvitations()
 std::map<std::string, Invitation> FrontendState::getInvitedPlayers()
 {
 	return logic.getInfo<InvitationResponse>("invited_players")->get();
+}
+
+bool FrontendState::isInGame()
+{
+	return logic.getInfo<BoolResponse>("is_in_game")->get();
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)

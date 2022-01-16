@@ -2,6 +2,8 @@
 #include "IAction.h"
 #include <iostream>
 #include "../StateUpdate/StateUpdate.h"
+#include "../../Network/WebModule.h"
+#include <cereal/archives/binary.hpp>
 
 class Patch;
 class SendPatchToAll : public IAction
@@ -15,6 +17,9 @@ public:
 		MoveFactory& factory)
 	{
 		std::shared_ptr<Patch> patch = stateUpdate.getCummulatedPatch();
-		// TODO:webModule send patch to all using web module
+		std::stringstream ss;
+		cereal::BinaryOutputArchive oarchive(ss);
+		oarchive(patch);
+		Network::WebModule::SendById(1 - gameState.hotSeatPlayers[0], Network::Patch, ss.str());
 	}
 };

@@ -15,7 +15,7 @@ public:
 	std::map<std::string, std::string> recivedInvitations;
 	bool isHosting = false;
 	bool isInGame = false;
-	std::vector<int> hotSeatPlayers;
+	std::vector<int> hotSeatPlayers = { 0 };
 
 	std::vector<Player> players;
 	std::vector<std::vector<Tile>> map;

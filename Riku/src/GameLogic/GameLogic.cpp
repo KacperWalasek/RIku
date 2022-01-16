@@ -47,15 +47,15 @@
 #include "Utils/Invitation.h"
 #include "StateUpdate/MoveFactory/SetNameMoveHandler.h"
 #include "StateUpdate/MoveFactory/StartGameMoveHandler.h"
+#include "StateUpdate/PatchHandler/DelayedMovePatchHandler.h"
+#include "FrontendCommunicator/RequestHandlers/GetUnitNamesRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/IsInGameRequestHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
 {
 	assets.initialize(assetPath, minigameAssetPath);
 	LogicUtils::initialize(0);
-
-	gameState.map = { 6, std::vector<Tile>() };
-	gameState.players = { (int)assets.playerResources.size(), (int)assets.playerResources.size() };
   
 	stateUpdate.setHandlers({ 
 		std::make_shared<ClearPatchHandler>(),
@@ -64,9 +64,10 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<PlayerPatchHandler>(),
 		std::make_shared<TilePatchHandler>(),
 		std::make_shared<RegisterHookablePatchHandler>(),
-		std::make_shared<PlayerOnMovePatchHandler>(),
 		std::make_shared<UnitPatchHandler>(),
-		std::make_shared<MiniGamePatchHandler>()
+		std::make_shared<MiniGamePatchHandler>(),
+		std::make_shared<DelayedMovePatchHandler>(),
+		std::make_shared<PlayerOnMovePatchHandler>()
 		});
 
 	factory.setHandlers({
@@ -95,18 +96,10 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<TileObjectGuiRequestHandler>(gameState),
 		std::make_shared<IsInMiniGameRequestHandler>(gameState),
 		std::make_shared<InvitedPlayersRequestHandler>(gameState),
-		std::make_shared<InvitationsRequestHandler>(gameState)
+		std::make_shared<InvitationsRequestHandler>(gameState),
+		std::make_shared<GetUnitNamesRequestHandler>(assets),
+		std::make_shared<IsInGameRequestHandler>(gameState),
 		});
-
-	MapGenerator generator(assets.mapGenerator);
-	gameState.map = generator.getMap(assets);
-
-	auto unitMove = std::make_shared<CreateUnit>(0, "stefan", 10, 10);
-	stateUpdate.handleMove(unitMove);
-	unitMove = std::make_shared<CreateUnit>(0, "stefan", 11, 10);
-	stateUpdate.handleMove(unitMove);
-	unitMove = std::make_shared<CreateUnit>(1, "stefan", 12, 10);
-	stateUpdate.handleMove(unitMove);
 	
 }
 
@@ -172,6 +165,11 @@ void GameLogic::update()
 				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId());
 			}
 			break;
+		case Network::MessType::Join:
+		{
+			gameState.hotSeatPlayers.push_back(*message[1].data<int>());
+		}
+		break;
 		default:
 			break;
 		}

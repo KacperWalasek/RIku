@@ -18,6 +18,7 @@ public:
 	const std::vector<std::vector<minigame::MiniTile>>& getMiniMap();
 	std::map<std::string, int> getResources();
 	std::map<std::string, std::string> getAvailableBuildings(int mapX, int mapY);
+	std::vector<std::string> getUnitNames();
 	std::vector<std::shared_ptr<const Unit>> getUnits();
 	std::vector<std::shared_ptr<const minigame::MiniUnit>> getMiniUnits();
 	const logic::AssetHandler& getLogicAssetHandler();
@@ -30,6 +31,7 @@ public:
 	std::vector<std::string> getSkills();
 	std::map<std::string, std::string> getInvitations();
 	std::map<std::string, Invitation> getInvitedPlayers();
+	bool isInGame();
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);
