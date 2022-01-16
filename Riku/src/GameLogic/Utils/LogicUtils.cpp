@@ -79,3 +79,17 @@ Patch LogicUtils::createPatchFromState(const GameState& state)
     return patch;
 }
 
+int LogicUtils::getResponsePlayer(const GameState& state)
+{
+    int ret = state.hotSeatPlayers[0];
+    for (int p : state.hotSeatPlayers)
+    {
+        if (p == state.playerOnMove)
+            return p;
+        if( p > ret && !(ret < state.playerOnMove && p > state.playerOnMove)) 
+            ret = p;
+    }
+    return ret;
+
+}
+

@@ -1,5 +1,6 @@
 #include "PlayerResourcesRequestHandler.h"
 #include "../Responses/StringIntMapResponse.h"
+#include "../../Utils/LogicUtils.h"
 
 PlayerResourcesRequestHandler::PlayerResourcesRequestHandler(const GameState& gamestate, const LogicAssets& assets)
     : state(gamestate), assets(assets)
@@ -11,7 +12,7 @@ std::shared_ptr<Response> PlayerResourcesRequestHandler::handleRequest(std::shar
 {
     std::vector<int> quantities;
     if (state.isInGame)
-        quantities = state.players[state.playerOnMove].getResourceQuantities();
+        quantities = state.players[LogicUtils::getResponsePlayer(state)].getResourceQuantities();
     else
         quantities.resize(assets.playerResources.size());
     std::map<std::string, int> resourceMap;

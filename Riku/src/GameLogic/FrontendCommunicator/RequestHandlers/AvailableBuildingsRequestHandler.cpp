@@ -2,6 +2,7 @@
 #include "../Responses/StringStringMapResponse.h"
 #include "../Requests/TileRequest.h"
 #include "../../StateUpdate/Move/BuildTileObject.h"
+#include "../../Utils/LogicUtils.h"
 
 std::shared_ptr<Response> AvailableBuildingsRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
@@ -14,8 +15,7 @@ std::shared_ptr<Response> AvailableBuildingsRequestHandler::handleRequest(std::s
     std::copy_if(buildings.begin(), buildings.end(),
         std::insert_iterator(availableBuildings, availableBuildings.end()),
         [&](const std::pair<std::string, std::string>& building) {
-            //TODO index playera
-            BuildTileObject obj(state.playerOnMove, { tileRequest->getMapX(), tileRequest->getMapY() }, building.first);
+            BuildTileObject obj(LogicUtils::getResponsePlayer(state), { tileRequest->getMapX(), tileRequest->getMapY() }, building.first);
             return obj.isDoable(state, assets);
         });
     return std::make_shared<StringStringMapResponse>(tileRequest, availableBuildings);

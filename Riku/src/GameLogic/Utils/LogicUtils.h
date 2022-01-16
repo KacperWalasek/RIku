@@ -22,5 +22,6 @@ public:
 	static void clearHookables();
 
 	static Patch createPatchFromState(const GameState& state);
+	static int getResponsePlayer(const GameState& state);
 };
 
