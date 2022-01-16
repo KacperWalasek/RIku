@@ -161,6 +161,11 @@ void Network::WebModule::Join(std::string ip, int playerId)
     //SendById(playerId, MessType::AddPlayer, &myId, sizeof(myId), &myIp, sizeof(myIp)); //zak³adamy ¿e host ma id = 0
 }
 
+void Network::WebModule::SendPatch(int playerId,  std::string patch)
+{
+    SendById(playerId, Network::Patch, patch);
+}
+
 void Network::WebModule::SendByIp(std::string ip, MessType type, void* data, size_t size, void* data2, size_t size2)
 {
     if (invitedPlayers.find(ip) == invitedPlayers.end())

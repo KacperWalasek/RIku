@@ -56,6 +56,7 @@ public:
 		static void Invite(std::string ip, std::string name);
 		static void AcceptInvitation(std::string ip, std::string name);
 		static void Join(std::string ip, int playerId);
+		static void SendPatch(int playerId, std::string patch);
 		static void SendById(int playerId, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);
 		static void SendById(int playerId, MessType type, std::string dataString, void* data = nullptr, size_t size = 0);
 		static void SendByIp(std::string ip, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);

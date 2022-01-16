@@ -50,6 +50,9 @@
 #include "StateUpdate/PatchHandler/DelayedMovePatchHandler.h"
 #include "FrontendCommunicator/RequestHandlers/GetUnitNamesRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/IsInGameRequestHandler.h"
+#include <cereal/archives/binary.hpp>
+#define CEREAL_FUTURE_EXPERIMENTAL
+#include <cereal/archives/adapters.hpp>
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -167,7 +170,18 @@ void GameLogic::update()
 			break;
 		case Network::MessType::Join:
 		{
-			gameState.hotSeatPlayers.push_back(*message[1].data<int>());
+			gameState.hotSeatPlayers = { *message[1].data<int>() };
+		}
+		break;
+		case Network::MessType::Patch:
+		{
+			std::stringstream ss( message.dataString());
+			DeserializationData data(assets, minigame::MiniGame::getAssets());
+			cereal::UserDataAdapter<DeserializationData, cereal::BinaryInputArchive> iarchive(data, ss);
+
+			Patch patch;
+			iarchive(patch);
+			stateUpdate.handlePatch(std::make_shared<Patch>(patch), false);
 		}
 		break;
 		default:
