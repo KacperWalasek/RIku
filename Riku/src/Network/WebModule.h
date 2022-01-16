@@ -54,12 +54,13 @@ public:
 		static void Stop();
 		static void CloseInviteSockets();
 		static void Invite(std::string ip, std::string name);
-		static void AcceptInvitation(std::string ip);
+		static void AcceptInvitation(std::string ip, std::string name);
 		static void Join(std::string ip, int playerId);
 		static void SendById(int playerId, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);
 		static void SendById(int playerId, MessType type, std::string dataString, void* data = nullptr, size_t size = 0);
 		static void SendByIp(std::string ip, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);
 		static void SendByIp(std::string ip, MessType type, std::string dataString, void* data = nullptr, size_t size = 0);
+		static void SendByIp(std::string ip, MessType type, std::string dataString1, std::string dataString2);
 		static std::vector<zmq::message_t> ReceiveMessage();
 		static m_message ReceiveMessageStruct();
 	};

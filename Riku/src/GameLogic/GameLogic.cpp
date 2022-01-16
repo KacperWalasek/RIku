@@ -78,7 +78,7 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<SaveMoveHandler>(),
 		std::make_shared<LoadMoveHandler>(),
 		std::make_shared<InviteMoveHandler>(gameState),
-		std::make_shared<AcceptInvitationMoveHandler>(),
+		std::make_shared<AcceptInvitationMoveHandler>(gameState),
 		std::make_shared<SetNameMoveHandler>(gameState)
 		});
 
@@ -157,8 +157,7 @@ void GameLogic::update()
 		{
 		case Network::MessType::Invitation:
 			if (gameState.recivedInvitations.find(message.dataString()) == gameState.recivedInvitations.end())
-				break;
-			gameState.recivedInvitations.emplace(message.dataString(), message[2].to_string());
+				gameState.recivedInvitations.emplace(message.dataString(), message[2].to_string());
 			break;
 		case Network::MessType::InvitationAccepted:
 			{
@@ -166,6 +165,7 @@ void GameLogic::update()
 				if (invitationIt == gameState.invitedPlayers.end())
 					break;
 				invitationIt->second.state = InvitationState::Accepted;
+				invitationIt->second.name = message[2].to_string();
 				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId());
 			}
 			break;

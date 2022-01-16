@@ -4,9 +4,9 @@
 class InviteMoveHandler :
     public IMoveDescriptionHandler
 {
-    const GameState& state;
+    GameState& state;
 public:
-    InviteMoveHandler(const GameState& state);
+    InviteMoveHandler(GameState& state);
     virtual std::shared_ptr<IMove> handleDescription(const IMoveDescription& description) override;
 
     virtual bool canHandle(const IMoveDescription& description) const override;

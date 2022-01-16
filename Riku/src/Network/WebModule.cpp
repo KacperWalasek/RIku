@@ -133,12 +133,12 @@ void Network::WebModule::CloseInviteSockets()
 
 void Network::WebModule::Invite(std::string ip, std::string name)
 {
-    SendByIp(ip, Invitation, myIp, &name, sizeof(name));
+    SendByIp(ip, Invitation, myIp, name);
 }
 
-void Network::WebModule::AcceptInvitation(std::string ip)
+void Network::WebModule::AcceptInvitation(std::string ip, std::string name)
 {
-    SendByIp(ip, InvitationAccepted, myIp);
+    SendByIp(ip, InvitationAccepted, myIp, name);
 }
 
 void Network::WebModule::Join(std::string ip, int playerId)
@@ -195,6 +195,24 @@ void Network::WebModule::SendByIp(std::string ip, MessType type, std::string dat
        zmq::buffer(&type, sizeof(type)),      
        zmq::buffer(std::string_view(dataString)),
        zmq::buffer(data, size),
+    };
+    auto res = zmq::send_multipart(pushSock, send_msgs);
+}
+
+void Network::WebModule::SendByIp(std::string ip, MessType type, std::string dataString1, std::string dataString2)
+{
+    if (invitedPlayers.find(ip) == invitedPlayers.end())
+    {
+        invitedPlayers.insert(std::pair<std::string, zmq::socket_t>(ip, zmq::socket_t(context, zmq::socket_type::push)));
+        invitedPlayers[ip].set(zmq::sockopt::linger, 0);
+        invitedPlayers[ip].connect("tcp://" + ip + ":" + port);
+    }
+
+    zmq::socket_ref pushSock = invitedPlayers[ip];
+    std::array<zmq::const_buffer, 3> send_msgs = {
+       zmq::buffer(&type, sizeof(type)),
+       zmq::buffer(std::string_view(dataString1)),
+       zmq::buffer(std::string_view(dataString2)),
     };
     auto res = zmq::send_multipart(pushSock, send_msgs);
 }
