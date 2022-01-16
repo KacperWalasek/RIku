@@ -41,6 +41,8 @@ public:
 			this->map.push_back(descRow);
 		}
 	}
+	Patch(std::vector<std::vector<TileDescription>> map)
+		: map(map) {}
 
 
 	std::map<int,PlayerPatch> playerPatches;

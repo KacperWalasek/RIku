@@ -503,6 +503,8 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1163,6 +1165,8 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

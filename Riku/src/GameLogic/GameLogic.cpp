@@ -46,6 +46,7 @@
 #include "../Network/WebModule.h"
 #include "Utils/Invitation.h"
 #include "StateUpdate/MoveFactory/SetNameMoveHandler.h"
+#include "StateUpdate/MoveFactory/StartGameMoveHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -79,7 +80,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<LoadMoveHandler>(),
 		std::make_shared<InviteMoveHandler>(gameState),
 		std::make_shared<AcceptInvitationMoveHandler>(gameState),
-		std::make_shared<SetNameMoveHandler>(gameState)
+		std::make_shared<SetNameMoveHandler>(gameState),
+		std::make_shared<StartGameMoveHandler>(gameState)
 		});
 
 	communicator.setHandlers({
@@ -164,7 +166,8 @@ void GameLogic::update()
 				auto invitationIt = gameState.invitedPlayers.find(message.dataString());
 				if (invitationIt == gameState.invitedPlayers.end())
 					break;
-				invitationIt->second.state = InvitationState::Accepted;
+				// TODO: change to Accepted
+				invitationIt->second.state = InvitationState::Joined;
 				invitationIt->second.name = message[2].to_string();
 				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId());
 			}

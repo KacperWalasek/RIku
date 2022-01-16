@@ -172,3 +172,8 @@ void FrontendState::setName(std::string name)
 {
 	logic.makeMove(std::make_shared<StringMoveDescription>("set_name", name));
 }
+
+void FrontendState::startGame()
+{
+	logic.makeMove(std::make_shared<SimpleMoveDescription>("start_game"));
+}

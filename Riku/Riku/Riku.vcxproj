@@ -244,6 +244,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp" />
@@ -258,6 +259,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Load.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp" />
@@ -432,6 +434,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h" />
@@ -445,6 +448,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\ExtractResources.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Load.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h" />

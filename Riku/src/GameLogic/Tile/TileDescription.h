@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <cereal/access.hpp>
+#include "Tile.h"
+
 class TileDescription
 {
 public:
