@@ -4,11 +4,12 @@
 #include "../../Resource.h"
 #include <string>
 
-class Biome : public Resource
+class Biome :
+    public ICostModifier, public Resource
 {
-    int mpCost;
+    double mult = 0;
 public:
-    Biome(std::string name, int mpCost);
-    int getCost() const;
+    Biome(std::string name, double mult);
+    virtual double getModifiedCost(double cost) const override;
 };
 

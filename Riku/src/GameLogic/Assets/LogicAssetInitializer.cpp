@@ -41,7 +41,7 @@ void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 			MoveWrapper(AddMiniUnit)>()
 		);
 	lua->new_usertype<TileDescription>("TileDescription",
-		sol::constructors<TileDescription(int, std::string, std::string, std::string)>()
+		sol::constructors<TileDescription(int, std::string, std::string, std::string), TileDescription(int, std::string, std::string, std::string, std::string)>()
 		);
 	lua->new_usertype<CombinedMove>("CombinedMove",
 		sol::constructors<CombinedMove(MoveWrapper, MoveWrapper)>()

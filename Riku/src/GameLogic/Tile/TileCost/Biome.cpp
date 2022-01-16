@@ -1,11 +1,11 @@
 // Kacper Walasek
 #include "Biome.h"
 
-Biome::Biome(std::string name, int cost)
-	: Resource(name), mpCost(cost)
+Biome::Biome(std::string name, double mult)
+	: Resource(name), mult(mult)
 {}
 
-int Biome::getCost() const
+double Biome::getModifiedCost(double cost) const
 {
-	return mpCost;
+	return cost * mult;
 }
