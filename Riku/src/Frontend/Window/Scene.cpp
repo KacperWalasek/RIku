@@ -145,6 +145,8 @@ void front::Scene::drawGame() {
 	const auto& units = state.getUnits();
 	if (focusedUnitIndex >= units.size())
 		focusedUnitIndex = -1;
+	if (focusedUnitIndex < 0 && focusedUnitIndex >= units.size())
+		path = Path({}, 0);
 	for (int i = 0; i < (int)map.size(); i++)
 	{
 		for (int j = 0; j < (int)map[i].size(); j++)
