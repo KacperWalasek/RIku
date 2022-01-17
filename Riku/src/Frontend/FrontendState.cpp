@@ -23,6 +23,7 @@
 #include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -181,6 +182,11 @@ void FrontendState::acceptInvitation(std::string ip)
 void FrontendState::setName(std::string name)
 {
 	logic.makeMove(std::make_shared<StringMoveDescription>("set_name", name));
+}
+
+void FrontendState::setHotseatPlayerCount(int count)
+{
+	logic.makeMove(std::make_shared<IntMoveDescription>("hotseat_count", count));
 }
 
 void FrontendState::startGame()

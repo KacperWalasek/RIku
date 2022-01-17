@@ -161,9 +161,9 @@ void Network::WebModule::Join(std::string ip, int playerId)
     //SendById(playerId, MessType::AddPlayer, &myId, sizeof(myId), &myIp, sizeof(myIp)); //zak³adamy ¿e host ma id = 0
 }
 
-void Network::WebModule::SendPatch(int playerId,  std::string patch)
+void Network::WebModule::SendPatch(std::string patch)
 {
-    SendById(playerId, Network::Patch, patch);
+    SendToAll(Network::Patch, patch);
 }
 
 void Network::WebModule::SendByIp(std::string ip, MessType type, void* data, size_t size, void* data2, size_t size2)
@@ -220,6 +220,12 @@ void Network::WebModule::SendByIp(std::string ip, MessType type, std::string dat
        zmq::buffer(std::string_view(dataString2)),
     };
     auto res = zmq::send_multipart(pushSock, send_msgs);
+}
+
+void Network::WebModule::SendToAll( MessType type, std::string dataString, void* data, size_t size)
+{
+    for (const auto& logic : players)
+        SendById(logic.first, type, dataString, data, size);
 }
 
 void Network::WebModule::SendById(int playerId, MessType type, void* data, size_t size, void* data2, size_t size2)

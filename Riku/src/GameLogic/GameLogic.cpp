@@ -53,6 +53,7 @@
 #include <cereal/archives/binary.hpp>
 #define CEREAL_FUTURE_EXPERIMENTAL
 #include <cereal/archives/adapters.hpp>
+#include "StateUpdate/MoveFactory/HotseatCountMoveHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -85,7 +86,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<InviteMoveHandler>(gameState),
 		std::make_shared<AcceptInvitationMoveHandler>(gameState),
 		std::make_shared<SetNameMoveHandler>(gameState),
-		std::make_shared<StartGameMoveHandler>(gameState)
+		std::make_shared<StartGameMoveHandler>(gameState),
+		std::make_shared<HotseatCountMoveHandler>(gameState)
 		});
 
 	communicator.setHandlers({

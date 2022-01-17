@@ -46,6 +46,7 @@ public:
 	void invite(std::string ip);
 	void acceptInvitation(std::string ip);
 	void setName(std::string name);
+	void setHotseatPlayerCount(int count);
 	void startGame();
 };
 

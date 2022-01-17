@@ -8,7 +8,7 @@ StartGameMoveHandler::StartGameMoveHandler(GameState& state)
 std::shared_ptr<IMove> StartGameMoveHandler::handleDescription(const IMoveDescription& description)
 {
 	state.isInGame = true;
-	int playerCount = 1;
+	int playerCount = state.hotSeatPlayers.size();
 	for (const auto& inv : state.invitedPlayers)
 		if (inv.second.state == InvitationState::Joined)
 			playerCount++;
