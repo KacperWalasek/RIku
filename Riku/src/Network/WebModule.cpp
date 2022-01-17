@@ -1,6 +1,7 @@
 #include "WebModule.h"
 #include "NetworkUtils.h"
 #include <mutex>
+#include "InvitationAcceptance.h"
 
 std::string Network::WebModule::myIp;
 std::string Network::WebModule::port;
@@ -136,9 +137,11 @@ void Network::WebModule::Invite(std::string ip, std::string name)
     SendByIp(ip, Invitation, myIp, name);
 }
 
-void Network::WebModule::AcceptInvitation(std::string ip, std::string name)
+void Network::WebModule::AcceptInvitation(std::string ip, std::string name, int hotseatCount)
 {
-    SendByIp(ip, InvitationAccepted, myIp, name);
+    InvitationAcceptance acceptance(ip, name, hotseatCount);
+
+    SendByIp(ip, InvitationAccepted, myIp, acceptance.serialize());
 }
 
 void Network::WebModule::Join(std::string ip, int playerId)

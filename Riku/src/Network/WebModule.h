@@ -54,7 +54,7 @@ public:
 		static void Stop();
 		static void CloseInviteSockets();
 		static void Invite(std::string ip, std::string name);
-		static void AcceptInvitation(std::string ip, std::string name);
+		static void AcceptInvitation(std::string ip, std::string name, int hotseatCount);
 		static void Join(std::string ip, int playerId);
 		static void SendPatch(std::string patch);
 		static void SendById(int playerId, MessType type, void* data = nullptr, size_t size = 0, void* data2 = nullptr, size_t size2 = 0);

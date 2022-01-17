@@ -44,7 +44,7 @@ public:
 	void save(std::string path);
 	void load(std::string path);
 	void invite(std::string ip);
-	void acceptInvitation(std::string ip);
+	void acceptInvitation(std::string ip, int hotseadCount);
 	void setName(std::string name);
 	void setHotseatPlayerCount(int count);
 	void startGame();

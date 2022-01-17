@@ -1181,6 +1181,12 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\IntMoveDescription.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Network\InvitationAcceptance.h">
+      <Filter>Riku\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AcceptInvitationMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

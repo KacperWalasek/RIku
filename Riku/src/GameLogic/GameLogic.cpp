@@ -54,6 +54,7 @@
 #define CEREAL_FUTURE_EXPERIMENTAL
 #include <cereal/archives/adapters.hpp>
 #include "StateUpdate/MoveFactory/HotseatCountMoveHandler.h"
+#include "../Network/InvitationAcceptance.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -161,18 +162,29 @@ void GameLogic::update()
 			break;
 		case Network::MessType::InvitationAccepted:
 			{
-				auto invitationIt = gameState.invitedPlayers.find(message.dataString());
+				InvitationAcceptance acceptance;
+				acceptance.deserialize(message.dataString());
+				auto invitationIt = gameState.invitedPlayers.find(acceptance.ip);
 				if (invitationIt == gameState.invitedPlayers.end())
 					break;
-				// TODO: change to Accepted
-				invitationIt->second.state = InvitationState::Joined;
-				invitationIt->second.name = message[2].to_string();
-				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId());
+				invitationIt->second.state = InvitationState::Accepted;
+				invitationIt->second.name = acceptance.name;
+				invitationIt->second.hotseatCount = acceptance.hotseatCount;
+				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId(acceptance.hotseatCount));
 			}
 			break;
 		case Network::MessType::Join:
 		{
-			gameState.hotSeatPlayers = { *message[2].data<int>() };
+			for (int i = 0; i < gameState.hotSeatPlayers.size(); i++)
+				gameState.hotSeatPlayers[i] += *message[2].data<int>();
+		}
+		break;
+		case Network::MessType::JoinAccepted:
+		{
+			auto invitationIt = gameState.invitedPlayers.find(message.dataString());
+			if (invitationIt == gameState.invitedPlayers.end())
+				break;
+			invitationIt->second.state = InvitationState::Joined;
 		}
 		break;
 		case Network::MessType::Patch:

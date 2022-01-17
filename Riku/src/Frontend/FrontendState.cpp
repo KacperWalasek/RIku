@@ -24,6 +24,7 @@
 #include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/AcceptInvitationMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -174,9 +175,9 @@ void FrontendState::invite(std::string ip)
 	logic.makeMove(std::make_shared<StringMoveDescription>("invite", ip));
 }
 
-void FrontendState::acceptInvitation(std::string ip)
+void FrontendState::acceptInvitation(std::string ip, int hotseadCount)
 {
-	logic.makeMove(std::make_shared<StringMoveDescription>("accept_invitation", ip));
+	logic.makeMove(std::make_shared<AcceptInvitationMoveDescription>(ip, hotseadCount));
 }
 
 void FrontendState::setName(std::string name)

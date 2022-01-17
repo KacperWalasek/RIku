@@ -129,7 +129,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -168,7 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\cegui-0-8-7\include;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/sdl /w34996 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -422,6 +422,7 @@
     <ClInclude Include="..\src\GameLogic\LogicAssets.h" />
     <ClInclude Include="..\src\GameLogic\Player\Player.h" />
     <ClInclude Include="..\src\GameLogic\Resource.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AcceptInvitationMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AttackMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\BuildMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\ChoseGuiOptionMoveDescription.h" />
@@ -547,6 +548,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <ClInclude Include="..\src\Network\InvitationAcceptance.h" />
     <ClInclude Include="..\src\Network\NetworkUtils.h" />
     <ClInclude Include="..\src\Network\WebModule.h" />
   </ItemGroup>

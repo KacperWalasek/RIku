@@ -14,4 +14,5 @@ struct Invitation
 	std::string ip;
 	std::string name;
 	InvitationState state;
+	int hotseatCount = 1;
 };
