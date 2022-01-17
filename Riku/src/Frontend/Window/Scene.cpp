@@ -106,6 +106,8 @@ void front::Scene::drawInit(glm::mat4& projection, glm::mat4& view) {
 void front::Scene::drawMiniGame() {
 	const auto& map = state.getMiniMap();
 	const auto& units = state.getMiniUnits();
+	if (focusedUnitIndex >= units.size())
+		focusedUnitIndex = -1;
 	for(int i=0;i<(int)map.size();i++) {
 		for(int j=0;j<(int)map[i].size();j++) {
 			auto transform = front::Transform(glm::vec3((float)i, 0.0f, (float)j));
@@ -141,6 +143,8 @@ void front::Scene::drawMiniGame() {
 void front::Scene::drawGame() {
 	const auto& map = state.getMap();
 	const auto& units = state.getUnits();
+	if (focusedUnitIndex >= units.size())
+		focusedUnitIndex = -1;
 	for (int i = 0; i < (int)map.size(); i++)
 	{
 		for (int j = 0; j < (int)map[i].size(); j++)
