@@ -20,6 +20,6 @@ public:
 		std::stringstream ss;
 		cereal::BinaryOutputArchive oarchive(ss);
 		oarchive(patch);
-		//Network::WebModule::SendPatch(1 - gameState.hotSeatPlayers[0], ss.str());
+		Network::WebModule::SendPatch(1 - gameState.hotSeatPlayers[0], ss.str());
 	}
 };

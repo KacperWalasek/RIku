@@ -195,6 +195,9 @@ void GameLogic::update()
 
 std::shared_ptr<IMiniGame> GameLogic::getActiveMiniGame() const
 {
+	if (gameState.minigames.size() == 1)
+		return gameState.minigames.begin()->second;
+
 	auto minigameIt = gameState.minigames.find(gameState.playerOnMove);
 	if (minigameIt != gameState.minigames.end())
 	{
