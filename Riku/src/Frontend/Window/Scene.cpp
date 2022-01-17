@@ -108,6 +108,8 @@ void front::Scene::drawMiniGame() {
 	const auto& units = state.getMiniUnits();
 	if (focusedUnitIndex >= units.size())
 		focusedUnitIndex = -1;
+	if (focusedUnitIndex < 0 && focusedUnitIndex >= units.size())
+		path = Path({}, 0);
 	for(int i=0;i<(int)map.size();i++) {
 		for(int j=0;j<(int)map[i].size();j++) {
 			auto transform = front::Transform(glm::vec3((float)i, 0.0f, (float)j));

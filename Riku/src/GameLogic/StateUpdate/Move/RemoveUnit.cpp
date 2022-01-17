@@ -16,7 +16,7 @@ std::shared_ptr<Patch> RemoveUnit::createPatch(const GameState& state, const Log
 
 bool RemoveUnit::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return mapX > 0 && mapY > 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
+    return mapX >= 0 && mapY >= 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
 }
 
 std::shared_ptr<IMove> RemoveUnit::asPointner() const

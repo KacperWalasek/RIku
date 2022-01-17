@@ -37,8 +37,6 @@ std::shared_ptr<IMove> Unit::onTurnBegin()
 
 std::shared_ptr<IMove> Unit::onBeingPlaced(int mapX, int mapY)
 {
-	this->mapX = mapX;
-	this->mapY = mapY;
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 

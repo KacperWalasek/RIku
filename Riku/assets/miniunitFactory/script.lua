@@ -33,6 +33,12 @@ function onOptionChosen(option,mapX,mapY)
     return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(AddMiniUnit.new(name,mapX,mapY)),MoveWrapper.new(UseResources.new("wood",wood))))
 end
 
+function onOptionShow(option)
+    local wood = option["wood"]:as_string("", true)
+    local name = option["name"]:as_string("", false)
+    return name, wood  
+end
+
 -- Tak chcemy, żeby to wyglądało w przyszłości. Do tego funkcja onGuiShow zwracająca na podstawie opcji tworząca vector<string> 
 -- gui = {
 --     name = "Units",
