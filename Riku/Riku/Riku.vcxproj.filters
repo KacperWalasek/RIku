@@ -37,8 +37,6 @@
     </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\MoveDescriptions">
     </Filter>
-    <Filter Include="Riku\GameLogic\StateUpdate\MoveFactory">
-    </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\Patch">
     </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\PatchHandler">
@@ -110,6 +108,7 @@
     </Filter>
     <Filter Include="Riku\Network">
     </Filter>
+    <Filter Include="Riku\GameLogic\Hooks\MoveFactory" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -281,22 +280,22 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerOnMovePatchHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
@@ -381,7 +380,7 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
@@ -459,7 +458,7 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecorator.cpp">
       <Filter>Riku\GameLogic\GameObject</Filter>
@@ -468,10 +467,10 @@
       <Filter>Riku\Network</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\InviteMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\AcceptInvitationMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Network\NetworkUtils.cpp">
       <Filter>Riku\Network</Filter>
@@ -486,7 +485,7 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
@@ -501,7 +500,7 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.cpp">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp" />
@@ -807,25 +806,25 @@
       <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\BuildMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\ChoseGuiOptionMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\FinishGameMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\IMoveDescriptionHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TestMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\TranslateUnitMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h">
       <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
@@ -994,7 +993,7 @@
       <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BoolResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
@@ -1080,9 +1079,6 @@
     <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h">
       <Filter>Riku\GameLogic\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h">
-      <Filter>Riku\GameLogic\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
@@ -1114,7 +1110,7 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\StringMoveDescription.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
@@ -1129,10 +1125,10 @@
       <Filter>Riku\Network</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\InviteMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AcceptInvitationMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Utils\Invitation.h">
       <Filter>Riku\GameLogic\Utils</Filter>
@@ -1153,7 +1149,7 @@
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
@@ -1168,7 +1164,7 @@
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.h">
-      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+      <Filter>Riku\GameLogic\Hooks\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h" />

@@ -364,7 +364,6 @@
     <ClInclude Include="..\src\GameLogic\Actions\DelayedMoveAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h" />
-    <ClInclude Include="..\src\GameLogic\Actions\SendMiniPatch.h" />
     <ClInclude Include="..\src\GameLogic\Actions\SendPatchToAll.h" />
     <ClInclude Include="..\src\GameLogic\Actions\TestAction.h" />
     <ClInclude Include="..\src\GameLogic\Assets\Asset.h" />

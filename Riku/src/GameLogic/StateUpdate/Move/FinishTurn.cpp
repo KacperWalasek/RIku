@@ -1,7 +1,7 @@
 #include "FinishTurn.h"
 #include "CombinedMove.h"
 #include "../../Unit/Unit.h"
-
+#include "../../Utils/LogicUtils.h"
 std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<IMove> move = nullptr;
@@ -19,7 +19,7 @@ std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const Log
 
 bool FinishTurn::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return true;
+    return LogicUtils::getResponsePlayer(state) == state.playerOnMove;
 }
 
 std::shared_ptr<IMove> FinishTurn::asPointner() const

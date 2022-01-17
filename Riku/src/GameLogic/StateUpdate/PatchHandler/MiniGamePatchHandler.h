@@ -3,6 +3,9 @@
 #include "../../../MiniGame/MiniGame.h"
 #include "../../GameState.h"
 #include "../../Utils/LogicUtils.h"
+#include "../../Actions/CombinedAction.h"
+#include "../../Actions/SendPatchToAll.h"
+#include "../../Actions/ResetCummulatedPatch.h"
 
 class MiniGamePatchHandler :
     public IPatchHandler
@@ -10,8 +13,14 @@ class MiniGamePatchHandler :
 public:
     virtual std::shared_ptr<IAction> handlePatch(GameState& state, const Patch& patch) const override
     {
+		bool send = false;
 		for (auto p : patch.miniGamePatches)
 		{
+			if (std::find(state.hotSeatPlayers.begin(), state.hotSeatPlayers.end(), p.second.player) == state.hotSeatPlayers.end())
+			{
+				send = true;
+				continue;
+			}
 			if (p.second.remove)
 				// TODO sprawdzic czy to sie wywali jak player nie bedzie w trakcie minigry
 				state.minigames.erase(p.first);
@@ -37,7 +46,10 @@ public:
 					minigameIt->second->resetCummulatedPatch();
 			}
 		}
-		return nullptr;
+
+		return send ? std::make_shared<CombinedAction>(
+			std::make_shared<SendPatchToAll>(),
+			std::make_shared<ResetCummulatedPatch>()) : nullptr;
     }
 };
 
