@@ -4,12 +4,11 @@
 #include "../../Resource.h"
 #include <string>
 
-class Ground :
-    public ICostModifier, public Resource
+class Ground : public Resource
 {
-    double mult = 0;
+    int mpCost;
 public:
-    Ground(std::string name, double mult);
-    virtual double getModifiedCost(double cost) const override;
+    Ground(std::string name, int mpCost);
+    int getCost() const;
 };
 
