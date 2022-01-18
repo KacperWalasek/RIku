@@ -7,7 +7,7 @@ IsInMiniGameRequestHandler::IsInMiniGameRequestHandler(const GameState& state)
 
 std::shared_ptr<Response> IsInMiniGameRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
-    return std::make_shared<BoolResponse>(request, state.minigames.find(LogicUtils::getResponsePlayer(state)) != state.minigames.end());
+    return std::make_shared<BoolResponse>(request, state.minigames.size()!=0);
 }
 
 bool IsInMiniGameRequestHandler::canHandle(const Request& request) const

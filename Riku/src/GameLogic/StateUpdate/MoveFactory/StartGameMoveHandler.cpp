@@ -11,7 +11,7 @@ std::shared_ptr<IMove> StartGameMoveHandler::handleDescription(const IMoveDescri
 	int playerCount = state.hotSeatPlayers.size();
 	for (const auto& inv : state.invitedPlayers)
 		if (inv.second.state == InvitationState::Joined)
-			playerCount++;
+			playerCount+= inv.second.hotseatCount;
 
 	return std::make_shared<GenerateMap>(playerCount);
 }

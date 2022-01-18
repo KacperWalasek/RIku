@@ -163,8 +163,8 @@ void GameLogic::update()
 		case Network::MessType::InvitationAccepted:
 			{
 				InvitationAcceptance acceptance;
-				acceptance.deserialize(message.dataString());
-				auto invitationIt = gameState.invitedPlayers.find(acceptance.ip);
+				acceptance.deserialize(message[2].to_string());
+				auto invitationIt = gameState.invitedPlayers.find(message.dataString());
 				if (invitationIt == gameState.invitedPlayers.end())
 					break;
 				invitationIt->second.state = InvitationState::Accepted;
