@@ -130,6 +130,11 @@ int FrontendState::getPlayerCount()
 	return logic.getInfo<IntResponse>("player_count")->get();
 }
 
+int FrontendState::getWinner()
+{
+	return logic.getInfo<IntResponse>("winner")->get();
+}
+
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<BuildMoveDescription>(name, mapX, mapY));

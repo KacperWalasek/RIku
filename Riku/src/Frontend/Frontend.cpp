@@ -9,5 +9,6 @@ front::Frontend::Frontend(GameLogic& logic, Config& config)
 
 bool front::Frontend::update()
 {
+	std::cout << "winner: " << state.getWinner() << std::endl;
 	return window.update();
 }

@@ -56,6 +56,8 @@
 #include "StateUpdate/MoveFactory/HotseatCountMoveHandler.h"
 #include "../Network/InvitationAcceptance.h"
 #include "FrontendCommunicator/RequestHandlers/PlayerCountRequestHandler.h"
+#include "StateUpdate/PatchHandler/WinnerPatchHandler.h"
+#include "FrontendCommunicator/RequestHandlers/WinnerRequestHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -73,7 +75,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<UnitPatchHandler>(),
 		std::make_shared<MiniGamePatchHandler>(),
 		std::make_shared<DelayedMovePatchHandler>(),
-		std::make_shared<PlayerOnMovePatchHandler>()
+		std::make_shared<PlayerOnMovePatchHandler>(),
+		std::make_shared<WinnerPatchHandler>()
 		});
 
 	factory.setHandlers({
@@ -106,7 +109,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<InvitationsRequestHandler>(gameState),
 		std::make_shared<GetUnitNamesRequestHandler>(assets),
 		std::make_shared<IsInGameRequestHandler>(gameState),
-		std::make_shared<PlayerCountRequestHandler>(gameState)
+		std::make_shared<PlayerCountRequestHandler>(gameState),
+		std::make_shared<WinnerRequestHandler>(gameState)
 		});
 }
 
