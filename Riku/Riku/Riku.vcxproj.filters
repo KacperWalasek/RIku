@@ -516,6 +516,8 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1214,6 +1216,8 @@
     <ClInclude Include="..\src\GameLogic\Actions\CheckWinConditionAction.h">
       <Filter>Riku\GameLogic\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
