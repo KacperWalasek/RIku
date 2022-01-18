@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <fstream>
 #include <hash-library/sha256.h>
+#include <iostream>
 
 namespace logic {
 

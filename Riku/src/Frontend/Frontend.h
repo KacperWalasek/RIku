@@ -8,6 +8,7 @@ class GameLogic;
 namespace front {
 	class Frontend
 	{
+	public:
 		GameLogic& logic;
 		FrontendState state;
 		AssetHandler assetHandler;

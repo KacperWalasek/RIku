@@ -40,11 +40,13 @@ int main() {
 	GameLogic logic("../assets", "../mini_assets");
 	front::Config config;
 	front::Frontend frontend(logic, config);
+	//frontend.state.startGame();
 	bool exitProgram = false;
 	while (!exitProgram)
 	{
 		logic.update();
 		exitProgram = frontend.update();
 	}
+	Network::WebModule::Stop();
 	return 0;
 }

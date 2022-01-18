@@ -13,6 +13,7 @@ std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
+std::map<std::string, Invitation> CEGUI::GUIUpdate::lastInvited;
 
 void CEGUI::GUIUpdate::Init()
 {
@@ -37,6 +38,10 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CE
         CEGUI::GUIUpdate::CreateBuildingOptions(state, focusedUnitIndex, guiDic);
         CEGUI::GUIUpdate::UpdateResources(state, guiDic);
         CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
+    }
+    else
+    {
+        CEGUI::GUIUpdate::CreateInvitations(guiDic["NewGameMenu"], "InvitationsList", state);
     }
 }
 
@@ -180,7 +185,6 @@ void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
 }
 void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform)
 {
-
     auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(unitsListName));
     auto player_units = state.getUnits();
     if (lastUnits.size() == player_units.size()) return; // na razie zak³adam, ze jednostka nie moze po prostu zmieniæ sie w inn¹ jednostkê
@@ -257,6 +261,41 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
         i++;
     }
     lastUnits = player_units;
+}
+
+void CEGUI::GUIUpdate::CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state)
+{
+    std::map<std::string, Invitation> invited = state.getInvitedPlayers();
+    for (auto p : invited)
+    {
+        //std::cout << p.first;
+    }
+    if (invited.size() == lastInvited.size())
+        return;
+
+    auto invitationsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(InvitationsListName));
+
+    for (const auto& invitation : lastInvited)
+    {
+        auto item = invitationsList->getChildElementRecursive(invitation.first);
+        invitationsList->removeChild(item);
+        delete item;
+    }
+    float y = 0.1f;
+    for (const auto& invitation : invited)
+    {
+        auto invitationLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), invitation.first));
+        InvitationState state = invitation.second.state;
+        invitationLabel->setText(invitation.first + "state: " + "state_to_string");
+       /* auto callback1 = new CEGUI::Functor::SetLabelText(building.first, nameLabel);
+        gui->setPushButtonCallback(building.first, callback1);
+        auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
+        gui->setPushButtonCallback(building.first, callback2);*/
+        invitationsList->addChild(invitationLabel);
+        y += 0.3f;
+    }
+    lastInvited = invited;
 }
 
 void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)

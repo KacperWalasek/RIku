@@ -169,11 +169,13 @@ void Network::WebModule::SendPatch(std::string patch)
 void Network::WebModule::SendByIp(std::string ip, MessType type, void* data, size_t size, void* data2, size_t size2)
 {
     if (invitedPlayers.find(ip) == invitedPlayers.end())
+        try
     {
         invitedPlayers.insert(std::pair<std::string, zmq::socket_t>(ip, zmq::socket_t(context, zmq::socket_type::push)));
         invitedPlayers[ip].set(zmq::sockopt::linger, 0);
         invitedPlayers[ip].connect("tcp://" + ip + ":" + port);
     }
+    catch (zmq::error_t e) { std::cout << e.what() << '\n'; return; }
 
     zmq::socket_ref pushSock = invitedPlayers[ip];    
     std::array<zmq::const_buffer, 3> send_msgs = {
@@ -189,11 +191,13 @@ void Network::WebModule::SendByIp(std::string ip, MessType type, void* data, siz
 void Network::WebModule::SendByIp(std::string ip, MessType type, std::string dataString, void* data, size_t size)
 {
     if (invitedPlayers.find(ip) == invitedPlayers.end())
+        try
     {
         invitedPlayers.insert(std::pair<std::string, zmq::socket_t>(ip, zmq::socket_t(context, zmq::socket_type::push)));
         invitedPlayers[ip].set(zmq::sockopt::linger, 0);
         invitedPlayers[ip].connect("tcp://" + ip + ":" + port);
     }
+    catch (zmq::error_t e) { std::cout << e.what() << '\n'; return; }
 
     zmq::socket_ref pushSock = invitedPlayers[ip];
     std::array<zmq::const_buffer, 3> send_msgs = {
@@ -207,11 +211,13 @@ void Network::WebModule::SendByIp(std::string ip, MessType type, std::string dat
 void Network::WebModule::SendByIp(std::string ip, MessType type, std::string dataString1, std::string dataString2)
 {
     if (invitedPlayers.find(ip) == invitedPlayers.end())
+        try
     {
         invitedPlayers.insert(std::pair<std::string, zmq::socket_t>(ip, zmq::socket_t(context, zmq::socket_type::push)));
         invitedPlayers[ip].set(zmq::sockopt::linger, 0);
         invitedPlayers[ip].connect("tcp://" + ip + ":" + port);
     }
+    catch (zmq::error_t e) { std::cout << e.what() << '\n'; return; }
 
     zmq::socket_ref pushSock = invitedPlayers[ip];
     std::array<zmq::const_buffer, 3> send_msgs = {

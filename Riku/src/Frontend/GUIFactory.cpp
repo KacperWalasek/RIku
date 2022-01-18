@@ -10,6 +10,9 @@
 #include "GUICallbacks/GameUIOnKeyPress.h"
 #include "GUICallbacks/MainMenuOnkeyPress.h"
 #include "GUICallbacks/SetLabelText.h" //to_delete
+#include "GUICallbacks/NewGameMenuOnKeyPress.h"
+#include "GUICallbacks/InvitePlayerFromEditBox.h"
+#include "GUICallbacks/StartGame.h"
 #include "Lang.h"
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
@@ -51,10 +54,12 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	auto onExitButton = new CEGUI::Functor::ExitApp(window);
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
 	auto onOptionsButton = new CEGUI::Functor::SwitchActiveGUI("OptionsMenu", activeGUI, guiDic);
+	auto onNewGameButton = new CEGUI::Functor::SwitchActiveGUI("NewGameMenu", activeGUI, guiDic);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ExitButton", onExitButton);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 	my_gui->setPushButtonCallback("OptionsButton", onOptionsButton);
+	my_gui->setPushButtonCallback("NewGameButton", onNewGameButton);
 
 	return my_gui;
 }
@@ -73,12 +78,33 @@ CEGUI::GUI* CEGUI::GUIFactory::GetOptionsMenu() {
 	return my_gui;
 }
 
+CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
+
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuNewGameMenu.layout");
+	//my_gui->loadLayout("TextDemo.layout");
+
+	auto box = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("IpBox"));
+
+	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic);
+	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
+	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(box, state);
+	auto onStartGameButton = new CEGUI::Functor::StartGame(state);
+	my_gui->setKeyCallback(onKeyPress);
+	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
+	my_gui->setPushButtonCallback("InviteButton", onInviteButton);
+	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton);
+
+	//CEGUI::GUIUpdate::CreateInvitations(my_gui, "InvitationsList", state);
+	return my_gui;
+}
+
 CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 
 	CEGUI::GUI* my_gui = new CEGUI::GUI();
 	my_gui->init();
 	my_gui->loadLayout("RikuGameUI.layout");
-
 	//CEGUI::GUIUpdate::CreateUnits(my_gui, "UnitsList", state, focusedUnitIndex);
 	CEGUI::GUIUpdate::CreateResources(my_gui, "ResourcesList", state);
 
