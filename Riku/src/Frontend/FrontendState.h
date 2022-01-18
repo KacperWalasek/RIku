@@ -32,6 +32,7 @@ public:
 	std::map<std::string, std::string> getInvitations();
 	std::map<std::string, Invitation> getInvitedPlayers();
 	bool isInGame();
+	int getPlayerCount();
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);

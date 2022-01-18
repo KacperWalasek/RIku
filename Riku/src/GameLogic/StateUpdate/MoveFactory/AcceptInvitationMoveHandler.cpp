@@ -3,8 +3,8 @@
 #include "../../../Network/WebModule.h"
 #include "../../GameState.h"
 
-AcceptInvitationMoveHandler::AcceptInvitationMoveHandler(GameState& state)
-    : state(state) {}
+AcceptInvitationMoveHandler::AcceptInvitationMoveHandler(GameState& state, const LogicAssets& assets)
+    : state(state), assets(assets) {}
 
 
 std::shared_ptr<IMove> AcceptInvitationMoveHandler::handleDescription(const IMoveDescription& description)
@@ -12,7 +12,7 @@ std::shared_ptr<IMove> AcceptInvitationMoveHandler::handleDescription(const IMov
     const auto& desc = (const AcceptInvitationMoveDescription&)description;
     if (state.recivedInvitations.find(desc.getIp()) == state.recivedInvitations.end())
         return nullptr;
-    Network::WebModule::AcceptInvitation(desc.getIp(), state.name, desc.getHotseatCount());
+    Network::WebModule::AcceptInvitation(desc.getIp(), state.name, assets.handler.getHash(), desc.getHotseatCount());
     state.recivedInvitations.erase(desc.getIp());
     state.hotSeatPlayers.clear();
     // initialize hotseatPlayers from 0. We will increase it when Join is recived

@@ -510,6 +510,9 @@
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\HotseatCountMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1186,6 +1189,9 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AcceptInvitationMoveDescription.h">
       <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

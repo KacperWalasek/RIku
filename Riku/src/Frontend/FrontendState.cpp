@@ -125,6 +125,11 @@ bool FrontendState::isInGame()
 	return logic.getInfo<BoolResponse>("is_in_game")->get();
 }
 
+int FrontendState::getPlayerCount()
+{
+	return logic.getInfo<IntResponse>("player_count")->get();
+}
+
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<BuildMoveDescription>(name, mapX, mapY));

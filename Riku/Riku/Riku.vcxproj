@@ -218,6 +218,7 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.cpp" />
@@ -383,6 +384,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h" />

@@ -137,9 +137,9 @@ void Network::WebModule::Invite(std::string ip, std::string name)
     SendByIp(ip, Invitation, myIp, name);
 }
 
-void Network::WebModule::AcceptInvitation(std::string ip, std::string name, int hotseatCount)
+void Network::WebModule::AcceptInvitation(std::string ip, std::string name, std::string hash, int hotseatCount)
 {
-    InvitationAcceptance acceptance(ip, name, hotseatCount);
+    InvitationAcceptance acceptance(ip, name, hash, hotseatCount);
 
     SendByIp(ip, InvitationAccepted, myIp, acceptance.serialize());
 }

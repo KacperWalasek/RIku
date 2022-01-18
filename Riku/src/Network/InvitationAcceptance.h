@@ -7,16 +7,17 @@ class InvitationAcceptance
 public:
 	InvitationAcceptance()
 		: ip(), name(), hotseatCount() {}
-	InvitationAcceptance(std::string ip, std::string name, int hotseatCount)
-		: ip(ip), name(name), hotseatCount(hotseatCount) {}
+	InvitationAcceptance(std::string ip, std::string name, std::string hash, int hotseatCount)
+		: ip(ip), name(name), hash(hash), hotseatCount(hotseatCount) {}
 	std::string ip;
 	std::string name;
+	std::string hash;
 	int hotseatCount;
 
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(ip, name, hotseatCount);
+		archive(ip, name, hash, hotseatCount);
 	}
 
 	std::string serialize()
