@@ -56,14 +56,14 @@
 	{
 		"ground": null,
 		"diffuse": "snow.png",
-		"specular": "snow.png",
+		"specular": "snow.png"
 	}
 ],
 "water": [
 	{
 		"ground": null,
 		"diffuse": "water.jpg",
-		"specular": "water.jpg",
+		"specular": "water.jpg"
 	}
 ]
 }
