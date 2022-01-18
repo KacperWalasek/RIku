@@ -112,14 +112,14 @@ void front::Scene::draw()
 				auto&& [tx,ty] = path.path.back().tile;
 				auto pathTransform = front::Transform(glm::vec3((float)tx, (float)map[tx][ty].height * 0.5f, (float)ty));
 				if(path.path.back().reachable)
-					handler.tryDraw("main_circle_reach", lightingShader, pathTransform);
+					handler.tryDraw("main_circle_reach", lightingShader, pathTransform, frustum);
 				else
-					handler.tryDraw("main_circle", lightingShader, pathTransform);
+					handler.tryDraw("main_circle", lightingShader, pathTransform, frustum);
 			}
 			else
-		        handler.tryDraw("main_circle", lightingShader, transform);
+		        handler.tryDraw("main_circle", lightingShader, transform, frustum);
         }
-		handler.tryDraw(unit[i]->getName(), lightingShader, transform);
+		handler.tryDraw(unit[i]->getName(), lightingShader, transform, frustum);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 	}
     for(auto& tile: path.path) {
@@ -127,9 +127,9 @@ void front::Scene::draw()
 			continue;
 		auto&& [x, y] = tile.tile;
 		if(tile.reachable)
-            handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
+            handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)), frustum);
 	    else
-		    handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)));
+		    handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)), frustum);
     }
 
 	//return to default value
@@ -150,7 +150,7 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 	//draw center
 	auto transform = Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y),glm::vec3(),scale);
 	if (map[x][y].area.getName() == "wet")
-		handler.tryDraw("wet",lightingShader, transform);
+		handler.tryDraw("wet",lightingShader, transform, frustum);
 	handler.drawGround(map[x][y].ground.getName(), "_flat",lightingShader, transform);
 	//draw sides (only flat)
 	for(int i=0;i<4;i++) {
@@ -294,7 +294,7 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 	}
 	//draw object
 	auto objectTransform = front::Transform({(float)x, (float)map[x][y].height * 0.5f, (float)y});
-	handler.tryDraw(map[x][y].biome.getName(), lightingShader, objectTransform);
+	//handler.tryDraw(map[x][y].biome.getName(), lightingShader, objectTransform);
 	if (map[x][y].object)
-		handler.tryDraw(map[x][y].object->getName(), lightingShader, objectTransform);
+		handler.tryDraw(map[x][y].object->getName(), lightingShader, objectTransform, frustum);
 }

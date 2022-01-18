@@ -208,11 +208,11 @@ end
 function getDesertTile(climate_type, desert_type, TileDescription)
 	rand = math.random()
 	if(rand<0.2) then
-		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type+"_sand",areas[math.random(2)],"cactus")
-	elseif (rand<0.6) then
-		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type+"_sand",areas[math.random(2)])
-	else
-		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type+"_rocks",areas[math.random(2)])
+		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type,areas[math.random(2)],"cactus")
+	else--[[if (rand<0.6) then--]]
+		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type,areas[math.random(2)])
+	--else
+	--	tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type+"_rocks",areas[math.random(2)])
 	end
 	return tile
 end
@@ -223,7 +223,7 @@ function onCreateMap()
 	local y=50
 	local arr = {}
 	local biomes = {"snow","tundra","taiga","temperate","mediterranean","tropics","sea"}
-	local grounds = {"snow", "stone", "tundra", "grass_taiga", "sand","grass","snow"}
+	local grounds = {"snow", "stone", "tundra", "taiga_grass", "sand","grass","snow"}
 	local areas = {"wet","dry"}
 	math.randomseed(os.time())
 	local heights = squareDiamond(x,y,{math.random()*15.0-10.0,math.random()*15.0-5.0,math.random()*15.0-5.0,math.random()*15.0-5.0}, 0.50, -5.0, 10.0)
@@ -247,7 +247,7 @@ function onCreateMap()
 					arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[biomeInd],grounds[1+biomeInd],areas[math.random(2)],"taiga_tree")
 				elseif (biomeInd==4) then
 					if (dryInd==1) then--forest
-						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[biomeInd],"grass",areas[math.random(2)],"temperate_tree")
+						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[biomeInd],"grass",areas[math.random(2)],"tree")
 					elseif (dryInd==2) then--steppe
 						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[biomeInd],"grass",areas[math.random(2)])
 					else --desert
@@ -255,15 +255,15 @@ function onCreateMap()
 					end
 				elseif (biomeInd==5) then --mediterranean
 					if (dryInd==1) then--forest
-						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[5],"grass",areas[math.random(2)],"subtropical_tree")
+						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[5],"grass",areas[math.random(2)],"tree")
 					else--desert
-						arr[i][j] = getDesertTile("mediterranean","semihot_desert", TileDescription)
+						arr[i][j] = getDesertTile("mediterranean","semihot_desert", "dry", TileDescription)
 					end
 				else --tropics
 					if (dryInd==1) then--forest
-						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),"tropics","tropics_grass","sand",areas[math.random(2)],"jungle")
+						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),"tropics","tropics_grass",areas[math.random(2)],"jungle")
 					else--desert
-						arr[i][j] = getDesertTile("tropics","hot_desert", TileDescription)
+						arr[i][j] = getDesertTile("tropics","hot_desert", "dry", TileDescription)
 					end
 				end
 			end

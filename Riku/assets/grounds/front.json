@@ -7,19 +7,56 @@
 		"normal": "grass_norm.png"
 	}
 ],
-"sand": [
+"tropics_grass": [
 	{
 		"ground": null,
-		"diffuse": "sand.jpg",
-		"specular": "sand.jpg"
+		"diffuse": "tropics_grass.png",
+		"specular": "tropics_grass.png",
+		"normal": "grass_norm.png"
 	}
 ],
-"stone": [
+"taiga_grass": [
+	{
+		"ground": null,
+		"diffuse": "taiga_grass.png",
+		"specular": "taiga_grass.png",
+		"normal": "grass_norm.png"
+	}
+],
+"hot_desert": [
+	{
+		"ground": null,
+		"diffuse": "hot_desert.jpg",
+		"specular": "hot_desert.jpg"
+	}
+],
+"semihot_desert": [
+	{
+		"ground": null,
+		"diffuse": "semihot_desert.jpg",
+		"specular": "semihot_desert.jpg"
+	}
+],
+"cold_desert": [
+	{
+		"ground": null,
+		"diffuse": "cold_desert.jpg",
+		"specular": "cold_desert.jpg"
+	}
+],
+"tundra": [
 	{
 		"ground": null,
 		"diffuse": "stone.jpg",
 		"specular": "stone.jpg",
 		"normal": "stone_norm.jpg"
+	}
+],
+"snow": [
+	{
+		"ground": null,
+		"diffuse": "snow.png",
+		"specular": "snow.png",
 	}
 ]
 }

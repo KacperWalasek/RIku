@@ -22,4 +22,5 @@ apt install libcegui-mk2-dev
 apt install libglm-dev
 apt install libxi-dev
 apt install libzmq3-dev
+apt install libcereal-dev
 exit
