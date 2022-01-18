@@ -2,6 +2,7 @@
 #include "../../Actions/CombinedAction.h"
 #include "../../Actions/SendPatchToAll.h"
 #include "../../Actions/ResetCummulatedPatch.h"
+#include "../../Actions/CheckWinConditionAction.h"
 
 std::shared_ptr<IAction> PlayerOnMovePatchHandler::handlePatch(GameState& state, const Patch& patch) const
 {
@@ -9,8 +10,10 @@ std::shared_ptr<IAction> PlayerOnMovePatchHandler::handlePatch(GameState& state,
 	{
 		state.playerOnMove = patch.playerOnMove;
 		return std::make_shared<CombinedAction>(
-			std::make_shared<SendPatchToAll>(), 
-			std::make_shared<ResetCummulatedPatch>());
+			std::make_shared<CombinedAction>(
+				std::make_shared<SendPatchToAll>(), 
+				std::make_shared<ResetCummulatedPatch>()),
+			std::make_shared<CheckWinConditionAction>());
 	}
 	return nullptr;
 }

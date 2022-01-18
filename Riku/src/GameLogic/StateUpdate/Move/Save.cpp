@@ -22,12 +22,6 @@ std::shared_ptr<Patch> Save::createPatch(const GameState& state, const LogicAsse
     cereal::BinaryOutputArchive oarchive(file);
     oarchive(patch);
     file.close();
-    /*
-    DeserializationData data(assets, minigame::MiniGame::getAssets());
-    cereal::UserDataAdapter<DeserializationData, cereal::BinaryInputArchive> iarchive(data, ss);
-    Patch patch2;
-    minigame::MiniPatch p1;
-    iarchive(p1);*/
     return nullptr;
 }
 

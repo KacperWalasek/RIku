@@ -6,7 +6,7 @@ RequireResources::RequireResources(std::shared_ptr<ITileObject> next, int resour
 
 bool RequireResources::canBeBuilt(const GameState& state, int mapX, int mapY)
 {
-	return state.map[mapX][mapY].resource == resource;
+	return state.map[mapX][mapY].resource == resource && TileObjectDecorator::canBeBuilt(state, mapX, mapY);
 }
 
 

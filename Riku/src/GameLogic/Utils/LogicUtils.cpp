@@ -3,6 +3,7 @@
 #include <list>
 #include "../StateUpdate/Patch/Patch.h"
 
+unsigned int LogicUtils::currentPlayerId = 0;
 unsigned int LogicUtils::currentId = 0;
 int LogicUtils::logicId = 0;
 std::map<std::string, std::shared_ptr<IHookable>> LogicUtils::hookables;
@@ -23,6 +24,13 @@ std::string LogicUtils::getUniqueId()
     std::string id = std::to_string(logicId) + "_" + std::to_string(currentId);
     currentId++;
     return id;
+}
+
+int LogicUtils::getAvailablePlayerId(int count)
+{
+    int first = currentPlayerId + 1;
+    currentPlayerId += count;
+    return first;
 }
 
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)
@@ -70,5 +78,19 @@ Patch LogicUtils::createPatchFromState(const GameState& state)
     patch = patch + Patch(state.playerOnMove);
     patch.playerCount = state.players.size();
     return patch;
+}
+
+int LogicUtils::getResponsePlayer(const GameState& state)
+{
+    int ret = state.hotSeatPlayers[0];
+    for (int p : state.hotSeatPlayers)
+    {
+        if (p == state.playerOnMove)
+            return p;
+        if( p > ret && !(ret < state.playerOnMove && p > state.playerOnMove)) 
+            ret = p;
+    }
+    return ret;
+
 }
 

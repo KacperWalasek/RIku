@@ -4,7 +4,7 @@
 #include <cereal/types/string.hpp>
 #include <cereal/types/memory.hpp>
 #include "../../Unit/Unit.h"
-
+#include "../../../MiniGame/StateUpdate/Patch/MiniPatch.h"
 class MiniGamePatch
 {
 public:
@@ -25,7 +25,7 @@ public:
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(player, playerUnit, enemyUnit, isBegining, remove, resetCummulatedPatch);
+		archive(player, playerUnit, enemyUnit, isBegining, remove, resetCummulatedPatch, miniPatch);
 	}
 
 	MiniGamePatch& operator+=(const MiniGamePatch& patch)

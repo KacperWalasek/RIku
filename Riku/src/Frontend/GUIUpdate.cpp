@@ -12,6 +12,7 @@ std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitOptions;
 std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
+std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
 
 void CEGUI::GUIUpdate::Init()
 {
@@ -27,12 +28,16 @@ CEGUI::GUIUpdate::~GUIUpdate()
         delete p.second;
 }
 
-void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic, int& focusedUnitIndex)
+void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic, int& focusedUnitIndex, front::Transform& movingCameraTransform)
 {
-    CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex);
-    CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
-    CEGUI::GUIUpdate::UpdateResources(state, guiDic);
-    CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
+    if (state.isInGame())
+    {
+        CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
+        CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
+        CEGUI::GUIUpdate::CreateBuildingOptions(state, focusedUnitIndex, guiDic);
+        CEGUI::GUIUpdate::UpdateResources(state, guiDic);
+        CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
+    }
 }
 
 void CEGUI::GUIUpdate::UpdateMovementBars(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic)
@@ -151,6 +156,7 @@ void CEGUI::GUIUpdate::CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& 
 }
 void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
 {
+
     auto resources = state.getResources();
     for (auto res : resources)
     {
@@ -161,18 +167,18 @@ void CEGUI::GUIUpdate::LoadIcons(FrontendState& state)
         }
         catch (...) {}
     }
-    auto units = state.getUnits();
-    for (auto u : units)
+    auto units = state.getUnitNames();
+    for (const std::string& u : units)
     {
         try
         {
-            CEGUI::GUI::loadIcon(u.get()->getName(), u.get()->getName() + ".png"); //TODO wczytywanie ró¿nych formatów
-            printf("Successfully loaded icon for: %s\n", u.get()->getName().c_str());
+            CEGUI::GUI::loadIcon(u, u + ".png"); //TODO wczytywanie ró¿nych formatów
+            printf("Successfully loaded icon for: %s\n", u.c_str());
         }
         catch (...) {}
     }
 }
-void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex)
+void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform)
 {
 
     auto unitsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(unitsListName));
@@ -239,7 +245,7 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
         movementBar->setProperty("FrameEnabled", "false");
 
         //CEGUI::Functor::FocusUnitWithIndex* func = new CEGUI::Functor::FocusUnitWithIndex(i, focusedUnitIndex, unitsList, name, activeUnitElem);
-        CEGUI::Functor::FocusUnit* func = new CEGUI::Functor::FocusUnit(repeats[unitName], focusedUnitIndex, unitsList, unitName, activeUnitElem, state);
+        CEGUI::Functor::FocusUnit* func = new CEGUI::Functor::FocusUnit(repeats[unitName], focusedUnitIndex, unitsList, unitName, activeUnitElem, state, movingCameraTransform);
         my_gui->setPushButtonCallback(name + "/button", func);
         movementBarBG->addChild(movementBar);
         resourceElem->addChild(movementBarBG);
@@ -306,4 +312,44 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
         y += 0.3;
     }
     lastOptions = avaible_options;
+}
+
+void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)
+{
+    auto units = state.getUnits();
+    if (focusedUnitIndex < 0 || focusedUnitIndex >= units.size())
+        return;
+    auto unit = units[focusedUnitIndex];
+    std::map<std::string, std::string> buildings = state.getAvailableBuildings(unit->getMapX(), unit->getMapY());
+
+    if (buildings == lastBuildings)
+        return;
+
+    CEGUI::GUI* gui = guiDic["BuildingUI"];
+    auto buildingList = static_cast<CEGUI::ScrollablePane*>(gui->getWidgetByName("BuildingsList"));
+    auto nameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("NameLabel"));
+    auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("FrontNameLabel"));
+
+    for (const auto& bulding : lastBuildings)
+    {
+        auto item = buildingList->getChildElementRecursive(bulding.first);
+        buildingList->removeChild(item);
+        delete item;
+    }
+    float y = 0.1f;
+    for (const auto& building : buildings)
+    {
+        auto buildingOptionButton = static_cast<CEGUI::PushButton*>(gui->createWidget("WindowsLook/Button",
+            glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), building.first));
+        buildingOptionButton->setText(front::Lang::getUtf(building.first));
+        auto callback1 = new CEGUI::Functor::SetLabelText(building.first, nameLabel);
+        gui->setPushButtonCallback(building.first, callback1);
+        auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
+        gui->setPushButtonCallback(building.first, callback2);
+        buildingList->addChild(buildingOptionButton);
+        y += 0.3f;
+    }
+    lastBuildings = buildings;
+
+
 }

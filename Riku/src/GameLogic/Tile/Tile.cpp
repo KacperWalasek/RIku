@@ -6,5 +6,5 @@ Tile::Tile(int height, const Area& area, const Ground& ground, const Biome& biom
 {}
 double Tile::getCost() const
 {
-	return area.getModifiedCost(ground.getModifiedCost(biome.getCost()));
+	return area.getModifiedCost(biome.getModifiedCost(ground.getCost()));
 }

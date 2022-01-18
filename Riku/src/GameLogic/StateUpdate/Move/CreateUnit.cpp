@@ -24,8 +24,12 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
     auto creeatedHookMove = unitPtr->onBeingCreated();
     auto placedHookPatch = placedHookMove ? *(placedHookMove->createPatch(state, assets)) : Patch();
     auto creeatedHookPatch = creeatedHookMove ? *(creeatedHookMove->createPatch(state, assets)) : Patch();
-    return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr->getId()) + 
-        (Patch)RegisterHookablePatch(unitPtr->getId()) + placedHookPatch + creeatedHookPatch);
+    return std::make_shared<Patch>(
+        PlayerPatch(player, unitPtr) +
+        (Patch)TilePatch({ mapX,mapY }, unitPtr->getId()) +
+        (Patch)RegisterHookablePatch(unitPtr->getId()) +
+        (Patch)UnitPatch(unitPtr->getId(), mapX, mapY) +
+        placedHookPatch + creeatedHookPatch);
 }
 
 bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets) const

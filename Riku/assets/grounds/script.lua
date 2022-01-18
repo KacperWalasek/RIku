@@ -1,6 +1,6 @@
 asset_type="grounds"
 grounds = {
-    stone = 0.8,
-    sand = 1.2,
+    stone = 2,
+    sand = 5,
     grass = 1
 }

@@ -14,8 +14,7 @@ std::shared_ptr<Patch> FinishMiniGame::createPatch(const GameState& state, const
 
 bool FinishMiniGame::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    auto end = state.minigames.end();
-    return state.minigames.find(player) != end && state.minigames.find(enemy) != end;
+    return state.minigames.find(player) != state.minigames.end();
 }
 
 std::shared_ptr<IMove> FinishMiniGame::asPointner() const
