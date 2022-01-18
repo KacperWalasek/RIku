@@ -16,6 +16,8 @@ void LogicAssets::initialize(std::string assetPath, std::string miniGameAssetPat
 	tileObjects = AssetUtils::getAllAssetsWithType("tileobject", handler);
 	units = AssetUtils::getAllAssetsWithType("unit", handler);
 	mapGenerator = std::move(handler.findAsset("map_generator").value().get());
+	winCondition = std::move(handler.findAsset("win_condition").value().get());
+	handler.assetNodes.erase("win_condition");
 	handler.assetNodes.erase("map_generator");
 	// TODO - catch wrong structure and types as errors
 }

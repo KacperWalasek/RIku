@@ -111,6 +111,7 @@
       <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +151,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/sdl /w34996 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -362,6 +364,7 @@
     <ClInclude Include="..\src\Frontend\Window\Light.h" />
     <ClInclude Include="..\src\Frontend\Window\Scene.h" />
     <ClInclude Include="..\src\Frontend\Window\Window.h" />
+    <ClInclude Include="..\src\GameLogic\Actions\CheckWinConditionAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\DelayedMoveAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
@@ -480,7 +483,6 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\MiniGamePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PatchSerializers.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h" />
@@ -500,6 +502,12 @@
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
     <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\CombinedWinCondition.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughResourceOfType.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughUnitsWithName.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\IWinCondition.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\OnlyOneSurvived.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\WinConditionFactory.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />

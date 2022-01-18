@@ -109,6 +109,9 @@
     <Filter Include="Riku\Network">
     </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\MoveFactory" />
+    <Filter Include="Riku\GameLogic\WinConditions">
+      <UniqueIdentifier>{06cd7d75-b170-4312-b4b2-e16ac6146d60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Frontend\Asset\AssetModel.cpp">
@@ -1104,9 +1107,6 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PatchSerializers.h">
-      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\Utils\DeserializationData.h">
       <Filter>Riku\GameLogic\Utils</Filter>
     </ClInclude>
@@ -1192,6 +1192,27 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\IWinCondition.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\OnlyOneSurvived.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughUnitsWithName.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughResourceOfType.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\CombinedWinCondition.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\WinConditionFactory.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\CheckWinConditionAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
