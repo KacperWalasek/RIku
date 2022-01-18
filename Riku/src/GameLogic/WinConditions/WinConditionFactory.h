@@ -15,7 +15,8 @@ public:
 		std::shared_ptr<IWinCondition> winCondition = nullptr;
 		for (const auto& condition : asset.getMap())
 		{
-			auto c = createWincondition(condition.first, condition.second.asMap());
+			auto map = condition.second.getType() == logic::AssetDataType::map ? condition.second.asMap() : std::map<std::string, logic::AssetData>();
+			auto c = createWincondition(condition.first, map);
 			if (c) winCondition = winCondition ? std::make_shared<CombinedWinCondition>(winCondition, c) : c;
 		}
 		return winCondition;
