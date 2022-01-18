@@ -1,7 +1,7 @@
 {
 "main_circle": [
 	{
-		"icon": "circle.png",
+		"icon": "front-essentials/circle.png",
 		"pos": {
 			"x": 0.0,
 			"y": 0.03,
@@ -21,7 +21,7 @@
 ],
 "main_move": [
 	{
-		"icon": "move.png",
+		"icon": "front-essentials/move.png",
 		"pos": {
 			"x": 0.0,
 			"y": 0.03,
@@ -47,6 +47,36 @@
 			"y": 0.25,
 			"z": 0.25
 		}
+	}
+],
+"_flat": [
+	{
+		"path": "front-essentials/flat.obj"
+	}
+],
+"_slope": [
+	{
+		"path": "front-essentials/slope.obj"
+	}
+],
+"_corner+": [
+	{
+		"path": "front-essentials/corner+.obj"
+	}
+],
+"_corner-": [
+	{
+		"path": "front-essentials/corner-.obj"
+	}
+],
+"_double_corner": [
+	{
+		"path": "front-essentials/double_corner.obj"
+	}
+],
+"_cliff": [
+	{
+		"path": "front-essentials/cliff.obj"
 	}
 ]
 }

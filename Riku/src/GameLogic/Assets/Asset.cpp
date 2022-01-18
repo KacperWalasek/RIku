@@ -8,6 +8,14 @@
 #include <filesystem>
 #include <fstream>
 #include <hash-library/sha256.h>
+#include "../StateUpdate/Move/TestMove.h"
+#include "../Hooks/MoveWrapper.h"
+#include "../Tile/TileDescription.h"
+#include "RandomWrapper.h"
+#include "../StateUpdate/Move/CreateUnit.h"
+#include "../StateUpdate/Move/CombinedMove.h"
+#include "../StateUpdate/Move/UseResources.h"
+#include <iostream>
 
 namespace logic {
 

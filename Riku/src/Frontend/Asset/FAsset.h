@@ -25,6 +25,7 @@ namespace front {
 		glm::vec3 frustumCenter; //centre of sphere for frustum culling. Includes Default value=0.5
 		std::vector<AssetModel> assetModels;
         std::vector<AssetTexture> assetTextures;
+
 		friend class AssetHandler;
     public:
 		[[nodiscard]] const std::string& getName() const {return name;}

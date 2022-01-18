@@ -11,6 +11,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Bump -s 100.000000 100.000000 100.000000 green.png
+map_Ks -s 100.000000 100.000000 100.000000 green.png
 
 newmtl Material.001
 Ns 225.000000
@@ -22,3 +23,4 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Bump -s 100.000000 100.000000 100.000000 brown.png
+map_Ks -s 100.000000 100.000000 100.000000 brown.png

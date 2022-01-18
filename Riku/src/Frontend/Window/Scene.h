@@ -44,6 +44,7 @@ namespace front {
 		friend class MouseClickCallback;
 
 		void init(GLFWwindow* window);
+		void drawTile(const std::vector<std::vector<Tile>> &map, int x, int y);
 	public:
 		const glm::mat4& getProjection() const {return projection;}
 		const glm::mat4& getView() const {return view;}

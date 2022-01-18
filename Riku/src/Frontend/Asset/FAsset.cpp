@@ -11,6 +11,30 @@
 #include <json/json.h>
 #endif // __linux__
 #include "../Model.h"
+#include <filesystem>
+
+std::tuple<std::optional<Texture>,std::optional<Texture>,std::optional<Texture>> checkTextures(const Json::Value& val, const std::string& path){
+	std::optional<Texture> diffuse, specular, normal;
+	if(val.isMember("diffuse") && val["diffuse"].isString()) {
+		std::string path2 = path + val["diffuse"].asString();
+		auto p = std::filesystem::path(path2);
+		std::string filename = p.filename().string();
+		diffuse = Texture("texture_diffuse",val["diffuse"].asString(), p.parent_path().string());
+	}
+	if(val.isMember("specular") && val["specular"].isString()) {
+		std::string path2 = path + val["specular"].asString();
+		auto p = std::filesystem::path(path2);
+		std::string filename = p.filename().string();
+		specular=Texture("texture_specular",filename, p.parent_path().string());
+	}
+	if(val.isMember("normal") && val["normal"].isString()) {
+		std::string path2 = path + val["normal"].asString();
+		auto p = std::filesystem::path(path2);
+		std::string filename = p.filename().string();
+		normal=Texture("texture_normal",filename, p.parent_path().string());
+	}
+	return {diffuse, specular, normal};
+}
 
 
 front::Asset::Asset(std::string name, const std::string& path, const Json::Value& value): name(std::move(name)) {
@@ -32,6 +56,13 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 					float z = val["frustum_center"].get("z",0.0f).asFloat();
 					frustumCenter = {x,y,z};
 				}
+			//check for ground asset
+			if(val.isMember("ground")) {
+				auto&& [specular, diffuse, normal]=checkTextures(val, path);
+				assetModels.emplace_back();
+				assetModels.back().diffuse=diffuse;
+				assetModels.back().normal=normal;
+				assetModels.back().specular=specular;
 			}
 			continue;
 		}
@@ -62,11 +93,16 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 			texScaleX = val["tex"].get("x",1.0f).asFloat();
 			texScaleY = val["tex"].get("y",1.0f).asFloat();
 		}
+		//textures
+		auto&& [specular, diffuse, normal]=checkTextures(val, path);
         //Parameter effective only for icons. Overrides icon rotation
         bool cameraAdaptive = val["scale"].get("camera_adaptive",false).asBool();
         if(!modelPath.empty()) {
             modelPath = path + modelPath;
 		    assetModels.emplace_back(modelPath, Transform(pos,rot,scale), texScaleX, texScaleY);
+			assetModels.back().diffuse=diffuse;
+	        assetModels.back().normal=normal;
+	        assetModels.back().specular=specular;
         }
         if(!iconPath.empty()) {
             iconPath = path + iconPath;
