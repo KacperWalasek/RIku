@@ -35,6 +35,7 @@ add_executable(Riku
 	src/MiniGame/MiniGameAssetInitializer.cpp
 	src/MiniGame/MiniGameState.cpp
 	src/MiniGame/MiniGameAssets.cpp
+	lib/stb_image/stb_image.cpp
 	src/GameLogic/Hooks/GUIDescription.cpp
 	src/GameLogic/Hooks/LoadedHookable.cpp
 	src/GameLogic/Tile/TileCost/Biome.cpp
@@ -111,7 +112,6 @@ add_executable(Riku
 	src/Frontend/Window/Scene.cpp
 	src/Frontend/FrontendState.cpp
 	src/Frontend/Texture.cpp
-	src/Frontend/stb_image.cpp
 	src/Frontend/Lang.cpp
 	src/Frontend/Object.cpp
 	src/Frontend/Model.cpp
@@ -124,7 +124,8 @@ add_executable(Riku
 	src/Frontend/Frontend.cpp
 	src/Frontend/Transform.cpp
 	src/Frontend/GUI.cpp
-	src/Riku.cpp)
+	src/Frontend/FrustumCulling.cpp
+	src/Riku.cpp src/Frontend/Util.cpp)
 
 target_link_libraries(Riku dl)
 target_link_libraries(Riku Xi)

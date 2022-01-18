@@ -1,5 +1,12 @@
 {
-"stefan": [
+"stone_factory": [
+	{
+		"frustum": null,
+		"frustum_radius": 0.5,
+		"frustum_center": {
+			"y": 0.866
+		}
+	},
 	{
 		"path": "model/sara.blend",
 		"pos": {

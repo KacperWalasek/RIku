@@ -26,12 +26,20 @@ front::Window::~Window()
 
 bool front::Window::update()
 {
+	static float stabDeltaTime = 0.0f;
+	static int ind = 0;
 	if (glfwWindowShouldClose(window))
 		return true;
-
 	auto currentFrame = (float)glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
+	ind++;
+	stabDeltaTime+=deltaTime;
+	if(ind==10) {
+		std::cout << stabDeltaTime << "\n";
+		ind = 0;
+		stabDeltaTime = .0f;
+	}
 
 	processInput();
 	scene.update();
