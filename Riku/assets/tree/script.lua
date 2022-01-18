@@ -1,5 +1,6 @@
 asset_type="tileobject"
 name = "tree"
 
-tree = {
+tileobject = {
+    description = "tree"
 }
