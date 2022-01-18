@@ -17,12 +17,37 @@ front::AssetModel::AssetModel(std::string& path, Transform transform, float texS
 }
 
 void front::AssetModel::draw(const Shader &shader, front::Transform t) const {
-    /*auto pos=t.position+front::rotate(transform.position,t.rotation);
-    auto rot=t.rotation+transform.rotation;
-    auto scale=t.scale*transform.scale;*/
+	if(model==nullptr)
+		return;
     Object object(*model);
     object.transform=transform;
     object.SetParent(t);
-
+	std::vector<Texture> backupTextures;
+	if(specular || diffuse || normal ) {
+		bool wasSpec=false, wasDiff=false, wasNorm=false;
+		for (auto &tex: model->meshes[0].textures) {
+			backupTextures.push_back(tex);
+			if (!wasDiff && tex.type == "texture_diffuse" && diffuse) {
+				tex=*diffuse;
+				wasDiff=true;
+			}
+			if (!wasSpec && tex.type == "texture_specular" && specular) {
+				tex=*specular;
+				wasSpec=true;
+			}
+			if (!wasNorm && tex.type == "texture_normal" && normal) {
+				tex=*normal;
+				wasNorm=true;
+			}
+		}
+		if(!wasDiff && diffuse)
+			model->meshes[0].textures.push_back(*diffuse);
+		if(!wasSpec && specular)
+			model->meshes[0].textures.push_back(*specular);
+		if(!wasNorm && normal)
+			model->meshes[0].textures.push_back(*normal);
+	}
     object.Draw(shader);
+	if(specular || diffuse || normal )
+		model->meshes[0].textures=std::move(backupTextures);
 }

@@ -1,6 +1,7 @@
 #include "AssetHandler.h"
 #include <filesystem>
 #include <hash-library/sha256.h>
+#include <iostream>
 
 namespace logic{
 

@@ -1,0 +1,20 @@
+{
+"en": {
+	"biomes_snow": "Snow",
+	"biomes_tundra": "Tundra",
+	"biomes_taiga": "Taiga",
+	"biomes_temperate": "Temperate",
+	"biomes_tropics": "Tropical",
+	"biomes_equator": "Equatorial",
+	"biomes_sea": "Sea"
+},
+"pl": {
+	"biomes_snow": "Śnieg",
+	"biomes_tundra": "Tundra",
+	"biomes_taiga": "Tajga",
+	"biomes_temperate": "Umiarkowany",
+	"biomes_tropics": "Zwrotnikowy",
+	"biomes_equator": "Równikowy",
+	"biomes_sea": "Morze"
+}
+}

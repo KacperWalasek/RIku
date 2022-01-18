@@ -77,9 +77,9 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 	MapGenerator generator(assets.mapGenerator);
 	gameState.map = generator.getMap(assets);
 
-	auto unitMove = std::make_shared<CreateUnit>(0, "stefan", 10, 10);
+	auto unitMove = std::make_shared<CreateUnit>(0, "stefan", 0, 0);
 	stateUpdate.handleMove(unitMove);
-	unitMove = std::make_shared<CreateUnit>(0, "stefan", 11, 10);
+	unitMove = std::make_shared<CreateUnit>(0, "stefan", 1, 0);
 	stateUpdate.handleMove(unitMove);
 	unitMove = std::make_shared<CreateUnit>(1, "stefan", 12, 10);
 	stateUpdate.handleMove(unitMove);
