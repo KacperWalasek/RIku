@@ -132,6 +132,8 @@ public:
 			p1.playerCount = p2.playerCount;
 		if (p2.delayedMove)
 			p1.delayedMove = p2.delayedMove;
+		if (p2.winner != -1)
+			p1.winner = p2.winner;
 		return std::move(p1);
 	}
 };
