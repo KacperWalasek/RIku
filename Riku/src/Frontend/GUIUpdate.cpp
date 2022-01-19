@@ -5,15 +5,18 @@
 #include "GUICallbacks/FocusUnitWithIndex.h"
 #include "GUICallbacks/FocusUnit.h"
 #include "GUICallbacks/SetLabelText.h"
+#include "GUICallbacks/AcceptInvitation.h"
 
 int CEGUI::GUIUpdate::a;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitElems;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitOptions;
+std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingReceivedInvitations;
 std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
 std::map<std::string, Invitation> CEGUI::GUIUpdate::lastInvited;
+std::map<std::string, std::string> CEGUI::GUIUpdate::lastReceivedInvitations;
 
 void CEGUI::GUIUpdate::Init()
 {
@@ -42,6 +45,7 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, std::map<std::string, CE
     else
     {
         CEGUI::GUIUpdate::CreateInvitations(guiDic["NewGameMenu"], "InvitationsList", state);
+        CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state);
     }
 }
 
@@ -109,8 +113,8 @@ void CEGUI::GUIUpdate::UpdateUIButtons(std::map<std::string, CEGUI::GUI*> guiDic
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("SaveButton"));
     button->setText(front::Lang::getUtf("Save Game"));
 
-    button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("LoadButton"));
-    button->setText(front::Lang::getUtf("Load Game"));
+    button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("JoinButton"));
+    button->setText(front::Lang::getUtf("Join Game"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("OptionsButton"));
     button->setText(front::Lang::getUtf("Options"));
@@ -266,36 +270,82 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
 void CEGUI::GUIUpdate::CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state)
 {
     std::map<std::string, Invitation> invited = state.getInvitedPlayers();
-    for (auto p : invited)
-    {
-        //std::cout << p.first;
-    }
-    if (invited.size() == lastInvited.size())
-        return;
+    //if (invited.size() == lastInvited.size())
+        //return;
 
     auto invitationsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(InvitationsListName));
 
     for (const auto& invitation : lastInvited)
     {
-        auto item = invitationsList->getChildElementRecursive(invitation.first);
+        CEGUI::Window* item = static_cast<CEGUI::Window*>(invitationsList->getChildElementRecursive(invitation.first));
         invitationsList->removeChild(item);
+        item->destroy();
         delete item;
     }
     float y = 0.1f;
     for (const auto& invitation : invited)
     {
         auto invitationLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
-            glm::vec4(0.1f, y, 0.8f, 0.25f), glm::vec4(0.0f), invitation.first));
-        InvitationState state = invitation.second.state;
-        invitationLabel->setText(invitation.first + "state: " + "state_to_string");
+            glm::vec4(0.1f, y, 0.8f, 0.15f), glm::vec4(0.0f), invitation.first));
+        //invitation inv = invitation.second;
+        invitationLabel->setText(invitation.first + " - invitation state: " + invitation.second.GetStateAsString());
        /* auto callback1 = new CEGUI::Functor::SetLabelText(building.first, nameLabel);
         gui->setPushButtonCallback(building.first, callback1);
         auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
         gui->setPushButtonCallback(building.first, callback2);*/
         invitationsList->addChild(invitationLabel);
-        y += 0.3f;
+        y += 0.2f;
     }
     lastInvited = invited;
+}
+
+void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state)
+{
+    std::map<std::string, std::string> invitations = state.getInvitations();
+    if (invitations == lastReceivedInvitations)
+        return;
+
+    auto invitationsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName(InvitationsListName));
+
+    for (auto p : existingReceivedInvitations)
+        invitationsList->removeChild(p.second);
+    
+    float y = 0.1f;
+    for (const auto& invitation : invitations)
+    {
+        auto ip = invitation.first;
+        if (existingReceivedInvitations.find(ip) != existingReceivedInvitations.end())
+        {
+            CEGUI::GUI::setWidgetDestRect(existingReceivedInvitations[ip], glm::vec4(0.1f, y, 0.8f, 0.2f), glm::vec4(0.0f));
+            invitationsList->addChild(existingReceivedInvitations[ip]);
+            y += 0.2;
+            continue;
+        }
+        auto item = my_gui->createWidget("DefaultWindow",
+            glm::vec4(0.1f, y, 0.8f, 0.2f), glm::vec4(0.0f), ip);
+        auto invitationLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.0f, 0.1f, 0.65f, 0.8f), glm::vec4(0.0f), ip +"/label"));
+        auto button = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
+            glm::vec4(0.65f, 0.1f, 0.35f, 0.8f), glm::vec4(0.0f), ip + "/button"));
+
+        button->setText(front::Lang::getUtf("Accept"));
+        std::string invitationFrom = front::Lang::get(std::string("Invitation from"));
+        invitationFrom += ": ";
+        if (invitation.second != "")
+            invitationLabel->setText(invitationFrom + invitation.second);
+        else
+            invitationLabel->setText(invitationFrom + ip);
+        auto callback1 = new CEGUI::Functor::AcceptInvitation(ip, state);
+        my_gui->setPushButtonCallback(ip + "/button", callback1);
+         /*auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
+         gui->setPushButtonCallback(building.first, callback2);*/
+        item->addChild(invitationLabel);
+        item->addChild(button);
+        invitationsList->addChild(item);
+        y += 0.2f;
+        existingReceivedInvitations.insert(std::pair(ip, item));
+    }
+    lastReceivedInvitations = invitations;
 }
 
 void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)
@@ -371,8 +421,9 @@ void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedU
 
     for (const auto& bulding : lastBuildings)
     {
-        auto item = buildingList->getChildElementRecursive(bulding.first);
+        CEGUI::Window* item = static_cast<CEGUI::Window*>(buildingList->getChildElementRecursive(bulding.first));
         buildingList->removeChild(item);
+        item->destroy();
         delete item;
     }
     float y = 0.1f;

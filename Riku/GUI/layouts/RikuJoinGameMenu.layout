@@ -13,15 +13,8 @@
                 <Property name="Area" value="{{0,24},{0,19},{0.1,24},{0.05,19}}" />
                 <Property name="Text" value="Return to main menu" />
             </Window>
-            <Window type="WindowsLook/Editbox" name="IpBox" >
-                <Property name="Area" value="{{0,184},{0,225},{0,440},{0,257}}" />
-            </Window>
-            <Window type="WindowsLook/Button" name="InviteButton" >
-                <Property name="Area" value="{{0,480},{0,223},{0,576},{0,255}}" />
-                <Property name="Text" value="Invite" />
-            </Window>
             <Window type="WindowsLook/FrameWindow" name="InvitationsWindow" >
-                <Property name="Area" value="{{0.5,0},{0.4,0},{0.9,0},{0.8,0}}" />
+                <Property name="Area" value="{{0.2,0},{0.4,0},{0.8,0},{0.7,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="SizingEnabled" value="false" />
                 <Property name="TitlebarEnabled" value="false" />
@@ -56,10 +49,6 @@
                         </AutoWindow>
                     </AutoWindow>
                 </Window>
-            </Window>
-            <Window type="WindowsLook/Button" name="StartGameButton" >
-                <Property name="Area" value="{{0,96},{0,117},{0.1,96},{0.05,117}}" />
-                <Property name="Text" value="Start Game" />
             </Window>
         </Window>
     </Window>

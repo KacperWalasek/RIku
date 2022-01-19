@@ -21,6 +21,7 @@ namespace CEGUI {
         CEGUI::GUI* GetMainMenu();
         CEGUI::GUI* GetOptionsMenu();
         CEGUI::GUI* GetNewGameMenu();
+        CEGUI::GUI* GetJoinGameMenu();
         CEGUI::GUI* GetGameUI();
         CEGUI::GUI* GetBuildingUI();
         CEGUI::GUI* GetRecruitingUI();

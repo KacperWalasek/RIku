@@ -40,7 +40,6 @@ int main() {
 	GameLogic logic("../assets", "../mini_assets");
 	front::Config config;
 	front::Frontend frontend(logic, config);
-	//frontend.state.startGame();
 	bool exitProgram = false;
 	while (!exitProgram)
 	{

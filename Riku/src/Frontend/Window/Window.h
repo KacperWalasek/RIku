@@ -15,6 +15,7 @@ namespace front {
 	{
 		Config& config;
 		GLFWwindow* window;
+		FrontendState& state;
 
 		float aspect;
 		float lastFrame = 0.0f;

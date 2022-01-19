@@ -66,6 +66,7 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
 	guiDic.insert(std::pair("OptionsMenu", fac.GetOptionsMenu()));
 	guiDic.insert(std::pair("NewGameMenu", fac.GetNewGameMenu()));
+	guiDic.insert(std::pair("JoinGameMenu", fac.GetJoinGameMenu()));
 	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
 	guiDic.insert(std::pair("RecruitingUI", fac.GetRecruitingUI()));
 	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));

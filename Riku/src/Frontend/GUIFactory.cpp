@@ -55,11 +55,13 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
 	auto onOptionsButton = new CEGUI::Functor::SwitchActiveGUI("OptionsMenu", activeGUI, guiDic);
 	auto onNewGameButton = new CEGUI::Functor::SwitchActiveGUI("NewGameMenu", activeGUI, guiDic);
+	auto onJoinButton = new CEGUI::Functor::SwitchActiveGUI("JoinGameMenu", activeGUI, guiDic);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ExitButton", onExitButton);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 	my_gui->setPushButtonCallback("OptionsButton", onOptionsButton);
 	my_gui->setPushButtonCallback("NewGameButton", onNewGameButton);
+	my_gui->setPushButtonCallback("JoinButton", onJoinButton);
 
 	return my_gui;
 }
@@ -97,6 +99,20 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton);
 
 	//CEGUI::GUIUpdate::CreateInvitations(my_gui, "InvitationsList", state);
+	return my_gui;
+}
+
+CEGUI::GUI* CEGUI::GUIFactory::GetJoinGameMenu() {
+
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuJoinGameMenu.layout");
+
+	auto onKeyPress = new CEGUI::Functor::Functor();
+	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
+	my_gui->setKeyCallback(onKeyPress);
+	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
+
 	return my_gui;
 }
 

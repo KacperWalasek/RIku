@@ -9,7 +9,7 @@
 #include "../Lang.h"
 
 front::Window::Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler)
-	: config(config), scene(config, logic, state, handler, aspect)
+	: config(config), state(state), scene(config, logic, state, handler, aspect)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -33,7 +33,8 @@ bool front::Window::update()
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 
-	processInput();
+	if(state.isInGame())
+		processInput();
 	scene.update();
 
 	glfwSwapBuffers(window);

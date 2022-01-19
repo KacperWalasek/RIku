@@ -14,4 +14,13 @@ struct Invitation
 	std::string ip;
 	std::string name;
 	InvitationState state;
+	std::string GetStateAsString() const {
+		switch (state)
+		{
+		case InvitationState::Pending: return "Pending";
+		case InvitationState::Accepted: return "Accepted";
+		case InvitationState::Joined: return "Joined";
+		default: return "";
+		}
+	}
 };

@@ -330,6 +330,7 @@
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\AcceptInvitation.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
@@ -344,7 +345,6 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
-    <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelTextFromEditbox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\StartGame.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
