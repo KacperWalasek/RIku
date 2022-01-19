@@ -21,4 +21,9 @@ apt install liblua5.3-dev
 apt install libcegui-mk2-dev
 apt install libglm-dev
 apt install libxi-dev
+#install zmq
+echo 'deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-stable/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/network:messaging:zeromq:release-stable.list
+curl -fsSL https://download.opensuse.org/repositories/network:messaging:zeromq:release-stable/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/network_messaging_zeromq_release-stable.gpg > /dev/null
+sudo apt update
+sudo apt install libzmq3-dev
 exit
