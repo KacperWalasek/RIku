@@ -33,6 +33,11 @@ int LogicUtils::getAvailablePlayerId(int count)
     return first;
 }
 
+void LogicUtils::resetPlayerIndexes()
+{
+    currentPlayerId = 0;
+}
+
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)
 {
     hookables.emplace(hookable->getId(), hookable);

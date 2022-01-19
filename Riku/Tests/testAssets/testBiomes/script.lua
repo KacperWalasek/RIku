@@ -1,6 +1,6 @@
 asset_type="biomes"
 biomes = {
-    biome1 = 1,
-    biome2 = 2,
-    biome3 = 3
+    biome1 = 0.8,
+    biome2 = 1.2,
+    biome3 = 1
 }
