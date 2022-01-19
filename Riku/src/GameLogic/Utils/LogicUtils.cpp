@@ -26,10 +26,11 @@ std::string LogicUtils::getUniqueId()
     return id;
 }
 
-int LogicUtils::getAvailablePlayerId()
+int LogicUtils::getAvailablePlayerId(int count)
 {
-    currentPlayerId++;
-    return currentPlayerId;
+    int first = currentPlayerId + 1;
+    currentPlayerId += count;
+    return first;
 }
 
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)

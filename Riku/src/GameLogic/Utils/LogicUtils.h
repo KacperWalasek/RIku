@@ -14,7 +14,7 @@ public:
 	static Path getShortestPath(
         const GameState& state, int fromX, int fromY, int toX, int toY, int movementPoints = 0);
 	static std::string getUniqueId();
-	static int getAvailablePlayerId();
+	static int getAvailablePlayerId(int count = 1);
 
 	static void addHookable(std::shared_ptr<IHookable> hookable);
 	static void removeHookable(std::string id);

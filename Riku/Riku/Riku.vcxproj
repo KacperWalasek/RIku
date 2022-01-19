@@ -111,6 +111,7 @@
       <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +130,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\binaries\glm;..\binaries\glew\include;..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -220,11 +221,13 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp" />
@@ -280,6 +283,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\StateUpdate.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\MapGenerator.cpp" />
     <ClCompile Include="..\src\GameLogic\Tile\Tile.cpp" />
@@ -369,6 +373,7 @@
     <ClInclude Include="..\src\Frontend\Window\Light.h" />
     <ClInclude Include="..\src\Frontend\Window\Scene.h" />
     <ClInclude Include="..\src\Frontend\Window\Window.h" />
+    <ClInclude Include="..\src\GameLogic\Actions\CheckWinConditionAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\DelayedMoveAction.h" />
     <ClInclude Include="..\src\GameLogic\Actions\IAction.h" />
@@ -391,11 +396,13 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\MapRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerOnMoveRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerResourcesRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\ShortestPathRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TilePairRequest.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Requests\TileRequest.h" />
@@ -430,6 +437,7 @@
     <ClInclude Include="..\src\GameLogic\LogicAssets.h" />
     <ClInclude Include="..\src\GameLogic\Player\Player.h" />
     <ClInclude Include="..\src\GameLogic\Resource.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AcceptInvitationMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AttackMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\BuildMoveDescription.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\ChoseGuiOptionMoveDescription.h" />
@@ -483,9 +491,9 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\RegisterHookablePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\TilePatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\UnitPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\MiniGamePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\Patch.h" />
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PatchSerializers.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\PlayerPatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\RegisterHookablePatch.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\TilePatch.h" />
@@ -505,6 +513,12 @@
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
     <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\CombinedWinCondition.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughResourceOfType.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughUnitsWithName.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\IWinCondition.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\OnlyOneSurvived.h" />
+    <ClInclude Include="..\src\GameLogic\WinConditions\WinConditionFactory.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />
@@ -555,6 +569,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <ClInclude Include="..\src\Network\InvitationAcceptance.h" />
     <ClInclude Include="..\src\Network\NetworkUtils.h" />
     <ClInclude Include="..\src\Network\WebModule.h" />
   </ItemGroup>

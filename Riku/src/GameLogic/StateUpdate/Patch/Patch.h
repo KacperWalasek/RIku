@@ -55,6 +55,7 @@ public:
 	std::map<int, MiniGamePatch> miniGamePatches;
 	std::vector<std::vector<TileDescription>>  map;
 	bool clearGameState = false;
+	int winner = -1;
 	int playerOnMove = -1;
 	int playerCount = -1;
 
@@ -63,8 +64,8 @@ public:
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(playerOnMove, registerHookablePatches, playerPatches,
-			tilePatches, unitPatches, miniGamePatches, map, clearGameState, playerCount);
+		archive(playerOnMove, registerHookablePatches, playerPatches, 
+			tilePatches, unitPatches, miniGamePatches, map, winner, clearGameState, playerCount);
 	}
 
 	friend Patch operator+(Patch p1, const Patch& p2)
@@ -131,6 +132,8 @@ public:
 			p1.playerCount = p2.playerCount;
 		if (p2.delayedMove)
 			p1.delayedMove = p2.delayedMove;
+		if (p2.winner != -1)
+			p1.winner = p2.winner;
 		return std::move(p1);
 	}
 };

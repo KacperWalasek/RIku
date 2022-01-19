@@ -32,6 +32,8 @@ public:
 	std::map<std::string, std::string> getInvitations();
 	std::map<std::string, Invitation> getInvitedPlayers();
 	bool isInGame();
+	int getPlayerCount();
+	int getWinner();
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);
@@ -44,7 +46,7 @@ public:
 	void save(std::string path);
 	void load(std::string path);
 	void invite(std::string ip);
-	void acceptInvitation(std::string ip);
+	void acceptInvitation(std::string ip, int hotseadCount);
 	void setName(std::string name);
 	void setHotseatPlayerCount(int count);
 	void startGame();

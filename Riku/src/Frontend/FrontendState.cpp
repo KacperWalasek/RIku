@@ -24,6 +24,7 @@
 #include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/AcceptInvitationMoveDescription.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -124,6 +125,16 @@ bool FrontendState::isInGame()
 	return logic.getInfo<BoolResponse>("is_in_game")->get();
 }
 
+int FrontendState::getPlayerCount()
+{
+	return logic.getInfo<IntResponse>("player_count")->get();
+}
+
+int FrontendState::getWinner()
+{
+	return logic.getInfo<IntResponse>("winner")->get();
+}
+
 void FrontendState::build(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<BuildMoveDescription>(name, mapX, mapY));
@@ -174,9 +185,9 @@ void FrontendState::invite(std::string ip)
 	logic.makeMove(std::make_shared<StringMoveDescription>("invite", ip));
 }
 
-void FrontendState::acceptInvitation(std::string ip)
+void FrontendState::acceptInvitation(std::string ip, int hotseadCount)
 {
-	logic.makeMove(std::make_shared<StringMoveDescription>("accept_invitation", ip));
+	logic.makeMove(std::make_shared<AcceptInvitationMoveDescription>(ip, hotseadCount));
 }
 
 void FrontendState::setName(std::string name)

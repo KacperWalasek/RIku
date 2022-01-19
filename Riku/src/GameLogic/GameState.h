@@ -16,6 +16,7 @@ public:
 	bool isHosting = false;
 	bool isInGame = false;
 	std::vector<int> hotSeatPlayers = { 0 };
+	int winner = -1;
 
 	std::vector<Player> players;
 	std::vector<std::vector<Tile>> map;

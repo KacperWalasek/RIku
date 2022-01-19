@@ -54,6 +54,10 @@
 #define CEREAL_FUTURE_EXPERIMENTAL
 #include <cereal/archives/adapters.hpp>
 #include "StateUpdate/MoveFactory/HotseatCountMoveHandler.h"
+#include "../Network/InvitationAcceptance.h"
+#include "FrontendCommunicator/RequestHandlers/PlayerCountRequestHandler.h"
+#include "StateUpdate/PatchHandler/WinnerPatchHandler.h"
+#include "FrontendCommunicator/RequestHandlers/WinnerRequestHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -71,7 +75,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<UnitPatchHandler>(),
 		std::make_shared<MiniGamePatchHandler>(),
 		std::make_shared<DelayedMovePatchHandler>(),
-		std::make_shared<PlayerOnMovePatchHandler>()
+		std::make_shared<PlayerOnMovePatchHandler>(),
+		std::make_shared<WinnerPatchHandler>()
 		});
 
 	factory.setHandlers({
@@ -84,7 +89,7 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<SaveMoveHandler>(),
 		std::make_shared<LoadMoveHandler>(),
 		std::make_shared<InviteMoveHandler>(gameState),
-		std::make_shared<AcceptInvitationMoveHandler>(gameState),
+		std::make_shared<AcceptInvitationMoveHandler>(gameState, assets),
 		std::make_shared<SetNameMoveHandler>(gameState),
 		std::make_shared<StartGameMoveHandler>(gameState),
 		std::make_shared<HotseatCountMoveHandler>(gameState)
@@ -104,8 +109,9 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<InvitationsRequestHandler>(gameState),
 		std::make_shared<GetUnitNamesRequestHandler>(assets),
 		std::make_shared<IsInGameRequestHandler>(gameState),
+		std::make_shared<PlayerCountRequestHandler>(gameState),
+		std::make_shared<WinnerRequestHandler>(gameState)
 		});
-	
 }
 
 std::shared_ptr<Response> GameLogic::getInfo(std::shared_ptr<Request> request) const
@@ -148,7 +154,6 @@ bool GameLogic::isMoveLegal(std::shared_ptr<IMoveDescription> moveDescription) c
 
 void GameLogic::update()
 {
-	// TODO:webModule check and handle recivedMessages
 	Network::m_message message = Network::WebModule::ReceiveMessageStruct();
 	bool isHost = true;
 	while (!message.empty())
@@ -161,33 +166,46 @@ void GameLogic::update()
 			break;
 		case Network::MessType::InvitationAccepted:
 			{
+				InvitationAcceptance acceptance;
+				acceptance.deserialize(message[2].to_string());
 				auto invitationIt = gameState.invitedPlayers.find(message.dataString());
-				if (invitationIt == gameState.invitedPlayers.end())
+				if (invitationIt == gameState.invitedPlayers.end() || acceptance.hash != assets.handler.getHash())
+					// send information
 					break;
-				// TODO: change to Accepted
-				invitationIt->second.state = InvitationState::Joined;
-				invitationIt->second.name = message[2].to_string();
-				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId());
+					
+				invitationIt->second.state = InvitationState::Accepted;
+				invitationIt->second.name = acceptance.name;
+				invitationIt->second.hotseatCount = acceptance.hotseatCount;
+				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId(acceptance.hotseatCount));
 			}
 			break;
 		case Network::MessType::Join:
-		{
-			gameState.hotSeatPlayers = { *message[2].data<int>() };
-		}
-		break;
+			{
+				for (int i = 0; i < gameState.hotSeatPlayers.size(); i++)
+					gameState.hotSeatPlayers[i] += *message[2].data<int>();
+			}
+			break;
+		case Network::MessType::JoinAccepted:
+			{
+				auto invitationIt = gameState.invitedPlayers.find(message.dataString());
+				if (invitationIt == gameState.invitedPlayers.end())
+					break;
+				invitationIt->second.state = InvitationState::Joined;
+			}
+			break;
 		case Network::MessType::Patch:
-		{
-			std::stringstream ss( message.dataString());
-			DeserializationData data(assets, minigame::MiniGame::getAssets());
-			cereal::UserDataAdapter<DeserializationData, cereal::BinaryInputArchive> iarchive(data, ss);
+			{
+				std::stringstream ss( message.dataString());
+				DeserializationData data(assets, minigame::MiniGame::getAssets());
+				cereal::UserDataAdapter<DeserializationData, cereal::BinaryInputArchive> iarchive(data, ss);
 
-			std::shared_ptr<Patch> patch;
-			iarchive(patch);
-			stateUpdate.handlePatch(patch, false);
-			if (!gameState.isInGame)
-				gameState.isInGame = true;
-		}
-		break;
+				std::shared_ptr<Patch> patch;
+				iarchive(patch);
+				stateUpdate.handlePatch(patch, false);
+				if (!gameState.isInGame)
+					gameState.isInGame = true;
+			}
+			break;
 		default:
 			break;
 		}

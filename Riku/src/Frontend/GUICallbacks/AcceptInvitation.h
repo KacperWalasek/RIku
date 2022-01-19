@@ -17,7 +17,7 @@ namespace CEGUI::Functor {
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            state.acceptInvitation(ip);
+            state.acceptInvitation(ip, 2);
             return true;
         };
     };
