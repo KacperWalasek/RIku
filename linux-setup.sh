@@ -1,4 +1,4 @@
-Needed version of GCC: >=10
+#Needed version of GCC: >=10
 
 #Needed packages:
 #libassimp-dev (Assimp >=5.0)
