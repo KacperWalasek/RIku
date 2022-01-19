@@ -14,7 +14,7 @@
                 <Property name="Text" value="Return to main menu" />
             </Window>
             <Window type="WindowsLook/FrameWindow" name="InvitationsWindow" >
-                <Property name="Area" value="{{0.2,0},{0.4,0},{0.8,0},{0.7,0}}" />
+                <Property name="Area" value="{{0.2,0},{0.32,0},{0.8,0},{0.87,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="SizingEnabled" value="false" />
                 <Property name="TitlebarEnabled" value="false" />
@@ -24,7 +24,7 @@
                     <Property name="DraggingEnabled" value="false" />
                 </AutoWindow>
                 <Window type="OgreTray/ScrollablePane" name="InvitationsList" >
-                    <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                    <Property name="Area" value="{{0,0},{0,60},{1,0},{1,0}}" />
                     <Property name="AutoRenderingSurface" value="true" />
                     <Property name="DistributeCapturedInputs" value="true" />
                     <AutoWindow namePath="__auto_container__" >
@@ -48,6 +48,19 @@
                             <Property name="Visible" value="false" />
                         </AutoWindow>
                     </AutoWindow>
+                </Window>
+                <Window type="WindowsLook/Label" name="InvitationsLabel" >
+                    <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                    <Property name="Text" value="Invitations" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="WindowsLook/Editbox" name="HotseatBox" >
+                    <Property name="Area" value="{{0.5,0},{0,33},{0.6,0},{0,63}}" />
+                </Window>
+                <Window type="WindowsLook/Label" name="HotseatLabel" >
+                    <Property name="Area" value="{{0.2,0},{0,32},{0.5,0},{0,64}}" />
+                    <Property name="Text" value="Hotseat Count" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 </Window>
             </Window>
         </Window>

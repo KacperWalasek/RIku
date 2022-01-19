@@ -6,9 +6,6 @@ front::Frontend::Frontend(GameLogic& logic, Config& config)
 {
 	assetHandler.loadFiles();
 
-	state.setName("Name");
-	state.setHotseatPlayerCount(2);
-	///state.startGame();
 	/*state.invite("192.168.0.14");
 	auto invitedPlayers = state.getInvitedPlayers();*/
 }

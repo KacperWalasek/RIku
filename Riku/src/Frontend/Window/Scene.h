@@ -34,6 +34,7 @@ namespace front {
 		Light light;
 		CEGUI::GUIFactory fac;
 		CEGUI::GUI* activeGUI;
+		CEGUI::GUI* lastActiveGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;
 
 		std::pair<int, int> clickPos;

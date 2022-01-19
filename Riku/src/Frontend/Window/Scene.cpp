@@ -32,7 +32,7 @@ constexpr uint8_t playerColors[][3]={
 };
 
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
-	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
+	: config(config), fac(logic,state,activeGUI, lastActiveGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
 {}
 
 front::Scene::~Scene()
@@ -42,7 +42,7 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
-	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex, movingCameraTransform);
+	CEGUI::GUIUpdate::CoreUpdate(state, activeGUI, guiDic, focusedUnitIndex, movingCameraTransform);
 	draw();
 	CEGUI::GUI::drawMultiple(guiDic, activeGUI);
 }
@@ -69,8 +69,9 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("JoinGameMenu", fac.GetJoinGameMenu()));
 	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
 	guiDic.insert(std::pair("RecruitingUI", fac.GetRecruitingUI()));
-	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));
+	guiDic.insert(std::pair("Popup", fac.GetPopup()));
 	guiDic.insert(std::pair("SetNamePopup", fac.GetSetNamePopup()));
+	guiDic.insert(std::pair("MiniGameUI", fac.GetMiniGameUI()));
 	guiDic["MainMenu"]->show();
 	activeGUI = guiDic["SetNamePopup"];
 	activeGUI->show();

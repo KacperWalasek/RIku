@@ -12,11 +12,12 @@ namespace CEGUI::Functor {
     class GameUIOnKeyPress : public Functor
     {
         CEGUI::GUI*& activeGUI;
+        CEGUI::GUI*& lastActiveGUI;
         std::map<std::string, CEGUI::GUI*>& guiDic;
         FrontendState& state;
     public:
-        GameUIOnKeyPress(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic)
-            : Functor(), activeGUI(activeGUI), guiDic(guiDic), state(state) {}
+        GameUIOnKeyPress(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic, CEGUI::GUI*& lastActiveGUI)
+            : Functor(), activeGUI(activeGUI), guiDic(guiDic), lastActiveGUI(lastActiveGUI), state(state) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
@@ -36,7 +37,8 @@ namespace CEGUI::Functor {
                 case CEGUI::Key::NumpadEnter:
                 case CEGUI::Key::Return:
                 {
-                    auto f = CEGUI::Functor::EndTurn(state, activeGUI, guiDic);
+                    
+                    auto f = CEGUI::Functor::EndTurn(state, activeGUI, guiDic, lastActiveGUI);
                     return f(e);
                 }
                 default: break;

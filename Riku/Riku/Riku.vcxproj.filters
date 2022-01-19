@@ -1236,6 +1236,12 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\Resign.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchGUIBack.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
