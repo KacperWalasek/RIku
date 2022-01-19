@@ -8,7 +8,7 @@ front::Frontend::Frontend(GameLogic& logic, Config& config)
 
 	state.setName("Name");
 	state.setHotseatPlayerCount(2);
-	state.startGame();
+	///state.startGame();
 	/*state.invite("192.168.0.14");
 	auto invitedPlayers = state.getInvitedPlayers();*/
 }
