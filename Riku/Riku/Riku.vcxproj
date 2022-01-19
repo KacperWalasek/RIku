@@ -344,7 +344,9 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetNameFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\StartGame.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />

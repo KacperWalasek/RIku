@@ -13,6 +13,8 @@
 #include "GUICallbacks/NewGameMenuOnKeyPress.h"
 #include "GUICallbacks/InvitePlayerFromEditBox.h"
 #include "GUICallbacks/StartGame.h"
+#include "GUICallbacks/SetNameFromEditBox.h"
+#include "GUICallbacks/SetHotseatCountFromEditBox.h"
 #include "Lang.h"
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
@@ -87,16 +89,22 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	my_gui->loadLayout("RikuNewGameMenu.layout");
 	//my_gui->loadLayout("TextDemo.layout");
 
-	auto box = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("IpBox"));
+	auto ipbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("IpBox"));
+	auto hotbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("HotseatBox"));
 
 	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic);
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
-	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(box, state);
-	auto onStartGameButton = new CEGUI::Functor::StartGame(state);
+	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(ipbox, state);
+	auto onStartGameButton1 = new CEGUI::Functor::SetHotseatCountFromEditBox(hotbox, state);
+	auto onStartGameButton2 = new CEGUI::Functor::StartGame(state);
+	auto onStartGameButton3 = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
+	
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 	my_gui->setPushButtonCallback("InviteButton", onInviteButton);
-	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton);
+	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton1);
+	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton2);
+	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton3);
 
 	//CEGUI::GUIUpdate::CreateInvitations(my_gui, "InvitationsList", state);
 	return my_gui;
@@ -172,6 +180,23 @@ CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
 	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostk¹
 	my_gui->setPushButtonCallback("OkButton", onOkButton);
 	my_gui->setKeyCallback(onKeyPress);
+
+	return my_gui;
+}
+
+CEGUI::GUI* CEGUI::GUIFactory::GetSetNamePopup() {
+
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuPopupWithEditbox.layout");
+
+	auto label = static_cast<CEGUI::Window*>(my_gui->getWidgetByName("Label"));
+	label->setText(front::Lang::getUtf("Please enter your name"));
+	auto editbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("Editbox"));
+	auto onOkButton1 = new CEGUI::Functor::SetNameFromEditBox(editbox, state);
+	auto onOkButton2 = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
+	my_gui->setPushButtonCallback("OkButton", onOkButton1);
+	my_gui->setPushButtonCallback("OkButton", onOkButton2);
 
 	return my_gui;
 }

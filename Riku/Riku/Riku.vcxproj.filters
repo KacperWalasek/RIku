@@ -1193,6 +1193,12 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\AcceptInvitation.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetNameFromEditBox.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

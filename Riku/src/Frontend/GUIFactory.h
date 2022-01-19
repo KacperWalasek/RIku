@@ -26,6 +26,7 @@ namespace CEGUI {
         CEGUI::GUI* GetBuildingUI();
         CEGUI::GUI* GetRecruitingUI();
         CEGUI::GUI* GetPlayerChangedUI();
+        CEGUI::GUI* GetSetNamePopup();
 
     private:
         GLFWwindow* window;

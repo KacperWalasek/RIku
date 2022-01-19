@@ -44,7 +44,7 @@ void front::Scene::update()
 {
 	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex, movingCameraTransform);
 	draw();
-	CEGUI::GUI::drawMultiple(guiDic);
+	CEGUI::GUI::drawMultiple(guiDic, activeGUI);
 }
 
 void front::Scene::init(GLFWwindow* window)
@@ -70,7 +70,9 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
 	guiDic.insert(std::pair("RecruitingUI", fac.GetRecruitingUI()));
 	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));
-	activeGUI = guiDic["MainMenu"];
+	guiDic.insert(std::pair("SetNamePopup", fac.GetSetNamePopup()));
+	guiDic["MainMenu"]->show();
+	activeGUI = guiDic["SetNamePopup"];
 	activeGUI->show();
 	CEGUI::GUIUpdate::UpdateUIButtons(guiDic);
 }

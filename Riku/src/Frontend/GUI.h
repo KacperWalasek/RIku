@@ -14,7 +14,7 @@ namespace CEGUI {
         static void setResourceDirectory(const CEGUI::String& resourceDirectory);
 
         void draw(bool render = true);
-        static void drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic);
+        static void drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic, CEGUI::GUI*& activeGUI);
         void show();
         void hide();
 
