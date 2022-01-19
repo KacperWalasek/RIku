@@ -15,4 +15,13 @@ struct Invitation
 	std::string name;
 	InvitationState state;
 	int hotseatCount = 1;
+	std::string GetStateAsString() const {
+		switch (state)
+		{
+		case InvitationState::Pending: return "Pending";
+		case InvitationState::Accepted: return "Accepted";
+		case InvitationState::Joined: return "Joined";
+		default: return "";
+		}
+	}
 };

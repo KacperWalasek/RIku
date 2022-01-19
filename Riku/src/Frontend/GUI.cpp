@@ -84,6 +84,8 @@ bool CEGUI::GUI::on_key_press(int key){
     CEGUI::Key::Scan guiKey = GlfwToCeguiKey(key);
     auto b = m_context->injectKeyDown(guiKey);
     m_context->injectKeyUp(guiKey);
+    if(!b)
+        return m_context->injectChar(key);
     return b;
 }
 
@@ -188,6 +190,8 @@ CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey)
     {
     case GLFW_KEY_UNKNOWN: return CEGUI::Key::Unknown;
     case GLFW_KEY_ESCAPE: return CEGUI::Key::Escape;
+    case GLFW_KEY_0: return CEGUI::Key::Zero;
+    case GLFW_KEY_PERIOD: return CEGUI::Key::Period;
     case GLFW_KEY_B: return CEGUI::Key::B;
     case GLFW_KEY_F1: return CEGUI::Key::F1;
     case GLFW_KEY_F2: return CEGUI::Key::F2;
@@ -224,6 +228,10 @@ CEGUI::Key::Scan GlfwToCeguiKey(int glfwKey)
     case GLFW_KEY_HOME: return CEGUI::Key::Home;
     case GLFW_KEY_END: return CEGUI::Key::End;
     case GLFW_KEY_KP_ENTER: return CEGUI::Key::NumpadEnter;
-    default: return CEGUI::Key::Unknown;
+    default: {
+        if (glfwKey >= GLFW_KEY_1 && glfwKey <= GLFW_KEY_9)
+            return (CEGUI::Key::Scan)(CEGUI::Key::One + glfwKey - GLFW_KEY_1);
+        return CEGUI::Key::Unknown; 
+        }
     }
 }

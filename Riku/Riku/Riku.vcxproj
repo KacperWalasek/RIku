@@ -172,6 +172,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/sdl /w34996 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -333,6 +334,7 @@
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\Frontend.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\AcceptInvitation.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
@@ -341,10 +343,13 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\Functor.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\GameUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildingUIOnKeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\InvitePlayerFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\StartGame.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
     <ClInclude Include="..\src\Frontend\GUIFactory.h" />
     <ClInclude Include="..\src\Frontend\FrontendState.h" />

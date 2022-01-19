@@ -46,5 +46,6 @@ int main() {
 		logic.update();
 		exitProgram = frontend.update();
 	}
+	Network::WebModule::Stop();
 	return 0;
 }

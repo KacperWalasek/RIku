@@ -48,6 +48,8 @@ namespace front {
 					}
 					return;
 				}
+				if (!state.isInGame())
+					return;
 				auto& map = state.getMap();
 				const auto& units = state.getUnits();
 				const Unit* unit = nullptr;

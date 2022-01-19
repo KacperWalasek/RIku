@@ -1218,6 +1218,18 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\InvitePlayerFromEditBox.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\StartGame.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\AcceptInvitation.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
