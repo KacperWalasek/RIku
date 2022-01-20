@@ -33,6 +33,25 @@ int LogicUtils::getAvailablePlayerId(int count)
     return first;
 }
 
+void LogicUtils::resetPlayerIndexes()
+{
+    currentPlayerId = 0;
+}
+
+std::string LogicUtils::getPopup()
+{
+    if (popups.empty())
+        return "";
+    std::string popup = popups.front();
+    popups.pop();
+    return popup;
+}
+
+void LogicUtils::addPopup(std::string popup)
+{
+    popups.push(popup);
+}
+
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)
 {
     hookables.emplace(hookable->getId(), hookable);

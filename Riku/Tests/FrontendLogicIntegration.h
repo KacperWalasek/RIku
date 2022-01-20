@@ -23,8 +23,10 @@ TEST(FrontendLogicIntegration, CreateMiniGame)
 {
 	GameLogic logic("testAssets", "testMiniAssets");
 	FrontendState state(logic);
+	state.setHotseatPlayerCount(2);
+	state.startGame();
 	ASSERT_FALSE(state.isInMiniGame());
-	// TODO: make this number more sensible. Make unit in assets not have to be stefan
-	state.attack(11, 10, 12, 10);
+	state.attack(0, 0, 0, 1);
 	ASSERT_TRUE(state.isInMiniGame());
+	LogicUtils::resetPlayerIndexes();
 }

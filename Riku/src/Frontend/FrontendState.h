@@ -34,6 +34,7 @@ public:
 	bool isInGame();
 	int getPlayerCount();
 	int getWinner();
+	std::string getPopup();
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);
@@ -50,5 +51,6 @@ public:
 	void setName(std::string name);
 	void setHotseatPlayerCount(int count);
 	void startGame();
+	
 };
 

@@ -7,7 +7,7 @@ TEST(ReadingAssets, Biome) {
 	assets.initialize("testAssets", "testMiniAssets");
 
 	ASSERT_EQ(assets.biomes.size(), 3);
-	ASSERT_EQ(assets.biomes.at("biome2").getCost(), 2);
+	ASSERT_EQ(assets.biomes.at("biome2").getModifiedCost(1), 1.2);
 }
 
 TEST(ReadingAssets, Area) {
@@ -23,7 +23,7 @@ TEST(ReadingAssets, Ground) {
 	assets.initialize("testAssets", "testMiniAssets");
 
 	ASSERT_EQ(assets.grounds.size(), 3);
-	ASSERT_EQ(assets.grounds.at("ground2").getModifiedCost(1), 1.2);
+	ASSERT_EQ(assets.grounds.at("ground2").getCost(), 2);
 }
 
 TEST(ReadingAssets, Resource) {
