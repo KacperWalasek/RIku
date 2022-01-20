@@ -2,13 +2,14 @@
 #include "../GameState.h"
 #include "Path.h"
 #include "ShortestPathEvaluator.h"
-
+#include <queue>
 class LogicUtils
 {
 	static unsigned int currentId;
 	static unsigned int currentPlayerId;
 	static int logicId;
 	static std::map<std::string, std::shared_ptr<IHookable>> hookables;
+	static std::queue<std::string> popups;
 public:
 	static void initialize(int logicId);
 	static Path getShortestPath(
@@ -16,6 +17,8 @@ public:
 	static std::string getUniqueId();
 	static int getAvailablePlayerId(int count = 1);
 	static void resetPlayerIndexes();
+	static std::string getPopup();
+	static void addPopup(std::string popup);
 
 	static void addHookable(std::shared_ptr<IHookable> hookable);
 	static void removeHookable(std::string id);

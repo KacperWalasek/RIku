@@ -25,6 +25,7 @@
 #include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/AcceptInvitationMoveDescription.h"
+#include "../GameLogic/FrontendCommunicator/Responses/StringResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -133,6 +134,11 @@ int FrontendState::getPlayerCount()
 int FrontendState::getWinner()
 {
 	return logic.getInfo<IntResponse>("winner")->get();
+}
+
+std::string FrontendState::getPopup()
+{
+	return logic.getInfo<StringResponse>("popup")->get();
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)
