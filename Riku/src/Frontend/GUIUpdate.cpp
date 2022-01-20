@@ -234,7 +234,7 @@ void CEGUI::GUIUpdate::UpdateUIButtons(std::map<std::string, CEGUI::GUI*> guiDic
     button->setText(front::Lang::getUtf("Buildings"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["GameUI"]->getWidgetByName("RecruitingButton"));
-    button->setText(front::Lang::getUtf("Recruit units"));
+    button->setText(front::Lang::getUtf("Building options"));
 
     button = static_cast<CEGUI::PushButton*>(guiDic["GameUI"]->getWidgetByName("EndTurnButton"));
     button->setText(front::Lang::getUtf("End turn"));
@@ -700,7 +700,7 @@ void CEGUI::GUIUpdate::CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, st
         resourceElem->addChild(button);
         skillsList->addChild(resourceElem);
 
-        existingUnitElems.insert(std::pair<std::string, CEGUI::Window*>(s, resourceElem));
+        existingSkillElems.insert(std::pair<std::string, CEGUI::Window*>(s, resourceElem));
         y += 0.1;
     }
     lastSkills = skills;
