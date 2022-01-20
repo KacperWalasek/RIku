@@ -20,3 +20,9 @@ vcpkg install cereal:x64-windows
 vcpkg integrate install
 ```
 Now you should be able to compile project using Visual Studio
+
+## Compile on 64-bit Ubuntu 20.04
+
+  1. Launch linux-setup.sh with root priviliges. It will install all needed packages.
+  2. Compile project using CLion IDE. It may be needed to run ```Riku/get_cpp_names.py``` in terminal to get list of source files and copy the output of command to file ```Riku/CMake Lists.txt``` and replace text from line after `lib/stb_image/stb_image.cpp` to `)` character before first `target_link_libraries`
+  3. Launch linux-generate-binary.sh script to create folder bin ready for user.
