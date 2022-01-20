@@ -1,5 +1,5 @@
 asset_type="skill"
-name = "test_skill"
+name = "Courage"
 
 skill = {}
 
