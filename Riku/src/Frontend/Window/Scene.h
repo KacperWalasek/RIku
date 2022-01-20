@@ -29,6 +29,7 @@ namespace front {
 
 		float fogDensity = 0.01f;
 		int focusedUnitIndex = 0;
+		std::string focusedSkill = "";
 		float& aspect;
 
 		Light light;

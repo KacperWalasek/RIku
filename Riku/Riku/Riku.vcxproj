@@ -338,6 +338,7 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusSkill.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\FocusUnitWithIndex.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\Functor.h" />

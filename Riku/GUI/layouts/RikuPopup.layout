@@ -9,7 +9,7 @@
             <Property name="RollUpEnabled" value="false" />
             <Property name="CloseButtonEnabled" value="false" />
             <Window type="WindowsLook/Label" name="Label" >
-                <Property name="Area" value="{{0.5,-64},{0.3,-16},{0.5,64},{0.3,16}}" />
+                <Property name="Area" value="{{0,0},{0.3,-16},{1,0},{0.3,32}}" />
                 <Property name="Text" value="Your turn" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>

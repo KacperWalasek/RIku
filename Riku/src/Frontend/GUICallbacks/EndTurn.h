@@ -25,7 +25,7 @@ namespace CEGUI::Functor {
             std::string s = front::Lang::get("Turn of player");
             s += ": ";
             s += std::to_string(state.getPlayerOnMove());
-            printf("%s", s.c_str());
+            printf("%s\n", s.c_str());
             CEGUI::GUIUpdate::ShowPopup(s, activeGUI, guiDic, lastActiveGUI);
             //CEGUI::Functor::SwitchActiveGUI("PlayerChangedUI", activeGUI, guiDic, false)(e);
             return true;
