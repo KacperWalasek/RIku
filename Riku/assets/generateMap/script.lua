@@ -102,9 +102,11 @@ function squareDiamond(sx,sy, begin_value, height_diff, min_height, max_height)
 	--scale height
 	for i=1,size do
 		for j=1,size do
-			heights[i][j]=min_height+heights[i][j]*(max_height-min_height)/(h_max-h_min)
+			heights[i][j]=min_height+(heights[i][j]-min_height)*(max_height-min_height)/(h_max-h_min)
 		end
 	end
+	 --only for show
+	heights[1][1]=0
 	return heights
 end
 
@@ -219,15 +221,15 @@ end--]]
 
 
 function onCreateMap()
-	local x=50
-	local y=50
+	local x=20
+	local y=20
 	local arr = {}
 	local biomes = {"snow","tundra","taiga","temperate","mediterranean","tropics","sea"}
 	local grounds = {"snow", "stone", "tundra", "grass_taiga", "hot_desert","grass","snow", "grass_tropics", "cold_desert", "semihot_desert"}
 	local areas = {"wet","dry"}
 	math.randomseed(os.time())
-	local heights = squareDiamond(x,y,{math.random()*15.0-10.0,math.random()*15.0-5.0,math.random()*15.0-5.0,math.random()*15.0-5.0}, 0.50, -5.0, 10.0)
-	local temperatures = setTemperatures(x,y,heights,0.80,1.20,0.10)
+	local heights = squareDiamond(x,y,{math.random()*15.0,math.random()*15.0,math.random()*15.0,math.random()*15.0}, 0.50, 0.0, 3.0)
+	local temperatures = setTemperatures(x,y,heights,0.60,50,0.10)
 	local dryness = setDryness(x,y,heights,2.40)
 
 	--there would be added +/-0.05 factor

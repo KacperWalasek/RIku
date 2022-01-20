@@ -52,6 +52,14 @@
 		"normal": "stone_norm.jpg"
 	}
 ],
+"stone": [
+	{
+		"ground": null,
+		"diffuse": "stone.jpg",
+		"specular": "stone.jpg",
+		"normal": "stone_norm.jpg"
+	}
+],
 "snow": [
 	{
 		"ground": null,

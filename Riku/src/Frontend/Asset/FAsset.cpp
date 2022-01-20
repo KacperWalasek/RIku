@@ -46,7 +46,7 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 	for(const auto& val: value) {
 		std::string modelPath = val.get("path", "").asString();
 		std::string iconPath = val.get("icon", "").asString();
-		if (modelPath.empty() == iconPath.empty()) {
+		/*if (modelPath.empty() != iconPath.empty())*/ {
 			//check if is frustum info. Should be unique
 			if (val.isMember("frustum")) {
 				frustumRadius = val.get("frustum_radius", 0.5f).asFloat();
@@ -56,15 +56,15 @@ front::Asset::Asset(std::string name, const std::string& path, const Json::Value
 					float z = val["frustum_center"].get("z", 0.0f).asFloat();
 					frustumCenter = {x, y, z};
 				}
-				//check for ground asset
-				if (val.isMember("ground")) {
-					auto&&[specular, diffuse, normal]=checkTextures(val, path);
-					assetModels.emplace_back();
-					assetModels.back().diffuse = diffuse;
-					assetModels.back().normal = normal;
-					assetModels.back().specular = specular;
-				}
 				continue;
+			}
+			//check for ground asset
+			if (val.isMember("ground")) {
+				auto&&[specular, diffuse, normal]=checkTextures(val, path);
+				assetModels.emplace_back();
+				assetModels.back().diffuse = diffuse;
+				assetModels.back().normal = normal;
+				assetModels.back().specular = specular;
 			}
 			glm::vec3 pos = {0.0f, 0.0f, 0.0f};
 			if (val.isMember("pos")) {

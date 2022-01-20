@@ -60,7 +60,8 @@ bool front::AssetHandler::drawGround(const std::string &key, const std::string &
 		return false;
 	AssetModel tmpAsset;
 	tmpAsset.model = assets.at(modelKey).assetModels[0].model;
-	const AssetModel& ground = assets.at(key).assetModels[0];
+	const Asset& assete = assets.at(key);
+	const AssetModel& ground = assete.assetModels[0];
 	tmpAsset.diffuse=ground.diffuse;
 	tmpAsset.specular=ground.specular;
 	tmpAsset.normal=ground.normal;
