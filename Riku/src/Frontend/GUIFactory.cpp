@@ -13,11 +13,15 @@
 #include "GUICallbacks/NewGameMenuOnkeyPress.h"
 #include "GUICallbacks/InvitePlayerFromEditBox.h"
 #include "GUICallbacks/StartGame.h"
+#include "GUICallbacks/SetNameFromEditBox.h"
+#include "GUICallbacks/SetHotseatCountFromEditBox.h"
+#include "GUICallbacks/Resign.h"
+#include "GUICallbacks/SwitchGUIBack.h"
 #include "Lang.h"
 
-CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
+CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastGUI,
 	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex)
-	:logic(logic), state(state), activeGUI(activeGUI), guiDic(guiDic), focusedUnitIndex(focusedUnitIndex)
+	:logic(logic), state(state), activeGUI(activeGUI), lastActiveGUI(lastGUI), guiDic(guiDic), focusedUnitIndex(focusedUnitIndex)
 {}
 
 void CEGUI::GUIFactory::init(GLFWwindow* win){
@@ -87,16 +91,20 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	my_gui->loadLayout("RikuNewGameMenu.layout");
 	//my_gui->loadLayout("TextDemo.layout");
 
-	auto box = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("IpBox"));
+	auto ipbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("IpBox"));
+	auto hotbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("HotseatBox"));
 
 	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic);
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
-	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(box, state);
-	auto onStartGameButton = new CEGUI::Functor::StartGame(state);
+	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(ipbox, state);
+	auto onStartGameButton1 = new CEGUI::Functor::SetHotseatCountFromEditBox(hotbox, state);
+	auto onStartGameButton2 = new CEGUI::Functor::StartGame(state);
+	
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 	my_gui->setPushButtonCallback("InviteButton", onInviteButton);
-	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton);
+	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton1);
+	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton2);
 
 	//CEGUI::GUIUpdate::CreateInvitations(my_gui, "InvitationsList", state);
 	return my_gui;
@@ -108,7 +116,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetJoinGameMenu() {
 	my_gui->init();
 	my_gui->loadLayout("RikuJoinGameMenu.layout");
 
-	auto onKeyPress = new CEGUI::Functor::Functor();
+	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic); // to be changed
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
@@ -124,10 +132,10 @@ CEGUI::GUI* CEGUI::GUIFactory::GetGameUI() {
 	//CEGUI::GUIUpdate::CreateUnits(my_gui, "UnitsList", state, focusedUnitIndex);
 	CEGUI::GUIUpdate::CreateResources(my_gui, "ResourcesList", state);
 
-	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state,activeGUI,guiDic);
+	auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state,activeGUI,guiDic, lastActiveGUI);
 	auto onBuildingsButton = new CEGUI::Functor::SwitchActiveGUI("BuildingUI",activeGUI,guiDic,false);
 	auto onRecruitingButton = new CEGUI::Functor::SwitchActiveGUI("RecruitingUI", activeGUI, guiDic, false);
-	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, activeGUI, guiDic);
+	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, activeGUI, guiDic, lastActiveGUI);
 
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("BuildingsButton", onBuildingsButton);
@@ -162,16 +170,33 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	return my_gui;
 }
 
-CEGUI::GUI* CEGUI::GUIFactory::GetPlayerChangedUI() {
+CEGUI::GUI* CEGUI::GUIFactory::GetPopup() {
 
 	CEGUI::GUI* my_gui = new CEGUI::GUI();
 	my_gui->init();
-	my_gui->loadLayout("RikuYourTurn.layout");
+	my_gui->loadLayout("RikuPopup.layout");
 
-	auto onOkButton = new CEGUI::Functor::SwitchActiveGUI("GameUI", activeGUI, guiDic);
+	auto onOkButton = new CEGUI::Functor::SwitchGUIBack(activeGUI, lastActiveGUI);
 	auto onKeyPress = new CEGUI::Functor::Functor(); //do blokowania ruchu jednostk�
 	my_gui->setPushButtonCallback("OkButton", onOkButton);
 	my_gui->setKeyCallback(onKeyPress);
+
+	return my_gui;
+}
+
+CEGUI::GUI* CEGUI::GUIFactory::GetSetNamePopup() {
+
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuPopupWithEditbox.layout");
+
+	auto label = static_cast<CEGUI::Window*>(my_gui->getWidgetByName("Label"));
+	label->setText(front::Lang::getUtf("Please enter your name"));
+	auto editbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("Editbox"));
+	auto onOkButton1 = new CEGUI::Functor::SetNameFromEditBox(editbox, state);
+	auto onOkButton2 = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
+	my_gui->setPushButtonCallback("OkButton", onOkButton1);
+	my_gui->setPushButtonCallback("OkButton", onOkButton2);
 
 	return my_gui;
 }
@@ -192,6 +217,23 @@ CEGUI::GUI* CEGUI::GUIFactory::GetRecruitingUI() {
 	my_gui->setPushButtonCallback("RecruitButton", onCloseButton);
 	auto frameWindow = static_cast<CEGUI::FrameWindow*>(my_gui->getWidgetByName("RecruitingWindow"));
 	frameWindow->getCloseButton()->subscribeEvent(CEGUI::PushButton::EventClicked, onCloseButton);
+
+	return my_gui;
+}
+
+
+CEGUI::GUI* CEGUI::GUIFactory::GetMiniGameUI() {
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuMiniGameUI.layout");
+
+	//auto onKeyPress = new CEGUI::Functor::GameUIOnKeyPress(state, activeGUI, guiDic);
+	auto onResignButton = new CEGUI::Functor::Resign(state);
+	auto onEndTurnButton = new CEGUI::Functor::EndTurn(state, activeGUI, guiDic, lastActiveGUI);
+
+	//my_gui->setKeyCallback(onKeyPress);
+	my_gui->setPushButtonCallback("ResignButton", onResignButton);
+	my_gui->setPushButtonCallback("EndTurnButton", onEndTurnButton);
 
 	return my_gui;
 }

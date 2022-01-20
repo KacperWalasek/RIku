@@ -18,6 +18,7 @@ namespace CEGUI::Functor {
         bool operator()(const CEGUI::EventArgs& e)
         {
             state.invite(ipBox->getText().c_str());
+            ipBox->setText("");
             return true;
         };
     };

@@ -6,23 +6,22 @@
 
 namespace CEGUI::Functor {
   
-    class AcceptInvitation : public Functor
+    class SetHotseatCountFromEditBox : public Functor
     {
     private:
-        std::string ip;
+        CEGUI::Editbox* nameBox;
         FrontendState& state;
-        CEGUI::Editbox* editBox; // hotseat count
     public:
-        AcceptInvitation(CEGUI::Editbox* editBox, std::string ip, FrontendState& state)
-            : Functor(), editBox(editBox), ip(ip), state(state) {}
+        SetHotseatCountFromEditBox(CEGUI::Editbox* nameBox, FrontendState& state)
+            : Functor(), nameBox(nameBox), state(state) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            auto s = editBox->getText().c_str();
+            auto s = nameBox->getText().c_str();
             int n = 1;
             try { n = std::stoi(s); }
             catch (...) {}
-            state.acceptInvitation(ip, n);
+            state.setHotseatPlayerCount(n);
             return true;
         };
     };

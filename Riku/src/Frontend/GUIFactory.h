@@ -14,8 +14,9 @@ namespace CEGUI {
         GameLogic& logic;
         FrontendState& state;
         CEGUI::GUI*& activeGUI;
+        CEGUI::GUI*& lastActiveGUI;
         std::map<std::string, CEGUI::GUI*>& guiDic;
-        GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI,
+        GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastActiveGUI,
             std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex);
         void init(GLFWwindow* win);
         CEGUI::GUI* GetMainMenu();
@@ -25,7 +26,9 @@ namespace CEGUI {
         CEGUI::GUI* GetGameUI();
         CEGUI::GUI* GetBuildingUI();
         CEGUI::GUI* GetRecruitingUI();
-        CEGUI::GUI* GetPlayerChangedUI();
+        CEGUI::GUI* GetPopup();
+        CEGUI::GUI* GetSetNamePopup();
+        CEGUI::GUI* GetMiniGameUI();
 
     private:
         GLFWwindow* window;

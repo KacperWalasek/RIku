@@ -29,6 +29,11 @@ int findMiniUnit(const std::vector<std::shared_ptr<const minigame::MiniUnit> >& 
 	return -1;
 }
 void front::MouseClickCallback::MiniGameLeftClick(int px, int py) {
+	if(!scene->focusedSkill.empty()) {
+		scene->state.useSkill(scene->focusedSkill,px,py);
+		scene->focusedSkill="";
+		return;
+	}
 	auto units = scene->state.getMiniUnits();
 	if (!scene->path.path.empty()) {
 		auto& unit = units[scene->focusedUnitIndex];
@@ -166,6 +171,7 @@ void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int a
 			GameLeftClick(px,py);
 	}
     else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+		scene->focusedSkill="";
         if(!scene->path.path.empty()) {
             scene->path.cost = 0;
             scene->path.path.clear();

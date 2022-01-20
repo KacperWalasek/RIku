@@ -56,10 +56,12 @@ void CEGUI::GUI::draw(bool render) {
     }
     else m_context->draw();
 }
-void CEGUI::GUI::drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic) {
+void CEGUI::GUI::drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic, CEGUI::GUI*& activeGUI) {
     m_renderer->beginRendering();
+    activeGUI->draw(false);
     for (auto p : guiDic)
-        p.second->draw(false);
+        if (p.second != activeGUI)
+            p.second->draw(false);   
     m_renderer->endRendering();
     glDisable(GL_SCISSOR_TEST);
 }

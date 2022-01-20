@@ -29,11 +29,13 @@ namespace front {
 
 		float fogDensity = 0.01f;
 		int focusedUnitIndex = 0;
+		std::string focusedSkill = "";
 		float& aspect;
 
 		Light light;
 		CEGUI::GUIFactory fac;
 		CEGUI::GUI* activeGUI;
+		CEGUI::GUI* lastActiveGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;
 
 		std::pair<int, int> clickPos;

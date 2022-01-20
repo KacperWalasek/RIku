@@ -4,6 +4,8 @@
 std::shared_ptr<IMove> minigame::MiniStateUpdate::handlePatch(std::shared_ptr<MiniPatch> patch, bool addToCummulatedPatch)
 {
 	// TODO Zrobic +=
+	if (!patch)
+		return nullptr;
 	if(addToCummulatedPatch)
 		cummulatedPatch = cummulatedPatch ? std::make_shared<MiniPatch>(*cummulatedPatch + (MiniPatch)(*patch)) : patch;
 	std::shared_ptr<IMove> combinedMove;
