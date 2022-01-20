@@ -208,6 +208,7 @@
     <ClCompile Include="..\src\GameLogic\GameObject\RequireResources.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\ResourceFactory.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\SimpleTileObject.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\Unbuildable.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\UseResourceOnBuild.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\GUIDescription.cpp" />
     <ClCompile Include="..\src\GameLogic\Hooks\LoadedHookable.cpp" />
@@ -368,6 +369,7 @@
     <ClInclude Include="..\src\GameLogic\GameObject\ResourceFactory.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\SimpleTileObject.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\TileObjectDecorator.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\Unbuildable.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\UseResourceOnBuild.h" />
     <ClInclude Include="..\src\GameLogic\GameState.h" />
     <ClInclude Include="..\src\GameLogic\Hooks\GUIDescription.h" />
