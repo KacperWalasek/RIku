@@ -37,8 +37,7 @@ void LogicUtils::resetPlayerIndexes()
 {
     currentPlayerId = 0;
 }
-
-std::string LogicUtils::getPopup()
+/*std::string LogicUtils::getPopup()
 {
     if (popups.empty())
         return "";
@@ -51,7 +50,7 @@ void LogicUtils::addPopup(std::string popup)
 {
     popups.push(popup);
 }
-
+*/
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)
 {
     hookables.emplace(hookable->getId(), hookable);
