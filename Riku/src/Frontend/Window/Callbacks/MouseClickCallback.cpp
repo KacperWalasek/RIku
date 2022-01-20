@@ -29,7 +29,7 @@ int findMiniUnit(const std::vector<std::shared_ptr<const minigame::MiniUnit> >& 
 	return -1;
 }
 void front::MouseClickCallback::MiniGameLeftClick(int px, int py) {
-	if(scene->focusedSkill.empty()) {
+	if(!scene->focusedSkill.empty()) {
 		scene->state.useSkill(scene->focusedSkill,px,py);
 		scene->focusedSkill="";
 		return;
