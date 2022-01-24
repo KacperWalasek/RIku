@@ -87,7 +87,7 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<ChoseGuiOptionMoveHandler>(gameState),
 		std::make_shared<AttackMoveHandler>(gameState),
 		std::make_shared<SaveMoveHandler>(),
-		std::make_shared<LoadMoveHandler>(),
+		std::make_shared<LoadMoveHandler>(gameState,assets),
 		std::make_shared<InviteMoveHandler>(gameState),
 		std::make_shared<AcceptInvitationMoveHandler>(gameState, assets),
 		std::make_shared<SetNameMoveHandler>(gameState),

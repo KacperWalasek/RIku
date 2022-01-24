@@ -14,6 +14,8 @@ GenerateMap::GenerateMap(int playerCount)
 
 std::shared_ptr<Patch> GenerateMap::createPatch(const GameState& state, const LogicAssets& assets) const
 {
+    if (state.map.size() != 0)
+        return std::make_shared<Patch>(state.playerOnMove);
     auto map = assets.mapGenerator.getFunction("onCreateMap")().get<std::vector<std::vector<TileDescription>>>();
     std::shared_ptr<IMove> combined = nullptr;;
     for(int i = 0; i< map.size(); i++)

@@ -54,7 +54,7 @@ public:
 		auto it = data.assets.tileObjects.find(name);
 		if (it == data.assets.tileObjects.end())
 			throw;
-		auto hooks = it->second.getFunctions();
+		const auto& hooks = it->second.getFunctions();
 		construct(name, player, hooks, GUIDescription(hooks), id);
 	}
 }; 

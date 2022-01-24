@@ -1,6 +1,8 @@
 #include "StartGameMoveHandler.h"
 #include "../Move/GenerateMap.h"	
 #include "../../GameState.h"
+#include "../../Actions/SendPatchToAll.h"
+#include "../../Actions/ResetCummulatedPatch.h"
 
 StartGameMoveHandler::StartGameMoveHandler(GameState& state)
 	: state(state) { }
@@ -11,7 +13,7 @@ std::shared_ptr<IMove> StartGameMoveHandler::handleDescription(const IMoveDescri
 	int playerCount = state.hotSeatPlayers.size();
 	for (const auto& inv : state.invitedPlayers)
 		if (inv.second.state == InvitationState::Joined)
-			playerCount+= inv.second.hotseatCount;
+			playerCount += inv.second.hotseatCount;
 
 	return std::make_shared<GenerateMap>(playerCount);
 }

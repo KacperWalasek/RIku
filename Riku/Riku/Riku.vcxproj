@@ -344,11 +344,13 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\GameUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\InvitePlayerFromEditBox.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGame.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\Resign.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGame.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetNameFromEditBox.h" />
@@ -513,6 +515,7 @@
     <ClInclude Include="..\src\GameLogic\Utils\Invitation.h" />
     <ClInclude Include="..\src\GameLogic\Utils\LogicUtils.h" />
     <ClInclude Include="..\src\GameLogic\Utils\Path.h" />
+    <ClInclude Include="..\src\GameLogic\Utils\SaveStruct.h" />
     <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h" />
     <ClInclude Include="..\src\GameLogic\WinConditions\CombinedWinCondition.h" />
     <ClInclude Include="..\src\GameLogic\WinConditions\EnoughResourceOfType.h" />

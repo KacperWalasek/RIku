@@ -13,6 +13,8 @@
 #include "GUICallbacks/NewGameMenuOnkeyPress.h"
 #include "GUICallbacks/InvitePlayerFromEditBox.h"
 #include "GUICallbacks/StartGame.h"
+#include "GUICallbacks/LoadGame.h"
+#include "GUICallbacks/SaveGame.h"
 #include "GUICallbacks/SetNameFromEditBox.h"
 #include "GUICallbacks/SetHotseatCountFromEditBox.h"
 #include "GUICallbacks/Resign.h"
@@ -60,12 +62,15 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	auto onOptionsButton = new CEGUI::Functor::SwitchActiveGUI("OptionsMenu", activeGUI, guiDic);
 	auto onNewGameButton = new CEGUI::Functor::SwitchActiveGUI("NewGameMenu", activeGUI, guiDic);
 	auto onJoinButton = new CEGUI::Functor::SwitchActiveGUI("JoinGameMenu", activeGUI, guiDic);
+	auto onSaveButton = new CEGUI::Functor::SaveGame(state);
+
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ExitButton", onExitButton);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 	my_gui->setPushButtonCallback("OptionsButton", onOptionsButton);
 	my_gui->setPushButtonCallback("NewGameButton", onNewGameButton);
 	my_gui->setPushButtonCallback("JoinButton", onJoinButton);
+	my_gui->setPushButtonCallback("SaveButton", onSaveButton);
 
 	return my_gui;
 }
@@ -99,12 +104,14 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(ipbox, state);
 	auto onStartGameButton1 = new CEGUI::Functor::SetHotseatCountFromEditBox(hotbox, state);
 	auto onStartGameButton2 = new CEGUI::Functor::StartGame(state);
+	auto onLoadButton = new CEGUI::Functor::LoadGame(state);
 	
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
 	my_gui->setPushButtonCallback("InviteButton", onInviteButton);
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton1);
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton2);
+	my_gui->setPushButtonCallback("LoadButton", onLoadButton);
 
 	//CEGUI::GUIUpdate::CreateInvitations(my_gui, "InvitationsList", state);
 	return my_gui;
