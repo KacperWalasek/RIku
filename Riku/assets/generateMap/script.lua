@@ -265,7 +265,7 @@ function onCreateMap()
 					if (dryInd==1) then--forest
 						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[6],"grass_tropics",areas[math.random(2)],"jungle")
 					else--desert
-						arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[6],"hot_desert","dry", "cactus")
+							arr[i][j] = TileDescription.new(math.floor(heights[i][j]+0.5),biomes[6],"hot_desert","dry", "")
 					end
 				end
 			end

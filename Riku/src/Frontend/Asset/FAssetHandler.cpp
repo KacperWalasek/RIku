@@ -54,7 +54,7 @@ const std::map<std::string, front::Asset>& front::AssetHandler::getMap() const {
 }
 
 bool front::AssetHandler::drawGround(const std::string &key, const std::string &modelKey, const Shader &shader,
-                                     front::Transform transform) const {
+                                     front::Transform transform, const Frustum& frustum) const {
 	//assumes that asset with key modelKey has exactly one model
 	if(assets.find(key)==assets.end() || assets.find(modelKey)==assets.end())
 		return false;
@@ -65,6 +65,9 @@ bool front::AssetHandler::drawGround(const std::string &key, const std::string &
 	tmpAsset.diffuse=ground.diffuse;
 	tmpAsset.specular=ground.specular;
 	tmpAsset.normal=ground.normal;
+	float r = assete.frustumRadius * std::max({ transform.scale.x,transform.scale.y,transform.scale.z });
+	if (!frustum.isSphereOn(rotate(assete.frustumCenter, transform.rotation), r, transform))
+		return true;
 	tmpAsset.draw(shader, transform);
 	assets.at(modelKey).draw(shader,transform);
 	return true;
