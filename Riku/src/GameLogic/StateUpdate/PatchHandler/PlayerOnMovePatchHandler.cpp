@@ -9,11 +9,12 @@ std::shared_ptr<IAction> PlayerOnMovePatchHandler::handlePatch(GameState& state,
 	if (patch.playerOnMove >= 0 && patch.playerOnMove < state.players.size())
 	{
 		state.playerOnMove = patch.playerOnMove;
-		return std::make_shared<CombinedAction>(
-			std::make_shared<CombinedAction>(
-				std::make_shared<SendPatchToAll>(), 
-				std::make_shared<ResetCummulatedPatch>()),
-			std::make_shared<CheckWinConditionAction>());
+		if(state.isInGame)
+			return std::make_shared<CombinedAction>(
+				std::make_shared<CombinedAction>(
+					std::make_shared<SendPatchToAll>(), 
+					std::make_shared<ResetCummulatedPatch>()),
+				std::make_shared<CheckWinConditionAction>());
 	}
 	return nullptr;
 }
