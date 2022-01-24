@@ -20,19 +20,19 @@ void Unit::restoreMovementPoints()
 	movementPoints = baseMovementPoints;
 }
 
-std::shared_ptr<IMove> Unit::onDestroy(bool byOwner)
+std::shared_ptr<IMove> Unit::onDestroy(int mapX, int mapY)
 {
-	return loadedHookable.onDestroy(*this, byOwner);
+	return loadedHookable.onDestroy(*this, mapX, mapY);
 }
 
-std::shared_ptr<IMove> Unit::onTurnEnd()
+std::shared_ptr<IMove> Unit::onTurnEnd(int mapX, int mapY)
 {
-	return loadedHookable.onTurnEnd(*this);
+	return loadedHookable.onTurnEnd(*this, mapX, mapY);
 }
 
-std::shared_ptr<IMove> Unit::onTurnBegin()
+std::shared_ptr<IMove> Unit::onTurnBegin(int mapX, int mapY)
 {
-	return loadedHookable.onTurnBegin(*this);
+	return loadedHookable.onTurnBegin(*this, mapX, mapY);
 }
 
 std::shared_ptr<IMove> Unit::onBeingPlaced(int mapX, int mapY)
@@ -40,9 +40,9 @@ std::shared_ptr<IMove> Unit::onBeingPlaced(int mapX, int mapY)
 	return loadedHookable.onBeingPlaced(*this, mapX, mapY);
 }
 
-std::shared_ptr<IMove> Unit::onBeingCreated()
+std::shared_ptr<IMove> Unit::onBeingCreated(int mapX, int mapY)
 {
-	return loadedHookable.onBeingCreated(*this);;
+	return loadedHookable.onBeingCreated(*this, mapX, mapY);;
 }
 
 bool Unit::canBeBuilt(const GameState& state, int mapX, int mapY)

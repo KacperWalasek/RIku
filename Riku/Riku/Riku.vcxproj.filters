@@ -333,9 +333,6 @@
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp">
       <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp">
-      <Filter>Riku\GameLogic\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp">
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClCompile>
@@ -891,9 +888,6 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h">
       <Filter>Riku\GameLogic\Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Unit\Hero.h">
-      <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h">
       <Filter>Riku\GameLogic\Unit</Filter>

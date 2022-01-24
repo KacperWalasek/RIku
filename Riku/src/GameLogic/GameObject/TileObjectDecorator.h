@@ -20,15 +20,15 @@ public:
 
     virtual double getModifiedCost(double cost) const override { return next->getModifiedCost(cost); }
 
-    virtual std::shared_ptr<IMove> onDestroy(bool byOwner) override { return next->onDestroy(byOwner); }
+    virtual std::shared_ptr<IMove> onDestroy(int mapX, int mapY) override { return next->onDestroy(mapX, mapY); }
 
-    virtual std::shared_ptr<IMove> onTurnEnd() override { return next->onTurnEnd(); }
+    virtual std::shared_ptr<IMove> onTurnEnd(int mapX, int mapY) override { return next->onTurnEnd(mapX, mapY); }
 
-    virtual std::shared_ptr<IMove> onTurnBegin() override { return next->onTurnBegin(); }
+    virtual std::shared_ptr<IMove> onTurnBegin(int mapX, int mapY) override { return next->onTurnBegin(mapX, mapY); }
 
     virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override { return next->onBeingPlaced(mapX, mapY); }
 
-    virtual std::shared_ptr<IMove> onBeingCreated() override { return next->onBeingCreated(); }
+    virtual std::shared_ptr<IMove> onBeingCreated(int mapX, int mapY) override { return next->onBeingCreated(mapX, mapY); }
 
     virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) { return next->canBeBuilt(state, mapX, mapY); }
 

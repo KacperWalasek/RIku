@@ -14,7 +14,7 @@ class ResourceFactory :
     friend cereal::access;
 public:
     ResourceFactory(std::shared_ptr<ITileObject> next, int resource, int quantity);
-    virtual std::shared_ptr<IMove> onTurnEnd() override;
+    virtual std::shared_ptr<IMove> onTurnEnd(int mapX, int mapY) override;
     virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override;
 
     template<class Archive>

@@ -8,11 +8,11 @@ tileobject = {
         headers = { "name", "wood" },
         options = { 
             {
-                name = "julka_ciocia_stefana",
+                name = "warrior",
                 wood = 3
             },
             {
-                name = "maciek_syn_stefana",
+                name = "archer",
                 wood = 10
             }
         }

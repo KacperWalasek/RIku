@@ -26,11 +26,11 @@ public:
 	virtual int getOwner() const override;
 	virtual double getModifiedCost(double cost) const override;
 
-	virtual std::shared_ptr<IMove> onDestroy(bool byOwner) override;
-	virtual std::shared_ptr<IMove> onTurnEnd() override;
-	virtual std::shared_ptr<IMove> onTurnBegin() override;
+	virtual std::shared_ptr<IMove> onDestroy(int mapX, int mapY) override;
+	virtual std::shared_ptr<IMove> onTurnEnd(int mapX, int mapY) override;
+	virtual std::shared_ptr<IMove> onTurnBegin(int mapX, int mapY) override;
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) override;
-	virtual std::shared_ptr<IMove> onBeingCreated() override;
+	virtual std::shared_ptr<IMove> onBeingCreated(int mapX, int mapY) override;
 	virtual bool canBeBuilt(const GameState& state, int mapX, int mapY) override;
 
 	virtual const GUIDescription& getGuiDescription() override;

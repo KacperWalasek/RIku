@@ -7,7 +7,8 @@ std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const Log
     std::shared_ptr<IMove> move = nullptr;
     for (auto h : state.registredHookables)
         if(h.second->getOwner()==state.playerOnMove)
-            move = move ? std::make_shared<CombinedMove>(move, h.second->onTurnEnd()) : h.second->onTurnEnd();
+            //TODO: poprawiæ onTurnEnd
+            move = move ? std::make_shared<CombinedMove>(move, h.second->onTurnEnd(0,0)) : h.second->onTurnEnd(0,0);
     std::shared_ptr<Patch> patch = move ? move->createPatch(state, assets) : std::make_shared<Patch>();
     for (auto unit : state.players[state.playerOnMove].units)
     {

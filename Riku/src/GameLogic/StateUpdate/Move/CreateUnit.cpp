@@ -21,7 +21,7 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
     auto& funcs = asset.getFunctions();
     auto unitPtr = std::make_shared<Unit>(asset.getType(), name, player, mp, miniunits, funcs);
     auto placedHookMove = unitPtr->onBeingPlaced(mapX, mapY);
-    auto creeatedHookMove = unitPtr->onBeingCreated();
+    auto creeatedHookMove = unitPtr->onBeingCreated(mapX, mapY);
     auto placedHookPatch = placedHookMove ? *(placedHookMove->createPatch(state, assets)) : Patch();
     auto creeatedHookPatch = creeatedHookMove ? *(creeatedHookMove->createPatch(state, assets)) : Patch();
     return std::make_shared<Patch>(
