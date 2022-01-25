@@ -170,6 +170,7 @@
     <ClCompile Include="..\src\Frontend\Config.cpp" />
     <ClCompile Include="..\src\Frontend\Frontend.cpp" />
     <ClCompile Include="..\src\Frontend\FrontendState.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendUtils.cpp" />
     <ClCompile Include="..\src\Frontend\FrustumCulling.cpp" />
     <ClCompile Include="..\src\Frontend\GUI.cpp" />
     <ClCompile Include="..\src\Frontend\GUIFactory.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="..\src\Frontend\Asset\FAssetHandler.h" />
     <ClInclude Include="..\src\Frontend\Config.h" />
     <ClInclude Include="..\src\Frontend\Frontend.h" />
+    <ClInclude Include="..\src\Frontend\FrontendUtils.h" />
     <ClInclude Include="..\src\Frontend\FrustumCulling.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />

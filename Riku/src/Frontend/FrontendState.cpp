@@ -21,6 +21,7 @@
 #include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
 #include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
+#include "FrontendUtils.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -94,6 +95,18 @@ bool FrontendState::isInMiniGame()
 std::vector<std::string> FrontendState::getSkills()
 {
 	return logic.getInfo<StringListResponse>("skills")->getNames();
+}
+
+std::map<std::string, Mesh>& FrontendState::getMapMeshes(const front::AssetHandler& handler)
+{
+	if (mapMeshes.size() == 0)
+	{
+		std::map<std::string, Mesh> meshMap;
+		const auto& map = getMap();
+		mapMeshes = front::FrontendUtils::createMapMesh(map, handler);
+
+	}
+	return mapMeshes;
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)

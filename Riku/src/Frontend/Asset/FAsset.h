@@ -27,6 +27,7 @@ namespace front {
         std::vector<AssetTexture> assetTextures;
 
 		friend class AssetHandler;
+		friend class FrontendUtils;
     public:
 		[[nodiscard]] const std::string& getName() const {return name;}
 		Asset(std::string name, const std::string& path, const Json::Value& value);

@@ -6,9 +6,12 @@
 #include "../GameLogic/Utils/Path.h"
 // TODO: somehow get rid of this include
 #include "../MiniGame/Tile/MiniTile.h"
+#include "Mesh.h"
+#include "Asset/FAssetHandler.h"
 class FrontendState
 {
 	GameLogic& logic;
+	std::map<std::string, Mesh> mapMeshes;
 public:
 	FrontendState(GameLogic& logic);
 
@@ -25,6 +28,7 @@ public:
 	std::vector<std::string> getGuiHeaders(int mapX, int mapY);
 	bool isInMiniGame();
 	std::vector<std::string> getSkills();
+	std::map<std::string, Mesh>& getMapMeshes(const front::AssetHandler& handler);
 
 	void build(std::string name, int mapX, int mapY);
 	void attack(int fromX, int fromY, int toX, int toY);

@@ -92,6 +92,14 @@ void front::Scene::draw()
 
 	// render the loaded models
 	//draw tiles
+	auto& meshes = state.getMapMeshes(handler);
+	for (auto& pair : meshes)
+	{
+		Model model;
+		model.meshes.push_back(pair.second);
+		Object obj(model);
+		obj.Draw(lightingShader);
+	}
 	const auto& map = state.getMap();
 	for (int i = 0; i < (int)map.size(); i++)
 	{
@@ -147,7 +155,8 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 	else
 		lightingShader.setVec4("color_mod", 0.8f, 0.75f, 0.75f, 1.0f);
 	glm::vec3 scale = {.333333f,.333333f,.333333f};
-	//draw center
+	
+	/*//draw center
 	auto transform = Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y),glm::vec3(),scale);
 	if (map[x][y].area.getName() == "wet")
 		handler.tryDraw("wet",lightingShader, transform, frustum);
@@ -253,7 +262,7 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 				break;
 		}
 
-	}
+	}*/
 	//draw clifs
 	for (int i = 0; i < 4; i++) {
 		int dx = i % 2 == 0 ? 0 : 2 - i;

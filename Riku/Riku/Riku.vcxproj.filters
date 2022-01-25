@@ -446,6 +446,7 @@
     <ClCompile Include="..\src\Frontend\FrustumCulling.cpp" />
     <ClCompile Include="..\src\Frontend\Util.cpp" />
     <ClCompile Include="..\src\GameLogic\GameObject\Unbuildable.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1048,6 +1049,9 @@
     <ClInclude Include="..\src\Frontend\FrustumCulling.h" />
     <ClInclude Include="..\src\Frontend\Util.h" />
     <ClInclude Include="..\src\GameLogic\GameObject\Unbuildable.h" />
+    <ClInclude Include="..\src\Frontend\FrontendUtils.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
