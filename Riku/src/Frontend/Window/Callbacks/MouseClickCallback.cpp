@@ -155,7 +155,7 @@ void front::MouseClickCallback::GameLeftClick(int px, int py) {
 	}
 }
 
-void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int action, int mods) {
+void front::MouseClickCallback::operator()(GLFWwindow* window,  int button, int action, int mods) {
 	if (activeGUI->on_mouse_click(button, action)) return;
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
@@ -200,8 +200,9 @@ void front::MouseClickCallback::operator()(GLFWwindow* window, int button, int a
             if (scene->focusedUnitIndex == -1)
                 scene->clickPos = {px, py};
         }*/
-		auto clickPos = front::getMapClickPosition(window, (float) x, (float) y, scene->movingCameraTransform,
-		                                             scene->config.fov, scene->aspect, 0.5f);
+		//auto clickPos = front::getMapClickPosition(window, (float) x, (float) y, scene->movingCameraTransform,
+		                                             //scene->config.fov, scene->aspect, 0.5f);
+		auto clickPos = front::getMapClickPosition(window, *scene, (float) x, (float) y, 0.5f);
     int px = int(std::round(clickPos.x));
     int py = int(std::round(clickPos.y));
 		if(scene->state.isInMiniGame())

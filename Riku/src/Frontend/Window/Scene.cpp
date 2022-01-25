@@ -81,7 +81,7 @@ void front::Scene::init(GLFWwindow* window)
 }
 
 void front::Scene::drawInit(glm::mat4& projection, glm::mat4& view) {
-	float dayPart = 0.5f;
+	float dayPart = 1;
 	if (fogDensity >= 0.05f)
 		glClearColor(dayPart * 0.7f, dayPart * 0.7f, dayPart * 0.7f, 1.0f);
 	else
@@ -122,7 +122,7 @@ void front::Scene::drawMiniGame() {
 	for(int i=0;i<(int)map.size();i++) {
 		for(int j=0;j<(int)map[i].size();j++) {
 			auto transform = front::Transform(glm::vec3((float)i, 0.0f, (float)j));
-			handler.tryDraw("grass",lightingShader,transform);
+			handler.tryDraw("grass",lightingShader,transform, frustum);
 			if(map[i][j].unit) {
 				const auto* unit = map[i][j].unit.get();
 				auto&& color = playerColors[unit->getOwner()];
@@ -130,9 +130,9 @@ void front::Scene::drawMiniGame() {
 					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
 				else {
 					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
-					handler.tryDraw("main_circle", lightingShader, transform);
+					handler.tryDraw("main_circle", lightingShader, transform, frustum);
 				}
-				handler.tryDraw(unit->getName(), lightingShader, transform);
+				handler.tryDraw(unit->getName(), lightingShader, transform, frustum);
 				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 			}
 		}
@@ -142,9 +142,9 @@ void front::Scene::drawMiniGame() {
 			continue;
 		auto&& [x, y] = tile.tile;
 		if (tile.reachable)
-			handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)));
+			handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)), frustum);
 		else
-			handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)));
+			handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)), frustum);
 	}
 
 	//return to default value
@@ -175,7 +175,7 @@ void front::Scene::drawGame() {
 			drawTile(map,i,j);
 		}
 	}
-	const auto& unit = state.getUnits();
+	/*const auto& unit = state.getUnits();
 	for (int i = 0; i < (int)unit.size(); i++) {
         if (i != focusedUnitIndex)
             lightingShader.setVec4("color_mod", 0.7f, 0.7f, 0.7f, 1.0f);
@@ -196,7 +196,7 @@ void front::Scene::drawGame() {
         }
 		handler.tryDraw(unit[i]->getName(), lightingShader, transform, frustum);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
-	}
+	}*/
     for(auto& tile: path.path) {
 		if(&tile==&path.path.back())
 			continue;
@@ -214,7 +214,6 @@ void front::Scene::drawGame() {
 void front::Scene::draw()
 {
 
-	glm::mat4 projection, view;
 	drawInit(projection, view);
 	// render the loaded models
 	//draw tiles
@@ -388,4 +387,19 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 	//handler.tryDraw(map[x][y].biome.getName(), lightingShader, objectTransform);
 	if (map[x][y].object)
 		handler.tryDraw(map[x][y].object->getName(), lightingShader, objectTransform, frustum);
+	const auto& units = state.getUnits();
+	if (map[x][y].unit) {
+		const auto& unit = map[x][y].unit;
+		auto&& color = playerColors[unit->getOwner()];
+		auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
+		if (focusedUnitIndex == -1 || unit->getId() != units[focusedUnitIndex]->getId())
+			lightingShader.setVec4("color_mod", color[0] / 360.f, color[1] / 360.f, color[2] / 360.f, 1.0f);
+		else
+		{
+			lightingShader.setVec4("color_mod", color[0] / 255.f, color[1] / 255.f, color[2] / 255.f, 1.0f);
+			handler.tryDraw("main_circle", lightingShader, transform, frustum);
+		}
+		handler.tryDraw(unit->getName(), lightingShader, transform, frustum);
+		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+	}
 }

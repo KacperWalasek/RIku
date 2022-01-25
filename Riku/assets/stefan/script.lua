@@ -1,7 +1,7 @@
 asset_type="unit"
 name = "stefan"
 unit = {
-    movement_points = 50,
+    movement_points = 1000,
     miniunits = {
         "warrior",
         "archer",

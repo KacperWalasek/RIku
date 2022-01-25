@@ -122,6 +122,7 @@ std::map<std::string, Mesh>& FrontendState::getMapMeshes(const front::AssetHandl
 
 	}
 	return mapMeshes;
+}
 std::map<std::string, std::string> FrontendState::getInvitations()
 {
 	return logic.getInfo<StringStringMapResponse>("invitations")->get();
