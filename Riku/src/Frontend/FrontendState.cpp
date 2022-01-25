@@ -4,7 +4,6 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/SimpleMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/ChoseGuiOptionMoveDescription.h"
 
-#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/MapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringIntMapResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringListResponse.h"
@@ -19,9 +18,15 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/AttackMoveDescription.h"
 #include "../MiniGame/Communicator/Responses/MiniUnitListResponse.h"
 #include "../MiniGame/StateUpdate/MoveDescription/UseSkillMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/StringMoveDescription.h"
 #include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
 #include "FrontendUtils.h"
+#include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
+#include "../GameLogic/StateUpdate/MoveDescriptions/AcceptInvitationMoveDescription.h"
+#include "../GameLogic/FrontendCommunicator/Responses/StringResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -47,6 +52,11 @@ std::map<std::string, std::string> FrontendState::getAvailableBuildings(int mapX
 	return logic.getInfo<StringStringMapResponse>(std::make_shared<TileRequest>("available_buildings", mapX, mapY))->get();
 }
 
+std::vector<std::string> FrontendState::getUnitNames()
+{
+	return logic.getInfo<StringListResponse>("unit_names")->getNames();
+}
+
 std::vector<std::shared_ptr<const Unit>> FrontendState::getUnits()
 {
 	return logic.getInfo<UnitListResponse>("player_units")->getUnits();
@@ -57,9 +67,14 @@ std::vector<std::shared_ptr<const minigame::MiniUnit>> FrontendState::getMiniUni
 	return logic.getInfo<minigame::MiniUnitListResponse>("mini_player_units")->get();
 }
 
-const logic::AssetHandler& FrontendState::getAssetHandler()
+const logic::AssetHandler& FrontendState::getLogicAssetHandler()
 {
-	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getHandler();
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getLogicHandler();
+}
+
+const logic::AssetHandler& FrontendState::getMinigameAssetHandler()
+{
+	return logic.getInfo<AssetHandlerResponse>("asset_handler")->getMinigameHandler();
 }
 
 int FrontendState::getPlayerOnMove()
@@ -107,6 +122,34 @@ std::map<std::string, Mesh>& FrontendState::getMapMeshes(const front::AssetHandl
 
 	}
 	return mapMeshes;
+std::map<std::string, std::string> FrontendState::getInvitations()
+{
+	return logic.getInfo<StringStringMapResponse>("invitations")->get();
+}
+
+std::map<std::string, Invitation> FrontendState::getInvitedPlayers()
+{
+	return logic.getInfo<InvitationResponse>("invited_players")->get();
+}
+
+bool FrontendState::isInGame()
+{
+	return logic.getInfo<BoolResponse>("is_in_game")->get();
+}
+
+int FrontendState::getPlayerCount()
+{
+	return logic.getInfo<IntResponse>("player_count")->get();
+}
+
+int FrontendState::getWinner()
+{
+	return logic.getInfo<IntResponse>("winner")->get();
+}
+
+std::string FrontendState::getPopup()
+{
+	return logic.getInfo<StringResponse>("popup")->get();
 }
 
 void FrontendState::build(std::string name, int mapX, int mapY)
@@ -142,4 +185,39 @@ void FrontendState::resign()
 void FrontendState::useSkill(std::string name, int mapX, int mapY)
 {
 	logic.makeMove(std::make_shared<minigame::UseSkillMoveDescription>(name, mapX, mapY));
+}
+
+void FrontendState::save(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("save", path));
+}
+
+void FrontendState::load(std::string path)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("load", path));
+}
+
+void FrontendState::invite(std::string ip)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("invite", ip));
+}
+
+void FrontendState::acceptInvitation(std::string ip, int hotseadCount)
+{
+	logic.makeMove(std::make_shared<AcceptInvitationMoveDescription>(ip, hotseadCount));
+}
+
+void FrontendState::setName(std::string name)
+{
+	logic.makeMove(std::make_shared<StringMoveDescription>("set_name", name));
+}
+
+void FrontendState::setHotseatPlayerCount(int count)
+{
+	logic.makeMove(std::make_shared<IntMoveDescription>("hotseat_count", count));
+}
+
+void FrontendState::startGame()
+{
+	logic.makeMove(std::make_shared<SimpleMoveDescription>("start_game"));
 }

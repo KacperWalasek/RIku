@@ -23,6 +23,7 @@ std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const 
         TilePatch({ newToX, newToY }, unit->getId()) +
         (Patch)TilePatch({ fromX,fromY },false,true) + 
         (Patch)UnitPatch(unit->getId(),-path.cost) +
+        (Patch)UnitPatch(unit->getId(), newToX, newToY) +
         hookPatch);
 }
 

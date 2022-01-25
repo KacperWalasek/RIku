@@ -17,7 +17,7 @@ std::shared_ptr<minigame::MiniPatch> minigame::CreateMiniUnit::createPatch(const
     const logic::Asset& asset = it->second;
     int mp = asset.getByKey("movement_points").asNumber();
     auto& funcs = asset.getFunctions();
-    auto unitPtr = std::make_shared<MiniUnit>(name, enemy, mp, funcs);
+    auto unitPtr = std::make_shared<MiniUnit>(name, enemy ? state.enemy.logicIndex : state.player.logicIndex, mp, funcs);
     return std::make_shared<MiniPatch>(
         MiniPatch(MiniPlayerPatch(unitPtr), enemy ) +
         (MiniPatch)MiniTilePatch({ mapX,mapY }, unitPtr->getId()) +

@@ -1,5 +1,5 @@
 asset_type = "minigame_unit"
-name = "miniunit1"
+name = "archer"
 
 minigame_unit = {
     movement_points = 1,

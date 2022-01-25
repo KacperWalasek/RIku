@@ -4,7 +4,7 @@
     <Window type="DefaultWindow" name="Root" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Property name="InheritsAlpha" value="False" />
+        <Property name="InheritsAlpha" value="false" />
         <Window type="TaharezLook/FrameWindow" name="TextDemo" >
             <Property name="Area" value="{{0.0191444,-4},{0.0367866,0},{0.989488,-4},{0.901572,0}}" />
             <Property name="Text" value="Text sample" />
@@ -38,8 +38,8 @@
                     <Property name="Area" value="{{0.630188,0},{0.066344,0},{0.780188,0},{0.183333,0}}" />
                     <Property name="Text" value="Vert. formatting" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="False" />
+                    <Property name="FrameEnabled" value="false" />
+                    <Property name="BackgroundEnabled" value="false" />
                     <Property name="HorzScrollPageSize" value="177" />
                     <Property name="VertScrollPageSize" value="24" />
                     <Property name="HorzScrollDocumentSize" value="101" />
@@ -59,14 +59,14 @@
                     <Property name="Area" value="{{0.821951,0},{0.358591,0},{0.962843,0},{0.47558,0}}" />
                     <Property name="Text" value="Word wrap" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                    <Property name="Selected" value="True" />
+                    <Property name="Selected" value="true" />
                 </Window>
                 <Window type="TaharezLook/StaticText" name="lblHorzFormatting" >
                     <Property name="Area" value="{{0.436163,0},{0.066344,0},{0.586163,0},{0.183333,0}}" />
                     <Property name="Text" value="Horz. formatting" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="False" />
+                    <Property name="FrameEnabled" value="false" />
+                    <Property name="BackgroundEnabled" value="false" />
                     <Property name="HorzScrollPageSize" value="177" />
                     <Property name="VertScrollPageSize" value="24" />
                     <Property name="HorzScrollDocumentSize" value="105" />
@@ -101,9 +101,9 @@
                     <Property name="Area" value="{{0.309388,0},{0.115043,0},{0.361665,0},{0.534798,0}}" />
                     <Property name="Text" value="Age:" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                    <Property name="AlwaysOnTop" value="True" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="False" />
+                    <Property name="AlwaysOnTop" value="true" />
+                    <Property name="FrameEnabled" value="false" />
+                    <Property name="BackgroundEnabled" value="false" />
                     <Property name="HorzScrollPageSize" value="61" />
                     <Property name="VertScrollPageSize" value="27" />
                     <Property name="HorzScrollDocumentSize" value="29" />
@@ -113,9 +113,9 @@
                     <Property name="Area" value="{{0.386344,0},{0.115043,0},{0.576599,0},{0.534798,0}}" />
                     <Property name="Text" value="Password:" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                    <Property name="AlwaysOnTop" value="True" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="False" />
+                    <Property name="AlwaysOnTop" value="true" />
+                    <Property name="FrameEnabled" value="false" />
+                    <Property name="BackgroundEnabled" value="false" />
                     <Property name="HorzScrollPageSize" value="223" />
                     <Property name="VertScrollPageSize" value="27" />
                     <Property name="HorzScrollDocumentSize" value="70" />
@@ -125,9 +125,9 @@
                     <Property name="Area" value="{{0.032217,0},{0.115043,0},{0.282217,0},{0.534798,0}}" />
                     <Property name="Text" value="Name:" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                    <Property name="AlwaysOnTop" value="True" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="False" />
+                    <Property name="AlwaysOnTop" value="true" />
+                    <Property name="FrameEnabled" value="false" />
+                    <Property name="BackgroundEnabled" value="false" />
                     <Property name="HorzScrollPageSize" value="294" />
                     <Property name="VertScrollPageSize" value="27" />
                     <Property name="HorzScrollDocumentSize" value="40" />
@@ -153,6 +153,18 @@
                     <Property name="Area" value="{{0.589235,0},{0.383349,0},{0.83639,0},{0.533435,0}}" />
                     <Property name="Text" value="Force vertical scrollbar" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+            </Window>
+            <Window type="TaharezLook/Listbox" name="Listbox" >
+                <Property name="Area" value="{{0,635},{0,182},{0,891},{0,438}}" />
+                <Property name="Font" value="DejaVuSans-12" />
+                <Window type="TaharezLook/ListboxItem" name="ListboxItem" >
+                    <Property name="Area" value="{{0,45},{0,30},{0,173},{0,62}}" />
+                    <Property name="Text" value="jhkjhkjh" />
+                </Window>
+                <Window type="TaharezLook/ListboxItem" name="ListboxItem2" >
+                    <Property name="Area" value="{{0,45},{0,124},{0,173},{0,156}}" />
+                    <Property name="Text" value="trytrytry" />
                 </Window>
             </Window>
         </Window>

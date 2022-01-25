@@ -20,9 +20,16 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
     std::vector<std::string> miniunits = AssetUtils::readStringArray<std::string>("miniunits", asset);
     auto& funcs = asset.getFunctions();
     auto unitPtr = std::make_shared<Unit>(asset.getType(), name, player, mp, miniunits, funcs);
-    auto hookMove = unitPtr->onBeingPlaced(mapX, mapY);
-    auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : Patch();
-    return std::make_shared<Patch>(PlayerPatch(player, unitPtr) + (Patch)TilePatch({mapX,mapY}, unitPtr->getId()) + (Patch)RegisterHookablePatch(unitPtr->getId()) + hookPatch);
+    auto placedHookMove = unitPtr->onBeingPlaced(mapX, mapY);
+    auto creeatedHookMove = unitPtr->onBeingCreated(mapX, mapY);
+    auto placedHookPatch = placedHookMove ? *(placedHookMove->createPatch(state, assets)) : Patch();
+    auto creeatedHookPatch = creeatedHookMove ? *(creeatedHookMove->createPatch(state, assets)) : Patch();
+    return std::make_shared<Patch>(
+        PlayerPatch(player, unitPtr) +
+        (Patch)TilePatch({ mapX,mapY }, unitPtr->getId()) +
+        (Patch)RegisterHookablePatch(unitPtr->getId()) +
+        (Patch)UnitPatch(unitPtr->getId(), mapX, mapY) +
+        placedHookPatch + creeatedHookPatch);
 }
 
 bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets) const

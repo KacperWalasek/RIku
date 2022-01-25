@@ -9,7 +9,7 @@
 #include "../Lang.h"
 
 front::Window::Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler)
-	: config(config), scene(config, logic, state, handler, aspect)
+	: config(config), state(state), scene(config, logic, state, handler, aspect)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -41,7 +41,8 @@ bool front::Window::update()
 		stabDeltaTime = .0f;
 	}
 
-	processInput();
+	if(state.isInGame())
+		processInput();
 	scene.update();
 
 	glfwSwapBuffers(window);
@@ -52,7 +53,7 @@ bool front::Window::update()
 void front::Window::initWindow()
 {
 	config.load();
-	Lang::loadLanguage(scene.state.getAssetHandler(), config.language);
+	Lang::loadLanguage(scene.state.getLogicAssetHandler(), config.language);
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
 	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);

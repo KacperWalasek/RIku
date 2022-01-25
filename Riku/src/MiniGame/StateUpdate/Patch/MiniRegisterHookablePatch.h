@@ -10,10 +10,16 @@ namespace minigame
 	public:
 		std::string hookable;
 		bool add;
-
+		MiniRegisterHookablePatch() : hookable(""), add(false) {}
 		MiniRegisterHookablePatch(std::string hookable, bool add = true)
 			: hookable(hookable), add(add)
 		{}
+
+		template<class Archive>
+		void serialize(Archive& archive)
+		{
+			archive(hookable, add);
+		}
 
 		MiniRegisterHookablePatch& operator+=(const MiniRegisterHookablePatch& patch)
 		{

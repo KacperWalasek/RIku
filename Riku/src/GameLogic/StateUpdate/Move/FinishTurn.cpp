@@ -1,13 +1,14 @@
 #include "FinishTurn.h"
 #include "CombinedMove.h"
 #include "../../Unit/Unit.h"
-
+#include "../../Utils/LogicUtils.h"
 std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<IMove> move = nullptr;
     for (auto h : state.registredHookables)
         if(h.second->getOwner()==state.playerOnMove)
-            move = move ? std::make_shared<CombinedMove>(move, h.second->onTurnEnd()) : h.second->onTurnEnd();
+            //TODO: poprawiæ onTurnEnd
+            move = move ? std::make_shared<CombinedMove>(move, h.second->onTurnEnd(0,0)) : h.second->onTurnEnd(0,0);
     std::shared_ptr<Patch> patch = move ? move->createPatch(state, assets) : std::make_shared<Patch>();
     for (auto unit : state.players[state.playerOnMove].units)
     {
@@ -19,7 +20,7 @@ std::shared_ptr<Patch> FinishTurn::createPatch(const GameState& state, const Log
 
 bool FinishTurn::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return true;
+    return LogicUtils::getResponsePlayer(state) == state.playerOnMove;
 }
 
 std::shared_ptr<IMove> FinishTurn::asPointner() const

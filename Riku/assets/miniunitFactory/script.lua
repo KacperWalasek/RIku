@@ -8,11 +8,11 @@ tileobject = {
         headers = { "name", "wood" },
         options = { 
             {
-                name = "julka_ciocia_stefana",
+                name = "warrior",
                 wood = 3
             },
             {
-                name = "maciek_syn_stefana",
+                name = "archer",
                 wood = 10
             }
         }
@@ -31,6 +31,12 @@ function onOptionChosen(option,mapX,mapY)
     local wood = option["wood"]:as_int(1)
     local name = option["name"]:as_string("", false)
     return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(AddMiniUnit.new(name,mapX,mapY)),MoveWrapper.new(UseResources.new("wood",wood))))
+end
+
+function onOptionShow(option)
+    local wood = option["wood"]:as_string("", true)
+    local name = option["name"]:as_string("", false)
+    return name, wood  
 end
 
 -- Tak chcemy, żeby to wyglądało w przyszłości. Do tego funkcja onGuiShow zwracająca na podstawie opcji tworząca vector<string> 

@@ -1,11 +1,14 @@
 //Kacper Walasek
 #pragma once
 #include <map>
+#include <cereal/types/string.hpp>
+#include <cereal/types/memory.hpp>
 #include "../../Unit/Unit.h"
-
+#include "../../../MiniGame/StateUpdate/Patch/MiniPatch.h"
 class MiniGamePatch
 {
 public:
+	MiniGamePatch() : player(0), playerUnit(""), enemyUnit(""), isBegining(true), remove(false), resetCummulatedPatch(false) {}
 	MiniGamePatch(int player, std::string playerUnit, std::string enemyUnit, bool isBegining)
 		: player(player), playerUnit(playerUnit), enemyUnit(enemyUnit), isBegining(isBegining), remove(false), resetCummulatedPatch(false) {}
 	MiniGamePatch(int player, bool resetCummulatedPatch, bool remove) 
@@ -18,6 +21,12 @@ public:
 	bool remove;
 	bool resetCummulatedPatch;
 	std::shared_ptr<minigame::MiniPatch> miniPatch;
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(player, playerUnit, enemyUnit, isBegining, remove, resetCummulatedPatch, miniPatch);
+	}
 
 	MiniGamePatch& operator+=(const MiniGamePatch& patch)
 	{

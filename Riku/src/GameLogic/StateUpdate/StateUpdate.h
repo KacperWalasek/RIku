@@ -11,8 +11,8 @@ class StateUpdate
 	GameState& state;
 	const LogicAssets& assets;
 	std::vector<std::shared_ptr<IPatchHandler>> patchHandlers;
-	std::shared_ptr<IAction> handlePatch(std::shared_ptr<Patch> patch);
 public:
+	std::shared_ptr<IAction> handlePatch(std::shared_ptr<Patch> patch, bool addToCummulatedPatch = true);
 	void setHandlers(std::vector<std::shared_ptr<IPatchHandler>> patchHandlers);
 	StateUpdate(GameState& state, const LogicAssets& assets);
 	std::shared_ptr<IAction> handleMove(const std::shared_ptr<IMove> move);

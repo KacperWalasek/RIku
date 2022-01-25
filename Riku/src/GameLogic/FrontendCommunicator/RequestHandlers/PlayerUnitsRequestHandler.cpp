@@ -1,5 +1,6 @@
 #include "PlayerUnitsRequestHandler.h"
 #include "../Responses/UnitListResponse.h"
+#include "../../Utils/LogicUtils.h"
 
 PlayerUnitsRequestHandler::PlayerUnitsRequestHandler(const GameState& gameState) 
     : state(gameState) 
@@ -9,7 +10,7 @@ PlayerUnitsRequestHandler::PlayerUnitsRequestHandler(const GameState& gameState)
 
 std::shared_ptr<Response> PlayerUnitsRequestHandler::handleRequest(std::shared_ptr<Request> request) const
 {
-    const Player& player = state.players[state.playerOnMove];
+    const Player& player = state.players[LogicUtils::getResponsePlayer(state)];
     std::vector<std::shared_ptr<const Unit>> units;
     std::copy(player.units.begin(), player.units.end(),
         std::back_inserter(units));

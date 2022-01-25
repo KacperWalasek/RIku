@@ -22,7 +22,7 @@ bool minigame::TranslateMiniUnit::isDoable(const MiniGameState& state, const Min
     //TODO: zoptymalizowac, zeby nie liczyc dwa razy patha. (Liczenie patha w MoveDescription?)
     auto path = MiniGameUtils::getShortestPath(state, fromX, fromY, toX, toY);
     const auto& unit = state.map[fromX][fromY].unit;
-    return unit && unit->movementPoints >= path.cost && state.playerOnMove == unit->getOwner();
+    return unit && !state.map[toX][toY].unit && unit->movementPoints >= path.cost && state.playerOnMove == unit->getOwner();
 }
 
 std::shared_ptr<minigame::IMiniMove> minigame::TranslateMiniUnit::asPointner() const

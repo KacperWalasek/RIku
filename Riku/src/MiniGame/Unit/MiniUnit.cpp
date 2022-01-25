@@ -1,8 +1,8 @@
 #include "MiniUnit.h"
 #include "../../GameLogic/Utils/LogicUtils.h"
 
-minigame::MiniUnit::MiniUnit(std::string name, int owner, int baseMovementPoints, const std::map<std::string, sol::function>& hooks)
-    :name(name), owner(owner), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints), loadedHookable(hooks), id(LogicUtils::getUniqueId())
+minigame::MiniUnit::MiniUnit(std::string name, int owner, int baseMovementPoints, const std::map<std::string, sol::function>& hooks, std::string id)
+    :name(name), owner(owner), baseMovementPoints(baseMovementPoints), movementPoints(baseMovementPoints), loadedHookable(hooks), id(id=="" ? LogicUtils::getUniqueId() : id)
 {}
 
 std::shared_ptr<minigame::IMiniMove> minigame::MiniUnit::onDestroy(bool byOwner)

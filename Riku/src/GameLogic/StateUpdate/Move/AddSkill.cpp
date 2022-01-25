@@ -13,7 +13,7 @@ std::shared_ptr<Patch> AddSkill::createPatch(const GameState& state, const Logic
 
 bool AddSkill::isDoable(const GameState& state, const LogicAssets& assets) const
 {
-    return mapX > 0 && mapY > 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
+    return mapX >= 0 && mapY >= 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
 }
 
 std::shared_ptr<IMove> AddSkill::asPointner() const

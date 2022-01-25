@@ -1,7 +1,7 @@
 asset_type="grounds"
 
 grounds = {
-    ground1 = 0.8,
-    ground2 = 1.2,
-    ground3 = 1
+    ground1 = 1,
+    ground2 = 2,
+    ground3 = 3
 }

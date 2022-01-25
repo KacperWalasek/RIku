@@ -16,8 +16,25 @@
 #include "../GUIUpdate.h"
 #include "../FrustumCulling.h"
 
+constexpr uint8_t playerColors[][3]={
+		{255,0,0},
+		{0,0,255},
+		{0,255,0},
+		{255,255,255},
+		{0,0,0},
+		{255,255,0},
+		{255,0,255},
+		{0,255,255},
+		{255,127,0},
+		{255,0,127},
+		{127,255,0},
+		{0,255,127},
+		{127,0,255},
+		{0,127,255},
+};
+
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
-	: config(config), fac(logic,state,activeGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
+	: config(config), fac(logic,state,activeGUI, lastActiveGUI, guiDic, focusedUnitIndex), state(state), aspect(aspect), handler(handler), path({},0)
 {}
 
 front::Scene::~Scene()
@@ -27,9 +44,9 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
-	CEGUI::GUIUpdate::CoreUpdate(state, guiDic, focusedUnitIndex);
+	CEGUI::GUIUpdate::CoreUpdate(state, activeGUI, guiDic, focusedUnitIndex, focusedSkill, movingCameraTransform);
 	draw();
-	CEGUI::GUI::drawMultiple(guiDic);
+	CEGUI::GUI::drawMultiple(guiDic, activeGUI);
 }
 
 void front::Scene::init(GLFWwindow* window)
@@ -49,17 +66,21 @@ void front::Scene::init(GLFWwindow* window)
 	fac.init(window);
 	guiDic.insert(std::pair("GameUI", fac.GetGameUI()));
 	guiDic.insert(std::pair("MainMenu", fac.GetMainMenu()));
-	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
 	guiDic.insert(std::pair("OptionsMenu", fac.GetOptionsMenu()));
+	guiDic.insert(std::pair("NewGameMenu", fac.GetNewGameMenu()));
+	guiDic.insert(std::pair("JoinGameMenu", fac.GetJoinGameMenu()));
+	guiDic.insert(std::pair("BuildingUI", fac.GetBuildingUI()));
 	guiDic.insert(std::pair("RecruitingUI", fac.GetRecruitingUI()));
-	guiDic.insert(std::pair("PlayerChangedUI", fac.GetPlayerChangedUI()));
-	activeGUI = guiDic["MainMenu"];
+	guiDic.insert(std::pair("Popup", fac.GetPopup()));
+	guiDic.insert(std::pair("SetNamePopup", fac.GetSetNamePopup()));
+	guiDic.insert(std::pair("MiniGameUI", fac.GetMiniGameUI()));
+	guiDic["MainMenu"]->show();
+	activeGUI = guiDic["SetNamePopup"];
 	activeGUI->show();
 	CEGUI::GUIUpdate::UpdateUIButtons(guiDic);
 }
 
-void front::Scene::draw()
-{
+void front::Scene::drawInit(glm::mat4& projection, glm::mat4& view) {
 	float dayPart = 0.5f;
 	if (fogDensity >= 0.05f)
 		glClearColor(dayPart * 0.7f, dayPart * 0.7f, dayPart * 0.7f, 1.0f);
@@ -88,8 +109,55 @@ void front::Scene::draw()
 
 	//Setting lights
 	light.apply(lightingShader, dayPart);
+}
 
 
+void front::Scene::drawMiniGame() {
+	const auto& map = state.getMiniMap();
+	const auto& units = state.getMiniUnits();
+	if (focusedUnitIndex >= units.size())
+		focusedUnitIndex = -1;
+	if (focusedUnitIndex < 0 && focusedUnitIndex >= units.size())
+		path = Path({}, 0);
+	for(int i=0;i<(int)map.size();i++) {
+		for(int j=0;j<(int)map[i].size();j++) {
+			auto transform = front::Transform(glm::vec3((float)i, 0.0f, (float)j));
+			handler.tryDraw("grass",lightingShader,transform);
+			if(map[i][j].unit) {
+				const auto* unit = map[i][j].unit.get();
+				auto&& color = playerColors[unit->getOwner()];
+				if(focusedUnitIndex == -1 || unit!=units[focusedUnitIndex].get())
+					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
+				else {
+					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
+					handler.tryDraw("main_circle", lightingShader, transform);
+				}
+				handler.tryDraw(unit->getName(), lightingShader, transform);
+				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+			}
+		}
+	}
+	for (auto& tile : path.path) {
+		if (&tile == &path.path.back())
+			continue;
+		auto&& [x, y] = tile.tile;
+		if (tile.reachable)
+			handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)));
+		else
+			handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)));
+	}
+
+	//return to default value
+	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+void front::Scene::drawGame() {
+	const auto& map = state.getMap();
+	const auto& units = state.getUnits();
+	if (focusedUnitIndex >= units.size())
+		focusedUnitIndex = -1;
+	if (focusedUnitIndex < 0 && focusedUnitIndex >= units.size())
+		path = Path({}, 0);
 	// render the loaded models
 	//draw tiles
 	auto& meshes = state.getMapMeshes(handler);
@@ -100,7 +168,6 @@ void front::Scene::draw()
 		Object obj(model);
 		obj.Draw(lightingShader);
 	}
-	const auto& map = state.getMap();
 	for (int i = 0; i < (int)map.size(); i++)
 	{
 		for (int j = 0; j < (int)map[i].size(); j++)
@@ -142,6 +209,21 @@ void front::Scene::draw()
 
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+void front::Scene::draw()
+{
+
+	glm::mat4 projection, view;
+	drawInit(projection, view);
+	// render the loaded models
+	//draw tiles
+	if (!state.isInGame())
+		return;
+	if(state.isInMiniGame())
+		drawMiniGame();
+	else
+		drawGame();
 	//return to default value
 	lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 

@@ -30,11 +30,13 @@ namespace front {
 
 		float fogDensity = 0.01f;
 		int focusedUnitIndex = 0;
+		std::string focusedSkill = "";
 		float& aspect;
 
 		Light light;
 		CEGUI::GUIFactory fac;
 		CEGUI::GUI* activeGUI;
+		CEGUI::GUI* lastActiveGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;
 		glm::mat4 projection, view;
 
@@ -45,6 +47,9 @@ namespace front {
 
 		void init(GLFWwindow* window);
 		void drawTile(const std::vector<std::vector<Tile>> &map, int x, int y);
+		void drawGame();
+		void drawMiniGame();
+		void drawInit(glm::mat4& projection, glm::mat4& view);
 	public:
 		const glm::mat4& getProjection() const {return projection;}
 		const glm::mat4& getView() const {return view;}

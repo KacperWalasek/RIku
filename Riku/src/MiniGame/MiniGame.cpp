@@ -91,7 +91,7 @@ void minigame::MiniGame::applyMiniPatch(std::shared_ptr<MiniPatch> patch)
 	auto enemyPatch = patch->enemyPatch;
 	patch->enemyPatch = patch->playerPatch;
 	patch->playerPatch = enemyPatch;
-	stateUpdate.handlePatch(patch);
+	stateUpdate.handlePatch(patch, false);
 }
 
 std::shared_ptr<minigame::MiniPatch> minigame::MiniGame::getCummulatedPatch() const

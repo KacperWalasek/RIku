@@ -3,9 +3,9 @@ name = "stefan"
 unit = {
     movement_points = 50,
     miniunits = {
-        "julka_ciocia_stefana",
-        "maciek_syn_stefana",
-        "maciek_syn_stefana",
+        "warrior",
+        "archer",
+        "archer",
     }
 }
 

@@ -2,12 +2,16 @@
 #pragma once
 #include <map>
 #include <memory>
+#include <cereal/types/vector.hpp>
+#include <cereal/types/map.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/types/string.hpp>
 #include "../../Unit/Unit.h"
 
 class PlayerPatch
 {
-public: 
-	PlayerPatch(int player) :player(player) {}
+public:
+	PlayerPatch(int player = 0) :player(player) {}
 	PlayerPatch(int player, int resource, int quantity) :player(player) { resourceChanges.insert({ resource,quantity }); }
 	PlayerPatch(int player, std::shared_ptr<Unit> unit) : player(player) 
 	{
@@ -18,6 +22,11 @@ public:
 		removedUnits.push_back(removedUnit);
 	}
 
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(player, addedUnits, resourceChanges, removedUnits);
+	}
 
 	int player;
 	std::map<int, int> resourceChanges;

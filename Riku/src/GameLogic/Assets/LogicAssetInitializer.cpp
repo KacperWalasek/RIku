@@ -8,6 +8,7 @@
 #include "../StateUpdate/Move/CombinedMove.h"
 #include "../StateUpdate/Move/AddMiniUnit.h"
 #include "../StateUpdate/Move/AddSkill.h"
+#include "../StateUpdate/Move/CreateUnitAround.h"
 
 void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 {
@@ -21,6 +22,9 @@ void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 		);
 	lua->new_usertype<CreateUnit>("CreateUnit",
 		sol::constructors<CreateUnit(std::string, int, int)>()
+		);
+	lua->new_usertype<CreateUnitAround>("CreateUnitAround",
+		sol::constructors<CreateUnitAround(std::string, int, int)>()
 		);
 	lua->new_usertype<UseResources>("UseResources",
 		sol::constructors<UseResources(int, int), UseResources(std::string, int)>()
@@ -37,7 +41,8 @@ void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 			MoveWrapper(CreateUnit), 
 			MoveWrapper(CombinedMove), 
 			MoveWrapper(UseResources), 
-			MoveWrapper(AddSkill), 
+			MoveWrapper(AddSkill),
+			MoveWrapper(CreateUnitAround),
 			MoveWrapper(AddMiniUnit)>()
 		);
 	lua->new_usertype<TileDescription>("TileDescription",
