@@ -2,5 +2,12 @@ asset_type="tileobject"
 name = "tree"
 
 tileobject = {
-    description = "tree"
+    description = "tree",
+    behavior = {
+        unbuildable = {
+            {
+                a = ""
+            }
+        }
+    }
 }

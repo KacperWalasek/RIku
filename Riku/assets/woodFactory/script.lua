@@ -23,6 +23,21 @@ tileobject = {
                 resource = "wood",
                 quantity = 10
             }
+        },
+        require_resources = {
+            {
+                resource = "stone"
+            }
+        },
+        use_resources = {
+            {
+                resource = "wood",
+                quantity = 5
+            },
+            {
+                resource = "stone",
+                quantity = 5
+            }
         }
     }
 }
@@ -38,7 +53,7 @@ function onOptionShow(option)
     return name, wood  
 end
 
-function onBeingPlaced(hookable) 
+function onBeingPlaced(mapX, mapY) 
     return MoveWrapper.new(TestMove.new())
 end
 

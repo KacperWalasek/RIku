@@ -9,6 +9,6 @@ unit = {
     }
 }
 
-function onTurnEnd(hookable) --W przyszlosci prawdopodobnie to bedzie Unit a nie Hookable
+function onTurnEnd(mapX, mapY) --W przyszlosci prawdopodobnie to bedzie Unit a nie Hookable
     return MoveWrapper.new(TestMove.new())
 end

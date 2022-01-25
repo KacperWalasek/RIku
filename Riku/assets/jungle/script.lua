@@ -1,5 +1,12 @@
 asset_type="tileobject"
 name="jungle"
 tileobject = {
-    description = "jungle"
+    description = "jungle",
+    behavior = {
+        unbuildable = {
+            {
+                a = ""
+            }
+        }
+    }
 }
