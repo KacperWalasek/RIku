@@ -10,7 +10,7 @@ namespace minigame
 {
 	class MiniGame : public IMiniGame
 	{
-		const int mapsize = 20;
+		const int mapsize = 10;
 		inline static MiniGameAssets assets;
 
 		Communicator communicator;

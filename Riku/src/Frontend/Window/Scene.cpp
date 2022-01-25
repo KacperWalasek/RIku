@@ -122,7 +122,7 @@ void front::Scene::drawMiniGame() {
 	for(int i=0;i<(int)map.size();i++) {
 		for(int j=0;j<(int)map[i].size();j++) {
 			auto transform = front::Transform(glm::vec3((float)i, 0.0f, (float)j));
-			handler.tryDraw("grass",lightingShader,transform, frustum);
+			handler.drawGround("grass", "_flat", lightingShader, transform, frustum);
 			if(map[i][j].unit) {
 				const auto* unit = map[i][j].unit.get();
 				auto&& color = playerColors[unit->getOwner()];
