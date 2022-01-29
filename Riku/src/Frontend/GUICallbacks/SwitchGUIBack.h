@@ -11,15 +11,13 @@ namespace CEGUI::Functor {
     private:
         CEGUI::GUI*& activeGUI;
         CEGUI::GUI*& lastActiveGUI;
-        bool hideActive;
     public:
         SwitchGUIBack(CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastActiveGUI)
             : Functor(), activeGUI(activeGUI), lastActiveGUI(lastActiveGUI) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            if (hideActive)
-                activeGUI->hide();
+            activeGUI->hide();
             activeGUI = lastActiveGUI;
             activeGUI->show();
             return true;
