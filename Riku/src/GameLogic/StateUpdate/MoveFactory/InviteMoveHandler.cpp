@@ -16,7 +16,7 @@ std::shared_ptr<IMove> InviteMoveHandler::handleDescription(const IMoveDescripti
 		LogicUtils::addPopup("You cannot invite yourself!");
 		return nullptr;
 	}
-	std::regex regex("^[0-9]+.[0-9]+.[0-9]+.[0-9]+$");
+	std::regex regex("^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$");
 	if (!std::regex_match(desc.get(), regex))
 	{
 		LogicUtils::addPopup(desc.get() + " is not a valid Ip address");
