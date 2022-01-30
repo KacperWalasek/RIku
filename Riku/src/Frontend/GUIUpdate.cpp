@@ -645,6 +645,7 @@ void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedU
     auto buildingList = static_cast<CEGUI::ScrollablePane*>(gui->getWidgetByName("BuildingsList"));
     auto nameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("NameLabel"));
     auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("FrontNameLabel"));
+    auto description = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("Description"));
 
     for (const auto& bulding : lastBuildings)
     {
@@ -663,6 +664,8 @@ void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedU
         gui->setPushButtonCallback(building.first, callback1);
         auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
         gui->setPushButtonCallback(building.first, callback2);
+        auto callback3 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.second), description);
+        gui->setPushButtonCallback(building.first, callback3);
         buildingList->addChild(buildingOptionButton);
         y += 0.3f;
     }

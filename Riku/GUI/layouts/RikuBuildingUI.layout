@@ -9,7 +9,7 @@
             <Property name="Text" value="Building menu" />
             <Property name="RollUpEnabled" value="false" />
             <Window type="OgreTray/ScrollablePane" name="BuildingsList" >
-                <Property name="Area" value="{{0,0},{0,90},{1,0},{1,-40}}" />
+                <Property name="Area" value="{{0,0},{0,120},{1,0},{1,-40}}" />
                 <AutoWindow namePath="__auto_container__" >
                     <Property name="MouseInputPropagationEnabled" value="true" />
                 </AutoWindow>
@@ -33,27 +33,36 @@
                 </AutoWindow>
             </Window>
             <Window type="WindowsLook/Label" name="Label" >
-                <Property name="Area" value="{{0,-7},{0,3},{0,171},{0,35}}" />
-                <Property name="Text" value="Chosen Building info" />
-                <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            </Window>
-            <Window type="WindowsLook/Label" name="Label2" >
-                <Property name="Area" value="{{0,-4},{0,45},{0,73},{0,77}}" />
+                <Property name="Area" value="{{0,20},{0,5},{0.2,20},{0,37}}" />
                 <Property name="Text" value="Name: " />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
             </Window>
             <Window type="WindowsLook/Label" name="FrontNameLabel" >
-                <Property name="Area" value="{{0,75},{0,45},{0,203},{0,77}}" />
+                <Property name="Area" value="{{0.2,20},{0,5},{0.7,20},{0,37}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
             </Window>
             <Window type="OgreTray/Button" name="BuildButton" >
                 <Property name="Area" value="{{0,4},{1,-36},{0,100},{1,-4}}" />
                 <Property name="Text" value="Confirm" />
             </Window>
             <Window type="WindowsLook/Label" name="NameLabel" >
-                <Property name="Area" value="{{0,209},{0,6},{0,337},{0,38}}" />
+                <Property name="Area" value="{{0,457},{0,9},{0,585},{0,41}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="Visible" value="false" />
+            </Window>
+            <Window type="WindowsLook/Label" name="DescriptionLabel" >
+                <Property name="Area" value="{{0,20},{0,45},{0.2,20},{0,77}}" />
+                <Property name="Text" value="Description" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="WindowsLook/MultiLineEditbox" name="Description" >
+                <Property name="Area" value="{{0.2,20},{0,45},{0.9,0},{0,115}}" />
+                <Property name="Text" >
+</Property>
+                <Property name="ReadOnly" value="true" />
             </Window>
         </Window>
     </Window>

@@ -167,7 +167,10 @@ CEGUI::GUI* CEGUI::GUIFactory::GetBuildingUI() {
 	auto buildingsList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("BuildingsList"));
 	auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
 	auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("FrontNameLabel"));
-	
+	auto label = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("Label"));
+	label->setText(front::Lang::getUtf("Name"));
+	label = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("DescriptionLabel"));
+	label->setText(front::Lang::getUtf("Description"));
 
 	auto onKeyPress = new CEGUI::Functor::BuildingUIOnKeyPress(activeGUI, guiDic, nameLabel, state, focusedUnitIndex);
 	//auto onConfirmButton = new CEGUI::Functor::ConfirmBuilding(nameLabel, state, focusedUnitIndex, activeGUI, guiDic);
