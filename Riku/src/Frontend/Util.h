@@ -5,6 +5,8 @@
 #ifndef RIKU_UTIL_H
 #define RIKU_UTIL_H
 
+#include <string>
+#include <vector>
 #include "Transform.h"
 
 struct GLFWwindow;
@@ -13,5 +15,6 @@ namespace front {
 	glm::vec3 getRelativeRay(const glm::mat4& projection, const glm::mat4& view, float x, float y);
 	glm::vec3 getRay(GLFWwindow* window, const glm::mat4& projection, const glm::mat4& view, float mouseX, float mouseY);
 	glm::vec2 getMapClickPosition(GLFWwindow* window, const Scene& scene, float mouseX, float mouseY, float level);
+	std::vector<std::string> getSaveFiles();
 }
 #endif //RIKU_UTIL_H
