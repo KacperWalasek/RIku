@@ -7,6 +7,7 @@ unsigned int LogicUtils::currentPlayerId = 0;
 unsigned int LogicUtils::currentId = 0;
 int LogicUtils::logicId = 0;
 std::map<std::string, std::shared_ptr<IHookable>> LogicUtils::hookables;
+std::queue<std::string> LogicUtils::popups;
 void LogicUtils::initialize(int logicId)
 {
     LogicUtils::logicId = logicId;
@@ -37,7 +38,7 @@ void LogicUtils::resetPlayerIndexes()
 {
     currentPlayerId = 0;
 }
-/*std::string LogicUtils::getPopup()
+std::string LogicUtils::getPopup()
 {
     if (popups.empty())
         return "";
@@ -50,7 +51,7 @@ void LogicUtils::addPopup(std::string popup)
 {
     popups.push(popup);
 }
-*/
+
 void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)
 {
     hookables.emplace(hookable->getId(), hookable);

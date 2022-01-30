@@ -11,9 +11,9 @@ std::shared_ptr<Patch> AddMiniUnit::createPatch(const GameState& state, const Lo
     return std::make_shared<Patch>(UnitPatch(state.map[mapX][mapY].unit->getId(),name,0));
 }
 
-bool AddMiniUnit::isDoable(const GameState& state, const LogicAssets& assets) const
+bool AddMiniUnit::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
-    return mapX > 0 && mapY > 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
+    return mapX >= 0 && mapY >= 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
 }
 
 std::shared_ptr<IMove> AddMiniUnit::asPointner() const

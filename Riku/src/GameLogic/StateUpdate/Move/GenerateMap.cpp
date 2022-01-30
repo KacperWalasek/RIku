@@ -36,7 +36,7 @@ std::shared_ptr<Patch> GenerateMap::createPatch(const GameState& state, const Lo
     return std::make_shared<Patch>(patch);
 }
 
-bool GenerateMap::isDoable(const GameState& state, const LogicAssets& assets) const
+bool GenerateMap::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return true;
 }

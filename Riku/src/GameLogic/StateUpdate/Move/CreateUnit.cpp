@@ -32,7 +32,7 @@ std::shared_ptr<Patch> CreateUnit::createPatch(const GameState& state, const Log
         placedHookPatch + creeatedHookPatch);
 }
 
-bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets) const
+bool CreateUnit::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return mapX>=0 && mapY>=0 && mapX<state.map.size() && mapY<state.map[0].size() && !state.map[mapX][mapY].unit;
 }

@@ -1,7 +1,7 @@
 #include "UseResources.h"
 #include <memory>
 #include "../../LogicAssets.h"
-
+#include "../../Utils/LogicUtils.h"
 int UseResources::getResourceFromString(const LogicAssets& assets) const
 {
     auto it = std::find_if(assets.playerResources.begin(), assets.playerResources.end(),
@@ -27,9 +27,12 @@ std::shared_ptr<Patch> UseResources::createPatch(const GameState& state, const L
     return std::make_shared<Patch>(PlayerPatch(state.playerOnMove, res,-quantity));
 }
 
-bool UseResources::isDoable(const GameState& state, const LogicAssets& assets) const
+bool UseResources::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     int res = asString ? getResourceFromString(assets) : resource;
+    bool doable = state.players[state.playerOnMove].getResourceQuantity(res) >= quantity;
+    if (popup && !doable)
+        LogicUtils::addPopup("You dont have enough resources");
     return state.players[state.playerOnMove].getResourceQuantity(res) >= quantity;
 }
 

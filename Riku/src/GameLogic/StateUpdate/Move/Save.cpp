@@ -28,7 +28,7 @@ std::shared_ptr<Patch> Save::createPatch(const GameState& state, const LogicAsse
     return nullptr;
 }
 
-bool Save::isDoable(const GameState& state, const LogicAssets& assets) const
+bool Save::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return true;
 }

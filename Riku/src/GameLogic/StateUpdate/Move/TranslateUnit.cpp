@@ -27,7 +27,7 @@ std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const 
         hookPatch);
 }
 
-bool TranslateUnit::isDoable(const GameState& state, const LogicAssets& assets) const
+bool TranslateUnit::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     //TODO: zoptymalizowac, zeby nie liczyc dwa razy patha. (Liczenie patha w MoveDescription?)
     auto unit = state.map[fromX][fromY].unit;

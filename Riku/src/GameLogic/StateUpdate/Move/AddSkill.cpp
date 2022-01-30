@@ -11,7 +11,7 @@ std::shared_ptr<Patch> AddSkill::createPatch(const GameState& state, const Logic
     return std::make_shared<Patch>(UnitPatch(state.map[mapX][mapY].unit->getId(), name, 1));
 }
 
-bool AddSkill::isDoable(const GameState& state, const LogicAssets& assets) const
+bool AddSkill::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return mapX >= 0 && mapY >= 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
 }

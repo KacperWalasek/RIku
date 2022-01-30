@@ -7,7 +7,7 @@ std::shared_ptr<Patch> Load::createPatch(const GameState& state, const LogicAsse
     return std::make_shared<Patch>(patch);
 }
 
-bool Load::isDoable(const GameState& state, const LogicAssets& assets) const
+bool Load::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return true;
 }

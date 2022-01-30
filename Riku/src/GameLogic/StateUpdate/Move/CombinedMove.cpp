@@ -15,9 +15,9 @@ std::shared_ptr<Patch> CombinedMove::createPatch(const GameState& state, const L
     return std::make_shared<Patch>(*p1 + *p2);
 }
 
-bool CombinedMove::isDoable(const GameState& state, const LogicAssets& assets) const
+bool CombinedMove::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
-    return (move1==nullptr || move1->isDoable(state, assets)) && (move2==nullptr || move2->isDoable(state, assets));
+    return (move1==nullptr || move1->isDoable(state, assets, popup)) && (move2==nullptr || move2->isDoable(state, assets, popup));
 }
 
 std::shared_ptr<IMove> CombinedMove::asPointner() const

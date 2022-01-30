@@ -58,6 +58,7 @@
 #include "FrontendCommunicator/RequestHandlers/PlayerCountRequestHandler.h"
 #include "StateUpdate/PatchHandler/WinnerPatchHandler.h"
 #include "FrontendCommunicator/RequestHandlers/WinnerRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/PopupRequestHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -110,7 +111,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<GetUnitNamesRequestHandler>(assets),
 		std::make_shared<IsInGameRequestHandler>(gameState),
 		std::make_shared<PlayerCountRequestHandler>(gameState),
-		std::make_shared<WinnerRequestHandler>(gameState)
+		std::make_shared<WinnerRequestHandler>(gameState),
+		std::make_shared<PopupRequestHandler>()
 		});
 }
 

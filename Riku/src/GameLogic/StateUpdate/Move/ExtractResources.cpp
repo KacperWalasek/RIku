@@ -9,7 +9,7 @@ std::shared_ptr<Patch> ExtractResources::createPatch(const GameState& state, con
     return std::make_shared<Patch>(PlayerPatch(player,resource,quantity));
 }
 
-bool ExtractResources::isDoable(const GameState& state, const LogicAssets& assets) const
+bool ExtractResources::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {  
     return player < state.players.size() 
         && state.players[player].getResourceQuantity(resource) + quantity >= 0 

@@ -30,7 +30,7 @@ StateUpdate::StateUpdate(GameState& state, const LogicAssets& assets) : state(st
 
 std::shared_ptr<IAction> StateUpdate::handleMove(const std::shared_ptr<IMove> move)
 {
-	if (move && move->isDoable(state, assets))
+	if (move && move->isDoable(state, assets, true))
 		return handlePatch(move->createPatch(state, assets));
 	return nullptr;
 }

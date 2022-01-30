@@ -14,7 +14,7 @@ std::shared_ptr<Patch> RemoveUnit::createPatch(const GameState& state, const Log
         + (Patch)RegisterHookablePatch(unit->getId(),false));
 }
 
-bool RemoveUnit::isDoable(const GameState& state, const LogicAssets& assets) const
+bool RemoveUnit::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return mapX >= 0 && mapY >= 0 && mapX < state.map.size() && mapY < state.map[0].size() && state.map[mapX][mapY].unit;
 }
