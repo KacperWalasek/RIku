@@ -6,7 +6,7 @@ GUIDescription::GUIDescription(const std::map<std::string, sol::function>& funcs
 {}
 
 GUIDescription::GUIDescription(const GUIDescription & description)
-	: name(description.name), funcs(description.funcs), options(description.options)
+	: name(description.name), funcs(description.funcs), options(description.options), headers(description.headers)
 {}
 
 GUIDescription::GUIDescription(const std::map<std::string,logic::AssetData>& gui, const std::map<std::string, sol::function>& funcs)

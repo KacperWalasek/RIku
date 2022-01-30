@@ -17,6 +17,7 @@ public:
 	GUIDescription& operator=(const GUIDescription& desc) {
 		this->name = desc.name;
 		this->options = desc.options;
+		this->headers = desc.headers;
 		return *this;
 	}
 	GUIDescription(const std::map<std::string, logic::AssetData>& asset, const std::map<std::string, sol::function>& funcs);
