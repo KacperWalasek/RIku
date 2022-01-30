@@ -130,7 +130,8 @@ void front::Scene::drawMiniGame() {
 					lightingShader.setVec4("color_mod", color[0]/360.f, color[1]/360.f, color[2]/360.f, 1.0f);
 				else {
 					lightingShader.setVec4("color_mod", color[0]/255.f, color[1]/255.f, color[2]/255.f, 1.0f);
-					handler.tryDraw("main_circle", lightingShader, transform, frustum);
+					if(path.path.empty())
+						handler.tryDraw("main_circle", lightingShader, transform, frustum);
 				}
 				handler.tryDraw(unit->getName(), lightingShader, transform, frustum);
 				lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
@@ -138,13 +139,23 @@ void front::Scene::drawMiniGame() {
 		}
 	}
 	for (auto& tile : path.path) {
-		if (&tile == &path.path.back())
+		if(&tile==&path.path.front())
 			continue;
 		auto&& [x, y] = tile.tile;
-		if (tile.reachable)
-			handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)), frustum);
-		else
-			handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, 0, (float)y)), frustum);
+		if(&tile==&path.path.back()) {
+			if(tile.reachable)
+				handler.tryDraw("main_circle_reach", lightingShader, Transform(glm::vec3((float)x, .0f, (float)y)), frustum);
+			else
+				handler.tryDraw("main_circle", lightingShader, Transform(glm::vec3((float)x, .0f, (float)y)), frustum);
+		}
+		else {
+			if (tile.reachable)
+				handler.tryDraw("main_move", lightingShader,
+				                Transform(glm::vec3((float) x, .0f, (float) y)), frustum);
+			else
+				handler.tryDraw("main_move_not", lightingShader,
+				                Transform(glm::vec3((float) x, .0f, (float) y)), frustum);
+		}
 	}
 
 	//return to default value
@@ -198,13 +209,23 @@ void front::Scene::drawGame() {
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
 	}*/
     for(auto& tile: path.path) {
-		if(&tile==&path.path.back())
-			continue;
-		auto&& [x, y] = tile.tile;
-		if(tile.reachable)
-            handler.tryDraw("main_move", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)), frustum);
-	    else
-		    handler.tryDraw("main_move_not", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y)), frustum);
+	    if(&tile==&path.path.front())
+		    continue;
+	    auto&& [x, y] = tile.tile;
+		if(&tile==&path.path.back()) {
+			if(tile.reachable)
+				handler.tryDraw("main_circle_reach", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f+0.3f, (float)y)), frustum);
+			else
+				handler.tryDraw("main_circle", lightingShader, Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f+0.3f, (float)y)), frustum);
+		}
+		else {
+			if (tile.reachable)
+				handler.tryDraw("main_move", lightingShader,
+				                Transform(glm::vec3((float) x, (float) map[x][y].height * 0.5f, (float) y)), frustum);
+			else
+				handler.tryDraw("main_move_not", lightingShader,
+				                Transform(glm::vec3((float) x, (float) map[x][y].height * 0.5f, (float) y)), frustum);
+		}
     }
 
 	//return to default value
@@ -391,13 +412,14 @@ void front::Scene::drawTile(const std::vector<std::vector<Tile>> &map, int x, in
 	if (map[x][y].unit) {
 		const auto& unit = map[x][y].unit;
 		auto&& color = playerColors[unit->getOwner()];
-		auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f, (float)y));
+		auto transform = front::Transform(glm::vec3((float)x, (float)map[x][y].height * 0.5f+0.3f, (float)y));
 		if (focusedUnitIndex == -1 || unit->getId() != units[focusedUnitIndex]->getId())
 			lightingShader.setVec4("color_mod", color[0] / 360.f, color[1] / 360.f, color[2] / 360.f, 1.0f);
 		else
 		{
 			lightingShader.setVec4("color_mod", color[0] / 255.f, color[1] / 255.f, color[2] / 255.f, 1.0f);
-			handler.tryDraw("main_circle", lightingShader, transform, frustum);
+			if(path.path.empty())
+				handler.tryDraw("main_circle", lightingShader, transform, frustum);
 		}
 		handler.tryDraw(unit->getName(), lightingShader, transform, frustum);
 		lightingShader.setVec4("color_mod", 1.0f, 1.0f, 1.0f, 1.0f);
