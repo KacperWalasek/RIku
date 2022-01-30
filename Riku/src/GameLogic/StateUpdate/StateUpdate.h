@@ -1,6 +1,5 @@
 //Kacper Walasek
 #pragma once
-#include "../GameState.h"
 #include "Move/IMove.h"
 #include "./Patch/Patch.h"
 #include "./PatchHandler/IPatchHandler.h"
@@ -8,13 +7,17 @@
 
 class StateUpdate
 {
+	std::shared_ptr<Patch> cummulatedPatch;
 	GameState& state;
 	const LogicAssets& assets;
 	std::vector<std::shared_ptr<IPatchHandler>> patchHandlers;
-	void handlePatch(std::shared_ptr<Patch> patch);
 public:
+	std::shared_ptr<IAction> handlePatch(std::shared_ptr<Patch> patch, bool addToCummulatedPatch = true);
 	void setHandlers(std::vector<std::shared_ptr<IPatchHandler>> patchHandlers);
 	StateUpdate(GameState& state, const LogicAssets& assets);
-	void handleMove(const std::shared_ptr<IMove> move);
+	std::shared_ptr<IAction> handleMove(const std::shared_ptr<IMove> move);
+
+	std::shared_ptr<Patch> getCummulatedPatch() const;
+	void resetCummulatedPatch();
 };
 

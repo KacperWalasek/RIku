@@ -1,8 +1,9 @@
 asset_type="tileobject"
-
+name="test_tile_object"
 tileobject = {
     gui = {
         name = "GuiName",
+        headers = { "name" },
         options = { 
             {
                 name = "opt1"
@@ -21,3 +22,13 @@ tileobject = {
         }
     }
 }
+
+
+function onOptionChosen(option,mapX,mapY)
+    return MoveWrapper.new(AddSkill.new("test_skill",mapX,mapY))
+end
+
+function onOptionShow(option)
+    local name = option["name"]:as_string("", false)
+    return name 
+end

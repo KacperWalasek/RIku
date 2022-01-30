@@ -1,19 +1,22 @@
 #pragma once
 #include <memory>
+#include <string>
 #include "../StateUpdate/Move/IMove.h"
 
 class IHookable
 {
 public:
-	// wywo³ane po zniszczeniu obiektu
-	// byOwner mówi czy zniszczenie zosta³o wywo³ane przez w³aœciciela budynku. Przydatne np. ¿eby zwróciæ czêœæ zasobów graczowi jeœli to on zburzy³ budynek, który wczeœniej zbudowa³
-	virtual std::shared_ptr<IMove> onDestroy(bool byOwner) = 0;
-	// wywo³ywane na koniec tury
-	virtual std::shared_ptr<IMove> onTurnEnd() = 0;
-	// wywo³ywane na koniec tury
-	virtual std::shared_ptr<IMove> onTurnBegin() = 0;
-	// wywo³ywane gdy zostanie postawiony na polu
+	virtual std::string getId() const = 0;
+	// wywolane po zniszczeniu obiektu
+	virtual std::shared_ptr<IMove> onDestroy(int mapX, int mapY) = 0;
+	// wywolywane na koniec tury
+	virtual std::shared_ptr<IMove> onTurnEnd(int mapX, int mapY) = 0;
+	// wywolywane na koniec tury
+	virtual std::shared_ptr<IMove> onTurnBegin(int mapX, int mapY) = 0;
+	// wywolywane gdy zostanie postawiony na polu
 	virtual std::shared_ptr<IMove> onBeingPlaced(int mapX, int mapY) = 0;
+	
+	virtual std::shared_ptr<IMove> onBeingCreated(int mapX, int mapY) = 0;
 
 	virtual int getOwner() const = 0;
 

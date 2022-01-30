@@ -38,6 +38,23 @@ public:
 		return data;
 	}
 
+
+	template<typename T>
+	static std::vector<T> readStringArray(std::string name, const logic::Asset& asset)
+	{
+		if (!asset.hasData(name))
+			return {};
+		auto assetData = asset.getByKey(name);
+		std::vector<logic::AssetData>& vec = assetData.asVector();
+		std::vector<T> data = {};
+		std::transform(vec.begin(), vec.end(),
+			std::back_insert_iterator<std::vector<T>>(data),
+			[](const logic::AssetData& record) {
+				return T(record.asString());
+			});
+		return data;
+	}
+
 	static std::map<std::string, logic::Asset> getAllAssetsWithType(std::string type, logic::AssetHandler& handler)
 	{
 		std::map<std::string, logic::Asset> assetsWithType = {};

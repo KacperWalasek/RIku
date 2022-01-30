@@ -1,46 +1,31 @@
 #pragma once
 #include "../GameState.h"
 #include "Path.h"
-
-struct vertex
-{
-    vertex() {}
-    vertex(int x, int y) : x(x), y(y) {}
-    int x;
-    int y;
-
-    std::vector<vertex> getNeighbors(int maxX,int maxY) const
-    {
-        std::vector<vertex> vec;
-        if (x != 0)
-            vec.push_back({ x - 1,y });
-        if (y != 0)
-            vec.push_back({ x,y - 1 });
-        if (x != maxX-1)
-            vec.push_back({ x + 1,y });
-        if (y != maxY - 1)
-            vec.push_back({ x,y + 1 });
-        return vec;
-    }
-    // without this errors during set creation
-    friend bool operator<(const vertex& p1, const vertex& p2)
-    {
-        return p1.x < p2.x || (p1.x==p2.x && p1.y < p2.y);
-    }
-    friend bool operator==(const vertex& p1, const vertex& p2)
-    {
-        return p1.x == p2.x && p1.y == p2.y;
-    }
-
-};
-
+#include "ShortestPathEvaluator.h"
+#include <queue>
 class LogicUtils
 {
-	static double h(vertex from, vertex to);
-    static double d(const GameState& state, vertex vert);
-    static std::vector<std::pair<int, int>> reconstructPath(std::map<vertex, vertex> cameFrom, vertex current);
+	static unsigned int currentId;
+	static unsigned int currentPlayerId;
+	static int logicId;
+	static std::map<std::string, std::shared_ptr<IHookable>> hookables;
+	static std::queue<std::string> popups;
 public:
+	static void initialize(int logicId);
 	static Path getShortestPath(
-        const GameState& state, int fromX, int fromY, int toX, int toY);
+        const GameState& state, int fromX, int fromY, int toX, int toY, int movementPoints = 0);
+	static std::string getUniqueId();
+	static int getAvailablePlayerId(int count = 1);
+	static void resetPlayerIndexes();
+	//static std::string getPopup();
+	//static void addPopup(std::string popup);
+
+	static void addHookable(std::shared_ptr<IHookable> hookable);
+	static void removeHookable(std::string id);
+	static std::shared_ptr<IHookable> getHookable(std::string id);
+	static void clearHookables();
+
+	static Patch createPatchFromState(const GameState& state);
+	static int getResponsePlayer(const GameState& state);
 };
 

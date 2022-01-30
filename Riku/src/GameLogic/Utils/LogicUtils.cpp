@@ -1,77 +1,114 @@
 #include "LogicUtils.h"
 #include <queue>
 #include <list>
+#include "../StateUpdate/Patch/Patch.h"
 
-//heurystyka
-double LogicUtils::h(vertex from, vertex to)
+unsigned int LogicUtils::currentPlayerId = 0;
+unsigned int LogicUtils::currentId = 0;
+int LogicUtils::logicId = 0;
+std::map<std::string, std::shared_ptr<IHookable>> LogicUtils::hookables;
+void LogicUtils::initialize(int logicId)
 {
-    return sqrt(pow((to.x - from.x),2) + pow((to.y - from.y), 2));
-}
-
-//koszt ruchu
-double LogicUtils::d(const GameState& state,vertex vert)
-{
-    if (state.map[vert.x][vert.y].unit)
-        return 1000000;
-    return state.map[vert.x][vert.y].getCost();
-}
-
-std::vector<std::pair<int, int>> LogicUtils::reconstructPath(std::map<vertex, vertex> cameFrom, vertex current)
-{
-    std::list<std::pair<int, int>> totalPath = { {current.x, current.y} };
-    while (cameFrom.find(current) != cameFrom.end())
-    {
-        current = cameFrom[current];
-        totalPath.push_front({ current.x, current.y });
-    }
-    return { std::make_move_iterator(std::begin(totalPath)),
-             std::make_move_iterator(std::end(totalPath)) };
+    LogicUtils::logicId = logicId;
 }
 
 Path LogicUtils::getShortestPath(
-    const GameState& state, int fromX, int fromY, int toX, int toY)
+    const GameState& state, int fromX, int fromY, int toX, int toY, int movementPoints)
 {
-    vertex start(fromX, fromY);
-    vertex end(toX, toY);
-
-    std::map<vertex, double> fScore;
-    std::map<vertex, double> gScore;
-
-    auto priority = [&fScore](const vertex& x, const vertex& y) { return fScore[x] > fScore[y]; };
-    auto openSet = std::multiset< vertex, decltype(priority)>(priority);
-    std::map<vertex, vertex> cameFrom;
-
-    fScore.emplace(start, h(start, end));
-    gScore.emplace(start, 0);
-    openSet.insert(start);
-
-    while (openSet.size()>0)
-    {
-        vertex current = *(openSet.rbegin());
-        if (current.x == toX && current.y == toY) {
-            if (gScore[current] > 10000)
-                break;
-            return { reconstructPath(cameFrom, current), (int)ceil(gScore[current])};
-        }
-        openSet.erase(std::find_if(openSet.begin(), openSet.end(), [current](const auto& elem) {
-            return elem == current;
-            }));
-        for (vertex neighbor : current.getNeighbors(state.map.size(),state.map[0].size()))
-        {
-            double tentative_gScore = gScore[current] + d(state, neighbor);
-            if (gScore.find(neighbor) == gScore.end() || tentative_gScore < gScore[neighbor])
-            {
-                cameFrom.insert_or_assign(neighbor, current);
-                gScore.insert_or_assign(neighbor, tentative_gScore);
-                fScore.insert_or_assign(neighbor, tentative_gScore + h(neighbor, end));
-
-                //nieoptymalne (ale nwm jak to zrobic lepiej)
-                if (std::find_if(openSet.begin(), openSet.end(), [neighbor](const auto& elem) {
-                        return elem==neighbor;
-                    }) == openSet.end())
-                    openSet.insert(neighbor);
-            }
-        }
-    }
-    return { {}, INT_MAX };
+    CostEvaluator evaluator(state.map);
+    return ShortestPathEvaluator::getShortestPath(evaluator, state.map.size(), state.map[0].size(), fromX, fromY, toX, toY, movementPoints);
 }
+
+std::string LogicUtils::getUniqueId()
+{
+    std::string id = std::to_string(logicId) + "_" + std::to_string(currentId);
+    currentId++;
+    return id;
+}
+
+int LogicUtils::getAvailablePlayerId(int count)
+{
+    int first = currentPlayerId + 1;
+    currentPlayerId += count;
+    return first;
+}
+
+void LogicUtils::resetPlayerIndexes()
+{
+    currentPlayerId = 0;
+}
+/*std::string LogicUtils::getPopup()
+{
+    if (popups.empty())
+        return "";
+    std::string popup = popups.front();
+    popups.pop();
+    return popup;
+}
+
+void LogicUtils::addPopup(std::string popup)
+{
+    popups.push(popup);
+}
+*/
+void LogicUtils::addHookable(std::shared_ptr<IHookable> hookable)
+{
+    hookables.emplace(hookable->getId(), hookable);
+}
+
+void LogicUtils::removeHookable(std::string id)
+{
+    hookables.erase(id);
+}
+
+std::shared_ptr<IHookable> LogicUtils::getHookable(std::string id)
+{
+    return hookables[id];
+}
+
+void LogicUtils::clearHookables()
+{
+    hookables.clear();
+}
+
+Patch LogicUtils::createPatchFromState(const GameState& state)
+{
+    Patch patch;
+    for (int i = 0; i < state.players.size(); i++)
+    {
+        const auto& player = state.players[i];
+        for (int j = 0; j < player.getResourceQuantities().size(); j++)
+            patch = patch + PlayerPatch(i, j, player.getResourceQuantity(j));
+        for (auto unit : player.units)
+            patch = patch + PlayerPatch(i, unit);
+    }
+    for (const auto& hookable : state.registredHookables)
+        patch = patch + RegisterHookablePatch(hookable.first);
+    for (int i = 0; i < state.map.size(); i++)
+        for (int j = 0; j < state.map[i].size(); j++)
+        {
+            if (state.map[i][j].unit)
+                patch = patch + TilePatch({ i,j }, state.map[i][j].unit->getId());
+            if (state.map[i][j].object)
+                patch = patch + TilePatch({ i,j }, state.map[i][j].object);
+        }
+    patch = patch + Patch(state.map);
+    patch = patch + Patch(state.playerOnMove);
+    patch.playerCount = state.players.size();
+    return patch;
+}
+
+int LogicUtils::getResponsePlayer(const GameState& state)
+{
+    int ret = state.hotSeatPlayers[0];
+    for (int p : state.hotSeatPlayers)
+    {
+        if (p == state.playerOnMove)
+            return p;
+        if( p > ret && !(ret < state.playerOnMove && p > state.playerOnMove)) 
+            ret = p;
+    }
+    return ret;
+
+}
+

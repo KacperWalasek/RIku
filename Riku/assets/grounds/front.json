@@ -1,74 +1,77 @@
 {
 "grass": [
 	{
-		"path": "grass.obj",
-		"pos": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"rot": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"scale": {
-			"x": 1.0,
-			"y": 1.0,
-			"z": 1.0
-		},
-		"tex": {
-			"x": 1.0,
-			"y": 1.0
-		}
+		"ground": null,
+		"diffuse": "grass.png",
+		"specular": "grass.png",
+		"normal": "grass_norm.png"
 	}
 ],
-"sand": [
+"tropics_grass": [
 	{
-		"path": "sand.obj",
-		"pos": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"rot": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"scale": {
-			"x": 1.0,
-			"y": 1.0,
-			"z": 1.0
-		},
-		"tex": {
-			"x": 1.0,
-			"y": 1.0
-		}
+		"ground": null,
+		"diffuse": "tropics_grass.png",
+		"specular": "tropics_grass.png",
+		"normal": "grass_norm.png"
+	}
+],
+"taiga_grass": [
+	{
+		"ground": null,
+		"diffuse": "taiga_grass.png",
+		"specular": "taiga_grass.png",
+		"normal": "grass_norm.png"
+	}
+],
+"hot_desert": [
+	{
+		"ground": null,
+		"diffuse": "hot_desert.jpg",
+		"specular": "hot_desert.jpg"
+	}
+],
+"semihot_desert": [
+	{
+		"ground": null,
+		"diffuse": "semihot_desert.jpg",
+		"specular": "semihot_desert.jpg"
+	}
+],
+"cold_desert": [
+	{
+		"ground": null,
+		"diffuse": "cold_desert.jpg",
+		"specular": "cold_desert.jpg"
+	}
+],
+"tundra": [
+	{
+		"ground": null,
+		"diffuse": "stone.jpg",
+		"specular": "stone.jpg",
+		"normal": "stone_norm.jpg"
 	}
 ],
 "stone": [
 	{
-		"path": "stone.obj",
-		"pos": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"rot": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 0.0
-		},
-		"scale": {
-			"x": 1.0,
-			"y": 1.0,
-			"z": 1.0
-		},
-		"tex": {
-			"x": 1.0,
-			"y": 1.0
-		}
+		"ground": null,
+		"diffuse": "stone.jpg",
+		"specular": "stone.jpg",
+		"normal": "stone_norm.jpg"
+	}
+],
+"snow": [
+	{
+		"ground": null,
+		"diffuse": "snow.png",
+		"specular": "snow.png"
+	}
+],
+"water": [
+	{
+		"ground": null,
+		"diffuse": "water.jpg",
+		"specular": "water.jpg"
 	}
 ]
 }

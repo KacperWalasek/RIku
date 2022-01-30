@@ -2,11 +2,13 @@ asset_type="tileobject"
 name="wood_factory"
 
 tileobject = {
+    description = "wood_factory_description",
     gui = {
         name = "Units",
+        headers = { "name", "wood" },
         options = { 
             {
-                name = "Warrior",
+                name = "Hero",
                 wood = 3
             },
             {
@@ -30,7 +32,13 @@ function onOptionChosen(option,mapX,mapY)
     return MoveWrapper.new(CombinedMove.new(MoveWrapper.new(CreateUnitAround.new("stefan",mapX,mapY)),MoveWrapper.new(UseResources.new("wood",wood))))
 end
 
-function onBeingPlaced(hookable) 
+function onOptionShow(option)
+    local wood = option["wood"]:as_string("", true)
+    local name = option["name"]:as_string("", false)
+    return name, wood  
+end
+
+function onBeingPlaced(mapX, mapY) 
     return MoveWrapper.new(TestMove.new())
 end
 

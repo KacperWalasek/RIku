@@ -37,12 +37,67 @@
     </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\MoveDescriptions">
     </Filter>
-    <Filter Include="Riku\GameLogic\StateUpdate\MoveFactory">
-    </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\Patch">
     </Filter>
     <Filter Include="Riku\GameLogic\StateUpdate\PatchHandler">
     </Filter>
+    <Filter Include="Riku\GameLogic\Unit">
+    </Filter>
+    <Filter Include="Riku\GameLogic\Utils">
+    </Filter>
+    <Filter Include="Riku\MiniGame">
+      <UniqueIdentifier>{3c6fd964-6afd-4958-a94e-86e415e5ce72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Tile">
+      <UniqueIdentifier>{6ea550eb-491c-43c8-a1f3-00320e887a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate">
+      <UniqueIdentifier>{2c03f6d9-39d5-4620-a03d-4c7444d01a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\PatchHandler">
+      <UniqueIdentifier>{4413b66a-0fa3-4eb3-bb3f-ed865b2a4942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\Move">
+      <UniqueIdentifier>{c2192002-a267-4157-8509-df19d2d65078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\Patch">
+      <UniqueIdentifier>{c65c01ab-ba88-4311-aa17-3cea043178a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Unit">
+      <UniqueIdentifier>{d60e89b9-3df9-476b-b985-e3884e7347d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Hookable">
+      <UniqueIdentifier>{e18c81e9-5799-4349-b8d5-bce94145b4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Player">
+      <UniqueIdentifier>{92bfd45b-a1eb-42e3-802f-100ef87527e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\MoveFactory">
+      <UniqueIdentifier>{eff107a9-7110-4654-97ab-583132265f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Utils">
+      <UniqueIdentifier>{fafc3087-31e7-4b58-8e94-a2a018a4c90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator">
+      <UniqueIdentifier>{f78344db-0a4b-4f73-b7e5-7b11786be377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator\Requests">
+      <UniqueIdentifier>{6bbbdc71-5482-4acc-89a2-8ae4cb3b9994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator\Responses">
+      <UniqueIdentifier>{33894ad4-e7af-4fec-84fb-b70fcbb4576a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\Communicator\RequestHandlers">
+      <UniqueIdentifier>{aa7f5e29-d39c-46da-a0e9-59cee19d7004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\MiniGame\StateUpdate\MoveDescription">
+      <UniqueIdentifier>{2b775407-4ac9-46ae-8d85-aef03f990563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\GameLogic\Actions">
+      <UniqueIdentifier>{1b206673-2b13-4b0a-a3db-1dbe8643c60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Riku\GameLogic\Tile" />
+    <Filter Include="Riku\GameLogic\Tile\TileCost" />
     <Filter Include="Riku\GameLogic\Tile">
     </Filter>
     <Filter Include="Riku\GameLogic\Tile\TileCost">
@@ -50,6 +105,12 @@
     <Filter Include="Riku\GameLogic\Unit">
     </Filter>
     <Filter Include="Riku\GameLogic\Utils">
+    </Filter>
+    <Filter Include="Riku\Network">
+    </Filter>
+    <Filter Include="Riku\GameLogic\StateUpdate\MoveFactory" />
+    <Filter Include="Riku\GameLogic\WinConditions">
+      <UniqueIdentifier>{06cd7d75-b170-4312-b4b2-e16ac6146d60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +160,6 @@
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\Shader.cpp">
-      <Filter>Riku\Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Frontend\stb_image.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Frontend\Texture.cpp">
@@ -272,9 +330,6 @@
     <ClCompile Include="..\src\GameLogic\Tile\TileCost\Ground.cpp">
       <Filter>Riku\GameLogic\Tile\TileCost</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameLogic\Unit\Hero.cpp">
-      <Filter>Riku\GameLogic\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameLogic\Unit\Unit.cpp">
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClCompile>
@@ -285,9 +340,183 @@
       <Filter>Riku</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\hash-library\sha256.cpp" />
+    <ClCompile Include="..\src\MiniGame\MiniGame.cpp">
+      <Filter>Riku\MiniGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MiniGameState.cpp">
+      <Filter>Riku\MiniGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Tile\MiniTile.cpp">
+      <Filter>Riku\MiniGame\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.cpp">
+      <Filter>Riku\MiniGame\StateUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MiniGameAssets.cpp">
+      <Filter>Riku\MiniGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Unit\MiniUnit.cpp">
+      <Filter>Riku\MiniGame\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Assets\LogicAssetInitializer.cpp">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp">
+      <Filter>Riku\MiniGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Attack.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\Utils\ShortestPathEvaluator.cpp">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Utils\MiniGameUtils.cpp">
+      <Filter>Riku\MiniGame\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\EndMiniGameTurn.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\FinishMiniTurnMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\MiniResign.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddSkill.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\UseSkill.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\stb_image\stb_image.cpp" />
+    <ClCompile Include="..\src\Frontend\FrustumCulling.cpp" />
+    <ClCompile Include="..\src\Frontend\Util.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\Unbuildable.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendUtils.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\GameObject\TileObjectDecorator.cpp">
+      <Filter>Riku\GameLogic\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\WebModule.cpp">
+      <Filter>Riku\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\InviteMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\AcceptInvitationMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\NetworkUtils.cpp">
+      <Filter>Riku\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.cpp">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Load.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitedPlayersRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitationsRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\DelayedMovePatchHandler.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\HotseatCountMoveHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -329,9 +558,6 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\ConfirmBuilding.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\EndTurn.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -359,9 +585,6 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Frontend\GUICallbacks\SelectBuildingWithName.h">
-      <Filter>Riku\Frontend\GUICallbacks</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchActiveGUI.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -387,9 +610,6 @@
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Shader.h">
-      <Filter>Riku\Frontend</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Frontend\stb_image.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Texture.h">
@@ -432,9 +652,6 @@
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Assets\AssetUtils.h">
-      <Filter>Riku\GameLogic\Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Assets\RandomWrapper.h">
       <Filter>Riku\GameLogic\Assets</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Communicator.h">
@@ -671,9 +888,6 @@
     <ClInclude Include="..\src\GameLogic\Tile\TileDescription.h">
       <Filter>Riku\GameLogic\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\GameLogic\Unit\Hero.h">
-      <Filter>Riku\GameLogic\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameLogic\Unit\Unit.h">
       <Filter>Riku\GameLogic\Unit</Filter>
     </ClInclude>
@@ -684,11 +898,367 @@
       <Filter>Riku\GameLogic\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\hash-library\sha256.h" />
+    <ClInclude Include="..\src\MiniGame\MiniGame.h">
+      <Filter>Riku\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MiniGameState.h">
+      <Filter>Riku\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Tile\MiniTile.h">
+      <Filter>Riku\MiniGame\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MiniStateUpdate.h">
+      <Filter>Riku\MiniGame\StateUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\IMiniMove.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MiniGameAssets.h">
+      <Filter>Riku\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\MiniMoveFactory.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\IMiniMoveDescriptionHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Unit\MiniUnit.h">
+      <Filter>Riku\MiniGame\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CreateMiniUnit.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Hooks\MiniMoveWrapper.h">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Hooks\MiniLoadedHookable.h">
+      <Filter>Riku\MiniGame\Hookable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\IAssetInitializer.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Assets\LogicAssetInitializer.h">
+      <Filter>Riku\GameLogic\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MiniGameAssetInitializer.h">
+      <Filter>Riku\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniPlayerPatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniTilePatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Player\MiniGamePlayer.h">
+      <Filter>Riku\MiniGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniRegisterHookablePatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\IsOnMoveMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\RegisterHookableMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\PlayerMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\TileMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\UnitMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Patch\MiniUnitPatch.h">
+      <Filter>Riku\MiniGame\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MiniGamePatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Attack.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Patch\MiniGamePatch.h">
+      <Filter>Riku\GameLogic\StateUpdate\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AttackMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AttackMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BoolResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInMiniGameRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\TranslateMiniUnit.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\ShortestPathEvaluator.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Utils\MiniGameUtils.h">
+      <Filter>Riku\MiniGame\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h">
+      <Filter>Riku\MiniGame\Communicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniMapRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\TranslateMiniUnitMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\AttackMiniMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniAttack.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\FinishMiniTurn.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\EndMiniGameTurn.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\IMiniGame.h">
+      <Filter>Riku\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\FinishMiniTurnMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\PatchHandler\WinnerMiniPatchHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\FinishMiniGame.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h">
+      <Filter>Riku\MiniGame\Communicator\Responses</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\CreateUnitAround.h">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniPlayerUnitsRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\MiniResign.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\ResignMiniMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\IAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\TestAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\CombinedAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\SendPatchToAll.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\ResetCummulatedPatch.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddSkill.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\AddMiniUnit.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\UseSkill.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\MoveFactory\UseSkillMiniMoveHandler.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\MoveDescription\UseSkillMoveDescription.h">
+      <Filter>Riku\MiniGame\StateUpdate\MoveDescription</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h">
+      <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\DeserializationData.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Save.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\StringMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\GUIResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\stb_image\stb_image.h" />
+    <ClInclude Include="..\src\Frontend\FrustumCulling.h" />
+    <ClInclude Include="..\src\Frontend\Util.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\Unbuildable.h" />
+    <ClInclude Include="..\src\Frontend\FrontendUtils.h">
+      <Filter>Riku\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\NetworkUtils.h">
+      <Filter>Riku\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\InviteMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\AcceptInvitationMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\Invitation.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\InvitationResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\BuildingInfoResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\ClearPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiniGame\StateUpdate\Move\CombinedMiniMove.h">
+      <Filter>Riku\MiniGame\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Load.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\MapPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\PlayerCountPatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitedPlayersRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitationsRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\DelayedMovePatchHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\DelayedMoveAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\HotseatCountMoveHandler.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\IntMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\InvitationAcceptance.h">
+      <Filter>Riku\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveDescriptions\AcceptInvitationMoveDescription.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveDescriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PlayerCountRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\IWinCondition.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\OnlyOneSurvived.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughUnitsWithName.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\EnoughResourceOfType.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\CombinedWinCondition.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\WinConditions\WinConditionFactory.h">
+      <Filter>Riku\GameLogic\WinConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Actions\CheckWinConditionAction.h">
+      <Filter>Riku\GameLogic\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\InvitePlayerFromEditBox.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\StartGame.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\AcceptInvitation.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetNameFromEditBox.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\Resign.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchGUIBack.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusSkill.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGame.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGame.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\Utils\SaveStruct.h">
+      <Filter>Riku\GameLogic\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <ClInclude Include="..\src\Network\WebModule.h">
+      <Filter>Riku\Network</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

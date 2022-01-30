@@ -14,7 +14,7 @@ namespace CEGUI {
         static void setResourceDirectory(const CEGUI::String& resourceDirectory);
 
         void draw(bool render = true);
-        static void drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic);
+        static void drawMultiple(std::map<std::string, CEGUI::GUI*>& guiDic, CEGUI::GUI*& activeGUI);
         void show();
         void hide();
 
@@ -24,6 +24,7 @@ namespace CEGUI {
 
         //std::function<bool(int)>* on_key_press;
         bool on_key_press(int key);
+        //bool on_char_press(int key);
         bool on_mouse_pos(float x, float y);
         bool on_mouse_click(int button, int action);
         bool on_scroll(float delta);

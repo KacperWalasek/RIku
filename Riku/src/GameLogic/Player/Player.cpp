@@ -38,3 +38,10 @@ void Player::addUnit(std::shared_ptr<Unit> unit)
 {
 	units.push_back(unit);
 }
+
+void Player::removeUnit(std::shared_ptr<Unit> unit)
+{
+	auto it = std::find(units.begin(), units.end(), unit);
+	if(it != units.end())
+		units.erase(it);
+}

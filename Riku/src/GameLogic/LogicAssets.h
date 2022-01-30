@@ -17,6 +17,7 @@ struct LogicAssets
 	std::map<std::string, logic::Asset> tileObjects;
 	std::map<std::string, logic::Asset> units;
 	logic::Asset mapGenerator;
+	logic::Asset winCondition;
 
-	void initialize(std::string assetPath);
+	void initialize(std::string assetPath, std::string miniGameAssetPath);
 };

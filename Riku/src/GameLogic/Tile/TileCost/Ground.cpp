@@ -1,11 +1,12 @@
 // Kacper Walasek
 #include "Ground.h"
 
-Ground::Ground(std::string name, double mult)
-	: Resource(name), mult(mult) 
+Ground::Ground(std::string name, int cost)
+	: Resource(name), mpCost(cost)
 {}
 
-double Ground::getModifiedCost(double cost) const
+int Ground::getCost() const
 {
-	return cost * mult;
+	return mpCost;
 }
+
