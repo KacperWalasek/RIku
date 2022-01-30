@@ -46,7 +46,7 @@ CEGUI::GUIUpdate::~GUIUpdate()
 }
 
 void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic,
-    int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform)
+    int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI)
 {
     if (lastIsInGame != state.isInGame())
     {
@@ -149,6 +149,12 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
     {
         CEGUI::GUIUpdate::CreateInvitations(guiDic["NewGameMenu"], "InvitationsList", state);
         CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state);
+    }
+    if (activeGUI != guiDic["Popup"])
+    {
+        std::string s = state.getPopup();
+        if (s != "")
+            CEGUI::GUIUpdate::ShowPopup(s, activeGUI, guiDic, lastActiveGUI);
     }
 }
 

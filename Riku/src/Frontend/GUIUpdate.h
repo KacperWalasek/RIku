@@ -32,7 +32,8 @@ namespace CEGUI {
         static void Init();
         static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic);
         static void UpdateMovementBars(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic);
-        static void CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic, int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform);
+        static void CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic,
+            int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI);
         static void UpdateUIButtons(std::map<std::string, CEGUI::GUI*> guiDic);
         static void CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& resourcesListName, FrontendState& state);
         static void LoadIcons(FrontendState& state);
