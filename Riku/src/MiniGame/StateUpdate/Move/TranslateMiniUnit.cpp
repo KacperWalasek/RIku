@@ -8,21 +8,31 @@ minigame::TranslateMiniUnit::TranslateMiniUnit(int fromX, int fromY, int toX, in
 
 std::shared_ptr<minigame::MiniPatch> minigame::TranslateMiniUnit::createPatch(const MiniGameState& state, const MiniGameAssets& assets) const
 {
-    auto path = MiniGameUtils::getShortestPath(state, fromX, fromY, toX, toY);
     auto unit = state.map[fromX][fromY].unit;
+    int mp = unit ? unit->movementPoints : 0;
+    auto path = MiniGameUtils::getShortestPath(state, fromX, fromY, toX, toY, mp);
+    path.path.erase(path.path.begin() + path.reachableTilesNumber, path.path.end());
+    path.cost = path.path.rbegin()->cost;
+
+    auto&& [newToX, newToY] = path.path.rbegin()->tile;
+    auto hookMove = unit->onBeingPlaced(newToX, newToY);
+    auto hookPatch = hookMove ? *(hookMove->createPatch(state, assets)) : MiniPatch();
+   
     return std::make_shared<MiniPatch>(
-        MiniTilePatch({ toX, toY }, unit->getId()) +
+        MiniTilePatch({ newToX, newToY }, unit->getId()) +
         (MiniPatch)MiniTilePatch({ fromX,fromY }, true) +
         (MiniPatch)MiniUnitPatch(unit->getId(), -path.cost) + 
-        (MiniPatch)MiniUnitPatch(unit->getId(), toX, toY));
+        (MiniPatch)MiniUnitPatch(unit->getId(), newToX, newToY) +
+        hookPatch);
 }
 
 bool minigame::TranslateMiniUnit::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const
 {
     //TODO: zoptymalizowac, zeby nie liczyc dwa razy patha. (Liczenie patha w MoveDescription?)
-    auto path = MiniGameUtils::getShortestPath(state, fromX, fromY, toX, toY);
     const auto& unit = state.map[fromX][fromY].unit;
-    return unit && !state.map[toX][toY].unit && unit->movementPoints >= path.cost && state.playerOnMove == unit->getOwner();
+    int mp = unit ? unit->movementPoints : 0; 
+    auto path = MiniGameUtils::getShortestPath(state, fromX, fromY, toX, toY, mp);
+    return unit && path.reachableTilesNumber > 1 && state.playerOnMove == unit->getOwner();
 }
 
 std::shared_ptr<minigame::IMiniMove> minigame::TranslateMiniUnit::asPointner() const

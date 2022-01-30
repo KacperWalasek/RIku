@@ -15,6 +15,7 @@ std::shared_ptr<Patch> TranslateUnit::createPatch(const GameState& state, const 
     int mp = unit ? unit->movementPoints : 0;
     auto path = LogicUtils::getShortestPath(state, fromX, fromY, toX, toY, mp);
     path.path.erase(path.path.begin() + path.reachableTilesNumber, path.path.end());
+    path.cost = path.path.rbegin()->cost;
 
     auto&& [newToX, newToY] = path.path.rbegin()->tile;
     auto hookMove = unit->onBeingPlaced(newToX, newToY);
