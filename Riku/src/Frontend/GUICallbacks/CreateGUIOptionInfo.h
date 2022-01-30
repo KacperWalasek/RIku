@@ -36,10 +36,12 @@ namespace CEGUI::Functor {
                 auto label = static_cast<CEGUI::Window*>(CEGUI::GUI::createWidgetStatic("WindowsLook/Label",
                     glm::vec4(0.0f, 0.0f, 0.2f, 0.0f), glm::vec4(20.0f, y, 0.0f, 32.0f), header));
                 label->setText(front::Lang::getUtf(header));
+                label->setProperty("HorzFormatting", "LeftAligned");
                 list->addChild(label);
                 label = static_cast<CEGUI::Window*>(CEGUI::GUI::createWidgetStatic("WindowsLook/Label",
                     glm::vec4(0.2f, 0.0f, 0.65f, 0.0f), glm::vec4(20.0f, y, 0.0f, 32.0f), header+"/description"));
                 label->setText(front::Lang::getUtf(optionInfo[i]));
+                label->setProperty("HorzFormatting", "LeftAligned");
                 list->addChild(label);
                 y += 32.0f;
             }
