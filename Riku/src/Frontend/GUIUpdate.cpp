@@ -554,7 +554,11 @@ void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI
         std::string invitationFrom = front::Lang::get(std::string("Invitation from"));
         invitationFrom += ": ";
         if (invitation.second != "")
-            invitationLabel->setText(invitationFrom + invitation.second);
+        {
+            std::basic_string<unsigned char> text(front::Lang::getUtf(invitation.second));
+            text = std::basic_string<unsigned char>(reinterpret_cast<const unsigned char*>(invitationFrom.c_str())) + text;
+            invitationLabel->setText(text.c_str());
+        }
         else
             invitationLabel->setText(invitationFrom + ip);
         auto hotseatBox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("HotseatBox"));

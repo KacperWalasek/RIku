@@ -123,6 +123,11 @@ CEGUI::GUI* CEGUI::GUIFactory::GetJoinGameMenu() {
 	my_gui->init();
 	my_gui->loadLayout("RikuJoinGameMenu.layout");
 
+	auto label = static_cast<CEGUI::Window*>(my_gui->getWidgetByName("IpLabel"));
+	label->setText(front::Lang::getUtf("Your ip is"));
+	label = static_cast<CEGUI::Window*>(my_gui->getWidgetByName("Ip"));
+	label->setText(state.getIp());
+
 	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic); // to be changed
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
 	my_gui->setKeyCallback(onKeyPress);
