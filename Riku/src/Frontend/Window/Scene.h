@@ -14,6 +14,7 @@
 #include "../Model.h"
 #include "Light.h"
 #include "../Asset/FAssetHandler.h"
+#include "../FrustumCulling.h"
 
 namespace front {
 	class Window;
@@ -37,16 +38,23 @@ namespace front {
 		CEGUI::GUI* activeGUI;
 		CEGUI::GUI* lastActiveGUI;
 		std::map<std::string, CEGUI::GUI*> guiDic;
+		glm::mat4 projection, view;
 
 		std::pair<int, int> clickPos;
         Path path;
+		Frustum frustum;
 		friend class MouseClickCallback;
 
 		void init(GLFWwindow* window);
+		void drawTile(const std::vector<std::vector<Tile>> &map, int x, int y);
 		void drawGame();
 		void drawMiniGame();
 		void drawInit(glm::mat4& projection, glm::mat4& view);
 	public:
+		const glm::mat4& getProjection() const {return projection;}
+		const glm::mat4& getView() const {return view;}
+		const Transform& getCamera() const {return movingCameraTransform;}
+		const Frustum& getFrustum() const {return frustum;}
 		Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect);
 		~Scene();
 		void update();//input

@@ -2,6 +2,7 @@
 #include "ResourceFactory.h"
 #include "RequireResources.h"
 #include "UseResourceOnBuild.h"
+#include "Unbuildable.h"
 std::shared_ptr<TileObjectDecorator> TileObjectDecoratorFactory::createTileObject(std::string type, std::map<std::string, logic::AssetData> data, std::shared_ptr<ITileObject> base, const LogicAssets& assets)
 {
 	// TODO - zrobiæ to jakoœ ³adniej i bardziej rozszerzalnie
@@ -29,5 +30,7 @@ std::shared_ptr<TileObjectDecorator> TileObjectDecoratorFactory::createTileObjec
 			std::find_if(resources.begin(), resources.end(), [resourceName](const Resource& r) { return r.getName() == resourceName; }));
 		return std::make_shared<UseResourceOnBuild>(base, resourceIndex, data.at("quantity").asNumber());
 	}
+	if (type == "unbuildable")
+		return std::make_shared<Unbuildable>(base);
 	return nullptr;
 }

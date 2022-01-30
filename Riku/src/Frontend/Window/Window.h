@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtx/rotate_vector.hpp>
-#include "../stb_image.h"
+#include <stb_image/stb_image.h>
 #ifdef _WIN32
 #undef max
 #undef min

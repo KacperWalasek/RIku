@@ -21,6 +21,7 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/StringMoveDescription.h"
 #include "../GameLogic/FrontendCommunicator/Responses/GUIResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringStringMapResponse.h"
+#include "FrontendUtils.h"
 #include "../GameLogic/FrontendCommunicator/Responses/AssetHandlerResponse.h"
 #include "../GameLogic/FrontendCommunicator/Responses/InvitationResponse.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
@@ -111,6 +112,17 @@ std::vector<std::string> FrontendState::getSkills()
 	return logic.getInfo<StringListResponse>("skills")->getNames();
 }
 
+std::map<std::string, Mesh>& FrontendState::getMapMeshes(const front::AssetHandler& handler)
+{
+	if (mapMeshes.size() == 0)
+	{
+		std::map<std::string, Mesh> meshMap;
+		const auto& map = getMap();
+		mapMeshes = front::FrontendUtils::createMapMesh(map, handler);
+
+	}
+	return mapMeshes;
+}
 std::map<std::string, std::string> FrontendState::getInvitations()
 {
 	return logic.getInfo<StringStringMapResponse>("invitations")->get();

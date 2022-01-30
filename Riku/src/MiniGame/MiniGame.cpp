@@ -53,10 +53,10 @@ minigame::MiniGame::MiniGame(const Unit& player, const Unit& enemy, bool begins)
 		std::make_shared<UseSkillMiniMoveHandler>()
 		});
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < mapsize; i++)
 	{
 		state.map.emplace_back();
-		for (int j = 0; j < 20; j++)
+		for (int j = 0; j < mapsize; j++)
 			state.map[i].emplace_back();
 	}
 	if (begins) {

@@ -10,6 +10,7 @@ include_directories(Riku ${PROJECT_SOURCE_DIR}/lib "/usr/include/x86_64-linux-gn
 add_executable(Riku
 	lib/zmq.cpp
 	lib/hash-library/sha256.cpp
+		lib/stb_image/stb_image.cpp
 		src/MiniGame/MoveFactory/UseSkillMiniMoveHandler.cpp
 		src/MiniGame/MoveFactory/AttackMiniMoveHandler.cpp
 		src/MiniGame/MoveFactory/MiniMoveFactory.cpp
@@ -59,6 +60,23 @@ add_executable(Riku
 		src/GameLogic/StateUpdate/MoveFactory/ChoseGuiOptionMoveHandler.cpp
 		src/GameLogic/StateUpdate/MoveFactory/MoveFactory.cpp
 		src/GameLogic/StateUpdate/MoveFactory/TranslateUnitMoveHandler.cpp
+		src/GameLogic/StateUpdate/MoveFactory/FinishGameMoveHandler.cpp
+		src/GameLogic/StateUpdate/MoveFactory/TestMoveHandler.cpp
+		src/GameLogic/StateUpdate/MoveFactory/AttackMoveHandler.cpp
+		src/GameLogic/StateUpdate/MoveFactory/BuildMoveHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/TilePatchHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/UnitPatchHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/PlayerPatchHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/PlayerOnMovePatchHandler.cpp
+		src/GameLogic/StateUpdate/PatchHandler/RegisterHookablePatchHandler.cpp
+		src/GameLogic/StateUpdate/Move/UseResources.cpp
+		src/GameLogic/StateUpdate/Move/BuildTileObject.cpp
+		src/GameLogic/StateUpdate/Move/Attack.cpp
+		src/GameLogic/StateUpdate/Move/CombinedMove.cpp
+		src/GameLogic/StateUpdate/Move/FinishTurn.cpp
+		src/GameLogic/StateUpdate/Move/TranslateUnit.cpp
+		src/GameLogic/StateUpdate/Move/AddSkill.cpp
+		src/GameLogic/StateUpdate/Move/FinishMiniGame.cpp
 		src/GameLogic/StateUpdate/MoveFactory/SetNameMoveHandler.cpp
 		src/GameLogic/StateUpdate/MoveFactory/FinishGameMoveHandler.cpp
 		src/GameLogic/StateUpdate/MoveFactory/TestMoveHandler.cpp
@@ -100,6 +118,14 @@ add_executable(Riku
 		src/GameLogic/StateUpdate/Move/ExtractResources.cpp
 		src/GameLogic/StateUpdate/StateUpdate.cpp
 		src/GameLogic/FrontendCommunicator/Requests/Request.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/IsInMiniGameRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/MapRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerUnitsRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/AssetHandlerRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/AvailableBuildingsRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/TileObjectGuiRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/WinnerRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/SaveRequestHandler.cpp
@@ -138,6 +164,7 @@ add_executable(Riku
 		src/Frontend/Window/Scene.cpp
 		src/Frontend/FrontendState.cpp
 		src/Frontend/Texture.cpp
+		src/Frontend/FrustumCulling.cpp
 		src/Frontend/stb_image.cpp
 		src/Frontend/Lang.cpp
 		src/Frontend/Object.cpp
@@ -151,6 +178,7 @@ add_executable(Riku
 		src/Frontend/Frontend.cpp
 		src/Frontend/Transform.cpp
 		src/Frontend/GUI.cpp
+		src/Frontend/Util.cpp
 		src/Riku.cpp)
 
 target_link_libraries(Riku dl)

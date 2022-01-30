@@ -1,6 +1,13 @@
 {
 "wood_factory": [
 	{
+		"frustum": null,
+		"frustum_radius": 1.0,
+		"frustum_center": {
+			"y": 0.5
+		}
+	},
+	{
 		"path": "farmhouse_obj.obj",
 		"pos": {
 			"x": 0.0,

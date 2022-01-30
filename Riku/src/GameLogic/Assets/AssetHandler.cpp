@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <hash-library/sha256.h>
 #include <iostream>
+
 namespace logic{
 
 	void AssetHandler::passFile(const std::string& path, const std::string& fileName, std::shared_ptr<IAssetInitializer> initializer) {

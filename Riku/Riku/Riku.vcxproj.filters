@@ -162,9 +162,6 @@
     <ClCompile Include="..\src\Frontend\Shader.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Frontend\stb_image.cpp">
-      <Filter>Riku\Frontend</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Frontend\Texture.cpp">
       <Filter>Riku\Frontend</Filter>
     </ClCompile>
@@ -454,6 +451,11 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp">
       <Filter>Riku\MiniGame\Communicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\stb_image\stb_image.cpp" />
+    <ClCompile Include="..\src\Frontend\FrustumCulling.cpp" />
+    <ClCompile Include="..\src\Frontend\Util.cpp" />
+    <ClCompile Include="..\src\GameLogic\GameObject\Unbuildable.cpp" />
+    <ClCompile Include="..\src\Frontend\FrontendUtils.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp">
       <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClCompile>
@@ -608,9 +610,6 @@
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Shader.h">
-      <Filter>Riku\Frontend</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Frontend\stb_image.h">
       <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\Texture.h">
@@ -1120,6 +1119,13 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\Responses\StringStringMapResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\stb_image\stb_image.h" />
+    <ClInclude Include="..\src\Frontend\FrustumCulling.h" />
+    <ClInclude Include="..\src\Frontend\Util.h" />
+    <ClInclude Include="..\src\GameLogic\GameObject\Unbuildable.h" />
+    <ClInclude Include="..\src\Frontend\FrontendUtils.h">
+      <Filter>Riku\Frontend</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Network\NetworkUtils.h">
       <Filter>Riku\Network</Filter>

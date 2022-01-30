@@ -38,7 +38,7 @@ function onOptionShow(option)
     return name, wood  
 end
 
-function onBeingPlaced(hookable) 
+function onBeingPlaced(mapX, mapY) 
     return MoveWrapper.new(TestMove.new())
 end
 
