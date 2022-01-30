@@ -24,7 +24,7 @@ namespace CEGUI {
 
         //std::function<bool(int)>* on_key_press;
         bool on_key_press(int key);
-        //bool on_char_press(int key);
+        bool on_char_press(unsigned key);
         bool on_mouse_pos(float x, float y);
         bool on_mouse_click(int button, int action);
         bool on_scroll(float delta);

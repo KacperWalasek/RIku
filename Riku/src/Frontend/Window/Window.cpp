@@ -114,6 +114,10 @@ void front::Window::setCallbacks()
 		KeyCallback(scene->state, scene->focusedUnitIndex, scene->activeGUI, scene->config, scene->movingCameraTransform)(window, key, scancode, action, mods);
 		});
 
+	glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int code) {
+		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
+		scene->activeGUI->on_char_press(code);
+		});
 }
 
 void front::Window::processInput()
