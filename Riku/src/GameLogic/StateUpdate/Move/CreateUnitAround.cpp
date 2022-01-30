@@ -17,7 +17,7 @@ std::shared_ptr<Patch> CreateUnitAround::createPatch(const GameState & state, co
 	return nullptr;
 }
 
-bool CreateUnitAround::isDoable(const GameState& state, const LogicAssets& assets) const
+bool CreateUnitAround::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
 	for (int i = -1; i < 2; i++)
 		for (int j = -1; j < 2; j++)

@@ -12,7 +12,7 @@ std::shared_ptr<Patch> EndMiniGameTurn::createPatch(const GameState& state, cons
 	return std::make_shared<Patch>(MiniGamePatch(player, true, false) + (Patch)MiniGamePatch(enemy, patch));
 }
 
-bool EndMiniGameTurn::isDoable(const GameState& state, const LogicAssets& assets) const
+bool EndMiniGameTurn::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
 	return state.minigames.find(player) != state.minigames.end();
 }

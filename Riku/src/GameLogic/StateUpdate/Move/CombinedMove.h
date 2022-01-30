@@ -12,7 +12,7 @@ public:
     CombinedMove(std::shared_ptr<IMove> move1, std::shared_ptr<IMove> move2);
     virtual std::shared_ptr<Patch> createPatch(const GameState& state, const LogicAssets& assets) const override;
 
-    virtual bool isDoable(const GameState& state, const LogicAssets& assets) const override;
+    virtual bool isDoable(const GameState& state, const LogicAssets& assets, bool popup = false) const override;
 
     virtual std::shared_ptr<IMove> asPointner() const override;
 

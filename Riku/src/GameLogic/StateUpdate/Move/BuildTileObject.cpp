@@ -37,7 +37,7 @@ std::shared_ptr<Patch> BuildTileObject::createPatch(const GameState& state, cons
     return std::make_shared<Patch>(TilePatch(tile,object) + (Patch)RegisterHookablePatch(object->getId()) + placedHookPatch + creeatedHookPatch);
 }
 
-bool BuildTileObject::isDoable(const GameState& state, const LogicAssets& assets) const
+bool BuildTileObject::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     std::shared_ptr<ITileObject> object = createObject(assets);
     auto currentObject = state.map[tile.first][tile.second].object;

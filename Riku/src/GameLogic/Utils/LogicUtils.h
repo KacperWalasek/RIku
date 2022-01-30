@@ -17,8 +17,8 @@ public:
 	static std::string getUniqueId();
 	static int getAvailablePlayerId(int count = 1);
 	static void resetPlayerIndexes();
-	//static std::string getPopup();
-	//static void addPopup(std::string popup);
+	static std::string getPopup();
+	static void addPopup(std::string popup);
 
 	static void addHookable(std::shared_ptr<IHookable> hookable);
 	static void removeHookable(std::string id);

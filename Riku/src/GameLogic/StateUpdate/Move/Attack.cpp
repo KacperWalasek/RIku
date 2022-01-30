@@ -16,7 +16,7 @@ std::shared_ptr<Patch> Attack::createPatch(const GameState& state, const LogicAs
         Patch(std::make_shared<EndMiniGameTurn>(player, attacedUnit->getOwner())));
 }
 
-bool Attack::isDoable(const GameState& state, const LogicAssets& assets) const
+bool Attack::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
     auto distance = abs(unit->getMapX() - attackedTile.first) + abs(unit->getMapY() - attackedTile.second);

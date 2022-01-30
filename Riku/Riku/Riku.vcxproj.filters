@@ -505,7 +505,6 @@
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.cpp" />
-    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\DelayedMovePatchHandler.cpp">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
@@ -517,6 +516,12 @@
     </ClCompile>
     <ClCompile Include="..\src\GameLogic\StateUpdate\PatchHandler\WinnerPatchHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PopupRequestHandler.cpp">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1173,7 +1178,6 @@
       <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.h" />
-    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\PatchHandler\DelayedMovePatchHandler.h">
       <Filter>Riku\GameLogic\StateUpdate\PatchHandler</Filter>
@@ -1253,6 +1257,12 @@
     </ClInclude>
     <ClInclude Include="..\src\GameLogic\Utils\SaveStruct.h">
       <Filter>Riku\GameLogic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\PopupRequestHandler.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h">
+      <Filter>Riku\GameLogic\StateUpdate\Move</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@ public:
     // requireResource<0 => require no resources
     ExtractResources(int player, int resource, int quantity, int mapX, int mapY, int requiredResource = -1);
     virtual std::shared_ptr<Patch> createPatch(const GameState& state, const LogicAssets& assets) const override;
-    virtual bool isDoable(const GameState& state, const LogicAssets& assets) const override;
+    virtual bool isDoable(const GameState& state, const LogicAssets& assets, bool popup = false) const override;
     virtual std::shared_ptr<IMove> asPointner() const override;
 };
 

@@ -12,7 +12,7 @@ std::shared_ptr<Patch> FinishMiniGame::createPatch(const GameState& state, const
         + *winningPatch);
 }
 
-bool FinishMiniGame::isDoable(const GameState& state, const LogicAssets& assets) const
+bool FinishMiniGame::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return state.minigames.find(player) != state.minigames.end();
 }

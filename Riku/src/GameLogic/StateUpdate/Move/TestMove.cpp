@@ -7,7 +7,7 @@ std::shared_ptr<Patch> TestMove::createPatch(const GameState& state, const Logic
     return std::make_shared<Patch>(PlayerPatch(0));
 }
 
-bool TestMove::isDoable(const GameState& state, const LogicAssets& assets) const
+bool TestMove::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
     return true;
 }
