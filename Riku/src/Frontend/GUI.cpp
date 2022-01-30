@@ -159,6 +159,13 @@ CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const glm::ve
     return newWindow;
 }
 
+CEGUI::Window* CEGUI::GUI::createWidgetStatic(const CEGUI::String& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const CEGUI::String& name) {
+    CEGUI::Window* newWindow = CEGUI::WindowManager::getSingleton().createWindow(type, name);
+    newWindow->setMouseInputPropagationEnabled(true);
+    setWidgetDestRect(newWindow, destRectPerc, destRectPix);
+    return newWindow;
+}
+
 CEGUI::Window* CEGUI::GUI::createWidget(const CEGUI::String& type, const CEGUI::String& name) {
     CEGUI::Window* newWindow = CEGUI::WindowManager::getSingleton().createWindow(type, name);
     m_root->addChild(newWindow);

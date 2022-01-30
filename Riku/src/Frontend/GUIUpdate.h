@@ -24,6 +24,7 @@ namespace CEGUI {
         static std::vector<std::string> unitNames;
         static std::vector<std::string> unitMiniNames;
         static std::vector<std::vector<std::string>> lastOptions;
+        static std::vector<std::string> lastGUIHeaders;
         static std::map<std::string,std::string> lastBuildings;
         static std::map<std::string, Invitation> lastInvited;
         static std::map<std::string, std::string> lastReceivedInvitations;

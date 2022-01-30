@@ -29,6 +29,7 @@ namespace CEGUI {
         CEGUI::GUI* GetPopup();
         CEGUI::GUI* GetSetNamePopup();
         CEGUI::GUI* GetMiniGameUI();
+        CEGUI::GUI* GetLoadingScreen();
 
     private:
         GLFWwindow* window;
