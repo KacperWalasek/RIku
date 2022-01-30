@@ -74,6 +74,7 @@ void front::Scene::init(GLFWwindow* window)
 	guiDic.insert(std::pair("Popup", fac.GetPopup()));
 	guiDic.insert(std::pair("SetNamePopup", fac.GetSetNamePopup()));
 	guiDic.insert(std::pair("MiniGameUI", fac.GetMiniGameUI()));
+	guiDic.insert(std::pair("LoadingScreen", fac.GetLoadingScreen()));
 	guiDic["MainMenu"]->show();
 	activeGUI = guiDic["SetNamePopup"];
 	activeGUI->show();

@@ -103,13 +103,15 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic);
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
 	auto onInviteButton = new CEGUI::Functor::InvitePlayerFromEditBox(ipbox, state);
+	//auto onStartGameButton0 = new CEGUI::Functor::SwitchActiveGUI("LoadingScreen", activeGUI, guiDic);
 	auto onStartGameButton1 = new CEGUI::Functor::SetHotseatCountFromEditBox(hotbox, state);
 	auto onStartGameButton2 = new CEGUI::Functor::StartGame(state);
 	auto onLoadButton = new CEGUI::Functor::LoadGame(state);
 	
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
-	my_gui->setPushButtonCallback("InviteButton", onInviteButton);
+	my_gui->setPushButtonCallback("InviteButton", onInviteButton);	
+	//my_gui->setPushButtonCallback("StartGameButton", onStartGameButton0);
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton1);
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton2);
 	my_gui->setPushButtonCallback("LoadButton", onLoadButton);
@@ -255,6 +257,21 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMiniGameUI() {
 	//my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ResignButton", onResignButton);
 	my_gui->setPushButtonCallback("EndTurnButton", onEndTurnButton);
+
+	return my_gui;
+}
+
+
+CEGUI::GUI* CEGUI::GUIFactory::GetLoadingScreen() {
+	CEGUI::GUI* my_gui = new CEGUI::GUI();
+	my_gui->init();
+	my_gui->loadLayout("RikuLoading.layout");
+
+	auto label = static_cast<CEGUI::Window*>(my_gui->getWidgetByName("Label"));
+	label->setText(front::Lang::getUtf("Loading..."));
+
+	auto onKeyPress = new CEGUI::Functor::Functor();
+	my_gui->setKeyCallback(onKeyPress);
 
 	return my_gui;
 }

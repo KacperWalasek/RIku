@@ -7,6 +7,7 @@
 #include "GUICallbacks/SetLabelText.h"
 #include "GUICallbacks/AcceptInvitation.h"
 #include "GUICallbacks/FocusSkill.h"
+#include "GUICallbacks/CreateGUIOptionInfo.h"
 
 bool CEGUI::GUIUpdate::lastIsInMiniGame;
 bool CEGUI::GUIUpdate::lastIsInGame;
@@ -21,6 +22,7 @@ std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::shared_ptr<const minigame::MiniUnit>> CEGUI::GUIUpdate::lastMiniUnits;
 std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
+std::vector<std::string> CEGUI::GUIUpdate::lastGUIHeaders;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
 std::map<std::string, Invitation> CEGUI::GUIUpdate::lastInvited;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastReceivedInvitations;
@@ -42,6 +44,12 @@ CEGUI::GUIUpdate::~GUIUpdate()
     for (auto p : existingUnitElems)
         delete p.second;
     for (auto p : existingUnitOptions)
+        delete p.second;
+    for (auto p : existingMiniUnitElems)
+        delete p.second;
+    for (auto p : existingReceivedInvitations)
+        delete p.second;
+    for (auto p : existingSkillElems)
         delete p.second;
 }
 
@@ -591,6 +599,22 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
         if (same) return;
     }
 
+    auto headers = state.getGuiHeaders(unit->getMapX(), unit->getMapY());
+    auto infoList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("InfoList"));
+
+    for (const auto& header : lastGUIHeaders)
+    {
+        CEGUI::Window* item = static_cast<CEGUI::Window*>(infoList->getChildElementRecursive(header));
+        if (item == nullptr) continue;
+        infoList->removeChild(item);
+        item->destroy();
+        delete item;
+        item = static_cast<CEGUI::Window*>(infoList->getChildElementRecursive(header + "/description"));
+        infoList->removeChild(item);
+        item->destroy();
+        delete item;
+    }
+
     auto recruitButt = guiDic["GameUI"]->getWidgetByName("RecruitingButton");
     if (avaible_options.empty())
         recruitButt->setEnabled(false);
@@ -602,6 +626,8 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
 
     auto nameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("NameLabel"));
     auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(my_gui->getWidgetByName("FrontNameLabel"));
+    nameLabel->setText("");
+    frontNameLabel->setText("");
     CEGUI::PushButton* unitOptionButton;
     CEGUI::Functor::SetLabelText* func;
     float y = 0.1f;
@@ -622,12 +648,15 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
         my_gui->setPushButtonCallback(option, func);
         func = new CEGUI::Functor::SetLabelText(front::Lang::get(option), frontNameLabel);
         my_gui->setPushButtonCallback(option, func);
+        auto showOptionInfo = new CEGUI::Functor::CreateGUIOptionInfo(infoList, headers, o);
+        my_gui->setPushButtonCallback(option, showOptionInfo);
         unitsList->addChild(unitOptionButton);
 
         existingUnitOptions.insert(std::pair<std::string, CEGUI::Window*>(option, unitOptionButton));
         y += 0.3;
     }
     lastOptions = avaible_options;
+    lastGUIHeaders = headers;
 }
 
 void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)
@@ -646,6 +675,10 @@ void CEGUI::GUIUpdate::CreateBuildingOptions(FrontendState& state, int& focusedU
     auto nameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("NameLabel"));
     auto frontNameLabel = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("FrontNameLabel"));
     auto description = static_cast<CEGUI::DefaultWindow*>(gui->getWidgetByName("Description"));
+
+    nameLabel->setText("");
+    frontNameLabel->setText("");
+    description->setText("");
 
     for (const auto& bulding : lastBuildings)
     {
