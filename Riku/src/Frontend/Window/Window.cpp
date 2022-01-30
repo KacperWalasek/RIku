@@ -120,6 +120,10 @@ void front::Window::setCallbacks()
 		FocusCallback(scene->activeGUI, scene->isFocused)(window, callback);
 	});
 
+	glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int code) {
+		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
+		scene->activeGUI->on_char_press(code);
+		});
 }
 
 void front::Window::processInput()

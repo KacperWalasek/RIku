@@ -86,11 +86,15 @@ bool CEGUI::GUI::on_key_press(int key){
     CEGUI::Key::Scan guiKey = GlfwToCeguiKey(key);
     auto b = m_context->injectKeyDown(guiKey);
     m_context->injectKeyUp(guiKey);
-    if(!b)
-        return m_context->injectChar(key);
+    /*if(!b)
+        return m_context->injectChar(key);*/
     return b;
 }
 
+bool CEGUI::GUI::on_char_press(unsigned key)
+{
+    return m_context->injectChar(key);
+}
 bool CEGUI::GUI::on_mouse_pos(float x, float y) {
     return m_context->injectMousePosition(x, y);
 }
