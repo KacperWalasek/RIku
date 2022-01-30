@@ -362,6 +362,7 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetNameFromEditBox.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SetNamePopupOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\StartGame.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\SwitchActiveGUI.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SwitchGUIBack.h" />

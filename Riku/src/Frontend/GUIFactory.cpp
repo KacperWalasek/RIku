@@ -19,6 +19,7 @@
 #include "GUICallbacks/SetHotseatCountFromEditBox.h"
 #include "GUICallbacks/Resign.h"
 #include "GUICallbacks/SwitchGUIBack.h"
+#include "GUICallbacks/SetNamePopupOnKeyPress.h"
 #include "Lang.h"
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastGUI,
@@ -205,10 +206,15 @@ CEGUI::GUI* CEGUI::GUIFactory::GetSetNamePopup() {
 	auto label = static_cast<CEGUI::Window*>(my_gui->getWidgetByName("Label"));
 	label->setText(front::Lang::getUtf("Please enter your name"));
 	auto editbox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("Editbox"));
+
 	auto onOkButton1 = new CEGUI::Functor::SetNameFromEditBox(editbox, state);
 	auto onOkButton2 = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
+	auto onKeyPress = new CEGUI::Functor::SetNamePopupOnKeyPress(state, activeGUI, guiDic, editbox);
+
 	my_gui->setPushButtonCallback("OkButton", onOkButton1);
 	my_gui->setPushButtonCallback("OkButton", onOkButton2);
+	my_gui->setKeyCallback(onKeyPress);
+	editbox->subscribeEvent(CEGUI::Window::EventKeyDown, onKeyPress);
 
 	return my_gui;
 }
