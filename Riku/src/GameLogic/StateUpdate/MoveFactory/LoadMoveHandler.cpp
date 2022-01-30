@@ -21,6 +21,17 @@ LoadMoveHandler::LoadMoveHandler(GameState& state, const LogicAssets& assets)
 
 std::shared_ptr<IMove> LoadMoveHandler::handleDescription(const IMoveDescription& description)
 {
+    if (state.invitedPlayers.size() != 0 || state.map.size() != 0)
+    {
+        state.invitedPlayers.clear();
+        state.map.clear();
+        state.minigames.clear();
+        state.playerOnMove = 0;
+        state.players.clear();
+        state.registredHookables.clear();
+        LogicUtils::clearHookables();
+        LogicUtils::resetPlayerIndexes();
+    }
 
     const StringMoveDescription& desc = (const StringMoveDescription&)description;
     std::ifstream file;
