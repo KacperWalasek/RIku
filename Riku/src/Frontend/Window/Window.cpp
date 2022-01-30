@@ -7,6 +7,7 @@
 #include "Callbacks/MouseClickCallback.h"
 #include "Callbacks/KeyCallback.h"
 #include "../Lang.h"
+#include "Callbacks/FocusCallback.h"
 
 front::Window::Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler)
 	: config(config), state(state), scene(config, logic, state, handler, aspect)
@@ -41,7 +42,7 @@ bool front::Window::update()
 		stabDeltaTime = .0f;
 	}
 
-	if(state.isInGame())
+	if(state.isInGame() && scene.isFocused)
 		processInput();
 	scene.update();
 
@@ -113,6 +114,11 @@ void front::Window::setCallbacks()
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
 		KeyCallback(scene->state, scene->focusedUnitIndex, scene->activeGUI, scene->config, scene->movingCameraTransform)(window, key, scancode, action, mods);
 		});
+
+	glfwSetWindowFocusCallback(window, [](GLFWwindow* window, int callback) {
+		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
+		FocusCallback(scene->activeGUI, scene->isFocused)(window, callback);
+	});
 
 }
 

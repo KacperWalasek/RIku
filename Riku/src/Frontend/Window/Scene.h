@@ -44,6 +44,7 @@ namespace front {
         Path path;
 		Frustum frustum;
 		friend class MouseClickCallback;
+		bool isFocused = true;
 
 		void init(GLFWwindow* window);
 		void drawTile(const std::vector<std::vector<Tile>> &map, int x, int y);

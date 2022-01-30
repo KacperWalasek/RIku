@@ -117,9 +117,21 @@ std::vector<Mesh> front::FrontendUtils::getMeshes(const std::vector<std::vector<
 			type = "_slope";
 			break;
 		case 5:
-			sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f,
-				(float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
-			type = "_flat";
+			if(dhz==0 || std::abs(dhz)>=2) {
+				sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f,
+				                                    (float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
+				type = "_flat";
+			}
+			else if(dhz==1) {
+				sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f + 0.125f,
+				                                    (float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f-90.0f * i, 0.0f), scale);
+				type = "_corner+";
+			}
+			else if(dhz==-1) {
+				sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f - 0.125f,
+				                                    (float)y + (float)dy / 3.f), glm::vec3(0.0f, 90.0f-90.0f * i, 0.0f), scale);
+				type = "_corner-";
+			}
 			break;
 		case 6:
 			sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f + 0.125f,
