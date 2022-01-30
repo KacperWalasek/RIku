@@ -37,7 +37,7 @@ bool front::Window::update()
 	ind++;
 	stabDeltaTime+=deltaTime;
 	if(ind==10) {
-		std::cout << stabDeltaTime << "\n";
+		//std::cout << stabDeltaTime << "\n";
 		ind = 0;
 		stabDeltaTime = .0f;
 	}

@@ -18,7 +18,7 @@ void LogicAssetInitializer::initAsset(std::shared_ptr<sol::state> lua) const
 		"as_string", &logic::AssetData::asString
 		);
 	lua->new_usertype<TestMove>("TestMove",
-		sol::constructors<TestMove()>()
+		sol::constructors<TestMove(std::string)>()
 		);
 	lua->new_usertype<CreateUnit>("CreateUnit",
 		sol::constructors<CreateUnit(std::string, int, int)>()

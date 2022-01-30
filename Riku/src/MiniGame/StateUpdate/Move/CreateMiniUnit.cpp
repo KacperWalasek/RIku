@@ -18,11 +18,14 @@ std::shared_ptr<minigame::MiniPatch> minigame::CreateMiniUnit::createPatch(const
     int mp = asset.getByKey("movement_points").asNumber();
     auto& funcs = asset.getFunctions();
     auto unitPtr = std::make_shared<MiniUnit>(name, enemy ? state.enemy.logicIndex : state.player.logicIndex, mp, funcs);
+    auto move = unitPtr->onBeingPlaced(mapX, mapY);
+    auto patch = move ? move->createPatch(state, assets) : std::make_shared<MiniPatch>();
     return std::make_shared<MiniPatch>(
         MiniPatch(MiniPlayerPatch(unitPtr), enemy ) +
         (MiniPatch)MiniTilePatch({ mapX,mapY }, unitPtr->getId()) +
         (MiniPatch)MiniRegisterHookablePatch(unitPtr->getId()) +
-        (MiniPatch)MiniUnitPatch(unitPtr->getId(), mapX, mapY));
+        (MiniPatch)MiniUnitPatch(unitPtr->getId(), mapX, mapY) +
+        *patch);
 }
 
 bool minigame::CreateMiniUnit::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const

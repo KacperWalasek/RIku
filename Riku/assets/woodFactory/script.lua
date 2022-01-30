@@ -39,7 +39,19 @@ function onOptionShow(option)
 end
 
 function onBeingPlaced(mapX, mapY) 
-    return MoveWrapper.new(TestMove.new())
+    return MoveWrapper.new(TestMove.new("placed"))
+end
+
+function onBeingCreated(mapX, mapY) 
+    return MoveWrapper.new(TestMove.new("created"))
+end
+
+function onTurnEnd(mapX, mapY) 
+    return MoveWrapper.new(TestMove.new("end"))
+end
+
+function onTurnBegin(mapX, mapY) 
+    return MoveWrapper.new(TestMove.new("begin"))
 end
 
 -- Tak chcemy, żeby to wyglądało w przyszłości. Do tego funkcja onGuiShow zwracająca na podstawie opcji tworząca vector<string> 

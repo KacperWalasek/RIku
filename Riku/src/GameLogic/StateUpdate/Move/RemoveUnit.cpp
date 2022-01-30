@@ -9,9 +9,12 @@ RemoveUnit::RemoveUnit(int mapX, int mapY)
 std::shared_ptr<Patch> RemoveUnit::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<Unit> unit = state.map[mapX][mapY].unit;
+    auto move = unit->onDestroy(mapX, mapY);
+    auto patch = move->createPatch(state, assets);
     return std::make_shared<Patch>(TilePatch({mapX,mapY}, false, true) 
         + (Patch)PlayerPatch(unit->getOwner(),unit->getId()) 
-        + (Patch)RegisterHookablePatch(unit->getId(),false));
+        + (Patch)RegisterHookablePatch(unit->getId(),false) 
+        + *patch);
 }
 
 bool RemoveUnit::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
