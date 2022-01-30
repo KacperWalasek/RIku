@@ -101,6 +101,11 @@ void ListenerThread(zmq::context_t* ctx, std::vector<std::vector<zmq::message_t>
     }
 }
 
+std::string Network::WebModule::getIp()
+{
+    return myIp;
+}
+
 void Network::WebModule::Init(std::string ip)
 {
     myIp = ip;

@@ -49,6 +49,7 @@ public:
 		static std::vector<std::vector<zmq::message_t> > ReceivedMessages;		
 		static std::map<std::string, zmq::socket_t> invitedPlayers;
 	public:
+		static std::string getIp();
 		static void Init(std::string ip);
 		static void Init();
 		static void Stop();
