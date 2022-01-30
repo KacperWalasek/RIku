@@ -38,6 +38,7 @@ public:
 	bool isInGame();
 	int getPlayerCount();
 	int getWinner();
+	std::string getIp();
 	std::string getPopup();
 
 	void build(std::string name, int mapX, int mapY);

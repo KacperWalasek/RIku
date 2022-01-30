@@ -148,6 +148,11 @@ int FrontendState::getWinner()
 	return logic.getInfo<IntResponse>("winner")->get();
 }
 
+std::string FrontendState::getIp()
+{
+	return logic.getInfo<StringResponse>("ip")->get();
+}
+
 std::string FrontendState::getPopup()
 {
 	return logic.getInfo<StringResponse>("popup")->get();
