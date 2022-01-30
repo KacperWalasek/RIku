@@ -18,6 +18,8 @@ std::shared_ptr<Patch> Attack::createPatch(const GameState& state, const LogicAs
 
 bool Attack::isDoable(const GameState& state, const LogicAssets& assets, bool popup) const
 {
+    if (!unit)
+        return false;
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
     auto distance = abs(unit->getMapX() - attackedTile.first) + abs(unit->getMapY() - attackedTile.second);
 
