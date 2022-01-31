@@ -598,9 +598,15 @@ void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI
 void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic)
 {
     auto units = state.getUnits();
-    if (focusedUnitIndex < 0 || focusedUnitIndex >= units.size()) return;
-    auto unit = units[focusedUnitIndex].get();
-    auto avaible_options = state.getGuiOptions(unit->getMapX(), unit->getMapY());
+    int mapX = -1, mapY = -1;
+    if (focusedUnitIndex >= 0 && focusedUnitIndex < units.size())
+    {
+        auto unit = units[focusedUnitIndex].get();
+        mapX = unit->getMapX();
+        mapY = unit->getMapY();
+    };
+    
+    auto avaible_options = state.getGuiOptions(mapX, mapY);
 
     if (lastOptions.size() == avaible_options.size())
     {
@@ -611,7 +617,7 @@ void CEGUI::GUIUpdate::CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String
         if (same) return;
     }
 
-    auto headers = state.getGuiHeaders(unit->getMapX(), unit->getMapY());
+    auto headers = state.getGuiHeaders(mapX, mapY);
     auto infoList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("InfoList"));
 
     for (const auto& header : lastGUIHeaders)
