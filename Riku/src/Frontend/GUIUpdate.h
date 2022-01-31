@@ -11,6 +11,8 @@ namespace CEGUI {
         static bool lastIsInMiniGame;
         static bool lastIsInGame;
         static int lastFocusedUnitIndex;
+        static int lastFocusedSkillNr;
+        static int focusedSkillNr;
         static std::string lastFocusedSkill;
         static std::map<std::string, CEGUI::Window*> existingUnitElems;
         static std::map<std::string, CEGUI::Window*> existingMiniUnitElems;

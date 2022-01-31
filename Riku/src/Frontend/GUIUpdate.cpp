@@ -12,6 +12,8 @@
 bool CEGUI::GUIUpdate::lastIsInMiniGame;
 bool CEGUI::GUIUpdate::lastIsInGame;
 int CEGUI::GUIUpdate::lastFocusedUnitIndex;
+int CEGUI::GUIUpdate::lastFocusedSkillNr;
+int CEGUI::GUIUpdate::focusedSkillNr;
 std::string CEGUI::GUIUpdate::lastFocusedSkill;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitElems;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingMiniUnitElems;
@@ -127,19 +129,29 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
         }
         if (state.isInMiniGame())
         {
-            if (lastFocusedSkill != focusedSkill)
+            if (lastFocusedSkill != focusedSkill || lastFocusedSkillNr != focusedSkillNr)
             {
                 auto skillsList = static_cast<CEGUI::ScrollablePane*>(guiDic["MiniGameUI"]->getWidgetByName("SkillsList"));
+                std::map<std::string, int> repeats;
                 for (auto s : lastSkills)
-                {
-                    CEGUI::Window* child = skillsList->getChildRecursive(s);
+                {                  
+                    if (repeats.find(s) == repeats.end())
+                        repeats.insert(std::pair<std::string, int>(s, 0));
+                    repeats[s]++;
+                    int count = repeats[s];
+                    std::string name = s + std::to_string(count);
+
+                    CEGUI::Window* child = skillsList->getChildRecursive(name);
                     if (child)
                         child->setProperty("BackgroundEnabled", "false");
                 }  
-                CEGUI::Window* focused = skillsList->getChildRecursive(focusedSkill);
+                if (focusedSkillNr > repeats[focusedSkill])
+                    focusedSkillNr = 1;
+                CEGUI::Window* focused = skillsList->getChildRecursive(focusedSkill + std::to_string(focusedSkillNr));
                 if (focused)
                     focused->setProperty("BackgroundEnabled", "true");               
                 lastFocusedSkill = focusedSkill;
+                lastFocusedSkillNr = focusedSkillNr;
             }
             CEGUI::GUIUpdate::CreateMiniUnits(guiDic["MiniGameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
             CEGUI::GUIUpdate::CreateSkills(guiDic["MiniGameUI"], state, focusedSkill);
@@ -717,20 +729,27 @@ void CEGUI::GUIUpdate::CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, st
     float y = 0.05f;
     for (auto p : existingSkillElems)
         skillsList->removeChild(p.second);
+
+    std::map<std::string, int> repeats;    
     for (auto s : skills)
     {
-        if (existingSkillElems.find(s) != existingSkillElems.end())
+        if (repeats.find(s) == repeats.end())
+            repeats.insert(std::pair<std::string, int>(s, 0));
+        repeats[s]++;
+        int count = repeats[s];
+        std::string name = s + std::to_string(count);
+        if (existingSkillElems.find(name) != existingSkillElems.end())
         {
-            CEGUI::GUI::setWidgetDestRect(existingSkillElems[s], glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f));
-            skillsList->addChild(existingSkillElems[s]);
+            CEGUI::GUI::setWidgetDestRect(existingSkillElems[name], glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f));
+            skillsList->addChild(existingSkillElems[name]);
             y += 0.1;
             continue;
         }
 
         CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
-            glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f), s);
+            glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f), name);
         resourceElem->setProperty("BackgroundColours", "FF009999");
-        if (focusedSkill == s)
+        if (focusedSkill == s && count == focusedSkillNr)
             resourceElem->setProperty("BackgroundEnabled", "true");
         else resourceElem->setProperty("BackgroundEnabled", "false");
 
@@ -739,14 +758,14 @@ void CEGUI::GUIUpdate::CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, st
             //glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f), s);
 
         CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(my_gui->createWidget("Generic/ImageButton",
-            glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(0.0f), s + "/button"));
-        CEGUI::Functor::FocusSkill* func = new CEGUI::Functor::FocusSkill(s, focusedSkill);
-        my_gui->setPushButtonCallback(s + "/button", func);
+            glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(0.0f), name + "/button"));
+        CEGUI::Functor::FocusSkill* func = new CEGUI::Functor::FocusSkill(s, focusedSkill, count, focusedSkillNr);
+        my_gui->setPushButtonCallback(name + "/button", func);
         //resourceElem->addChild(label);
         resourceElem->addChild(button);
         skillsList->addChild(resourceElem);
 
-        existingSkillElems.insert(std::pair<std::string, CEGUI::Window*>(s, resourceElem));
+        existingSkillElems.insert(std::pair<std::string, CEGUI::Window*>(name, resourceElem));
         y += 0.1;
     }
     lastSkills = skills;
