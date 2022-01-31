@@ -1,5 +1,6 @@
 #include "FinishMiniGame.h"
 #include "../Patch/Patch.h"
+#include "../../Utils/LogicUtils.h"
 
 FinishMiniGame::FinishMiniGame(int player, int enemy, std::shared_ptr<IMove> moveOnWin)
     : player(player), enemy(enemy), moveOnWin(moveOnWin) {}

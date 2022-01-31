@@ -1,6 +1,6 @@
 #include "CreateUnitAround.h"
 #include "CreateUnit.h"
-
+#include "../../Utils/LogicUtils.h"
 CreateUnitAround::CreateUnitAround(std::string unit, int mapX, int mapY)
 	: unit(unit), mapX(mapX), mapY(mapY)
 {}
@@ -14,6 +14,7 @@ std::shared_ptr<Patch> CreateUnitAround::createPatch(const GameState & state, co
 			if (!(i == 0 && j == 0) && createMove.isDoable(state, assets))
 				return createMove.createPatch(state, assets);
 		}
+
 	return nullptr;
 }
 
@@ -23,6 +24,8 @@ bool CreateUnitAround::isDoable(const GameState& state, const LogicAssets& asset
 		for (int j = -1; j < 2; j++)
 			if (!(i == 0 && j == 0) && CreateUnit(unit, mapX + i, mapY + j).isDoable(state, assets))
 				return true;
+	if (popup)
+		LogicUtils::addPopup("No tile available!");
 	return false;
 }
 
