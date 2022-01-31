@@ -4,5 +4,5 @@ resources = {
     'wood',
     'iron',
     'stone',
-    'money'
+    'water'
 }

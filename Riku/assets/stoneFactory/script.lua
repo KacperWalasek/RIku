@@ -6,32 +6,15 @@ tileobject = {
     behavior = {
         resource_factory = {
             {
-                resource = "iron",
-                quantity = 10
-            },
-            {
                 resource = "stone",
-                quantity = 200
-            }
-        },
-        require_resources = {
-            {
-                resource = "stone"
+                quantity = 1
             }
         },
         use_resources = {
             {
                 resource = "wood",
-                quantity = 5
-            },
-            {
-                resource = "stone",
-                quantity = 5
+                quantity = 30
             }
         }
     }
 }
-
-function onBeingPlaced(hookable) 
-    return MoveWrapper.new(TestMove.new())
-end

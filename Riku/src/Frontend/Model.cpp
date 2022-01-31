@@ -26,7 +26,7 @@ void Model::loadModel(std::string const &path, float x_tex_scale, float y_tex_sc
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(dir_tmp+"/"+path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	if(!scene)
-		std::cerr << "No scene!!!" << "\n";
+		std::cerr << "No scene!!!" << importer.GetErrorString() << "\n";
 	else if(scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE)
 	{
 		std::cerr << "Scene not complete!!!" << "\n";
