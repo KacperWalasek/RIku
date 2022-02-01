@@ -8,7 +8,11 @@ FinishMiniGame::FinishMiniGame(int player, int enemy, std::shared_ptr<IMove> mov
 std::shared_ptr<Patch> FinishMiniGame::createPatch(const GameState& state, const LogicAssets& assets) const
 {
     std::shared_ptr<Patch> winningPatch = moveOnWin ? moveOnWin->createPatch(state, assets) : std::make_shared<Patch>();
-    return std::make_shared<Patch>(MiniGamePatch(player,false,true) 
+
+    auto patch = state.minigames.size()==2? nullptr :  state.minigames.find(player)->second->getCummulatedPatch(); 
+    return std::make_shared<Patch>(
+        MiniGamePatch(enemy, patch)
+        + (Patch)MiniGamePatch(player, false,true)
         + (Patch)MiniGamePatch(enemy, false, true) 
         + *winningPatch);
 }

@@ -38,7 +38,8 @@ public:
 			enemyUnit = patch.enemyUnit;
 			remove = patch.remove;
 			isBegining = patch.isBegining;
-			miniPatch = patch.miniPatch;
+			if(patch.miniPatch)
+				miniPatch = patch.miniPatch;
 			resetCummulatedPatch = patch.resetCummulatedPatch;
 		}
 		return *this;

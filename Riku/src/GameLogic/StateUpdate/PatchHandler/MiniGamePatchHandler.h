@@ -21,6 +21,24 @@ public:
 				send = true;
 				continue;
 			}
+			auto minigameIt = state.minigames.find(p.first);
+			if (minigameIt == state.minigames.end())
+			{
+				auto minigame = std::make_shared<minigame::MiniGame>(
+					*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.playerUnit))),
+					*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.enemyUnit))),
+					p.second.isBegining);
+				state.minigames.emplace(p.first, minigame);
+				minigameIt = state.minigames.find(p.first);
+			}
+			if (p.second.miniPatch)
+			{
+				// TODO:webModule if enemy on same pc
+				minigameIt->second->applyMiniPatch(p.second.miniPatch);
+				// else return SendMiniPatch
+			}
+			if (p.second.resetCummulatedPatch)
+				minigameIt->second->resetCummulatedPatch();
 			if (p.second.remove)
 			{
 				// TODO sprawdzic czy to sie wywali jak player nie bedzie w trakcie minigry
@@ -29,30 +47,10 @@ public:
 				{
 					auto odp = minigameIt->second->getInfo(std::make_shared<Request>("winner"));
 					auto intOdp = std::static_pointer_cast<IntResponse>(odp);
-					LogicUtils::addPopup("Player " + std::to_string(intOdp->get()) + " won minigame!");
+					if(intOdp->get()>=0)
+						LogicUtils::addPopup("Player " + std::to_string(intOdp->get()) + " won minigame!");
 					state.minigames.erase(p.first);
 				}
-			}
-			else
-			{
-				auto minigameIt = state.minigames.find(p.first);
-				if (minigameIt == state.minigames.end())
-				{
-					auto minigame = std::make_shared<minigame::MiniGame>(
-						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.playerUnit))),
-						*(std::dynamic_pointer_cast<Unit>(LogicUtils::getHookable(p.second.enemyUnit))),
-						p.second.isBegining);
-					state.minigames.emplace(p.first, minigame);
-					minigameIt = state.minigames.find(p.first);
-				}
-				if (p.second.miniPatch)
-				{
-					// TODO:webModule if enemy on same pc
-					minigameIt->second->applyMiniPatch(p.second.miniPatch);
-					// else return SendMiniPatch
-				}
-				if (p.second.resetCummulatedPatch)
-					minigameIt->second->resetCummulatedPatch();
 			}
 		}
 
