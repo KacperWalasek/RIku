@@ -18,7 +18,7 @@ std::shared_ptr<minigame::MiniPatch> minigame::FinishMiniTurn::createPatch(const
 			move = move ? std::make_shared<CombinedMiniMove>(move, h->onTurnEnd()) : h->onTurnEnd();
 	}
 	std::shared_ptr<MiniPatch> patch = move ? move->createPatch(state, assets) : std::make_shared<MiniPatch>();
-	for (auto unit : state.player.units)
+	for (auto& unit : state.player.units)
 	{
 		patch = std::make_shared<MiniPatch>(*patch + MiniUnitPatch(unit->getId(), unit->baseMovementPoints));
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include "IMiniPatchHandler.h"
 #include "../../../GameLogic/StateUpdate/Move/EndMiniGameTurn.h"
+#include "../../../GameLogic/Utils/LogicUtils.h"
 
 namespace minigame
 {
@@ -12,6 +13,7 @@ namespace minigame
 		{
 			if (patch.playerOnMove != -1)
 			{
+				LogicUtils::addPopup("Turn of player " + std::to_string(patch.playerOnMove));
 				state.playerOnMove = patch.playerOnMove;
 				return std::make_shared<EndMiniGameTurn>(state.player.logicIndex, state.enemy.logicIndex);
 			}
