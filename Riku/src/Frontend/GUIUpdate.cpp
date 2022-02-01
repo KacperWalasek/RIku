@@ -329,6 +329,7 @@ void CEGUI::GUIUpdate::CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& 
             val = my_gui->createWidget("WindowsLook/Label", glm::vec4(0.55f, 0.1f, 0.4f, 0.8f), glm::vec4(0.0f), res.first + "/value");
             x += 0.2;
         }
+        resourceElem->setClippedByParent(false);
         val->setText(std::to_string(res.second));
         resourceElem->addChild(icon);
         resourceElem->addChild(val);
@@ -390,6 +391,7 @@ void CEGUI::GUIUpdate::CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unit
 
         CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
             glm::vec4(0.1f, y, 0.8f, 0.30f), glm::vec4(0.0f), name);
+        resourceElem->setClippedByParent(false);
         resourceElem->setProperty("BackgroundColours", "FF009999");
         if (focusedUnitIndex == i)
         {
