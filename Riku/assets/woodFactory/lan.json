@@ -1,0 +1,11 @@
+{
+	"en": {
+		"wood_factory": "Sawmill",
+		"wood_factory_description": "Cost:\nfree\n\nIt gives 10 wood per turn."
+	},
+	"pl": {
+		"wood_factory": "Tartak",
+		"wood_factory_description": "Koszt:\nza darmo\n\nDaje 10 drewna na turę."
+	}
+	
+}

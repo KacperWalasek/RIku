@@ -1,0 +1,11 @@
+{
+	"en": {
+		"skill_factory": "Skill factory",
+		"military_barraks_description": "Cost:\n10 wood\n\nIt allows to buy skills."
+	},
+	"pl": {
+		"skill_factory": "Fabryka umiejętności",
+		"military_barraks_description": "Koszt:\n10 drewna\n\nUmożliwia kupowanie zdolności."
+	}
+	
+}

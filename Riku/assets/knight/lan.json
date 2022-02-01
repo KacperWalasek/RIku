@@ -1,5 +1,8 @@
 {
 "en": {
-	"cavalryman": "Cavalryman"
+	"knight": "Knight"
+	},
+"pl": {
+	"knight": "Rycerz"
 	}
 }
