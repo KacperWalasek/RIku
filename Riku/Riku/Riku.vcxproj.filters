@@ -528,6 +528,7 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.cpp">
       <Filter>Riku\GameLogic\FrontendCommunicator\RequestHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1285,6 +1286,7 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\CreateGUIOptionInfo.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

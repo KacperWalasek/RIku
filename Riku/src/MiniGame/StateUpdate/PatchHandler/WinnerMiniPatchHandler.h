@@ -14,7 +14,7 @@ namespace minigame
 		{
 			if (patch.winner != -1)
 			{
-				LogicUtils::addPopup("Player " + std::to_string(patch.winner) + " won minigame!");
+				state.winner = patch.winner;
 				const MiniGamePlayer& toRemove = patch.winner == state.player.logicIndex ? state.enemy : state.player;
 				auto removeUnit = std::make_shared<RemoveUnit>(toRemove.logicUnit.getMapX(), toRemove.logicUnit.getMapY());
 				return std::make_shared<FinishMiniGame>(state.player.logicIndex, state.enemy.logicIndex, removeUnit);

@@ -6,7 +6,7 @@
 #include "../../Actions/CombinedAction.h"
 #include "../../Actions/SendPatchToAll.h"
 #include "../../Actions/ResetCummulatedPatch.h"
-
+#include "../../FrontendCommunicator/Responses/IntResponse.h"
 class MiniGamePatchHandler :
     public IPatchHandler
 {
@@ -22,8 +22,17 @@ public:
 				continue;
 			}
 			if (p.second.remove)
+			{
 				// TODO sprawdzic czy to sie wywali jak player nie bedzie w trakcie minigry
-				state.minigames.erase(p.first);
+				auto minigameIt = state.minigames.find(p.first);
+				if (minigameIt != state.minigames.end())
+				{
+					auto odp = minigameIt->second->getInfo(std::make_shared<Request>("winner"));
+					auto intOdp = std::static_pointer_cast<IntResponse>(odp);
+					LogicUtils::addPopup("Player " + std::to_string(intOdp->get()) + " won minigame!");
+					state.minigames.erase(p.first);
+				}
+			}
 			else
 			{
 				auto minigameIt = state.minigames.find(p.first);

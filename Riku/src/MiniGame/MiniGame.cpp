@@ -19,6 +19,7 @@
 #include "MoveFactory/UseSkillMiniMoveHandler.h"
 
 #include "StateUpdate/Move/CreateMiniUnit.h"
+#include "Communicator/RequestHandlers/WinnerMiniRequestHandler.h"
 
 minigame::MiniGameAssets& minigame::MiniGame::getAssets()
 {
@@ -42,7 +43,8 @@ minigame::MiniGame::MiniGame(const Unit& player, const Unit& enemy, bool begins)
 		std::make_shared<MiniShortestPathRequestHandler>(state),
 		std::make_shared<PlayerOnMoveMiniRequestHandler>(state),
 		std::make_shared<MiniPlayerUnitsRequestHandler>(state),
-		std::make_shared<SkillsRequestHandler>(state)
+		std::make_shared<SkillsRequestHandler>(state),
+		std::make_shared<WinnerMiniRequestHandler>(state)
 		});
 
 	factory.setHandlers({

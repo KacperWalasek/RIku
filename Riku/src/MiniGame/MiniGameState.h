@@ -16,6 +16,7 @@ namespace minigame
 		std::set<std::string> registredHookables;
 
 		int playerOnMove;
+		int winner = -1;
 	};
 
 }

@@ -303,6 +303,7 @@
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.cpp" />
+    <ClCompile Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.cpp" />
     <ClCompile Include="..\src\MiniGame\Hooks\MiniLoadedHookable.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGame.cpp" />
     <ClCompile Include="..\src\MiniGame\MiniGameAssetInitializer.cpp" />
@@ -541,6 +542,7 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\MiniShortestPathRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\PlayerOnMoveMiniRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\SkillsRequestHandler.h" />
+    <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniMapResponse.h" />
     <ClInclude Include="..\src\MiniGame\Communicator\Responses\MiniUnitListResponse.h" />
     <ClInclude Include="..\src\MiniGame\Hooks\IMiniHookable.h" />
