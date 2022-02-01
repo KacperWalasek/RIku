@@ -15,6 +15,7 @@ class FrontendState
 	GameLogic& logic;
 	std::map<std::string, Mesh> mapMeshes;
 public:
+	int lastOnTurn;
 	FrontendState(GameLogic& logic);
 
 	const std::vector<std::vector<Tile>>& getMap();

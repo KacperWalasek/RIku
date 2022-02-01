@@ -6,7 +6,9 @@ namespace minigame
 {
 	class MiniCostEvaluator : public ICostEvaluator
 	{
+		const std::vector<std::vector<MiniTile>>& map;
 	public:
+		MiniCostEvaluator(const std::vector<std::vector<MiniTile>>& map);
 		virtual double h(vertex from, vertex to) override;
 		virtual int d(vertex vert) override;
 	};

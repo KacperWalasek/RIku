@@ -170,6 +170,13 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
         CEGUI::GUIUpdate::CreateInvitations(guiDic["NewGameMenu"], "InvitationsList", state);
         CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state);
     }
+    if (state.lastOnTurn != state.getPlayerOnMove() && state.isInMiniGame())
+    {
+        std::string s = front::Lang::get("Turn of player");
+        s += ": ";
+        s += std::to_string(state.getPlayerOnMove());
+        CEGUI::GUIUpdate::ShowPopup(s, activeGUI, guiDic, lastActiveGUI);
+    }
     if (activeGUI != guiDic["Popup"])
     {
         std::string s = state.getPopup();

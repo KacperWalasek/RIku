@@ -8,13 +8,19 @@ double minigame::MiniCostEvaluator::h(vertex from, vertex to)
 
 int minigame::MiniCostEvaluator::d(vertex vert)
 {
+    if (map[vert.x][vert.y].unit)
+        return 1000000;
     return 1;
 }
+minigame::MiniCostEvaluator::MiniCostEvaluator(const std::vector<std::vector<minigame::MiniTile>>& map)
+    : map(map)
+{}
 
 std::map<std::string, std::shared_ptr<minigame::IMiniHookable>> minigame::MiniGameUtils::hookables;
+
 Path minigame::MiniGameUtils::getShortestPath(const MiniGameState& state, int fromX, int fromY, int toX, int toY, int movementPoints)
 {
-    MiniCostEvaluator evaluator;
+    MiniCostEvaluator evaluator(state.map);
     return ShortestPathEvaluator::getShortestPath(evaluator, state.map.size(), state.map[0].size(), fromX, fromY, toX, toY, movementPoints);
 }
 

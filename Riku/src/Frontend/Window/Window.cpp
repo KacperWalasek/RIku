@@ -45,7 +45,7 @@ bool front::Window::update()
 	if(state.isInGame() && scene.isFocused)
 		processInput();
 	scene.update();
-
+	state.lastOnTurn = state.getPlayerOnMove();
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 	return false;
