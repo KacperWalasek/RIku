@@ -36,7 +36,7 @@ std::vector<std::string> front::getSaveFiles() {
 	std::vector<std::string> files;
 	for(const auto& entry: std::filesystem::directory_iterator(path)) {
 		if(entry.is_regular_file() && entry.path().extension().string()==".sav") {
-			files.push_back(entry.path().string());
+			files.push_back(entry.path().filename().string());
 		}
 	}
 	return files;

@@ -17,7 +17,8 @@ namespace CEGUI::Functor {
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            state.load(focusedSave);
+            std::string s = "../saves/" + focusedSave;
+            state.load(s);
             return true;
         };
     };
