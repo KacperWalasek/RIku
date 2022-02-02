@@ -9,6 +9,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 0.660000
 illum 2
+map_Bump basic.png
+map_Ks basic.png
 
 newmtl None.001
 Ns 196.078431
@@ -18,10 +20,10 @@ Ks 0.303025 0.303025 0.303025
 Ni 1.000000
 d 1.000000
 illum 2
-map_Bump D:\\CGchallenge\\New folder\\parts\\OutDwarf\\DoneWeps_NM2.png
-map_Kd D:\\CGchallenge\\New folder\\parts\\OutDwarf\\DoneWeps.png
-map_Ks D:\\CGchallenge\\New folder\\parts\\OutDwarf\\DoneWeps_Spec.png
-map_Ns D:\\CGchallenge\\New folder\\parts\\OutDwarf\\DoneWeps_Spec.png
+map_Bump DoneWeps_NM2.png
+map_Kd DoneWeps.png
+map_Ks DoneWeps_Spec.png
+map_Ns DoneWeps_Spec.png
 
 newmtl ___default___
 Ns 125.490196
@@ -31,10 +33,10 @@ Ks 0.019953 0.019953 0.019953
 Ni 1.000000
 d 1.000000
 illum 2
-map_Bump D:\\CGchallenge\\New folder\\parts\\All1NM2.png
-map_Kd D:\\CGchallenge\\New folder\\parts\\OutDwarf\\Done3.png
-map_Ks D:\\CGchallenge\\New folder\\parts\\DONE_Spec.png
-map_Ns D:\\CGchallenge\\New folder\\parts\\DONE_Spec.png
+map_Bump \All1NM2.png
+map_Kd Done3.png
+map_Ks DONE_Spec.png
+map_Ns DONE_Spec.png
 
 newmtl ___default___.001
 Ns 121.568627
@@ -44,5 +46,5 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd D:\CGchallenge\New folder\parts\OutDwarf\Done3.png
-map_Bump D:\\CGchallenge\\New folder\\parts\\All1NM2.png
+map_KdDone3.png
+map_Bump All1NM2.png

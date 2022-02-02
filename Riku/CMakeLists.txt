@@ -100,11 +100,13 @@ add_executable(Riku
 		src/GameLogic/StateUpdate/Move/RemoveUnit.cpp
 		src/GameLogic/StateUpdate/Move/CreateUnit.cpp
 		src/GameLogic/StateUpdate/Move/AddMiniUnit.cpp
+		src/GameLogic/StateUpdate/Move/QuitGame.cpp
 		src/GameLogic/StateUpdate/Move/ExtractResources.cpp
 		src/GameLogic/StateUpdate/StateUpdate.cpp
 		src/GameLogic/FrontendCommunicator/Requests/Request.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/WinnerRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/ShortestPathRequestHandler.cpp
+		src/GameLogic/FrontendCommunicator/RequestHandlers/HotseatPlayersRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/SaveRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/PlayerResourcesRequestHandler.cpp
 		src/GameLogic/FrontendCommunicator/RequestHandlers/IsInMiniGameRequestHandler.cpp

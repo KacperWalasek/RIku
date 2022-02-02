@@ -6,7 +6,7 @@ Ka 0.878 0.878 0.878
 Kd 0.878 0.878 0.878
 Ks 1 1 1
 Ns 752.6
-map_Kd GandalphDone.bmp
+map_Kd Done.bmp
 
 newmtl material04
 Ka 0.878 0.878 0.878

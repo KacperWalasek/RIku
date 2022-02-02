@@ -4,6 +4,7 @@
 #
 # object body
 #
+mtllib mesh.mtl
 
 v  6.9694 67.4004 -4.7913
 v  2.8385 67.5557 -5.8780
