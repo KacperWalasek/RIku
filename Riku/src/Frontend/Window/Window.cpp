@@ -25,6 +25,10 @@ front::Window::~Window()
 	glfwTerminate();
 }
 
+void front::Window::show()
+{
+	glfwShowWindow(window);
+}
 bool front::Window::update()
 {
 	static float stabDeltaTime = 0.0f;
@@ -57,6 +61,7 @@ void front::Window::initWindow()
 	Lang::loadLanguage(scene.state.getLogicAssetHandler(), config.language);
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
+	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr) {
 		std::cerr << "Failed to create GLFW window\n";
@@ -66,7 +71,7 @@ void front::Window::initWindow()
 	glfwMakeContextCurrent(window);
 	//glViewport(0, 0, 800, 600);
 	setCallbacks();
-
+	
 	//GLEW: check errors
 	GLenum err = glewInit();
 	if (GLEW_OK != err)

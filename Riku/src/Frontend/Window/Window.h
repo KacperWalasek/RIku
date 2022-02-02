@@ -30,6 +30,7 @@ namespace front {
 	public:
 		Window(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& hadler);
 		~Window();
+		void show();
 		bool update();
 	};
 }

@@ -470,6 +470,7 @@ void CEGUI::GUIUpdate::CreateMiniUnits(CEGUI::GUI* my_gui, const CEGUI::String& 
 
         CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
             glm::vec4(0.1f, y, 0.8f, 0.30f), glm::vec4(0.0f), name);
+        resourceElem->setClippedByParent(false);
         resourceElem->setProperty("BackgroundColours", "FF009999");
         if (focusedUnitIndex == i)
         {
@@ -538,6 +539,7 @@ void CEGUI::GUIUpdate::CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String
     {
         auto invitationLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
             glm::vec4(0.1f, y, 0.8f, 0.15f), glm::vec4(0.0f), invitation.first));
+        invitationLabel->setClippedByParent(false);
         //invitation inv = invitation.second;
         invitationLabel->setText(invitation.first + " - invitation state: " + invitation.second.GetStateAsString());
        /* auto callback1 = new CEGUI::Functor::SetLabelText(building.first, nameLabel);
@@ -576,6 +578,7 @@ void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI
             glm::vec4(0.1f, y, 0.8f, 0.2f), glm::vec4(0.0f), ip);
         auto invitationLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
             glm::vec4(0.0f, 0.1f, 0.65f, 0.8f), glm::vec4(0.0f), ip +"/label"));
+        invitationLabel->setClippedByParent(false);
         auto button = static_cast<CEGUI::PushButton*>(my_gui->createWidget("WindowsLook/Button",
             glm::vec4(0.65f, 0.1f, 0.35f, 0.8f), glm::vec4(0.0f), ip + "/button"));
 
@@ -761,6 +764,7 @@ void CEGUI::GUIUpdate::CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, st
 
         CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
             glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f), name);
+        resourceElem->setClippedByParent(false);
         resourceElem->setProperty("BackgroundColours", "FF009999");
         if (focusedSkill == s && count == focusedSkillNr)
             resourceElem->setProperty("BackgroundEnabled", "true");

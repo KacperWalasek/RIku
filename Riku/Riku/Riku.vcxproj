@@ -209,6 +209,7 @@
     <ClCompile Include="..\src\Frontend\Util.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Callbacks\MouseClickCallback.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Light.cpp" />
+    <ClCompile Include="..\src\Frontend\Window\LoadingWindow.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Scene.cpp" />
     <ClCompile Include="..\src\Frontend\Window\Window.cpp" />
     <ClCompile Include="..\src\GameLogic\Assets\Asset.cpp" />
@@ -386,6 +387,7 @@
     <ClInclude Include="..\src\Frontend\Window\Callbacks\MousePositionCallback.h" />
     <ClInclude Include="..\src\Frontend\Window\Callbacks\ScrollCallback.h" />
     <ClInclude Include="..\src\Frontend\Window\Light.h" />
+    <ClInclude Include="..\src\Frontend\Window\LoadingWindow.h" />
     <ClInclude Include="..\src\Frontend\Window\Scene.h" />
     <ClInclude Include="..\src\Frontend\Window\Window.h" />
     <ClInclude Include="..\src\GameLogic\Actions\CheckWinConditionAction.h" />
