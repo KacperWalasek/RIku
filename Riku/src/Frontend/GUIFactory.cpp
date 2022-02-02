@@ -22,6 +22,7 @@
 #include "GUICallbacks/SetNamePopupOnKeyPress.h"
 #include "GUICallbacks/SaveGamePopupOnKeyPress.h"
 #include "GUICallbacks/LoadGamePopupOnKeyPress.h"
+#include "GUICallbacks/QuitGame.h"
 #include "Lang.h"
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastGUI,
@@ -67,6 +68,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	auto onNewGameButton = new CEGUI::Functor::SwitchActiveGUI("NewGameMenu", activeGUI, guiDic);
 	auto onJoinButton = new CEGUI::Functor::SwitchActiveGUI("JoinGameMenu", activeGUI, guiDic);
 	auto onSaveButton = new CEGUI::Functor::SwitchActiveGUI("SaveGamePopup", activeGUI, guiDic, false);
+	auto onQuitButton = new CEGUI::Functor::QuitGame(state);
 
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ExitButton", onExitButton);
@@ -76,6 +78,7 @@ CEGUI::GUI* CEGUI::GUIFactory::GetMainMenu() {
 	my_gui->setPushButtonCallback("NewGameButton", onNewGameButton);
 	my_gui->setPushButtonCallback("JoinButton", onJoinButton);
 	my_gui->setPushButtonCallback("SaveButton", onSaveButton);
+	my_gui->setPushButtonCallback("ExitGameButton", onQuitButton);
 
 	return my_gui;
 }
@@ -110,7 +113,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	//auto onStartGameButton0 = new CEGUI::Functor::SwitchActiveGUI("LoadingScreen", activeGUI, guiDic);
 	auto onStartGameButton1 = new CEGUI::Functor::SetHotseatCountFromEditBox(hotbox, state);
 	auto onStartGameButton2 = new CEGUI::Functor::StartGame(state);
-	auto onStartGameButton3 = new CEGUI::Functor::PauseGame(isGameActive, false);
 	auto onLoadButton = new CEGUI::Functor::SwitchActiveGUI("LoadGamePopup", activeGUI, guiDic, false);
 	
 	my_gui->setKeyCallback(onKeyPress);
@@ -119,7 +121,6 @@ CEGUI::GUI* CEGUI::GUIFactory::GetNewGameMenu() {
 	//my_gui->setPushButtonCallback("StartGameButton", onStartGameButton0);
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton1);
 	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton2);
-	my_gui->setPushButtonCallback("StartGameButton", onStartGameButton3);
 	my_gui->setPushButtonCallback("LoadButton", onLoadButton);
 
 	//CEGUI::GUIUpdate::CreateInvitations(my_gui, "InvitationsList", state);

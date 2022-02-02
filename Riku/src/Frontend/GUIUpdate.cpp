@@ -10,6 +10,7 @@
 #include "GUICallbacks/FocusSkill.h"
 #include "GUICallbacks/CreateGUIOptionInfo.h"
 #include "GUICallbacks/FocusString.h"
+#include "GUICallbacks/SwitchActiveGUI.h"
 
 bool CEGUI::GUIUpdate::lastIsInMiniGame;
 bool CEGUI::GUIUpdate::lastIsInGame;
@@ -62,7 +63,7 @@ CEGUI::GUIUpdate::~GUIUpdate()
 }
 
 void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic,
-    int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI)
+    int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI, bool& isGameActive)
 {
     if (lastIsInGame != state.isInGame()) // entering / exiting game
     {
@@ -74,13 +75,31 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
             button->enable();
             button = guiDic["MainMenu"]->getWidgetByName("SaveButton");
             button->enable();
+            button = guiDic["MainMenu"]->getWidgetByName("NewGameButton");
+            button->disable();
+            button = guiDic["MainMenu"]->getWidgetByName("JoinButton");
+            button->disable();
+            button = guiDic["MainMenu"]->getWidgetByName("ExitButton");
+            button->hide();
+            button = guiDic["MainMenu"]->getWidgetByName("ExitGameButton");
+            button->show();
             activeGUI = guiDic["GameUI"];
+            isGameActive = true;
         }
         else {
             CEGUI::Window* button = guiDic["MainMenu"]->getWidgetByName("ReturnButton");
             button->disable();
             button = guiDic["MainMenu"]->getWidgetByName("SaveButton");
             button->disable(); activeGUI = guiDic["MainMenu"];
+            button = guiDic["MainMenu"]->getWidgetByName("NewGameButton");
+            button->enable();
+            button = guiDic["MainMenu"]->getWidgetByName("JoinButton");
+            button->enable();
+            button = guiDic["MainMenu"]->getWidgetByName("ExitButton");
+            button->show();
+            button = guiDic["MainMenu"]->getWidgetByName("ExitGameButton");
+            button->hide();
+            isGameActive = false;
         }
         activeGUI->show();
         lastIsInGame = state.isInGame();
@@ -187,8 +206,9 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
                 focused->setProperty("BackgroundEnabled", "true");
             lastFocusedSave = focusedSave;
         }
+        CEGUI::GUIUpdate::CreateJoinedPlayers(guiDic["NewGameMenu"], state);
         CEGUI::GUIUpdate::CreateInvitations(guiDic["NewGameMenu"], "InvitationsList", state);
-        CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state);
+        CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state, activeGUI, guiDic);
         CEGUI::GUIUpdate::CreateSavesList(guiDic["LoadGamePopup"], state);
     }
     if (state.lastOnTurn != state.getPlayerOnMove() && state.isInMiniGame())
@@ -310,6 +330,9 @@ void CEGUI::GUIUpdate::UpdateUIButtons(std::map<std::string, CEGUI::GUI*> guiDic
 
     button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("ExitButton"));
     button->setText(front::Lang::getUtf("Exit"));
+
+    button = static_cast<CEGUI::PushButton*>(guiDic["MainMenu"]->getWidgetByName("ExitGameButton"));
+    button->setText(front::Lang::getUtf("Quit Game"));
 }
 
 void CEGUI::GUIUpdate::ShowPopup(std::string message, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic, CEGUI::GUI*& lastActiveGUI)
@@ -555,7 +578,7 @@ void CEGUI::GUIUpdate::CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String
         item->destroy();
         delete item;
     }
-    float y = 0.1f;
+    float y = 0.0f;
     for (const auto& invitation : invited)
     {
         auto invitationLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
@@ -568,12 +591,12 @@ void CEGUI::GUIUpdate::CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String
         auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
         gui->setPushButtonCallback(building.first, callback2);*/
         invitationsList->addChild(invitationLabel);
-        y += 0.2f;
+        y += 0.12f;
     }
     lastInvited = invited;
 }
 
-void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state)
+void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic)
 {
     std::map<std::string, std::string> invitations = state.getInvitations();
     if (invitations == lastReceivedInvitations)
@@ -617,8 +640,8 @@ void CEGUI::GUIUpdate::CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI
         auto hotseatBox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("HotseatBox"));
         auto callback1 = new CEGUI::Functor::AcceptInvitation(hotseatBox, ip, state);
         my_gui->setPushButtonCallback(ip + "/button", callback1);
-         /*auto callback2 = new CEGUI::Functor::SetLabelText(front::Lang::get(building.first), frontNameLabel);
-         gui->setPushButtonCallback(building.first, callback2);*/
+        auto callback2 = new CEGUI::Functor::SwitchActiveGUI("LoadingScreen", activeGUI, guiDic);
+        my_gui->setPushButtonCallback(ip + "/button", callback2);
         item->addChild(invitationLabel);
         item->addChild(button);
         invitationsList->addChild(item);
@@ -851,4 +874,59 @@ void CEGUI::GUIUpdate::CreateSavesList(CEGUI::GUI* my_gui, FrontendState& state)
         y += 0.1;
     }
     lastSaves = saves;
+}
+
+void CEGUI::GUIUpdate::CreateJoinedPlayers(CEGUI::GUI* my_gui, FrontendState& state) // must be called before create invitations
+{
+    std::map<std::string, Invitation> invited = state.getInvitedPlayers();
+    bool same = true;
+    if (invited.size() == lastInvited.size()) {
+        for (const auto& invitation : lastInvited)
+            if (invitation.second.state != invited[invitation.first].state)
+                same = false;
+    }
+    else same = false; 
+    if (same) return;
+
+    auto playersList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("PlayersWindow"));
+
+    for (const auto& invitation : lastInvited)
+    {
+        if (invitation.second.state != InvitationState::Joined)
+            continue;
+        CEGUI::Window* item = static_cast<CEGUI::Window*>(playersList->getChildElementRecursive(invitation.first));
+        playersList->removeChild(item);
+        item->destroy();
+        delete item;
+    }
+    float y = 0.1f;
+    for (const auto& invitation : invited)
+    {
+        if (invitation.second.state != InvitationState::Joined)
+            continue;
+        CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
+            glm::vec4(0.1f, y, 0.8f, 0.2f), glm::vec4(0.0f), invitation.first);
+        resourceElem->setClippedByParent(false);
+
+        auto label1 = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.0f, 0.0f, 0.5f, 0.5f), glm::vec4(0.0f), invitation.first+"/number"));
+        label1->setText("Player: " + std::to_string(invitation.second.id));
+        auto label2 = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.5f, 0.0f, 0.5f, 0.5f), glm::vec4(0.0f), invitation.first + "/ip"));
+        label2->setText("ip: "+invitation.second.ip);
+        auto label3 = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.0f, 0.5f, 0.5f, 0.5f), glm::vec4(0.0f), invitation.first + "/name"));
+        label3->setText("name: "+invitation.second.name);
+        auto label4 = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.5f, 0.5f, 0.5f, 0.5f), glm::vec4(0.0f), invitation.first + "/hotseat"));
+        label4->setText("Hotseat count: " + std::to_string(invitation.second.hotseatCount));
+
+        resourceElem->addChild(label1);
+        resourceElem->addChild(label2);
+        resourceElem->addChild(label3);
+        resourceElem->addChild(label4);
+        playersList->addChild(resourceElem);
+
+        y += 0.25f;
+    }
 }

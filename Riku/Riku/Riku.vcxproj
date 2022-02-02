@@ -364,6 +364,7 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\PauseGame.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\QuitGame.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\Resign.h" />

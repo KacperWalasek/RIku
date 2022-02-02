@@ -61,6 +61,7 @@
 #include "FrontendCommunicator/RequestHandlers/PopupRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/IpRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/HotseatPlayersRequestHandler.h"
+#include "StateUpdate/MoveFactory/QuitMoveHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -95,7 +96,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<AcceptInvitationMoveHandler>(gameState, assets),
 		std::make_shared<SetNameMoveHandler>(gameState),
 		std::make_shared<StartGameMoveHandler>(gameState),
-		std::make_shared<HotseatCountMoveHandler>(gameState)
+		std::make_shared<HotseatCountMoveHandler>(gameState),
+		std::make_shared<QuitMoveHandler>()
 		});
 
 	communicator.setHandlers({
