@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="WindowsLook/FrameWindow" name="RecruitingWindow" >
+            <Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+            <Property name="Text" value="Recruiting menu" />
+            <Property name="RollUpEnabled" value="false" />
+            <Window type="OgreTray/ScrollablePane" name="UnitsList" >
+                <Property name="Area" value="{{0,0},{0,120},{1,0},{1,-40}}" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+            <Window type="OgreTray/Button" name="RecruitButton" >
+                <Property name="Area" value="{{0,4},{1,-36},{0,100},{1,-4}}" />
+                <Property name="Text" value="Confirm" />
+            </Window>
+            <Window type="WindowsLook/Label" name="NameLabel" >
+                <Property name="Area" value="{{0,453},{0,5},{0,581},{0,37}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+            </Window>
+            <Window type="WindowsLook/Label" name="Label" >
+                <Property name="Area" value="{{0,20},{0,5},{0.2,20},{0,37}}" />
+                <Property name="Text" value="Name: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="WindowsLook/Label" name="FrontNameLabel" >
+                <Property name="Area" value="{{0.2,20},{0,5},{0.7,20},{0,37}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="OgreTray/ScrollablePane" name="InfoList" >
+                <Property name="Area" value="{{0,-9},{0,29},{1,0},{0,120}}" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

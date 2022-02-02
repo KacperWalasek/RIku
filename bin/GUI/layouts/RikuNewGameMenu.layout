@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Image" >
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Image" value="Riku/Background" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="AutoRenderingSurface" value="true" />
+            <Window type="WindowsLook/Button" name="ReturnButton" >
+                <Property name="Area" value="{{0,24},{0,19},{0.1,24},{0.05,19}}" />
+                <Property name="Text" value="Return to main menu" />
+            </Window>
+            <Window type="WindowsLook/FrameWindow" name="InvitationsWindow" >
+                <Property name="Area" value="{{0.53,0},{0.4,0},{0.95,0},{0.9,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="SizingEnabled" value="false" />
+                <Property name="TitlebarEnabled" value="false" />
+                <Property name="DragMovingEnabled" value="false" />
+                <Property name="CloseButtonEnabled" value="false" />
+                <AutoWindow namePath="__auto_titlebar__" >
+                    <Property name="DraggingEnabled" value="false" />
+                </AutoWindow>
+                <Window type="OgreTray/ScrollablePane" name="InvitationsList" >
+                    <Property name="Area" value="{{0,0},{0,32},{1,0},{0.9,32}}" />
+                    <Property name="AutoRenderingSurface" value="true" />
+                    <Property name="DistributeCapturedInputs" value="true" />
+                    <AutoWindow namePath="__auto_container__" >
+                        <Property name="MouseInputPropagationEnabled" value="true" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_hscrollbar__" >
+                        <Property name="AlwaysOnTop" value="true" />
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_vscrollbar__" >
+                        <Property name="AlwaysOnTop" value="true" />
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                    </AutoWindow>
+                </Window>
+                <Window type="WindowsLook/Label" name="InvitationsLabel" >
+                    <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                    <Property name="Text" value="Sent Invitations" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+            </Window>
+            <Window type="WindowsLook/FrameWindow" name="PlayersWindow" >
+                <Property name="Area" value="{{0.05,0},{0.4,0},{0.47,0},{0.9,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="SizingEnabled" value="false" />
+                <Property name="TitlebarEnabled" value="false" />
+                <Property name="DragMovingEnabled" value="false" />
+                <Property name="CloseButtonEnabled" value="false" />
+                <AutoWindow namePath="__auto_titlebar__" >
+                    <Property name="DraggingEnabled" value="false" />
+                </AutoWindow>
+                <Window type="OgreTray/ScrollablePane" name="PlayersList" >
+                    <Property name="Area" value="{{0,0},{0,32},{1,0},{0.9,32}}" />
+                    <Property name="AutoRenderingSurface" value="true" />
+                    <Property name="DistributeCapturedInputs" value="true" />
+                    <AutoWindow namePath="__auto_container__" >
+                        <Property name="MouseInputPropagationEnabled" value="true" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_hscrollbar__" >
+                        <Property name="AlwaysOnTop" value="true" />
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_vscrollbar__" >
+                        <Property name="AlwaysOnTop" value="true" />
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="Visible" value="false" />
+                        </AutoWindow>
+                    </AutoWindow>
+                </Window>
+                <Window type="WindowsLook/Label" name="PlayersLabel" >
+                    <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                    <Property name="Text" value="Joined Players" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+            </Window>
+            <Window type="WindowsLook/FrameWindow" name="StartGameWindow" >
+                <Property name="Area" value="{{0.05,0},{0.4,-154},{0.47,0},{0.4,-30}}" />
+                <Property name="MinSize" value="{{0.1,0},{0.05,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="SizingEnabled" value="false" />
+                <Property name="TitlebarEnabled" value="false" />
+                <Property name="DragMovingEnabled" value="false" />
+                <Property name="CloseButtonEnabled" value="false" />
+                <AutoWindow namePath="__auto_titlebar__" >
+                    <Property name="DraggingEnabled" value="false" />
+                </AutoWindow>
+                <Window type="WindowsLook/Button" name="StartGameButton" >
+                    <Property name="Area" value="{{0.55,3},{0.15,-13},{0.95,3},{0.85,-47}}" />
+                    <Property name="Text" value="Start Game" />
+                </Window>
+                <Window type="WindowsLook/Editbox" name="HotseatBox" >
+                    <Property name="Area" value="{{0.4,4},{0.5,-43},{0.5,4},{0.5,-13}}" />
+                </Window>
+                <Window type="WindowsLook/Label" name="HotseatLabel" >
+                    <Property name="Area" value="{{0,6},{0.5,-40},{0.4,6},{0.5,-8}}" />
+                    <Property name="Text" value="Hotseat Count" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="WindowsLook/Button" name="LoadButton" >
+                    <Property name="Area" value="{{0.55,4},{0.15,45},{0.95,4},{0.85,11}}" />
+                    <Property name="Text" value="Load Game" />
+                </Window>
+            </Window>
+            <Window type="WindowsLook/FrameWindow" name="InviteWindow" >
+                <Property name="Area" value="{{0.53,0},{0.4,-78},{0.95,0},{0.4,-30}}" />
+                <Property name="MinSize" value="{{0.1,0},{0.05,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="SizingEnabled" value="false" />
+                <Property name="TitlebarEnabled" value="false" />
+                <Property name="DragMovingEnabled" value="false" />
+                <Property name="CloseButtonEnabled" value="false" />
+                <AutoWindow namePath="__auto_titlebar__" >
+                    <Property name="DraggingEnabled" value="false" />
+                </AutoWindow>
+                <Window type="WindowsLook/Button" name="InviteButton" >
+                    <Property name="Area" value="{{0.65,0},{0.15,0},{0.95,0},{0.85,0}}" />
+                    <Property name="Text" value="Invite" />
+                </Window>
+                <Window type="WindowsLook/Editbox" name="IpBox" >
+                    <Property name="Area" value="{{0,64},{0.5,-15},{0.6,0},{0.5,15}}" />
+                </Window>
+                <Window type="WindowsLook/Label" name="IpLabel" >
+                    <Property name="Area" value="{{0,0},{0.5,-16},{0,64},{0.5,16}}" />
+                    <Property name="Text" value="Ip:" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
