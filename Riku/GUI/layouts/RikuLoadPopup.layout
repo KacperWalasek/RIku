@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,1},{1,0},{1,1}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="AlwaysOnTop" value="true" />
+        <Window type="WindowsLook/FrameWindow" name="FrameWindow" >
+            <Property name="Area" value="{{0.25,0},{0.25,0},{0.75,0},{0.75,0}}" />
+            <Property name="AlwaysOnTop" value="true" />
+            <Property name="RollUpEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <Window type="WindowsLook/Label" name="Label" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                <Property name="Text" value="Select a file you want to load" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Button" name="OkButton" >
+                <Property name="Area" value="{{0.3,-48},{0.9,-16},{0.3,48},{0.9,16}}" />
+                <Property name="Text" value="Load" />
+            </Window>
+            <Window type="WindowsLook/Button" name="CancelButton" >
+                <Property name="Area" value="{{0.7,-48},{0.9,-16},{0.7,48},{0.9,16}}" />
+                <Property name="Text" value="Cancel" />
+            </Window>
+            <Window type="OgreTray/ScrollablePane" name="SavesList" >
+                <Property name="Area" value="{{0,0},{0,32},{1,0},{0.85,-16}}" />
+                <Property name="AutoRenderingSurface" value="true" />
+                <Property name="DistributeCapturedInputs" value="true" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

@@ -6,6 +6,7 @@
 #include "Functor.h"
 #include "SwitchActiveGUI.h"
 #include "EndTurn.h"
+#include "PauseGame.h"
 
 namespace CEGUI::Functor {
 
@@ -15,9 +16,10 @@ namespace CEGUI::Functor {
         CEGUI::GUI*& lastActiveGUI;
         std::map<std::string, CEGUI::GUI*>& guiDic;
         FrontendState& state;
+        bool& isGameActive;
     public:
-        GameUIOnKeyPress(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic, CEGUI::GUI*& lastActiveGUI)
-            : Functor(), activeGUI(activeGUI), guiDic(guiDic), lastActiveGUI(lastActiveGUI), state(state) {}
+        GameUIOnKeyPress(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*>& guiDic, CEGUI::GUI*& lastActiveGUI, bool& isGameActive)
+            : Functor(), activeGUI(activeGUI), guiDic(guiDic), lastActiveGUI(lastActiveGUI), state(state), isGameActive(isGameActive) {}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
@@ -26,6 +28,7 @@ namespace CEGUI::Functor {
             {
                 case CEGUI::Key::Escape:
                 {
+                    CEGUI::Functor::PauseGame(isGameActive, true)(e);
                     auto f = CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
                     return f(e);
                 }

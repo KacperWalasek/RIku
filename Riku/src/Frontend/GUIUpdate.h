@@ -13,16 +13,19 @@ namespace CEGUI {
         static int lastFocusedUnitIndex;
         static int lastFocusedSkillNr;
         static int focusedSkillNr;
+        static std::string lastFocusedSave;
         static std::string lastFocusedSkill;
         static std::map<std::string, CEGUI::Window*> existingUnitElems;
         static std::map<std::string, CEGUI::Window*> existingMiniUnitElems;
         static std::map<std::string, CEGUI::Window*> existingSkillElems;
+        static std::map<std::string, CEGUI::Window*> existingSaveElems;
         static std::map<std::string, CEGUI::Window*> existingUnitOptions;
         static std::map<std::string, CEGUI::Window*> existingReceivedInvitations;
         static std::shared_ptr<std::string> activeUnitElem;
         static std::vector<std::shared_ptr<const Unit>> lastUnits;
         static std::vector<std::shared_ptr<const minigame::MiniUnit>> lastMiniUnits;
         static std::vector<std::string> lastSkills;
+        static std::vector<std::string> lastSaves;
         static std::vector<std::string> unitNames;
         static std::vector<std::string> unitMiniNames;
         static std::vector<std::vector<std::string>> lastOptions;
@@ -31,6 +34,7 @@ namespace CEGUI {
         static std::map<std::string, Invitation> lastInvited;
         static std::map<std::string, std::string> lastReceivedInvitations;
     public:
+        static std::string focusedSave;
         ~GUIUpdate();
         static void Init();
         static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic);
@@ -42,6 +46,7 @@ namespace CEGUI {
         static void LoadIcons(FrontendState& state);
         static void CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform);
         static void CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, std::string& focusedSkill);
+        static void CreateSavesList(CEGUI::GUI* my_gui, FrontendState& state);
         static void CreateMiniUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform);
         static void CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state);
         static void CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state);

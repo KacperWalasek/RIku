@@ -52,6 +52,7 @@ namespace front {
 		void drawMiniGame();
 		void drawInit(glm::mat4& projection, glm::mat4& view);
 	public:
+		bool isGameActive = false;
 		const glm::mat4& getProjection() const {return projection;}
 		const glm::mat4& getView() const {return view;}
 		const Transform& getCamera() const {return movingCameraTransform;}
