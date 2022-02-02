@@ -58,6 +58,6 @@ public:
 	void setName(std::string name);
 	void setHotseatPlayerCount(int count);
 	void startGame();
-	
+	void quitGame();
 };
 

@@ -233,3 +233,8 @@ void FrontendState::startGame()
 {
 	logic.makeMove(std::make_shared<SimpleMoveDescription>("start_game"));
 }
+
+void FrontendState::quitGame()
+{
+	logic.makeMove(std::make_shared<SimpleMoveDescription>("quit"));
+}

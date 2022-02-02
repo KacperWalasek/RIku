@@ -536,6 +536,7 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\IntListResponse.h">
       <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\QuitGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1309,6 +1310,10 @@
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGamePopupOnKeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\QuitGame.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\QuitMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
