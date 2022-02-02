@@ -1,0 +1,38 @@
+{
+"taiga_tree": [
+	{
+		"frustum": null,
+		"frustum_radius": 1.0,
+		"frustum_center": {
+			"y": 0.5
+		}
+	},
+	{
+		"path": "forest.obj",
+		"pos": {
+			"x": 0.3,
+			"y": -0.2,
+			"z": 0.3
+		},
+		"scale": {
+			"x": 0.1,
+			"y": 0.1,
+			"z": 0.1
+		}
+	},
+	{
+		"path": "forest.obj",
+		"pos": {
+			"x": -0.3,
+			"y": -0.2,
+			"z": -0.3
+		},
+		"scale": {
+			"x": 0.1,
+			"y": 0.1,
+			"z": 0.1
+		}
+	}
+	
+]
+}

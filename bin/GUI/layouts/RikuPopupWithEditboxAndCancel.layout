@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,1},{1,0},{1,1}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="AlwaysOnTop" value="true" />
+        <Window type="WindowsLook/FrameWindow" name="FrameWindow" >
+            <Property name="Area" value="{{0.35,0},{0.35,0},{0.65,0},{0.65,0}}" />
+            <Property name="AlwaysOnTop" value="true" />
+            <Property name="RollUpEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <Window type="WindowsLook/Label" name="Label" >
+                <Property name="Area" value="{{0,0},{0.1,0},{1,0},{0.1,32}}" />
+                <Property name="Text" value="Please enter your name" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="WindowsLook/Button" name="OkButton" >
+                <Property name="Area" value="{{0.3,-48},{0.7,-16},{0.3,48},{0.7,16}}" />
+                <Property name="Text" value="Ok" />
+            </Window>
+            <Window type="WindowsLook/Editbox" name="Editbox" >
+                <Property name="Area" value="{{0.5,-128},{0.35,0},{0.5,128},{0.35,32}}" />
+            </Window>
+            <Window type="WindowsLook/Button" name="CancelButton" >
+                <Property name="Area" value="{{0.7,-48},{0.7,-16},{0.7,48},{0.7,16}}" />
+                <Property name="Text" value="Cancel" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
