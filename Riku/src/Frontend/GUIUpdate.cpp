@@ -820,14 +820,15 @@ void CEGUI::GUIUpdate::CreateSavesList(CEGUI::GUI* my_gui, FrontendState& state)
     {        
         if (existingSaveElems.find(s) != existingSaveElems.end())
         {
-            CEGUI::GUI::setWidgetDestRect(existingSaveElems[s], glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f));
+            CEGUI::GUI::setWidgetDestRect(existingSaveElems[s], glm::vec4(0.1f, y, 0.8f, 0.1f), glm::vec4(0.0f));
             savesList->addChild(existingSaveElems[s]);
             y += 0.1f;
             continue;
         }
 
         CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
-            glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f), s);
+            glm::vec4(0.1f, y, 0.8f, 0.1f), glm::vec4(0.0f), s);
+        resourceElem->setClippedByParent(false);
         resourceElem->setProperty("BackgroundColours", "FF009999");
         if (focusedSave == s)
             resourceElem->setProperty("BackgroundEnabled", "true");
