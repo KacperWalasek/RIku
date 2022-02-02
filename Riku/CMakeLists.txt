@@ -29,6 +29,7 @@ add_executable(Riku
 		src/MiniGame/StateUpdate/MiniStateUpdate.cpp
 		src/MiniGame/Communicator/RequestHandlers/MiniPlayerUnitsRequestHandler.cpp
 		src/MiniGame/Communicator/RequestHandlers/MiniShortestPathRequestHandler.cpp
+		src/MiniGame/Communicator/RequestHandlers/WinnerMiniRequestHandler.cpp
 		src/MiniGame/Communicator/RequestHandlers/SkillsRequestHandler.cpp
 		src/MiniGame/Communicator/RequestHandlers/MiniMapRequestHandler.cpp
 		src/MiniGame/Communicator/RequestHandlers/PlayerOnMoveMiniRequestHandler.cpp
@@ -136,6 +137,7 @@ add_executable(Riku
 		src/Frontend/Asset/AssetTexture.cpp
 		src/Frontend/Window/Callbacks/MouseClickCallback.cpp
 		src/Frontend/Window/Window.cpp
+		src/Frontend/Window/LoadingWindow.cpp
 		src/Frontend/Window/Light.cpp
 		src/Frontend/Window/Scene.cpp
 		src/Frontend/FrontendState.cpp
