@@ -12,6 +12,7 @@ namespace CEGUI {
         static bool lastIsInGame;
         static int lastFocusedUnitIndex;
         static int lastFocusedSkillNr;
+        static int lastWinner;
         static int focusedSkillNr;
         static std::string lastFocusedSave;
         static std::string lastFocusedSkill;
@@ -30,6 +31,7 @@ namespace CEGUI {
         static std::vector<std::string> unitMiniNames;
         static std::vector<std::vector<std::string>> lastOptions;
         static std::vector<std::string> lastGUIHeaders;
+        static std::vector<int> lastHotseatPlayers;
         static std::map<std::string,std::string> lastBuildings;
         static std::map<std::string, Invitation> lastInvited;
         static std::map<std::string, std::string> lastReceivedInvitations;
@@ -48,6 +50,7 @@ namespace CEGUI {
         static void CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, std::string& focusedSkill);
         static void CreateSavesList(CEGUI::GUI* my_gui, FrontendState& state);
         static void CreateJoinedPlayers(CEGUI::GUI* my_gui, FrontendState& state);
+        static void CreateHotseatPlayers(CEGUI::GUI* my_gui, FrontendState& state);
         static void CreateMiniUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform);
         static void CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state);
         static void CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic);
