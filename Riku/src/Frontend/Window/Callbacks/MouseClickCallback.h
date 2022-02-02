@@ -12,10 +12,11 @@ namespace front {
 	{
 		CEGUI::GUI* activeGUI;
 		Scene* scene;
+		bool& isGameActive;
 		void MiniGameLeftClick(int px, int py);
 		void GameLeftClick(int px, int py);
 	public:
-		MouseClickCallback(CEGUI::GUI* activeGUI, Scene* scene) : activeGUI(activeGUI), scene(scene) {}
+		MouseClickCallback(CEGUI::GUI* activeGUI, Scene* scene, bool& isGameActive) : activeGUI(activeGUI), scene(scene), isGameActive(isGameActive){}
 
 		void operator()(GLFWwindow* window, int button, int action, int mods);
 	};

@@ -12,11 +12,12 @@ namespace front {
 		CEGUI::GUI* activeGUI;
 		Config& config;
 		Transform& movingCameraTransform;
+		bool& isGameActive;
 	public:
 		KeyCallback(FrontendState& state, int& focusedUnitIndex, CEGUI::GUI* activeGUI,
-			Config& config,	Transform& movingCameraTransform)
-			: state(state), focusedUnitIndex(focusedUnitIndex), activeGUI(activeGUI), config(config), movingCameraTransform(movingCameraTransform)
-		{}
+			Config& config,	Transform& movingCameraTransform, bool& isGameActive)
+			: state(state), focusedUnitIndex(focusedUnitIndex), activeGUI(activeGUI), 
+			config(config), movingCameraTransform(movingCameraTransform), isGameActive(isGameActive) {}
 
 		void operator()(GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
@@ -25,6 +26,7 @@ namespace front {
 			if (action == GLFW_PRESS)
 			{
 				if (activeGUI->on_key_press(key)) return;
+				if (!isGameActive) return;
 				if(state.isInMiniGame()) {
 					switch (key) {
 						case GLFW_KEY_R:
