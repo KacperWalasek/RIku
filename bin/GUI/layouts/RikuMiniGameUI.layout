@@ -96,5 +96,27 @@
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
         </Window>
+        <Window type="WindowsLook/FrameWindow" name="PlayerTurn" >
+            <Property name="Area" value="{{0,0},{0,0},{0.25,0},{0,32}}" />
+            <Property name="MinSize" value="{{0.1,0},{0.03,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="TitlebarEnabled" value="false" />
+            <Property name="DragMovingEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="DraggingEnabled" value="false" />
+            </AutoWindow>
+            <Window type="WindowsLook/StaticText" name="PlayerTurnLabel" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                <Property name="Text" value="Turn of player 0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="250.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="111" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+        </Window>
     </Window>
 </GUILayout>
