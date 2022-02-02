@@ -14,6 +14,7 @@ std::shared_ptr<IAction> ClearPatchHandler::handlePatch(GameState& state, const 
         LogicUtils::clearHookables();
         LogicUtils::resetPlayerIndexes();
         state.isInGame = false;
+        state.hotSeatPlayers.clear();
     }
     return nullptr;
 }

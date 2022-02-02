@@ -16,6 +16,7 @@ bool CEGUI::GUIUpdate::lastIsInMiniGame;
 bool CEGUI::GUIUpdate::lastIsInGame;
 int CEGUI::GUIUpdate::lastFocusedUnitIndex;
 int CEGUI::GUIUpdate::lastFocusedSkillNr;
+int CEGUI::GUIUpdate::lastWinner = -1;
 int CEGUI::GUIUpdate::focusedSkillNr;
 std::string CEGUI::GUIUpdate::lastFocusedSkill;
 std::string CEGUI::GUIUpdate::focusedSave;
@@ -31,6 +32,7 @@ std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::shared_ptr<const minigame::MiniUnit>> CEGUI::GUIUpdate::lastMiniUnits;
 std::vector<std::vector<std::string>> CEGUI::GUIUpdate::lastOptions;
 std::vector<std::string> CEGUI::GUIUpdate::lastGUIHeaders;
+std::vector<int> CEGUI::GUIUpdate::lastHotseatPlayers;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
 std::map<std::string, Invitation> CEGUI::GUIUpdate::lastInvited;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastReceivedInvitations;
@@ -85,6 +87,9 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
             button->show();
             activeGUI = guiDic["GameUI"];
             isGameActive = true;
+            CEGUI::GUIUpdate::CreateHotseatPlayers(guiDic["GameUI"], state);
+            auto text = guiDic["GameUI"]->getWidgetByName("HotseatPlayersHeader");
+            text->setText(front::Lang::getUtf("Players on your computer"));
         }
         else {
             CEGUI::Window* button = guiDic["MainMenu"]->getWidgetByName("ReturnButton");
@@ -181,12 +186,21 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
             CEGUI::GUIUpdate::CreateMiniUnits(guiDic["MiniGameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
             CEGUI::GUIUpdate::CreateSkills(guiDic["MiniGameUI"], state, focusedSkill);
         }
-        else
+        else // in game, but not in minigame
         {
+            if (lastWinner != state.getWinner())
+            {
+                auto text = guiDic["GameUI"]->getWidgetByName("PlayerWon");
+                if (state.getWinner() >= 0)
+                    text->show();
+                else text->hide();
+                text = guiDic["GameUI"]->getWidgetByName("PlayerWonLabel");
+                text->setText("Player "+std::to_string(state.getWinner())+" won the game");
+            }
             CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
             CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
             CEGUI::GUIUpdate::CreateBuildingOptions(state, focusedUnitIndex, guiDic);
-            CEGUI::GUIUpdate::UpdateResources(state, guiDic);           
+            CEGUI::GUIUpdate::UpdateResources(state, guiDic);
         }
         CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
     }
@@ -211,13 +225,22 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
         CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state, activeGUI, guiDic);
         CEGUI::GUIUpdate::CreateSavesList(guiDic["LoadGamePopup"], state);
     }
-    if (state.lastOnTurn != state.getPlayerOnMove() && state.isInMiniGame())
-    {
-        std::string s = front::Lang::get("Turn of player");
-        s += ": ";
-        s += std::to_string(state.getPlayerOnMove());
-        CEGUI::GUIUpdate::ShowPopup(s, activeGUI, guiDic, lastActiveGUI);
-    }
+    if (state.lastOnTurn != state.getPlayerOnMove())
+        if (state.isInMiniGame())
+        {
+            std::string s = front::Lang::get("Turn of player");
+            s += ": ";
+            s += std::to_string(state.getPlayerOnMove());
+            CEGUI::GUIUpdate::ShowPopup(s, activeGUI, guiDic, lastActiveGUI);
+            auto text = static_cast<CEGUI::Window*>(guiDic["MiniGameUI"]->getWidgetByName("PlayerTurnLabel"));
+            text->setText("Turn of player "+std::to_string(state.getPlayerOnMove()));
+            
+        }
+        else
+        {
+            auto text = static_cast<CEGUI::Window*>(guiDic["GameUI"]->getWidgetByName("PlayerTurn"));
+            text->setText("Turn of player "+std::to_string(state.getPlayerOnMove()));
+        }
     if (activeGUI != guiDic["Popup"])
     {
         std::string s = state.getPopup();
@@ -929,4 +952,32 @@ void CEGUI::GUIUpdate::CreateJoinedPlayers(CEGUI::GUI* my_gui, FrontendState& st
 
         y += 0.25f;
     }
+}
+
+void CEGUI::GUIUpdate::CreateHotseatPlayers(CEGUI::GUI* my_gui, FrontendState& state)
+{
+    std::vector<int> hotseatPlayers = state.getHotseatPlayers();
+    if (hotseatPlayers == lastHotseatPlayers)
+        return;
+
+    auto playersList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("HotseatPlayersList"));
+
+    for (const auto& player : lastHotseatPlayers)
+    {
+        CEGUI::Window* item = static_cast<CEGUI::Window*>(playersList->getChildElementRecursive(std::to_string(player)));
+        playersList->removeChild(item);
+        item->destroy();
+        delete item;
+    }
+    float y = 0.0f;
+    for (const auto& player : hotseatPlayers)
+    {
+        auto playerLabel = static_cast<CEGUI::Window*>(my_gui->createWidget("WindowsLook/Label",
+            glm::vec4(0.1f, 0.0f, 0.8f, 0.0f), glm::vec4(0.0f,y,0.0f,20.0f), std::to_string(player)));
+        playerLabel->setClippedByParent(false);
+        playerLabel->setText("Player " + std::to_string(player));
+        playersList->addChild(playerLabel);
+        y += 20.0f;
+    }
+    lastHotseatPlayers = hotseatPlayers;
 }
