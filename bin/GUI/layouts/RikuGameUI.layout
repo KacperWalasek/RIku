@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="MousePassThroughEnabled" value="true" />
+        <Window type="WindowsLook/FrameWindow" name="UnitsWindow" >
+            <Property name="Area" value="{{0.8,0},{0,0},{1,0},{0.3,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="TitlebarEnabled" value="false" />
+            <Property name="DragMovingEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="DraggingEnabled" value="false" />
+            </AutoWindow>
+            <Window type="OgreTray/ScrollablePane" name="UnitsList" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="AutoRenderingSurface" value="true" />
+                <Property name="DistributeCapturedInputs" value="true" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+        </Window>
+        <Window type="WindowsLook/FrameWindow" name="ResourcesWindow" >
+            <Property name="Area" value="{{0,0},{0.9,0},{0.6,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="TitlebarEnabled" value="false" />
+            <Property name="DragMovingEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="DraggingEnabled" value="false" />
+            </AutoWindow>
+            <Window type="OgreTray/ScrollablePane" name="ResourcesList" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="ForceHorzScrollbar" value="true" />
+                <Property name="AutoRenderingSurface" value="true" />
+                <Property name="DistributeCapturedInputs" value="true" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+        </Window>
+        <Window type="WindowsLook/Button" name="EndTurnButton" >
+            <Property name="Area" value="{{0.8,0},{0.3,64},{1,0},{0.3,96}}" />
+            <Property name="Text" value="End turn" />
+            <Property name="TooltipText" value="Open building menu" />
+            <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="WindowsLook/Button" name="BuildingsButton" >
+            <Property name="Area" value="{{0.8,0},{0.3,0},{1,0},{0.3,32}}" />
+            <Property name="Text" value="Buildings" />
+            <Property name="TooltipText" value="Open building menu" />
+            <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="WindowsLook/Button" name="RecruitingButton" >
+            <Property name="Area" value="{{0.8,0},{0.3,32},{1,0},{0.3,64}}" />
+            <Property name="Text" value="Recruit units" />
+            <Property name="Disabled" value="true" />
+            <Property name="TooltipText" value="Open Units menu" />
+            <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="WindowsLook/FrameWindow" name="PlayersWindow" >
+            <Property name="Area" value="{{0,0},{0,0},{0.25,0},{0.2,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="TitlebarEnabled" value="false" />
+            <Property name="DragMovingEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="DraggingEnabled" value="false" />
+            </AutoWindow>
+            <Window type="OgreTray/ScrollablePane" name="HotseatPlayersList" >
+                <Property name="Area" value="{{0,0},{0,64},{1,0},{1,0}}" />
+                <Property name="AutoRenderingSurface" value="true" />
+                <Property name="DistributeCapturedInputs" value="true" />
+                <AutoWindow namePath="__auto_container__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_hscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_vscrollbar__" >
+                    <Property name="AlwaysOnTop" value="true" />
+                    <AutoWindow namePath="__auto_incbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_decbtn__" >
+                        <Property name="Visible" value="false" />
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+            <Window type="WindowsLook/StaticText" name="PlayerTurn" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                <Property name="Text" value="Turn of player 0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="250.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="111" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+            <Window type="WindowsLook/StaticText" name="HotseatPlayersHeader" >
+                <Property name="Area" value="{{0,0},{0,32},{1,0},{0,64}}" />
+                <Property name="Text" value="Players on your computer" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="250.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="185" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+        </Window>
+        <Window type="WindowsLook/FrameWindow" name="PlayerWon" >
+            <Property name="Area" value="{{0,0},{0.2,0},{0.25,0},{0.2,32}}" />
+            <Property name="MinSize" value="{{0.1,0},{0.03,0}}" />
+            <Property name="Visible" value="false" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="TitlebarEnabled" value="false" />
+            <Property name="DragMovingEnabled" value="false" />
+            <Property name="CloseButtonEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="DraggingEnabled" value="false" />
+            </AutoWindow>
+            <Window type="WindowsLook/StaticText" name="PlayerWonLabel" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="250.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

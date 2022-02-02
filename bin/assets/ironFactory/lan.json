@@ -1,0 +1,11 @@
+{
+	"en": {
+		"iron_factory": "Iron mine",
+		"iron_factory_description": "Cost:\n30 wood\n10 stone\n\nGives you 2 iron each turn."
+	},
+	"pl": {
+		"iron_factory": "Kopalnia żelaza",
+		"iron_factory_description": "Koszt:\n30 drewna\n10 kamienia\n\nDaje ci 2 sztuki żelaza na turę."
+	}
+	
+}
