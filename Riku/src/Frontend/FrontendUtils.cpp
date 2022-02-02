@@ -117,36 +117,58 @@ std::vector<Mesh> front::FrontendUtils::getMeshes(const std::vector<std::vector<
 			type = "_slope";
 			break;
 		case 5:
-			if(dhz==0 || std::abs(dhz)>=2) {
+			if (dhz == 0 || std::abs(dhz) >= 2) {
 				sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f,
-				                                    (float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
+					(float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
 				type = "_flat";
 			}
-			else if(dhz==1) {
+			else if (dhz == 1) {
 				sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f + 0.125f,
-				                                    (float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f-90.0f * i, 0.0f), scale);
+					(float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f - 90.0f * i, 0.0f), scale);
 				type = "_corner+";
 			}
-			else if(dhz==-1) {
+			else if (dhz == -1) {
 				sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f - 0.125f,
-				                                    (float)y + (float)dy / 3.f), glm::vec3(0.0f, 90.0f-90.0f * i, 0.0f), scale);
+					(float)y + (float)dy / 3.f), glm::vec3(0.0f, 90.0f - 90.0f * i, 0.0f), scale);
 				type = "_corner-";
 			}
 			break;
 		case 6:
+		{
 			sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f + 0.125f,
 				(float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i, 0.0f), scale);
 			type = "_slope";
-			break;
+			float yScale = 1 / 4.f;
+			int side = i < 2 ? 1 : -1;
+			float yTransition = 0.375f;
+			auto clifTransform = Transform(glm::vec3(
+				(float)x + 0.5f * side * (i % 2) + (i % 2 - 1) * side * 1 / 3.f,
+				(float)map[x][y].height * 0.5f - 0.125f,
+				(float)y + (i % 2 - 1) * side * 0.5f + (i % 2) * side * -1 / 3.f),
+				glm::vec3(90.0f, 0.0f, 90.0f * i), glm::vec3(1 / 3.f, yScale, 1 / 3.f));
+			getMeshes("_cliff", handler, clifTransform, meshes);
+		}
+		break;
 		case 8:
 			sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f,
 				(float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i - 180.0f, 0.0f), scale);
 			type = "_double_corner";
 			break;
 		case 9:
+		{
 			sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f + 0.125f,
 				(float)y + (float)dy / 3.f), glm::vec3(0.0f, -90.0f * i - 90.0f, 0.0f), scale);
 			type = "_slope";
+			float yScale = 1 / 4.f;
+			int side = i < 2 ? 1 : -1;
+			float yTransition = 0.375f;
+			auto clifTransform = Transform(glm::vec3(
+				(float)x + 1 / 3.f * side * (i % 2) + (i % 2 - 1) * side *  0.5f,
+				(float)map[x][y].height * 0.5f -0.125f,
+				(float)y + (i % 2 - 1) * side * 1 / 3.f  + (i % 2) * side * -0.5),
+				glm::vec3(90.0f, 0.0f, 90.0f*i-90.0f ), glm::vec3(1 / 3.f, yScale, 1 / 3.f));
+			getMeshes("_cliff", handler, clifTransform, meshes);
+		}
 			break;
 		case 10:
 			sideTransform = Transform(glm::vec3((float)x + (float)dx / 3.f, (float)map[x][y].height * 0.5f + 0.125f,
@@ -169,7 +191,7 @@ std::vector<Mesh> front::FrontendUtils::getMeshes(const std::vector<std::vector<
 		if (dh < -1)
 		{
 			int side = i < 2 ? 1 : -1;
-			for (int j = dh + 1; j < 1; j++)
+			for (int j = dh; j < 1; j++)
 			{
 				for (int k = -1; k < 2; k++)
 				{
