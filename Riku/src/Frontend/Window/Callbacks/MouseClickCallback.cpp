@@ -157,6 +157,7 @@ void front::MouseClickCallback::GameLeftClick(int px, int py) {
 
 void front::MouseClickCallback::operator()(GLFWwindow* window,  int button, int action, int mods) {
 	if (activeGUI->on_mouse_click(button, action)) return;
+	if (!isGameActive) return;
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {

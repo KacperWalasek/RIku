@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Lang.h"
+#include "Util.h"
 #include "GUIUpdate.h"
 #include "GUICallbacks/FocusUnitWithIndex.h"
 #include "GUICallbacks/FocusUnit.h"
@@ -8,6 +9,7 @@
 #include "GUICallbacks/AcceptInvitation.h"
 #include "GUICallbacks/FocusSkill.h"
 #include "GUICallbacks/CreateGUIOptionInfo.h"
+#include "GUICallbacks/FocusString.h"
 
 bool CEGUI::GUIUpdate::lastIsInMiniGame;
 bool CEGUI::GUIUpdate::lastIsInGame;
@@ -15,11 +17,14 @@ int CEGUI::GUIUpdate::lastFocusedUnitIndex;
 int CEGUI::GUIUpdate::lastFocusedSkillNr;
 int CEGUI::GUIUpdate::focusedSkillNr;
 std::string CEGUI::GUIUpdate::lastFocusedSkill;
+std::string CEGUI::GUIUpdate::focusedSave;
+std::string CEGUI::GUIUpdate::lastFocusedSave;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitElems;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingMiniUnitElems;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingSkillElems;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingUnitOptions;
 std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingReceivedInvitations;
+std::map<std::string, CEGUI::Window*> CEGUI::GUIUpdate::existingSaveElems;
 std::shared_ptr<std::string> CEGUI::GUIUpdate::activeUnitElem;
 std::vector<std::shared_ptr<const Unit>> CEGUI::GUIUpdate::lastUnits;
 std::vector<std::shared_ptr<const minigame::MiniUnit>> CEGUI::GUIUpdate::lastMiniUnits;
@@ -29,6 +34,7 @@ std::map<std::string, std::string> CEGUI::GUIUpdate::lastBuildings;
 std::map<std::string, Invitation> CEGUI::GUIUpdate::lastInvited;
 std::map<std::string, std::string> CEGUI::GUIUpdate::lastReceivedInvitations;
 std::vector<std::string> CEGUI::GUIUpdate::lastSkills;
+std::vector<std::string> CEGUI::GUIUpdate::lastSaves;
 std::vector<std::string> CEGUI::GUIUpdate::unitNames;
 std::vector<std::string> CEGUI::GUIUpdate::unitMiniNames;
 
@@ -58,7 +64,7 @@ CEGUI::GUIUpdate::~GUIUpdate()
 void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic,
     int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI)
 {
-    if (lastIsInGame != state.isInGame())
+    if (lastIsInGame != state.isInGame()) // entering / exiting game
     {
         for (const auto& p : guiDic)
             p.second->hide();
@@ -79,11 +85,11 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
         activeGUI->show();
         lastIsInGame = state.isInGame();
     }
-    if (state.isInGame())
+    if (state.isInGame()) // in game
     {
         if (lastFocusedUnitIndex != focusedUnitIndex)
         {
-            if (state.isInMiniGame())
+            if (state.isInMiniGame()) 
             {
                 auto unitsList = static_cast<CEGUI::ScrollablePane*>(guiDic["MiniGameUI"]->getWidgetByName("UnitsList"));
                 for (auto u : existingMiniUnitElems)
@@ -127,7 +133,7 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
             activeGUI->show();
             lastIsInMiniGame = state.isInMiniGame();
         }
-        if (state.isInMiniGame())
+        if (state.isInMiniGame()) // is in minigame
         {
             if (lastFocusedSkill != focusedSkill || lastFocusedSkillNr != focusedSkillNr)
             {
@@ -165,10 +171,25 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
         }
         CEGUI::GUIUpdate::UpdateMovementBars(state, guiDic);
     }
-    else
+    else // not in game
     {
+        if (lastFocusedSave != focusedSave)
+        {
+            auto savesList = static_cast<CEGUI::ScrollablePane*>(guiDic["LoadGamePopup"]->getWidgetByName("SavesList"));
+            for (auto s : lastSaves)
+            {
+                CEGUI::Window* child = savesList->getChildRecursive(s);
+                if (child)
+                    child->setProperty("BackgroundEnabled", "false");
+            }
+            CEGUI::Window* focused = savesList->getChildRecursive(focusedSave);
+            if (focused)
+                focused->setProperty("BackgroundEnabled", "true");
+            lastFocusedSave = focusedSave;
+        }
         CEGUI::GUIUpdate::CreateInvitations(guiDic["NewGameMenu"], "InvitationsList", state);
         CEGUI::GUIUpdate::CreateReceivedInvitations(guiDic["JoinGameMenu"], "InvitationsList", state);
+        CEGUI::GUIUpdate::CreateSavesList(guiDic["LoadGamePopup"], state);
     }
     if (state.lastOnTurn != state.getPlayerOnMove() && state.isInMiniGame())
     {
@@ -782,4 +803,47 @@ void CEGUI::GUIUpdate::CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, st
         y += 0.1;
     }
     lastSkills = skills;
+}
+
+void CEGUI::GUIUpdate::CreateSavesList(CEGUI::GUI* my_gui, FrontendState& state)
+{
+    auto saves = front::getSaveFiles();
+    if (lastSaves == saves) return;
+
+    auto savesList = static_cast<CEGUI::ScrollablePane*>(my_gui->getWidgetByName("SavesList"));   
+
+    for (auto p : existingSaveElems)
+        savesList->removeChild(p.second);
+
+    float y = 0.0f;
+    for (auto s : saves)
+    {        
+        if (existingSaveElems.find(s) != existingSaveElems.end())
+        {
+            CEGUI::GUI::setWidgetDestRect(existingSaveElems[s], glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f));
+            savesList->addChild(existingSaveElems[s]);
+            y += 0.1f;
+            continue;
+        }
+
+        CEGUI::Window* resourceElem = my_gui->createWidget("WindowsLook/Static",
+            glm::vec4(0.0f, y, 1.0f, 0.1f), glm::vec4(0.0f), s);
+        resourceElem->setProperty("BackgroundColours", "FF009999");
+        if (focusedSave == s)
+            resourceElem->setProperty("BackgroundEnabled", "true");
+        else resourceElem->setProperty("BackgroundEnabled", "false");
+
+        resourceElem->setText(reinterpret_cast<const unsigned char*>(s.c_str()));
+
+        CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(my_gui->createWidget("Generic/ImageButton",
+            glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(0.0f), s + "/button"));
+        CEGUI::Functor::FocusString* func = new CEGUI::Functor::FocusString(s, focusedSave);
+        my_gui->setPushButtonCallback(s + "/button", func);
+        resourceElem->addChild(button);
+        savesList->addChild(resourceElem);
+
+        existingSaveElems.insert(std::pair<std::string, CEGUI::Window*>(s, resourceElem));
+        y += 0.1;
+    }
+    lastSaves = saves;
 }

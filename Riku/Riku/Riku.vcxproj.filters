@@ -1287,6 +1287,18 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGamePopupOnKeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\PauseGame.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusString.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGamePopupOnKeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

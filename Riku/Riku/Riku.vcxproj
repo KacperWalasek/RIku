@@ -348,6 +348,7 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\ExitApp.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusSkill.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\FocusString.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\FocusUnit.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\FocusUnitWithIndex.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\Functor.h" />
@@ -355,12 +356,15 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\InvitePlayerFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGame.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGamePopupOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\PauseGame.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\Resign.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGame.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGamePopupOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetHotseatCountFromEditBox.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetLabelText.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SetNameFromEditBox.h" />

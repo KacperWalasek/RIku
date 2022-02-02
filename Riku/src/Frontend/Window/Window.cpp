@@ -42,7 +42,7 @@ bool front::Window::update()
 		stabDeltaTime = .0f;
 	}
 
-	if(state.isInGame() && scene.isFocused)
+	if(state.isInGame() && scene.isFocused && scene.isGameActive)
 		processInput();
 	scene.update();
 	state.lastOnTurn = state.getPlayerOnMove();
@@ -92,7 +92,7 @@ void front::Window::setCallbacks()
 
 	glfwSetScrollCallback(window, [](GLFWwindow* window, double xoffset, double yoffset) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		ScrollCallback(scene->movingCameraTransform, scene->config, scene->activeGUI)(window, xoffset, yoffset);
+		ScrollCallback(scene->movingCameraTransform, scene->config, scene->activeGUI, scene->isGameActive)(window, xoffset, yoffset);
 		});
 
 	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int width, int height) {
@@ -107,12 +107,12 @@ void front::Window::setCallbacks()
 
 	glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		MouseClickCallback(scene->activeGUI, scene)(window, button, action, mods);
+		MouseClickCallback(scene->activeGUI, scene, scene->isGameActive)(window, button, action, mods);
 		});
 
 	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 		Scene* scene = static_cast<Scene*>(glfwGetWindowUserPointer(window));
-		KeyCallback(scene->state, scene->focusedUnitIndex, scene->activeGUI, scene->config, scene->movingCameraTransform)(window, key, scancode, action, mods);
+		KeyCallback(scene->state, scene->focusedUnitIndex, scene->activeGUI, scene->config, scene->movingCameraTransform, scene->isGameActive)(window, key, scancode, action, mods);
 		});
 
 	glfwSetWindowFocusCallback(window, [](GLFWwindow* window, int callback) {

@@ -10,13 +10,14 @@ namespace CEGUI::Functor {
     {
     private:
         FrontendState& state;
+        std::string& focusedSave;
     public:
-        LoadGame(FrontendState& state)
-            : Functor(), state(state) {}
+        LoadGame(FrontendState& state, std::string& focusedSave)
+            : Functor(), state(state), focusedSave(focusedSave ){}
 
         bool operator()(const CEGUI::EventArgs& e)
         {
-            state.load("mySave");
+            state.load(focusedSave);
             return true;
         };
     };

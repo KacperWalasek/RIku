@@ -32,7 +32,7 @@ glm::vec2 front::getMapClickPosition(GLFWwindow* window, const Scene& scene, flo
 }
 
 std::vector<std::string> front::getSaveFiles() {
-	constexpr std::string_view path = "../saves";
+	constexpr std::string_view path = "../saves/";
 	std::vector<std::string> files;
 	for(const auto& entry: std::filesystem::directory_iterator(path)) {
 		if(entry.is_regular_file() && entry.path().extension().string()==".sav") {
