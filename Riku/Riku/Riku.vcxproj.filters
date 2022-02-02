@@ -1292,6 +1292,7 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.h" />
     <ClInclude Include="..\src\Frontend\Window\LoadingWindow.h">
       <Filter>Riku\Frontend\Window</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGamePopupOnKeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
