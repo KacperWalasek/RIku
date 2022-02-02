@@ -13,6 +13,7 @@ std::shared_ptr<IAction> ClearPatchHandler::handlePatch(GameState& state, const 
         state.registredHookables.clear();
         LogicUtils::clearHookables();
         LogicUtils::resetPlayerIndexes();
+        state.winner = -1;
         state.isInGame = false;
         state.hotSeatPlayers.clear();
         state.hotSeatPlayers.push_back(0);
