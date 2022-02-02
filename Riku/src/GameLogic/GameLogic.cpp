@@ -178,11 +178,12 @@ void GameLogic::update()
 				if (invitationIt == gameState.invitedPlayers.end() || acceptance.hash != assets.handler.getHash())
 					// send information
 					break;
-					
+				int id = LogicUtils::getAvailablePlayerId(acceptance.hotseatCount);
+				invitationIt->second.id = id;
 				invitationIt->second.state = InvitationState::Accepted;
 				invitationIt->second.name = acceptance.name;
 				invitationIt->second.hotseatCount = acceptance.hotseatCount;
-				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId(acceptance.hotseatCount));
+				Network::WebModule::Join(message.dataString(), id);
 			}
 			break;
 		case Network::MessType::Join:

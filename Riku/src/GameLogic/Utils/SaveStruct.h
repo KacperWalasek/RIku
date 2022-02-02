@@ -7,7 +7,7 @@ struct SaveStruct
 	SaveStruct(Patch patch, std::map<std::string, Invitation> invitations, int hotseatCount) : patch(patch), hotseatCount(hotseatCount)
 	{
 		for (const auto& pair : invitations)
-			this->invitations.push_back(Invitation(pair.first, pair.second.name, pair.second.hotseatCount, InvitationState::Loaded));
+			this->invitations.push_back(Invitation(pair.first, pair.second.name, pair.second.hotseatCount, InvitationState::Loaded, pair.second.id));
 	}
 	Patch patch;
 	std::vector<Invitation> invitations;
