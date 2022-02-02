@@ -196,6 +196,7 @@ void CEGUI::GUIUpdate::CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, 
                 else text->hide();
                 text = guiDic["GameUI"]->getWidgetByName("PlayerWonLabel");
                 text->setText("Player "+std::to_string(state.getWinner())+" won the game");
+                lastWinner = state.getWinner();
             }
             CEGUI::GUIUpdate::CreateUnits(guiDic["GameUI"], "UnitsList", state, focusedUnitIndex, movingCameraTransform);
             CEGUI::GUIUpdate::CreateUnitOptions(guiDic["RecruitingUI"], "UnitsList", state, focusedUnitIndex, guiDic);
