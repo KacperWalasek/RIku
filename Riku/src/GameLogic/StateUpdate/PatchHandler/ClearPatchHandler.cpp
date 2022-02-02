@@ -8,7 +8,7 @@ std::shared_ptr<IAction> ClearPatchHandler::handlePatch(GameState& state, const 
         state.invitedPlayers.clear();
         state.map.clear();
         state.minigames.clear();
-        state.playerOnMove = 0;
+        state.playerOnMove = -1;
         state.players.clear();
         state.registredHookables.clear();
         LogicUtils::clearHookables();
