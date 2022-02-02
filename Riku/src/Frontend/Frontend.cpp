@@ -6,12 +6,12 @@
 front::Frontend::Frontend(GameLogic& logic, Config& config)
 	: config(config), logic(logic), state(logic), window(config,logic,state, assetHandler), assetHandler(state.getLogicAssetHandler(), state.getMinigameAssetHandler())
 {
-	LoadingWindow loading;
-	loading.update();
+	//LoadingWindow loading;
+	//loading.update();
 	assetHandler.loadFiles(); 
 
 	window.show();
-	loading.destroy();
+	//loading.destroy();
 }
 
 bool front::Frontend::update()

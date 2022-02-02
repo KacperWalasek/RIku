@@ -28,6 +28,7 @@ front::Window::~Window()
 void front::Window::show()
 {
 	glfwShowWindow(window);
+	glfwMakeContextCurrent(window);
 }
 bool front::Window::update()
 {
@@ -61,7 +62,7 @@ void front::Window::initWindow()
 	Lang::loadLanguage(scene.state.getLogicAssetHandler(), config.language);
 	//set values
 	aspect = (float)config.screenWidth / config.screenHeight;
-	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+	//glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	window = glfwCreateWindow(config.screenWidth, config.screenHeight, Lang::get("window_name"), config.isFullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 	if (window == nullptr) {
 		std::cerr << "Failed to create GLFW window\n";
