@@ -532,6 +532,10 @@
     <ClCompile Include="..\src\Frontend\Window\LoadingWindow.cpp">
       <Filter>Riku\Frontend\Window</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\HotseatPlayersRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\IntListResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1293,6 +1297,7 @@
     <ClInclude Include="..\src\Frontend\Window\LoadingWindow.h">
       <Filter>Riku\Frontend\Window</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\HotseatPlayersRequestHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

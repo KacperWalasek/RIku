@@ -39,6 +39,7 @@ public:
 	bool isInGame();
 	int getPlayerCount();
 	int getWinner();
+	std::vector<int> getHotseatPlayers();
 	std::string getIp();
 	std::string getPopup();
 

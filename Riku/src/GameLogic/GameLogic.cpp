@@ -60,6 +60,7 @@
 #include "FrontendCommunicator/RequestHandlers/WinnerRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PopupRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/IpRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/HotseatPlayersRequestHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -114,7 +115,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<PlayerCountRequestHandler>(gameState),
 		std::make_shared<WinnerRequestHandler>(gameState),
 		std::make_shared<PopupRequestHandler>(),
-		std::make_shared<IpRequestHandler>()
+		std::make_shared<IpRequestHandler>(),
+		std::make_shared<HotseatPlayersRequestHandler>(gameState)
 		});
 }
 
