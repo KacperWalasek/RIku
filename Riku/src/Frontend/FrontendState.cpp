@@ -27,6 +27,7 @@
 #include "../GameLogic/StateUpdate/MoveDescriptions/IntMoveDescription.h"
 #include "../GameLogic/StateUpdate/MoveDescriptions/AcceptInvitationMoveDescription.h"
 #include "../GameLogic/FrontendCommunicator/Responses/StringResponse.h"
+#include "../GameLogic/FrontendCommunicator/Responses/IntListResponse.h"
 
 FrontendState::FrontendState(GameLogic& logic)
 	: logic(logic)
@@ -148,6 +149,11 @@ int FrontendState::getWinner()
 	return logic.getInfo<IntResponse>("winner")->get();
 }
 
+std::vector<int> FrontendState::getHotseatPlayers()
+{
+	return logic.getInfo<IntListResponse>("hotseat_players")->get();
+}
+
 std::string FrontendState::getIp()
 {
 	return logic.getInfo<StringResponse>("ip")->get();
@@ -226,4 +232,9 @@ void FrontendState::setHotseatPlayerCount(int count)
 void FrontendState::startGame()
 {
 	logic.makeMove(std::make_shared<SimpleMoveDescription>("start_game"));
+}
+
+void FrontendState::quitGame()
+{
+	logic.makeMove(std::make_shared<SimpleMoveDescription>("quit"));
 }

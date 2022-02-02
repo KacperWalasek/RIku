@@ -14,9 +14,10 @@ struct Invitation
 	Invitation() {}
 	Invitation(std::string ip, std::string name)
 		: ip(ip), name(name), state(InvitationState::Pending) {}
-	Invitation(std::string ip, std::string name, int hotseatCount, InvitationState state)
-		: ip(ip), name(name), hotseatCount(hotseatCount), state(state) {}
+	Invitation(std::string ip, std::string name, int hotseatCount, InvitationState state, int id)
+		: ip(ip), name(name), hotseatCount(hotseatCount), state(state), id(id) {}
 	std::string ip;
+	int id;
 	std::string name;
 	InvitationState state;
 	int hotseatCount = 1;
@@ -33,7 +34,7 @@ struct Invitation
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(ip, name, state, hotseatCount);
+		archive(ip, name, state, hotseatCount, id);
 	}
 
 };

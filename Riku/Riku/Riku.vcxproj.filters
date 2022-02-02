@@ -532,6 +532,11 @@
     <ClCompile Include="..\src\Frontend\Window\LoadingWindow.cpp">
       <Filter>Riku\Frontend\Window</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\HotseatPlayersRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\IntListResponse.h">
+      <Filter>Riku\GameLogic\FrontendCommunicator\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\QuitGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Frontend\Asset\AssetModel.h">
@@ -1292,6 +1297,8 @@
     <ClInclude Include="..\src\MiniGame\Communicator\RequestHandlers\WinnerMiniRequestHandler.h" />
     <ClInclude Include="..\src\Frontend\Window\LoadingWindow.h">
       <Filter>Riku\Frontend\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\HotseatPlayersRequestHandler.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\SaveGamePopupOnKeyPress.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
@@ -1302,6 +1309,13 @@
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Frontend\GUICallbacks\LoadGamePopupOnKeyPress.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\QuitGame.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\QuitMoveHandler.h">
+      <Filter>Riku\GameLogic\StateUpdate\MoveFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\QuitGame.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
   </ItemGroup>

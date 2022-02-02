@@ -40,16 +40,17 @@ namespace CEGUI {
         static void UpdateResources(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic);
         static void UpdateMovementBars(FrontendState& state, std::map<std::string, CEGUI::GUI*> guiDic);
         static void CoreUpdate(FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic,
-            int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI);
+            int& focusedUnitIndex, std::string& focusedSkill, front::Transform& movingCameraTransform, CEGUI::GUI*& lastActiveGUI, bool& isGameActive);
         static void UpdateUIButtons(std::map<std::string, CEGUI::GUI*> guiDic);
         static void CreateResources(CEGUI::GUI* my_gui, const CEGUI::String& resourcesListName, FrontendState& state);
         static void LoadIcons(FrontendState& state);
         static void CreateUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform);
         static void CreateSkills(CEGUI::GUI* my_gui, FrontendState& state, std::string& focusedSkill);
         static void CreateSavesList(CEGUI::GUI* my_gui, FrontendState& state);
+        static void CreateJoinedPlayers(CEGUI::GUI* my_gui, FrontendState& state);
         static void CreateMiniUnits(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, front::Transform& movingCameraTransform);
         static void CreateInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state);
-        static void CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state);
+        static void CreateReceivedInvitations(CEGUI::GUI* my_gui, const CEGUI::String& InvitationsListName, FrontendState& state, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic);
         static void CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic);
         static void CreateBuildingOptions(FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic);
         static void ShowPopup(std::string message, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic, CEGUI::GUI*& lastActiveGUI);

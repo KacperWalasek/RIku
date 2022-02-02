@@ -220,6 +220,7 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\HotseatPlayersRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitedPlayersRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitationsRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IsInGameRequestHandler.cpp" />
@@ -234,6 +235,7 @@
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\TileObjectGuiRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\WinnerRequestHandler.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Requests\Request.cpp" />
+    <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\IntListResponse.h" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\MapResponse.cpp" />
     <ClCompile Include="..\src\GameLogic\FrontendCommunicator\Responses\Response.cpp" />
     <ClCompile Include="..\src\GameLogic\GameLogic.cpp" />
@@ -275,6 +277,7 @@
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\FinishTurn.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Load.cpp" />
+    <ClCompile Include="..\src\GameLogic\StateUpdate\Move\QuitGame.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\Save.cpp" />
     <ClCompile Include="..\src\GameLogic\StateUpdate\Move\TestMove.cpp" />
@@ -361,6 +364,7 @@
     <ClInclude Include="..\src\Frontend\GuiCallbacks\MainMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\NewGameMenuOnkeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\PauseGame.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\QuitGame.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitingUIOnKeyPress.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\RecruitUnit.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\Resign.h" />
@@ -411,6 +415,7 @@
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AssetHandlerRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\AvailableBuildingsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\GetUnitNamesRequestHandler.h" />
+    <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\HotseatPlayersRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitedPlayersRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\InvitationsRequestHandler.h" />
     <ClInclude Include="..\src\GameLogic\FrontendCommunicator\RequestHandlers\IpRequestHandler.h" />
@@ -480,6 +485,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\InviteMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\LoadMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\MoveFactory.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\QuitMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SaveMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\SetNameMoveHandler.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\MoveFactory\StartGameMoveHandler.h" />
@@ -499,6 +505,7 @@
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\GenerateMap.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\IMove.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Load.h" />
+    <ClInclude Include="..\src\GameLogic\StateUpdate\Move\QuitGame.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\RemoveUnit.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\Save.h" />
     <ClInclude Include="..\src\GameLogic\StateUpdate\Move\TestMove.h" />

@@ -35,6 +35,11 @@
                 <Property name="Text" value="Return to game" />
                 <Property name="Disabled" value="true" />
             </Window>
+            <Window type="WindowsLook/Button" name="ExitGameButton" >
+                <Property name="Area" value="{{0.4,0},{0.8,0},{0.58,0},{0.883,0}}" />
+                <Property name="Text" value="Exit current game" />
+                <Property name="Visible" value="false" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>

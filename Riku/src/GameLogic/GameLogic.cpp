@@ -60,6 +60,8 @@
 #include "FrontendCommunicator/RequestHandlers/WinnerRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/PopupRequestHandler.h"
 #include "FrontendCommunicator/RequestHandlers/IpRequestHandler.h"
+#include "FrontendCommunicator/RequestHandlers/HotseatPlayersRequestHandler.h"
+#include "StateUpdate/MoveFactory/QuitMoveHandler.h"
 
 
 GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : stateUpdate(this->gameState, this->assets)
@@ -94,7 +96,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<AcceptInvitationMoveHandler>(gameState, assets),
 		std::make_shared<SetNameMoveHandler>(gameState),
 		std::make_shared<StartGameMoveHandler>(gameState),
-		std::make_shared<HotseatCountMoveHandler>(gameState)
+		std::make_shared<HotseatCountMoveHandler>(gameState),
+		std::make_shared<QuitMoveHandler>()
 		});
 
 	communicator.setHandlers({
@@ -114,7 +117,8 @@ GameLogic::GameLogic(std::string assetPath, std::string minigameAssetPath) : sta
 		std::make_shared<PlayerCountRequestHandler>(gameState),
 		std::make_shared<WinnerRequestHandler>(gameState),
 		std::make_shared<PopupRequestHandler>(),
-		std::make_shared<IpRequestHandler>()
+		std::make_shared<IpRequestHandler>(),
+		std::make_shared<HotseatPlayersRequestHandler>(gameState)
 		});
 }
 
@@ -176,11 +180,12 @@ void GameLogic::update()
 				if (invitationIt == gameState.invitedPlayers.end() || acceptance.hash != assets.handler.getHash())
 					// send information
 					break;
-					
+				int id = LogicUtils::getAvailablePlayerId(acceptance.hotseatCount);
+				invitationIt->second.id = id;
 				invitationIt->second.state = InvitationState::Accepted;
 				invitationIt->second.name = acceptance.name;
 				invitationIt->second.hotseatCount = acceptance.hotseatCount;
-				Network::WebModule::Join(message.dataString(), LogicUtils::getAvailablePlayerId(acceptance.hotseatCount));
+				Network::WebModule::Join(message.dataString(), id);
 			}
 			break;
 		case Network::MessType::Join:

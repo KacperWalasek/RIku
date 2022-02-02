@@ -44,7 +44,7 @@ front::Scene::~Scene()
 }
 void front::Scene::update()
 {
-	CEGUI::GUIUpdate::CoreUpdate(state, activeGUI, guiDic, focusedUnitIndex, focusedSkill, movingCameraTransform, lastActiveGUI);
+	CEGUI::GUIUpdate::CoreUpdate(state, activeGUI, guiDic, focusedUnitIndex, focusedSkill, movingCameraTransform, lastActiveGUI, isGameActive);
 	draw();
 	CEGUI::GUI::drawMultiple(guiDic, activeGUI);
 }
