@@ -9,5 +9,5 @@ grounds = {
     grass_taiga = 15,
     tundra = 20,
     snow = 40,
-    water = 10000000
+    water = 100000
 }
