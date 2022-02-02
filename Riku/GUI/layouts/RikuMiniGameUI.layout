@@ -109,12 +109,12 @@
             </AutoWindow>
             <Window type="WindowsLook/StaticText" name="PlayerTurnLabel" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{0,32}}" />
-                <Property name="Text" value="Player 1 won the game" />
+                <Property name="Text" value="Turn of player 0" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="HorzScrollPageSize" value="250.88" />
                 <Property name="VertScrollPageSize" value="26.88" />
-                <Property name="HorzScrollDocumentSize" value="160" />
+                <Property name="HorzScrollDocumentSize" value="111" />
                 <Property name="VertScrollDocumentSize" value="14.5776" />
             </Window>
         </Window>
