@@ -28,7 +28,7 @@ std::shared_ptr<Patch> GenerateMap::createPatch(const GameState& state, const Lo
     for (int i = 0; i < playerCount; i++)
     {
         // TODO: when players will be map change player index
-        std::shared_ptr<IMove> create = std::make_shared<CreateUnit>(i, "stefan", 0, i);
+        std::shared_ptr<IMove> create = std::make_shared<CreateUnit>(i, "stefan", (int)ceil(i/20)%20, (int)((i % 20) *((map.size()-1) / ((playerCount > 19 ? 19 : playerCount - 1)))) );
         combined = combined ? std::make_shared<CombinedMove>(combined, create) : create;
     }
     Patch patch = Patch(map) + Patch(combined) + Patch(0);

@@ -1,5 +1,6 @@
 #include "GUIDescription.h"
 #include "MoveWrapper.h"
+#include "../Utils/LogicUtils.h"
 
 GUIDescription::GUIDescription(const std::map<std::string, sol::function>& funcs)
 	: funcs(funcs)
@@ -30,16 +31,24 @@ std::vector<std::vector<std::string>> GUIDescription::getOptions() const
 {
 	auto onOptionShow = funcs.find("onOptionShow");
 	std::vector<std::vector<std::string>> descs;
-	if (onOptionShow != funcs.end())
-		std::transform(options.begin(), options.end(),
-			std::back_inserter(descs),
-			[&](std::map<std::string, logic::AssetData> map) {
-				sol::variadic_results table = onOptionShow->second(map);
-				std::vector<std::string> options;
-				for (const auto& opt : table)
-					options.push_back(opt.as<std::string>());
-				return options;
-			});
+	try
+	{
+		if (onOptionShow != funcs.end())
+			std::transform(options.begin(), options.end(),
+				std::back_inserter(descs),
+				[&](std::map<std::string, logic::AssetData> map) {
+					sol::variadic_results table = onOptionShow->second(map);
+					std::vector<std::string> options;
+					for (const auto& opt : table)
+						options.push_back(opt.as<std::string>());
+					return options;
+				});
+	}
+	catch(...)
+	{
+		LogicUtils::addPopup("Error in GUI definition");
+		descs.clear();
+	}
 	return descs;
 }
 
@@ -52,10 +61,15 @@ std::shared_ptr<IMove> GUIDescription::onOptionChosen(int index, int mapX, int m
 {
 	auto onOptionChosenFunc = funcs.find("onOptionChosen");
 	if (options.size() > index && onOptionChosenFunc != funcs.end())
-	{
-		MoveWrapper wrapper = onOptionChosenFunc->second(options[index],mapX,mapY);
-		return wrapper.move;
+		try
+		{
+			MoveWrapper wrapper = onOptionChosenFunc->second(options[index], mapX, mapY);
+			return wrapper.move;
 	}
-	return std::shared_ptr<IMove>();
+	catch (...)
+	{
+		LogicUtils::addPopup("Error in GUI definition");
+	}
+	return nullptr;
 }
 

@@ -12,7 +12,7 @@ tileobject = {
                 wood = 3
             },
             {
-                name = "Fire ball",
+                name = "Fireball",
                 wood = 10
             }
         }

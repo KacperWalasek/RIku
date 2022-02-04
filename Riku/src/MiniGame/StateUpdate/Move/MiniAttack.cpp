@@ -6,6 +6,11 @@ minigame::MiniAttack::MiniAttack(std::pair<int, int> attackedTile, std::shared_p
     : attackedTile(attackedTile), unit(unit)
 {}
 
+minigame::MiniAttack::MiniAttack(int mapX, int mapY)
+    : attackedTile({mapX,mapY}), unit(nullptr)
+{
+}
+
 std::shared_ptr<minigame::MiniPatch> minigame::MiniAttack::createPatch(const MiniGameState& state, const MiniGameAssets& assets) const
 {
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
@@ -17,7 +22,7 @@ bool minigame::MiniAttack::isDoable(const MiniGameState& state, const MiniGameAs
 {
     auto attacedUnit = state.map[attackedTile.first][attackedTile.second].unit;
     if (!unit)
-        return false;
+        return attacedUnit && attacedUnit->getOwner() == state.enemy.logicIndex;
     auto distance = abs(unit->getMapX() - attackedTile.first) + abs(unit->getMapY() - attackedTile.second);
 
     return attacedUnit && attacedUnit->getOwner() == state.enemy.logicIndex && distance == 1;

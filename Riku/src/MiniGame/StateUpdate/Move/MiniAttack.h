@@ -11,6 +11,7 @@ namespace minigame
         std::shared_ptr<MiniUnit> unit;
     public:
         MiniAttack(std::pair<int, int> attackedTile, std::shared_ptr<MiniUnit> unit);
+        MiniAttack(int mapX, int mapY);
 
         virtual std::shared_ptr<MiniPatch> createPatch(const MiniGameState& state, const MiniGameAssets& assets) const override;
 
