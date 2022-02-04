@@ -14,11 +14,15 @@ std::shared_ptr<minigame::MiniPatch> minigame::UseSkill::createPatch(const MiniG
     if (it == assets.skills.end())
         return nullptr;
     auto use = it->second.getFunction("onUse");
+    MiniMoveWrapper wrapper = use(mapX, mapY);
     try
     {
         MiniMoveWrapper wrapper = use(mapX, mapY);
-        if (!wrapper.move->isDoable(state, assets));
+        if (!wrapper.move->isDoable(state, assets))
+        {
+            LogicUtils::addPopup("You cannot use skill on this tile");
             return nullptr;
+        }
         return std::make_shared<MiniPatch>(*wrapper.move->createPatch(state, assets) + MiniPatch(MiniPlayerPatch(name,true)));
     }
     catch (...)
