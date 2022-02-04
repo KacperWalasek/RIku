@@ -1,11 +1,11 @@
 {
 	"en": {
 		"skill_factory": "Skill factory",
-		"skill_factory_description": "Cost:\n10 wood\n\nIt allows to buy skills."
+		"skill_factory_description": "It gives 10 wood per turn.\nIt also allows to buy skills."
 	},
 	"pl": {
 		"skill_factory": "Fabryka umiejętności",
-		"skill_factory_description": "Koszt:\n10 drewna\n\nUmożliwia kupowanie zdolności."
+		"skill_factory_description": "Daje 10 drewna na turę.\nRównież umożliwia kupowanie zdolności."
 	}
 	
 }

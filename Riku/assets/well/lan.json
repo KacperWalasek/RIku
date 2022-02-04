@@ -1,11 +1,11 @@
 {
 	"en": {
 		"well": "Well",
-		"well_description": "Cost:\nfree\n\nIt gives 10 water per turn."
+		"well_description": "It gives 10 water per turn."
 	},
 	"pl": {
 		"well": "Studnia",
-		"well_description": "Koszt:\nza darmo\n\nDaje 10 wody na turę."
+		"well_description": "Daje 10 wody na turę."
 	}
 	
 }

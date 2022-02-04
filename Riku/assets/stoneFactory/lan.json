@@ -1,7 +1,7 @@
 {
 	"en": {
 		"stone_factory": "Quarry",
-		"military_barraks_description": "Cost:\n10 wood\n\nIt gives 1 stone per turn."
+		"military_barraks_description": "Cost:\n30 wood\n\nIt gives 1 stone per turn."
 	},
 	"pl": {
 		"stone_factory": "Kamieniołom",
