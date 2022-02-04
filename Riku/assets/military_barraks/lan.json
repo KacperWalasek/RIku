@@ -1,11 +1,11 @@
 {
 	"en": {
 		"military_barraks": "Barracks",
-		"military_barraks_description": "Cost:\nfree\n\nIt allows to recruit units here."
+		"military_barraks_description": "It allows to recruit units here."
 	},
 	"pl": {
 		"military_barraks": "Koszary",
-		"military_barraks_description": "Koszt:\nza darmo\n\nUmożliwia rekrutowanie jednostek."
+		"military_barraks_description": "Umożliwia rekrutowanie jednostek."
 	}
 	
 }
