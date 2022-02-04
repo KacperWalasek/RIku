@@ -23,7 +23,7 @@ std::shared_ptr<Patch> GenerateMap::createPatch(const GameState& state, const Lo
 		    if (!map[i][j].tileObject.empty()) {
 			    std::shared_ptr<IMove> build = std::make_shared<BuildTileObject>(-1, std::make_pair(i, j),
 			                                                                     map[i][j].tileObject);
-			    combined = combined ? std::make_shared<CombinedMove>(combined, build) : build;
+			    //combined = combined ? std::make_shared<CombinedMove>(combined, build) : build;
 		    }
     }
 	int tmpCount=0;
