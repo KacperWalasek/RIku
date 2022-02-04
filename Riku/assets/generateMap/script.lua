@@ -10,9 +10,13 @@ function squareDiamondSizeTmp(var)
 	return ret
 end
 
+function my_rand(middle, spread)
+	return (math.random()-0.5)*spread+middle
+end
+
 
 --function takes size (x,y), begin_value (4 corners)
-function squareDiamond(sx,sy, begin_value, height_diff, min_height, max_height)
+function squareDiamond(sx,sy, height_diff, min_height, max_height)
 	local size = squareDiamondSizeTmp(math.max(sx,sy))
 	local heights = {}
 	--init height array
@@ -22,10 +26,11 @@ function squareDiamond(sx,sy, begin_value, height_diff, min_height, max_height)
 			heights[i][j]=0.0
 		end
 	end
-	heights[1][1]=begin_value[1]
-	heights[1][size]=begin_value[2]
-	heights[size][1]=begin_value[3]
-	heights[size][size]=begin_value[4]
+	--init values
+	heights[1][1]=my_rand(4.0,8.0)
+	heights[1][size]=my_rand(4.0,8.0)
+	heights[size][1]=my_rand(4.0,8.0)
+	heights[size][size]=my_rand(4.0,8.0)
 	diff=size-1
 	--main square dimaond
 	while diff>=2 do
@@ -34,50 +39,31 @@ function squareDiamond(sx,sy, begin_value, height_diff, min_height, max_height)
 			for y=1, size-diff, diff do
 				--diamond
 				avg=(heights[x][y]+heights[x+diff][y]+heights[x][y+diff]+heights[x+diff][y+diff])/4.0
-				heights[x+diff/2][y+diff/2]=avg+math.random()*height_diff*diff*0.7071067811865475244
+				heights[x+diff/2][y+diff/2]=my_rand(avg, height_diff*diff*1.4142)
 			end
 		end
 		--square
-		for x=diff,size, diff do
-			for y=diff, size, diff do
-				--square bottom
-				if x<=size-diff/2 then
-					avg=heights[x][y]
-					count=1
-					if x<=size-diff then
-						avg=avg+heights[x+diff][y]
-						count=count+1
-					end
-					if x<=size-diff/2 and y>diff/2 then
-						avg=avg+heights[x+diff/2][y-diff/2]
-						count=count+1
-					end
-					if x<=size-diff/2 and y<=size-diff/2 then
-						avg=avg+heights[x+diff/2][y+diff/2]
-						count=count+1
-					end
-					avg=avg/count
-					heights[x+diff/2][y]=avg+math.random()*height_diff*diff*0.7071067811865475244
+		for x=1, size, diff/2 do
+			for y=1+(x+diff/2-1)%diff, size, diff do
+				count=0
+				avg=0
+				if (x+diff/2<=size) then
+					avg=avg+heights[x+diff/2][y]
+					count=count+1
 				end
-				--square right
-				if y<=size-diff/2 then
-					avg=heights[x][y]
-					count=1
-					if y<=size-diff then
-						avg=avg+heights[x][y+diff]
-						count=count+1
-					end
-					if x>size-diff/2 and y<=size-diff/2 then
-						avg=avg+heights[x-diff/2][y-diff/2]
-						count=count+1
-					end
-					if x<=size-diff/2 and y<=size-diff/2 then
-						avg=avg+heights[x+diff/2][y+diff/2]
-						count=count+1
-					end
-					avg=avg/count
-					heights[x][y+diff/2]=avg+math.random()*height_diff*diff*0.7071067811865475244
+				if (x-diff/2>0) then
+					avg=avg+heights[x-diff/2][y]
+					count=count+1
 				end
+				if (y+diff/2<=size) then
+					avg=avg+heights[x][y+diff/2]
+					count=count+1
+				end
+				if (y-diff/2>0) then
+					avg=avg+heights[x][y-diff/2]
+					count=count+1
+				end
+				heights[x][y] = my_rand(avg/count, height_diff*diff)
 			end
 		end
 		diff=diff/2
@@ -100,13 +86,20 @@ function squareDiamond(sx,sy, begin_value, height_diff, min_height, max_height)
 		end
 	end
 	--scale height
-	for i=1,size do
-		for j=1,size do
-			heights[i][j]=min_height+(heights[i][j]-min_height)*(max_height-min_height)/(h_max-h_min)
+	if(h_max-h_min>0.0000001) then
+		for i=1,size do
+			for j=1,size do
+				heights[i][j]=min_height+(heights[i][j]-h_min)*(max_height-min_height)/(h_max-h_min)
+			end
 		end
+	else
+		for i=1,size do
+			for j=1,size do
+				heights[i][j]=(min_height+max_height)/2
+			end
+		end
+	
 	end
-	 --only for show
-	heights[1][1]=0
 	return heights
 end
 
@@ -207,29 +200,16 @@ function getDryIndex(dry, rand_fact)
 end
 
 
---[[function getDesertTile(climate_type, desert_type, TileDescription)
-	rand = math.random()
-	if(rand<0.2) then
-		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type,areas[math.random(2)],"cactus")
-	elseif (rand<0.6) then
-		tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type,areas[math.random(2)], "")
-	--else
-	--	tile = TileDescription.new(math.floor(heights[i][j]+0.5),climate_type,desert_type+"_rocks",areas[math.random(2)])
-	end
-	return tile
-end--]]
-
-
 function onCreateMap()
-	local x=20
-	local y=20
+	local x=50
+	local y=50
 	local arr = {}
 	local biomes = {"snow","tundra","taiga","temperate","mediterranean","tropics","sea"}
 	local grounds = {"snow", "stone", "tundra", "grass_taiga", "hot_desert","grass","snow", "grass_tropics", "cold_desert", "semihot_desert"}
 	local areas = {"wet","dry"}
 	math.randomseed(os.time())
-	local heights = squareDiamond(x,y,{math.random()*15.0,math.random()*15.0,math.random()*15.0,math.random()*15.0}, 0.50, 0.0, 3.0)
-	local temperatures = setTemperatures(x,y,heights,0.60,50,0.10)
+	local heights = squareDiamond(x,y, 0.20, 0.0, 6.0)
+	local temperatures = setTemperatures(x,y,heights,0.90,0.40,0.20)
 	local dryness = setDryness(x,y,heights,2.40)
 
 	--there would be added +/-0.05 factor
