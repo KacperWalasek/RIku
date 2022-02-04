@@ -22,12 +22,6 @@ tileobject = {
         }
     },
     behavior = {
-        resource_factory = {
-            {
-                resource = "wood",
-                quantity = 10
-            }
-        }
     }
 }
 

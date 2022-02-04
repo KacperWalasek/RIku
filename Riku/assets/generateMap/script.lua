@@ -201,8 +201,8 @@ end
 
 
 function onCreateMap()
-	local x=50
-	local y=50
+	local x=20
+	local y=20
 	local arr = {}
 	local biomes = {"snow","tundra","taiga","temperate","mediterranean","tropics","sea"}
 	local grounds = {"snow", "stone", "tundra", "grass_taiga", "hot_desert","grass","snow", "grass_tropics", "cold_desert", "semihot_desert"}
