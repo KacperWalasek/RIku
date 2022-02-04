@@ -30,7 +30,9 @@ std::shared_ptr<minigame::MiniPatch> minigame::CreateMiniUnit::createPatch(const
 
 bool minigame::CreateMiniUnit::isDoable(const MiniGameState& state, const MiniGameAssets& assets) const
 {
-    return assets.units.find(name) != assets.units.end() && !state.map[mapX][mapY].unit;
+    bool x = (assets.units.find(name) != assets.units.end());
+    bool x1 = !(state.map[mapX][mapY].unit);
+    return (assets.units.find(name) != assets.units.end()) && !(state.map[mapX][mapY].unit);
 }
 
 std::shared_ptr<minigame::IMiniMove> minigame::CreateMiniUnit::asPointner() const
