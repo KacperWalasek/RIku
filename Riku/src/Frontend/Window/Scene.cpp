@@ -34,7 +34,7 @@ constexpr uint8_t playerColors[][3]={
 };
 
 front::Scene::Scene(Config& config, GameLogic& logic, FrontendState& state, const AssetHandler& handler, float& aspect)
-	: config(config), fac(logic,state,activeGUI, lastActiveGUI, guiDic, focusedUnitIndex, isGameActive), state(state), aspect(aspect), handler(handler), path({},0)
+	: config(config), fac(logic,state,activeGUI, lastActiveGUI, guiDic, focusedUnitIndex, isGameActive, config), state(state), aspect(aspect), handler(handler), path({},0)
 {}
 
 front::Scene::~Scene()
@@ -81,6 +81,7 @@ void front::Scene::init(GLFWwindow* window)
 	activeGUI = guiDic["SetNamePopup"];
 	activeGUI->show();
 	CEGUI::GUIUpdate::UpdateUIButtons(guiDic);
+	CEGUI::GUIUpdate::UpdateSettingsDisplay(guiDic, config);
 }
 
 void front::Scene::drawInit(glm::mat4& projection, glm::mat4& view) {

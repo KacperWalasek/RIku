@@ -3,15 +3,109 @@
 <GUILayout version="4" >
     <Window type="DefaultWindow" name="DefaultWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="Text" value="Weeb" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="MinSize" value="{{0,160},{0,60}}" />
         <Window type="Generic/Image" name="Image" >
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="Image" value="Riku/Background" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AutoRenderingSurface" value="true" />
+            <Window type="WindowsLook/FrameWindow" name="Window" >
+                <Property name="Area" value="{{0.5,0},{0.5,64},{0.7,0},{0.5,96}}" />
+                <Property name="MinSize" value="{{0.1,0},{0,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="SizingEnabled" value="false" />
+                <Property name="TitlebarEnabled" value="false" />
+                <Property name="DragMovingEnabled" value="false" />
+                <Property name="CloseButtonEnabled" value="false" />
+                <AutoWindow namePath="__auto_titlebar__" >
+                    <Property name="DraggingEnabled" value="false" />
+                </AutoWindow>
+                <Window type="WindowsLook/Checkbox" name="FullscreenBox" >
+                    <Property name="Area" value="{{0.5,-8},{0,0},{0.5,8},{0,32}}" />
+                </Window>
+            </Window>
+            <Window type="WindowsLook/StaticText" name="WidthLabel" >
+                <Property name="Area" value="{{0.3,0},{0.5,32},{0.5,0},{0.5,64}}" />
+                <Property name="Text" value="Screen width" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="199.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="94" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+            <Window type="WindowsLook/Editbox" name="WidthBox" >
+                <Property name="Area" value="{{0.5,0},{0.5,32},{0.7,0},{0.5,64}}" />
+            </Window>
             <Window type="WindowsLook/Button" name="ReturnButton" >
                 <Property name="Area" value="{{0,24},{0,19},{0.1,24},{0.05,19}}" />
                 <Property name="Text" value="Return to main menu" />
+            </Window>
+            <Window type="WindowsLook/StaticText" name="LanguageLabel" >
+                <Property name="Area" value="{{0.3,0},{0.5,96},{0.5,0},{0.5,128}}" />
+                <Property name="Text" value="Language" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="199.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="69" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+            <Window type="WindowsLook/StaticText" name="HeightLabel" >
+                <Property name="Area" value="{{0.3,0},{0.5,0},{0.5,0},{0.5,32}}" />
+                <Property name="Text" value="Screen height" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="199.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="100" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+            <Window type="WindowsLook/Editbox" name="HeightBox" >
+                <Property name="Area" value="{{0.5,0},{0.5,0},{0.7,0},{0.5,32}}" />
+            </Window>
+            <Window type="WindowsLook/StaticText" name="FullscreenLabel" >
+                <Property name="Area" value="{{0.3,0},{0.5,64},{0.5,0},{0.5,96}}" />
+                <Property name="Text" value="Fullscreen mode" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="HorzScrollPageSize" value="199.88" />
+                <Property name="VertScrollPageSize" value="26.88" />
+                <Property name="HorzScrollDocumentSize" value="120" />
+                <Property name="VertScrollDocumentSize" value="14.5776" />
+            </Window>
+            <Window type="WindowsLook/Combobox" name="LangBox" >
+                <Property name="Area" value="{{0.5,0},{0.5,96},{0.7,0},{0.7,96}}" />
+                <AutoWindow namePath="__auto_droplist__" >
+                    <AutoWindow namePath="__auto_hscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_vscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                </AutoWindow>
+            </Window>
+            <Window type="WindowsLook/Button" name="ApplyButton" >
+                <Property name="Area" value="{{0,24},{0.95,-19},{0.1,24},{1,-19}}" />
+                <Property name="Text" value="Apply changes" />
             </Window>
         </Window>
     </Window>

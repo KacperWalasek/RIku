@@ -23,12 +23,13 @@
 #include "GUICallbacks/SaveGamePopupOnKeyPress.h"
 #include "GUICallbacks/LoadGamePopupOnKeyPress.h"
 #include "GUICallbacks/QuitGame.h"
+#include "GUICallbacks/ApplySettings.h"
 #include "Lang.h"
 
 CEGUI::GUIFactory::GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastGUI,
-	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex, bool& isGameActive)
-	:logic(logic), state(state), activeGUI(activeGUI), lastActiveGUI(lastGUI), guiDic(guiDic), focusedUnitIndex(focusedUnitIndex), isGameActive(isGameActive)
-{}
+	std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex, bool& isGameActive, front::Config& config)
+	:logic(logic), state(state), activeGUI(activeGUI), lastActiveGUI(lastGUI), guiDic(guiDic), 
+	focusedUnitIndex(focusedUnitIndex), isGameActive(isGameActive), config(config){}
 
 void CEGUI::GUIFactory::init(GLFWwindow* win){
     // init przyjmuje zmnienne, kt�rych mo�emy potrzebowa� dla funkcji callback
@@ -89,10 +90,16 @@ CEGUI::GUI* CEGUI::GUIFactory::GetOptionsMenu() {
 	my_gui->init();
 	my_gui->loadLayout("RikuOptionsMenu.layout");
 
-	auto onKeyPress = new CEGUI::Functor::Functor();
+	auto heightBox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("HeightBox"));
+	auto widthBox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("WidthBox"));
+	auto fullscreenBox = static_cast<CEGUI::ToggleButton*>(my_gui->getWidgetByName("FullscreenBox"));
+
+	auto onKeyPress = new CEGUI::Functor::NewGameMenuOnkeyPress(activeGUI, guiDic); // no enter action
 	auto onReturnButton = new CEGUI::Functor::SwitchActiveGUI("MainMenu", activeGUI, guiDic);
+	auto onApplyButton = new CEGUI::Functor::ApplySettings(window, config, guiDic, heightBox, widthBox, fullscreenBox);
 	my_gui->setKeyCallback(onKeyPress);
 	my_gui->setPushButtonCallback("ReturnButton", onReturnButton);
+	my_gui->setPushButtonCallback("ApplyButton", onApplyButton);
 
 	return my_gui;
 }

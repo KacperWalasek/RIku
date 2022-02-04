@@ -5,6 +5,7 @@
 #include "GUICallbacks/Functor.h"
 #include "FrontendState.h"
 #include "../GameLogic/GameLogic.h"
+#include "Config.h"
 
 namespace CEGUI {
     class GUIFactory {
@@ -18,7 +19,7 @@ namespace CEGUI {
         CEGUI::GUI*& lastActiveGUI;
         std::map<std::string, CEGUI::GUI*>& guiDic;
         GUIFactory(GameLogic& logic, FrontendState& state, CEGUI::GUI*& activeGUI, CEGUI::GUI*& lastActiveGUI,
-            std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex, bool& isGameActive);
+            std::map<std::string, CEGUI::GUI*>& guiDic, int& focusedUnitIndex, bool& isGameActive, front::Config& config);
         void init(GLFWwindow* win);
         CEGUI::GUI* GetMainMenu();
         CEGUI::GUI* GetOptionsMenu();
@@ -35,6 +36,7 @@ namespace CEGUI {
         CEGUI::GUI* GetLoadPopup();
 
     private:
+        front::Config& config;
         GLFWwindow* window;
         CEGUI::String resPath;
     };

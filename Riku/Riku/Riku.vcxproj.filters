@@ -1318,6 +1318,9 @@
     <ClInclude Include="..\src\Frontend\GUICallbacks\QuitGame.h">
       <Filter>Riku\Frontend\GUICallbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ApplySettings.h">
+      <Filter>Riku\Frontend\GUICallbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

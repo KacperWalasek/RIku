@@ -4,6 +4,7 @@
 #include "GUI.h"
 #include "FrontendState.h"
 #include "Transform.h"
+#include "Config.h"
 
 namespace CEGUI {
     class GUIUpdate {
@@ -57,5 +58,6 @@ namespace CEGUI {
         static void CreateUnitOptions(CEGUI::GUI* my_gui, const CEGUI::String& unitsListName, FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic);
         static void CreateBuildingOptions(FrontendState& state, int& focusedUnitIndex, std::map<std::string, CEGUI::GUI*> guiDic);
         static void ShowPopup(std::string message, CEGUI::GUI*& activeGUI, std::map<std::string, CEGUI::GUI*> guiDic, CEGUI::GUI*& lastActiveGUI);
+        static void UpdateSettingsDisplay(std::map<std::string, CEGUI::GUI*> guiDic, front::Config& config);
     };
 }

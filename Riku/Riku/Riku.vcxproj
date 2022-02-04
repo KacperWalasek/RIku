@@ -347,6 +347,7 @@
     <ClInclude Include="..\src\Frontend\FrustumCulling.h" />
     <ClInclude Include="..\src\Frontend\GUI.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\AcceptInvitation.h" />
+    <ClInclude Include="..\src\Frontend\GUICallbacks\ApplySettings.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\BuildBuildingFromLabel.h" />
     <ClInclude Include="..\src\Frontend\GUICallbacks\CreateGUIOptionInfo.h" />
     <ClInclude Include="..\src\Frontend\GuiCallbacks\EndTurn.h" />

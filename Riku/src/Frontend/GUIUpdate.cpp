@@ -982,3 +982,17 @@ void CEGUI::GUIUpdate::CreateHotseatPlayers(CEGUI::GUI* my_gui, FrontendState& s
     }
     lastHotseatPlayers = hotseatPlayers;
 }
+
+void CEGUI::GUIUpdate::UpdateSettingsDisplay(std::map<std::string, CEGUI::GUI*> guiDic, front::Config& config)
+{
+    auto my_gui = guiDic["OptionsMenu"];
+    auto heightBox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("HeightBox"));
+    auto widthBox = static_cast<CEGUI::Editbox*>(my_gui->getWidgetByName("WidthBox"));
+    auto fullscreenBox = static_cast<CEGUI::ToggleButton*>(my_gui->getWidgetByName("FullscreenBox"));
+    auto langBox = static_cast<CEGUI::Combobox*>(my_gui->getWidgetByName("LangBox"));
+
+    heightBox->setText(std::to_string(config.screenHeight));
+    widthBox->setText(std::to_string(config.screenWidth));
+    fullscreenBox->setSelected(config.isFullscreen);
+    langBox->setText(config.language);
+}
